@@ -43,3 +43,6 @@
 [submodule "site-lisp/magit"]
 	path = site-lisp/magit
 	url = https://github.com/magit/magit.git
+[submodule "site-lisp/emacs-color-theme-solarized"]
+	path = site-lisp/emacs-color-theme-solarized
+	url = https://github.com/ahyatt/emacs-color-theme-solarized.git

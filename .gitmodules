@@ -1,6 +1,3 @@
-[submodule "site-list/magit"]
-	path = site-list/magit
-	url = https://github.com/magit/magit.git
 [submodule "site-lisp/yaml-mode"]
 	path = site-lisp/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
@@ -43,3 +40,6 @@
 [submodule "site-lisp/php-mode"]
 	path = site-lisp/php-mode
 	url = https://github.com/ejmr/php-mode.git
+[submodule "site-lisp/magit"]
+	path = site-lisp/magit
+	url = https://github.com/magit/magit.git

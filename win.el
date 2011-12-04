@@ -79,4 +79,48 @@
 
 ;(size-frame 200 40)
 
+(default-size-frame 160 50)
 (provide 'win)
+(setq win32-tempdir "c:/windows/temp")
+(require 'cygwin-mount)
+(setq cygwin-mount-cygwin-bin-directory "C:/cygwin/bin")
+(cygwin-mount-activate)
+(defun my-backward-slashes (filename)
+  "convert each slash in filename to a backward slash"
+  (concat (mapcar (function (lambda (c)
+                              (if (= c ?/) ?\\ c)))
+                  filename)))
+
+(defun add-PATH (d) "" (interactive)
+  (add-to-list 'exec-path d)
+  (setenv "PATH" (concat (my-backward-slashes d) ";" (getenv "PATH"))))
+
+(add-PATH "c:/cygwin/bin")
+(add-PATH "c:/cygwin/usr/local/bin")
+
+(defun follow-cygwin-symlink ()
+  "Follow Cygwin symlinks.
+Handles old-style (text file) and new-style (.lnk file) symlinks.
+\(Non-Cygwin-symlink .lnk files, such as desktop shortcuts, are still
+loaded as such.)"
+  (save-excursion
+    (goto-char 0)
+    (if (looking-at
+         "L\x000\x000\x000\x001\x014\x002\x000\x000\x000\x000\x000\x0C0\x000\x000\x000\x000\x000\x000\x046\x00C")
+        (progn
+          (re-search-forward
+           "\x000\\([-A-Za-z0-9_\\.\\\\\\$%@(){}~!#^'`][-A-Za-z0-9_\\.\\\\\\$%@(){}~!#^'`]+\\)")
+          (find-alternate-file (match-string 1)))
+      (if (looking-at "!<symlink>")
+          (progn
+            (re-search-forward "!<symlink>\\(.*\\)\0")
+            (find-alternate-file (match-string 1))))
+      )))
+(when nil
+(add-hook 'find-file-hooks 'follow-cygwin-symlink)
+(add-hook 'find-file-not-found-hooks 'follow-cygwin-symlink)
+)
+                                        ;(require 'cygwin-mount)
+                                        ;(cygwin-mount-activate)
+                                        ;(add-hook 'find-file-hooks 'follow-cygwin-symlink)
+                                        ;(add-hook 'find-file-not-found-hooks 'follow-cygwin-symlink)

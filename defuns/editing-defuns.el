@@ -239,6 +239,13 @@ region-end is used. Adds the duplicated text to the kill ring."
   (add-change-log-entry nil "TODO" t t)
   )
 
+(defvar my-change-log-file "~/x/ChangeLog")
+(defun my-change-log-entry ()
+  "allow repeated entries, custom file"
+  (interactive)
+  (add-change-log-entry nil my-change-log-file t t)
+  )
+
 (defun electric-pair ()
   "Insert character pair without sournding spaces"
   (interactive)

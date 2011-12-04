@@ -20,3 +20,12 @@
 
 (defun my-split-current-filename ()
   (my-split-filename (file-name-nondirectory (buffer-file-name))))
+
+(defun my-split-path (path)
+  (let ((result nil) (elt nil))
+    (while (and path
+                (not (equal (setq elt (file-name-nondirectory path)) "")))
+      (setq result (cons elt result))
+      (setq path (file-name-directory path))
+      (setq path (and path (directory-file-name path))))
+    result))

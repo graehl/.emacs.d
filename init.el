@@ -58,7 +58,7 @@
 (require 'ace-jump-mode)
 
 ;; Setup key mappings
-(require 'key-chords)
+(require 'key-chords) ; to enable: key-chord-mode
 (require 'key-bindings)
 
 
@@ -84,7 +84,7 @@
 (put 'narrow-to-region 'disabled nil)
 
 (require 'grep-buffers)
-(require 'scratch)
+(require 'scratch-back)
 (require 'wrap-region)
 ;(iswitchb-mode 1)
 ;(icomplete-mode 1)

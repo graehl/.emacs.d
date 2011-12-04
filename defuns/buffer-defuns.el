@@ -119,10 +119,6 @@ Symbols matching the text at point are put first in the completion list."
   (interactive)
   (untabify (point-min) (point-max)))
 
-(defun indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
@@ -220,3 +216,15 @@ modified file"
           (setq list (cdr list))
           (setq buffer (car list))))))
   (message "Refreshing open files"))
+
+
+(defun indent-buffer ()
+  (interactive)
+  (indent-region (point-min) (point-max)))
+
+(defun indent-buffer () "whole buffer!"
+  (interactive) (save-excursion (indent-region (point-min) (point-max) nil)))
+
+(defun prev-line (n) (forward-line (- n)))
+(defun bufend() (goto-char (point-max)))
+(defun bufstart() (goto-char (point-min)))

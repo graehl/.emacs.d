@@ -180,7 +180,6 @@
 (global-set-key (kbd "M-s s") 'rgrep)
 
 (provide 'key-bindings)
-
 (global-set-key (kbd "M-/") 'dabbrev-expand)
 (global-set-key (kbd "M-k") 'kill-whole-line)
 (global-set-key (kbd "C-k") 'kill-line)
@@ -194,6 +193,7 @@
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)
 (global-set-key (kbd "<f12>") 'next-error)
+(global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
@@ -201,7 +201,7 @@
 
 (require 'grep-buffers)
 (global-set-key (kbd "M-n") 'grep-buffers)
-(global-set-key (kbd "C-M-n") 'rgrep)
+(global-set-key (kbd "M-s s") 'rgrep)
 (global-set-key (kbd "M-o") 'nuke-line)
 (global-set-key (kbd "C-d") 'tweakemacs-delete-region-or-char)
 (global-set-key (kbd "C-/") 'tweakemacs-comment-dwim-region-or-one-line)
@@ -212,6 +212,7 @@
 (global-set-key (kbd "C-/") 'c-comment-region)
 (global-set-key (kbd "<C-,>") 'backward-word)
 (global-set-key (kbd "<C-.>") 'forward-word)
+(global-set-key (kbd "C-x 4 a") 'my-change-log-entry) ; allow repeats
 (global-set-key "\C-x5a" 'my-add-todo-entry) ; like 4a for ChangeLog
 (global-set-key "\C-x\C-g" 'goto-line) ; in case of fat fingering C-x g
 (global-set-key "\C-xr\C-k" 'my-kill-rectangle)
@@ -230,12 +231,17 @@
 (global-set-key  [(control shift next)] 'downcase-word)
 (global-set-key [(control f1)] 'query-replace-regexp)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
-;(define-key shell-mode-map "\C-r" 'isearch-backward)
+                                        ;(define-key shell-mode-map "\C-r" 'isearch-backward)
 (global-set-key (kbd "M-x") 'smex)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 (define-key global-map (kbd "C-c C-s") 'occur)
-
-
+(global-set-key (kbd "M-m") 'iy-go-to-char)
+(global-set-key "\C-\\" 'set-mark-and-goto-line)
+(global-set-key (kbd "C-f") 'forward-word)
+(require 'scratch-back)
+(global-set-key (kbd "M-<f2>") 'scratch-back)
+(global-set-key (kbd "M-<f3>") 'back-from-scratch)
+;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands
 ;; M-: (alt-shift-;) - evaluate lisp expression

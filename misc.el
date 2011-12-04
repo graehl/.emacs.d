@@ -29,7 +29,10 @@
 
 (setq require-final-newline t)
 
+(setq longlines-wrap-follows-window-size t)
+
 (require 'wrap-region)
 (wrap-region-global-mode t)
+
 
 (provide 'misc)

@@ -50,6 +50,8 @@
 (require 'setup-scala-mode)
 (require 'setup-clojure-mode)
 (require 'setup-js-mode)
+(require 'setup-line-mode)
+
 ;; Map files to modes
 (require 'mode-mappings)
 

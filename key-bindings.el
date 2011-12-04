@@ -244,7 +244,8 @@
 (global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
 (global-set-key (kbd "M-C-o") 'same-buffer-other-window)
 (global-set-key (kbd "C-x f") 'hobo-find-file) (require 'hobo)
-
+(global-set-key (kbd "C-e") 'end-of-line)
+(global-set-key (kbd "C-a") 'beginning-of-line)
 ;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands

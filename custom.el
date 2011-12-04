@@ -19,6 +19,7 @@
  '(custom-safe-themes (quote ("0174d99a8f1fdc506fa54403317072982656f127" default)))
  '(fill-column 80)
  '(kill-whole-line t)
+ '(line-move-visual nil)
  '(ido-use-filename-at-point nil)
  '(js2-allow-rhino-new-expr-initializer nil)
  '(js2-auto-indent-p t)

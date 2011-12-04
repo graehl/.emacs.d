@@ -1,16 +1,16 @@
-(setq word-wrap t)
-(defvar global-line-move-visual nil)
+                                        ;Users may configure this behavior via the (new) `line-move-visual' customization variable. Set it to t for unconditional visual movement of all keys, and nil for unconditional logical (buffer) movement of all keys.
 
-(when global-line-move-visual (global-visual-line-mode t))
-(visual-line-mode )
-;(setq line-move-visual global-line-move-visual)
+                                        ;(setq word-wrap t)
+(global-visual-line-mode t)
+(defvar global-line-move-visual line-move-visual)
+(defun regular-line-move () (setq line-move-visual global-line-move-visual))
+(regular-line-move)
 (add-hook 'iswitchb-minibuffer-setup-hook
           (lambda ()
             (setq line-move-visual nil)))
-(add-hook 'minibuffer-exit-hook (lambda ()
-                                  (setq line-move-visual global-line-move-visual)))
+(add-hook 'minibuffer-exit-hook 'regular-line-move)
 
-(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
+                                        ;(add-hook 'text-mode-hook 'turn-on-visual-line-mode)
 (setq visual-line-fringe-indicators t)
 
 (provide 'setup-line-mode)
@@ -24,6 +24,8 @@
         (put-text-property lbp lep 'wrap-prefix (fill-context-prefix lbp lep))
         (search-forward "\n" end t))))
 
+(defvar srb-adaptive-wrap-no-fringe nil)
+
 (define-minor-mode srb-adaptive-wrap-mode
   "Wrap the buffer text with adaptive filling."
   :lighter ""
@@ -35,15 +37,17 @@
             (mod (buffer-modified-p)))
         (if srb-adaptive-wrap-mode
             (progn
-              (setq word-wrap t)
-              (unless (member '(continuation) fringe-indicator-alist)
-                (push '(continuation) fringe-indicator-alist))
+              (when srb-adaptive-wrap-no-fringe
+                (setq word-wrap t)
+                (unless (member '(continuation) fringe-indicator-alist)
+                  (push '(continuation) fringe-indicator-alist)))
               (jit-lock-register 'srb-adaptive-indent))
           (jit-lock-unregister 'srb-adaptive-indent)
           (remove-text-properties (point-min) (point-max) '(wrap-prefix pref))
-          (setq fringe-indicator-alist
-                (delete '(continuation) fringe-indicator-alist))
-          (setq word-wrap nil))
+          (when srb-adaptive-wrap-no-fringe
+            (setq fringe-indicator-alist
+                  (delete '(continuation) fringe-indicator-alist))
+            (setq word-wrap nil)))
         (restore-buffer-modified-p mod)))))
 
-(srb-adaptive-wrap-mode)
+(srb-adaptive-wrap-mode t)

@@ -245,6 +245,8 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive)
   (add-change-log-entry nil my-change-log-file t t)
   )
+(defvar my-notes-file "~/x/NOTES")
+
 
 (defun electric-pair ()
   "Insert character pair without sournding spaces"

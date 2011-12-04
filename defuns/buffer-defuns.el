@@ -228,3 +228,9 @@ modified file"
 (defun prev-line (n) (forward-line (- n)))
 (defun bufend() (goto-char (point-max)))
 (defun bufstart() (goto-char (point-min)))
+
+(defun same-buffer-other-window ()
+  "switch to the current buffer in the other window"
+  (interactive)
+  (switch-to-buffer-other-window (current-buffer))
+  )

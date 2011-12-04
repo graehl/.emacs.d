@@ -243,6 +243,7 @@
 (global-set-key "\M-u"        '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
 (global-set-key "\M-l"        '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
 (global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
+(global-set-key (kbd "M-C-o") 'same-buffer-other-window)
 
 ;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize

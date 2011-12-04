@@ -29,4 +29,7 @@
 
 (setq require-final-newline t)
 
+(require 'wrap-region)
+(wrap-region-global-mode t)
+
 (provide 'misc)

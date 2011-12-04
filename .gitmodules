@@ -82,3 +82,6 @@
 [submodule "site-lisp/paredit"]
 	path = site-lisp/paredit
 	url = https://github.com/emacsmirror/paredit.git
+[submodule "site-lisp/hobo"]
+	path = site-lisp/hobo
+	url = https://github.com/emacsmirror/hobo.git

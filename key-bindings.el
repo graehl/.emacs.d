@@ -237,13 +237,13 @@
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key "\C-\\" 'set-mark-and-goto-line)
 (global-set-key (kbd "C-f") 'forward-word)
-(require 'scratch-back)
-(global-set-key (kbd "M-<f2>") 'scratch-back)
+(global-set-key (kbd "M-<f2>") 'scratch-back) (require 'scratch-back)
 (global-set-key (kbd "M-<f3>") 'back-from-scratch)
 (global-set-key "\M-u"        '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
 (global-set-key "\M-l"        '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
 (global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
 (global-set-key (kbd "M-C-o") 'same-buffer-other-window)
+(global-set-key (kbd "C-x f") 'hobo-find-file) (require 'hobo)
 
 ;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize

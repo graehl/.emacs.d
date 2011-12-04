@@ -88,7 +88,6 @@
 
 (require 'grep-buffers)
 (require 'scratch-back)
-(require 'wrap-region)
 ;(iswitchb-mode 1)
 ;(icomplete-mode 1)
 (require 'buffer-init)

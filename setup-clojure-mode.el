@@ -1,7 +1,5 @@
 (require 'clojure-mode nil 'noerror)
-(require 'paredit)
 
-(defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
 
 (defun clojure-font-lock-setup ()

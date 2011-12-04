@@ -46,6 +46,7 @@
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
+(require 'setup-scala-mode)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -96,8 +97,10 @@
 (setq dabbrev-case-fold-search nil)
 (setq dabbrev-case-distinction nil)
 
+(setq require-final-newline t)
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 (defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
+(fset 'yes-or-no-p 'y-or-n-p)
 (defalias 'list-buffers 'ibuffer) ; always use ibuffer
 
 (require 'aliases)

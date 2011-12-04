@@ -214,7 +214,6 @@
 (global-set-key (kbd "<C-.>") 'forward-word)
 (global-set-key (kbd "C-x 4 a") 'my-change-log-entry) ; allow repeats
 (global-set-key "\C-x5a" 'my-add-todo-entry) ; like 4a for ChangeLog
-(global-set-key "\C-x\C-g" 'goto-line) ; in case of fat fingering C-x g
 (global-set-key "\C-xr\C-k" 'my-kill-rectangle)
 (global-set-key "\C-xr\C-y" 'my-yank-replace-rectangle)
 (global-set-key "\C-xr\C-w" 'my-save-rectangle)
@@ -241,6 +240,10 @@
 (require 'scratch-back)
 (global-set-key (kbd "M-<f2>") 'scratch-back)
 (global-set-key (kbd "M-<f3>") 'back-from-scratch)
+(global-set-key "\M-u"        '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
+(global-set-key "\M-l"        '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
+(global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
+
 ;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands

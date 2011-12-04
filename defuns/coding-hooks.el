@@ -5,8 +5,8 @@
 
 (setq c-modes-hook '(js-mode-hook c-mode-hook idl-mode-hook c++-mode-hook cc-mode-hook java-mode-hook c-mode-common-hook go-mode-hook))
 (setq lisp-modes-hook '(scheme-mode-hook lisp-mode-hook emacs-lisp-mode-hook lisp-interaction-mode-hook))
-(setq jvm-modes-hook '(java-mode-hook scala-mode-hook clojure-mode-hook))
-(setq ml-modes-hook '(ocaml-mode-hook ml-mode-hook haskell-mode-hook))
+(setq jvm-modes-hook '(java-mode-hook scala-mode-hook clojure-mode-hook tuareg-mode-hook))
+(setq ml-modes-hook '(ocaml-mode-hook ml-mode-hook haskell-mode-hook tuareg-mode-hook))
 (setq make-modes-hook '(makefile-mode-hook jam-mode-hook))
 (setq doc-modes-hook '(LaTeX-mode-hook html-mode-hook))
 (setq script-modes-hook '(perl-mode-hook ruby-mode-hook python-mode-hook sh-mode-hook))

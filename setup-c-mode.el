@@ -30,21 +30,8 @@
                                         ;   (c-add-style "graehl" graehl-style t)
   )
 
-
-
-(defun my-code-mode-hook ()
-                                        ;  (font-lock-mode t)
-  (show-paren-mode t)
-  (local-set-key [return] 'newline-and-indent)
-  (local-set-key [(control return)] 'newline)
-  (local-set-key [( control ?\( )] 'my-matching-paren)
-;  (make-local-variable 'dabbrev-case-fold-search)
-;  (setq dabbrev-case-fold-search nil)
-  )
-
-(add-hook 'coding-hooks 'my-code-mode-hook)
-
 (defun my-c-mode-hook ()
+  (key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"
                                         ;        c-backspace-function 'c-hungry-delete
@@ -110,10 +97,6 @@
                                         ;(graehl-style-common-hook)
   )
 
-;; Since pretty much all my .h files are actually C++ headers, use c++-mode instead of
-;; c-mode for these files.
-(setq auto-mode-alist
-      (cons '("\\.h$" . c++-mode) auto-mode-alist))
 (defun my-makefile-mode-hook ()
   (font-lock-mode t)
   (show-paren-mode t)

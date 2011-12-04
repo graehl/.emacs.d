@@ -49,7 +49,7 @@
 (require 'setup-iswitchb)
 (require 'setup-scala-mode)
 (require 'setup-clojure-mode)
-
+(require 'setup-js-mode)
 ;; Map files to modes
 (require 'mode-mappings)
 

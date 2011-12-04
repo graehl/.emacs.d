@@ -73,3 +73,6 @@
 [submodule "site-lisp/ack"]
 	path = site-lisp/ack
 	url = https://github.com/emacsmirror/ack.git
+[submodule "site-lisp/rainbow-delimiters"]
+	path = site-lisp/rainbow-delimiters
+	url = https://github.com/emacsmirror/rainbow-delimiters.git

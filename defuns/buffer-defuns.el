@@ -115,16 +115,58 @@ Symbols matching the text at point are put first in the completion list."
 (add-hook 'coding-hook 'local-comment-auto-fill)
 (add-hook 'coding-hook 'turn-on-hl-line-mode)
 
+;; The regexp "\\s-+$" is too general, since form feeds (\n), carriage
+;; returns (\r), and form feeds/page breaks (C-l) count as whitespace in
+;; some syntaxes even though they serve a functional purpose in the file.
+(defconst whitespace-regexp "[ \t]+$"
+  "Regular expression which matches trailing whitespace.")
+
+;; Match two or more trailing newlines at the end of the buffer; all but
+;; the first newline will be deleted.
+(defconst whitespace-eob-newline-regexp "\n\n+\\'"
+  "Regular expression which matches newlines at the end of the buffer.")
+
+(defun delete-trailing-newlines () "delete extra end-of-buffer newlines"
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (and (re-search-forward whitespace-eob-newline-regexp nil t)
+         (delete-region (1+ (match-beginning 0)) (match-end 0)))))
+
+(defmacro with-whole-buffer (fn)
+`(save-excursion 
+    (save-restriction 
+      (widen) (goto-char (point-min))
+      (save-match-data (progn ,fn)))))
+
+
+(defconst excessive-newlines-regexp "\n\n\n\n+" "regexp to replace")
+(defconst excessive-newlines-replacement "\n" "replacement")
+(defconst excessive-newlines-replacement-n 3 "use this may repetitions of excessive-newlines-replacement")
+(defun excessive-newlines-compress (&optional nrepl)
+  "replace excessive-newlines-regexp with nrepl newlines in the whole buffer"
+  (interactive "p")
+  (when (eq nrepl nil) (setq nrepl excessive-newlines-replacement-n))
+  (with-whole-buffer
+   (while (re-search-forward excessive-newlines-regexp (point-max) t)
+     (delete-region (match-beginning 0) (match-end 0))
+     (dotimes (i nrepl) (insert excessive-newlines-replacement)))))
+
+
 (defun untabify-buffer ()
   (interactive)
   (untabify (point-min) (point-max)))
 
+(defvar cleanup-buffer-excessive-newlines nil)
 (defun cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
   (indent-buffer)
   (untabify-buffer)
-  (delete-trailing-whitespace))
+  (unless (eq nil cleanup-buffer-excessive-newlines)
+    (excessive-newlines-compress cleanup-buffer-excessive-newlines))
+  (delete-trailing-whitespace)
+  (delete-trailing-newlines))
 
 (defun recentf-ido-find-file ()
   "Find a recent file using ido."

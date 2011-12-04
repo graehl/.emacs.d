@@ -7,7 +7,12 @@
       whitespace-line-column 100)
 
 ;; Trailing white-space. Just say no.
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(require 'time-stamp)
+                                        ;(add-hook 'before-save-hook 'time-stamp)
+
+
+(setq cleanup-buffer-excessive-newlines 3)
+(add-hook 'before-save-hook 'cleanup-buffer)
 
 ;; Misc in misc
 (setq ediff-window-setup-function 'ediff-setup-windows-plain

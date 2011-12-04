@@ -1,12 +1,13 @@
-; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
+                                        ; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
 (require 'solarized-dark-theme)
 
-; emacs-24 enable-theme does not work;
-;(add-to-list 'custom-theme-load-path solarized-path)
+
+                                        ; emacs-24 enable-theme does not work;
+                                        ;(add-to-list 'custom-theme-load-path solarized-path)
 (setq solarized-path (concat (expand-file-name "emacs-color-theme-solarized" site-lisp-dir)))
 (require 'color-theme-solarized)
 (color-theme-solarized-dark)
-;(color-theme-solarized-light)
+                                        ;(color-theme-solarized-light)
 
 (setq visible-bell t
       font-lock-maximum-decoration t
@@ -70,11 +71,11 @@
  sgml-validate-command "tidy"
  teach-extended-commands-p t
  truncate-partial-width-windows nil
-; mode-line-buffer-identification '("%12b [%f]")
+                                        ; mode-line-buffer-identification '("%12b [%f]")
  indent-tabs-mode nil
  ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally
-)
+ )
 
 (global-auto-revert-mode 1)
 (transient-mark-mode 1)

@@ -96,8 +96,6 @@
 
 ;; Navigation bindings
 (global-set-key (kbd "C-x g") 'goto-line)
-(global-set-key (kbd "<home>") 'beginning-of-buffer)
-(global-set-key (kbd "<end>") 'end-of-buffer)
 (global-set-key (kbd "M-<up>") 'beginning-of-buffer)
 (global-set-key (kbd "M-<down>") 'end-of-buffer)
 
@@ -180,6 +178,7 @@
 (global-set-key (kbd "M-s s") 'rgrep)
 
 (provide 'key-bindings)
+
 (global-set-key (kbd "M-/") 'dabbrev-expand)
 (global-set-key (kbd "M-k") 'kill-whole-line)
 (global-set-key (kbd "C-k") 'kill-line)
@@ -199,8 +198,15 @@
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
 (global-set-key (kbd "M-]") 'split-window-horizontally)
 
-(require 'grep-buffers)
-(global-set-key (kbd "M-n") 'grep-buffers)
+                                        ;(global-set-key (kbd "M-s") 'fixup-whitespace)
+                                        ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
+;; Other useful strokes and commands
+;; M-: (alt-shift-;) - evaluate lisp expression
+;; C-x C-e - evaluate the preceding lisp expression on this line
+;; edebug-<tab> a suite of elisp debugging functions (e.g. edebug-defun)
+;; M-! (alt-shift-1) - do a shell command, e.g. tlm edit
+;; C-x C-f (visit file) to make a buffer modifiable after you've 'tlm edited' it.
+(global-set-key (kbd "M-n") 'grep-buffers) (require 'grep-buffers)
 (global-set-key (kbd "M-s s") 'rgrep)
 (global-set-key (kbd "M-o") 'nuke-line)
 (global-set-key (kbd "C-d") 'tweakemacs-delete-region-or-char)
@@ -248,13 +254,7 @@
 (global-set-key (kbd "M-m") 'query-replace)
 (global-set-key (kbd "M-<f1>") 'replace-string)
 (global-set-key (kbd "C-<f1>") 'replace-string)
-;(global-set-key (kbd "M-s") 'fixup-whitespace)
-;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
-;; Other useful strokes and commands
-;; M-: (alt-shift-;) - evaluate lisp expression
-;; C-x C-e - evaluate the preceding lisp expression on this line
-;; edebug-<tab> a suite of elisp debugging functions (e.g. edebug-defun)
-;; M-! (alt-shift-1) - do a shell command, e.g. tlm edit
-;; C-x C-f (visit file) to make a buffer modifiable after you've 'tlm edited' it.
+(global-set-key (kbd "<C-next>") 'mark-next-like-this)
 
-
+(global-set-key (kbd "<home>") 'beginning-of-visual-line)
+(global-set-key (kbd "<end>") 'end-of-visual-line)

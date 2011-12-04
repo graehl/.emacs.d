@@ -25,4 +25,3 @@
   "I can't believe emacs doesn't give you a way to do this!!"
   (interactive t)
   (eval-expression (edebug-read-top-level-form)))
-

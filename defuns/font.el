@@ -8,4 +8,4 @@
                      (set-face-font 'bold-italic (concat (concat fontpre "bold-i") fontpost))))))
 
 (defun gnu-font (font) (interactive)
-  (gnu-font-sz font "10"))
+  (gnu-font-sz font "11"))

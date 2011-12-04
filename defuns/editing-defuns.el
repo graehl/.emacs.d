@@ -163,3 +163,58 @@ region-end is used. Adds the duplicated text to the kill ring."
     (delete-char 1)
     (capitalize-word 1)
     (setq arg (1- arg))))
+
+(defun kill-whole-line ()
+  "delete from start of current line instead of cursor as per normal kill-line"
+  (interactive)
+  (let ((c (current-column)))
+    (beginning-of-line)
+    (kill-line)
+    (move-to-column c)))
+
+(defun nuke-line ()
+  "Delete current line without sending to kill ring."
+  (interactive)
+  (setq previous-column (current-column))
+  (delete-region (line-beginning-position) (line-end-position))
+  (delete-char 1)
+  (move-to-column previous-column))
+
+(defun tweakemacs-delete-region-or-char ()
+  "Delete a region or a single character."
+  (interactive)
+  (if mark-active
+      (delete-region (region-beginning) (region-end))
+    (delete-char 1)))
+
+(defun tweakemacs-move-one-line-downward ()
+  "Move current line downward once."
+  (interactive)
+  (forward-line)
+  (transpose-lines 1)
+  (prev-line 1))
+
+(defun tweakemacs-move-one-line-upward ()
+  "Move current line upward once."
+  (interactive)
+  (transpose-lines 1)
+  (forward-line -2))
+
+(defun tweakemacs-comment-dwim-region-or-one-line (arg)
+  "When a region exists, execute comment-dwim, or if comment or uncomment the current line according to if the current line is a comment."
+  (interactive "*P")
+  (if mark-active
+      (comment-dwim arg)
+    (save-excursion
+      (let ((has-comment? (progn (beginning-of-line) (looking-at (concat "\\s-*" (regexp-quote comment-start))))))
+	(push-mark (point) nil t)
+	(end-of-line)
+	(if has-comment?
+	    (uncomment-region (mark) (point))
+	  (comment-region (mark) (point)))))))
+
+(defun my-add-todo-entry ()
+  "like add-change-log-entry but uses filename of TODO"
+  (interactive)
+  (add-change-log-entry nil "TODO" t t)
+  )

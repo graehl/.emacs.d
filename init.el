@@ -3,7 +3,7 @@
                     (or (buffer-file-name) load-file-name)))
 
 ;; Set path to dependencies
-(setq site-lisp-dir (expand-file-name "site-lisp" dotfiles-dir))
+(setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 
 ;; Set up load path
 (add-to-list 'load-path dotfiles-dir)
@@ -37,6 +37,11 @@
 (require 'setup-magit)
 (require 'setup-hippie)
 (require 'setup-autopair)
+(require 'setup-c-mode)
+(require 'setup-compilation-mode)
+(require 'setup-gud-mode)
+(require 'setup-html-mode)
+(require 'setup-sh-mode)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -61,12 +66,21 @@
 (require 'appearance)
 (require 'misc)
 (when (equal system-type 'darwin) (require 'mac))
-
+(when (equal system-type 'windows-nt) (require 'win))
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
-  (server-start))
+  (safe-wrap (server-start)))
 
 ;; Run at full power please
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+(require 'scratch)
+(require 'wrap-region)
+;(iswitchb-mode 1)
+;(icomplete-mode 1)
+(require 'buffer-init)
+(require 'iswitchb)
+(iswitchb-mode 1)
+

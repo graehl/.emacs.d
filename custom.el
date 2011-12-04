@@ -1,8 +1,8 @@
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "Black" :foreground "White" :inverse-video nil :box nil :strike-t*hrough nil :overline nil :underline nil :slant normal :weight normal :width normal :height 105))))
  '(fill-column 80)
  '(highlight ((((class color) (min-colors 88) (background dark)) (:background "#111111"))))
@@ -12,11 +12,13 @@
  '(show-paren-mismatch ((((class color)) (:background "red")))))
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("0174d99a8f1fdc506fa54403317072982656f127" default)))
  '(fill-column 80)
+ '(kill-whole-line t)
  '(ido-use-filename-at-point nil)
  '(js2-allow-rhino-new-expr-initializer nil)
  '(js2-auto-indent-p t)

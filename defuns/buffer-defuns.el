@@ -136,3 +136,63 @@ Symbols matching the text at point are put first in the completion list."
   (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
     (when file
       (find-file file))))
+
+(defun remove-dos-eol ()
+  "Removes the disturbing '^M' showing up in files containing mixed UNIX and DOS line endings."
+  (interactive)
+  (setq buffer-display-table (make-display-table))
+  (aset buffer-display-table ?\^M []))
+
+(defun kill-others-of-this-name () "" (interactive) (kill-other-buffers-of-this-file-name nil))
+(defun kill-other-buffers-of-this-file-name (&optional buffername)
+  "Kill all other buffers visiting files of the same base name."
+  (interactive "bBuffer to make unique: ")
+  (let ((buffer (if buffername (get-buffer buffername) (current-buffer))))
+    (cond ((buffer-file-name buffer)
+           (let ((name (file-name-nondirectory (buffer-file-name buffer))))
+             (loop for ob in (buffer-list)
+                   do (if (and (not (eq ob buffer))
+                               (buffer-file-name ob)
+                               (let ((ob-file-name (file-name-nondirectory (buffer-file-name ob))))
+                                 (or (equal ob-file-name name)
+                                     (string-match (concat name "\\(\\.~.*\\)?~$") ob-file-name))) )
+                          (kill-buffer ob)))))
+          (message "This buffer has no file name."))))
+
+(defun my-mark-or-point ()
+  "Return the mark if it is active, otherwise the point."
+  (if (mark-active) (mark) (point)))
+
+(defun my-selection ()
+  "Return a pair [start . finish) delimiting the current selection"
+  (let ((start (make-marker))
+        (finish (make-marker)))
+    (set-marker start (min (my-mark-or-point) (point)))
+    (set-marker finish (max (my-mark-or-point) (point)))
+    (cons start finish)))
+
+(defun my-replace-in-region (start finish key replacement)
+  "In the range [START, FINISH), replace text matching KEY with REPLACEMENT"
+  (goto-char start)
+  (while (search-forward key finish t)
+    (replace-match replacement)))
+
+(defun my-activate-mark ()
+  "Make the mark active if it is currently inactive"
+  (set-mark (mark t)))
+
+(defun my-force-writable ()
+  "Make this buffer and its file writable.  Has no effect on
+  buffers not associated with a file"
+  (interactive)
+  (let ((f (buffer-file-name)))
+    (if f
+        (let* ((modes (file-modes f))
+               (newmodes (logior ?\200 modes))
+               )
+          (if (not (equal modes newmodes))
+              (progn
+                (set-file-modes f newmodes)
+                (if (not (buffer-modified-p))
+                    (revert-buffer nil t t))
+                ))))))

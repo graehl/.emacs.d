@@ -46,3 +46,15 @@
 [submodule "site-lisp/emacs-color-theme-solarized"]
 	path = site-lisp/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "site-lisp/scratch"]
+	path = site-lisp/scratch
+	url = https://github.com/cbbrowne/scratch-el.git
+[submodule "site-lisp/fic-mode"]
+	path = site-lisp/fic-mode
+	url = https://github.com/emacsmirror/fic-mode.git
+[submodule "site-lisp/grep-buffers"]
+	path = site-lisp/grep-buffers
+	url = https://github.com/emacsmirror/grep-buffers.git
+[submodule "site-lisp/wrap-region"]
+	path = site-lisp/wrap-region
+	url = https://github.com/rejeep/wrap-region.git

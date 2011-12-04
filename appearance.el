@@ -1,4 +1,6 @@
-(require 'solarized-definitions)
+; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
+(require 'solarized-dark-theme)
+
 ; emacs-24 enable-theme does not work;
 ;(add-to-list 'custom-theme-load-path solarized-path)
 (setq solarized-path (concat (expand-file-name "emacs-color-theme-solarized" site-lisp-dir)))
@@ -43,9 +45,8 @@
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
-  (turn-off-tool-bar)
+  (safe-wrap (turn-off-tool-bar))
   (tooltip-mode -1)
-  (turn-off-tool-bar)
   (blink-cursor-mode -1))
 
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
@@ -56,6 +57,28 @@
 ;; Make zooming affect frame instead of buffers
 (require 'zoom-frm)
 
-(remove-dos-eol)
 
 (provide 'appearance)
+
+(remove-dos-eol)
+(require 'avoid)
+(require 'misc-fns)
+(require 'fit-frame)
+
+(setq-default
+ sgml-quick-keys t
+ sgml-validate-command "tidy"
+ teach-extended-commands-p t
+ truncate-partial-width-windows nil
+; mode-line-buffer-identification '("%12b [%f]")
+ indent-tabs-mode nil
+ ediff-window-setup-function 'ediff-setup-windows-plain
+ ediff-split-window-function 'split-window-horizontally
+)
+
+(global-auto-revert-mode 1)
+(transient-mark-mode 1)
+
+;; Enable these two supposedly "advanced" commands which come disabled by default.
+(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)

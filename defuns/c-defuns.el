@@ -183,3 +183,194 @@ is not supplied, the boost copyright is used by default"
       )
     )
   )
+
+
+(defun my-at-preprocessor-directive-p ()
+  "return non-nil if point is sitting at the beginning of a preprocessor directive name"
+  (and
+   (save-excursion
+     (re-search-backward "^\\([ \t]*\\)#\\([ \t]*\\)" (line-beginning-position) t))
+   (>= (point) (match-beginning 2))
+   (<= (point) (match-end 2))
+   ))
+
+(defun my-preprocessor-indentation ()
+  (save-excursion
+    (beginning-of-line)
+    (re-search-backward "^[ \t]*#[ \t]*" nil t)
+    (goto-char (match-end 0))
+    (+ (current-column)
+       (if (looking-at "\\(if\\)\\|\\(el\\)") 1 0)))) ; fixme: was 1 0
+
+(defun my-electric-pound-< ()
+  (interactive)
+  (my-maybe-insert-incude "<" ">"))
+
+
+(defun my-electric-pound ()
+  (interactive)
+  (insert "#")
+  (if (my-at-preprocessor-directive-p)
+      (progn
+        (delete-region (match-beginning 1) (match-end 1))
+        (move-to-column (my-preprocessor-indentation) t))))
+
+(defun my-electric-pound-e ()
+  (interactive)
+
+  (if (my-at-preprocessor-directive-p)
+      (progn
+        (move-to-column (max 1 (- (my-preprocessor-indentation) 1))))) ; #fixme: was 1
+  (insert "e"))
+
+(defun my-c-namespace-indent (langelem)
+  "Used with c-set-offset, indents namespace scope elements 2 spaces
+from the namespace declaration iff the open brace sits on a line by itself."
+  (save-excursion
+    (if (progn (goto-char (cdr langelem))
+                                        ;               (setq column (current-column))
+               (end-of-line)
+               (while (and (search-backward "{" nil t)
+                           (assoc 'incomment (c-guess-basic-syntax))))
+               (skip-chars-backward " \t")
+               (bolp))
+        2)))
+
+(defun my-c-backward-template-prelude ()
+  "Back up over expressions that end with a template argument list.
+
+Examples include:
+
+        typename foo<bar>::baz::mumble
+
+        foo(bar, baz).template bing
+"
+  (while
+      (save-excursion
+        ;; Inspect the previous token or balanced pair to
+        ;; see whether to skip backwards over it
+        (c-backward-syntactic-ws)
+        (or
+         ;; is it the end of a nested template argument list?
+         (and
+          (eq (char-before) ?>)
+          (c-backward-token-2 1 t) ;; skips over balanced "<>" pairs
+          (eq (char-after) ?<))
+
+         (and
+          (c-backward-token-2 1 t)
+          (looking-at "[A-Za-z_\\[(.]\\|::\\|->"))))
+
+    (c-backward-token-2 1 t)))
+
+(defun my-lineup-first-template-args (langelem)
+  "Align lines beginning with the first template argument.
+
+To allow this function to be used in a list expression, nil is
+returned if we don't appear to be in a template argument list.
+
+Works with: template-args-cont."
+  (let ((leading-comma (my-c-leading-comma-p)))
+    (save-excursion
+      (c-with-syntax-table c++-template-syntax-table
+        (beginning-of-line)
+        (backward-up-list 1)
+        (if (eq (char-after) ?<)
+
+            (progn
+              (my-c-backward-template-prelude)
+
+              (vector
+               (+ (current-column)
+                  (if leading-comma (/ c-basic-offset 2) c-basic-offset)
+                  ))
+
+              ))))))
+
+
+(defun my-lineup-more-template-args (langelem)
+  "Line up template argument lines under the first argument,
+adjusting for leading commas. To allow this function to be used in
+a list expression, nil is returned if there's no template
+argument on the first line.
+
+Works with: template-args-cont."
+  (let ((result (c-lineup-template-args langelem)))
+    (if (not (eq result nil))
+        (if (my-c-leading-comma-p)
+            (vector (- (aref result 0) (/ c-basic-offset 2)))
+          result))))
+
+(defun my-lineup-template-close (langelem)
+  (save-excursion
+    (c-with-syntax-table c++-template-syntax-table
+      (beginning-of-line)
+      (c-forward-syntactic-ws (c-point 'eol))
+      (if (and
+           (eq (char-after) ?>)
+           (progn
+             (forward-char)
+             (c-backward-token-2 1 t)
+             (eq (char-after) ?<)))
+          (progn
+            (my-c-backward-template-prelude)
+            (vector (current-column)))))))
+
+(defun my-c-electric-comma (arg)
+  "Amend the regular comma insertion by possibly appending a
+  space."
+  (interactive "*P") ; Require a writable buffer/take a prefix arg in raw form
+
+  ;; Do the regular action.  Perhaps we should be using defadvice here?
+  (c-electric-semi&comma arg)
+
+  ;; Insert the space if this comma is the first token on the line, or
+  ;; if there are preceding commas followed by a space.
+  (and (eq (char-before) ?,)
+       (save-excursion
+         (backward-char)
+         (skip-syntax-backward " ")
+         (bolp)
+         )
+       (insert " "))
+  )
+
+(defun my-electric-pound-quote ()
+  (interactive)
+  (my-maybe-insert-incude "\"" "\""))
+
+(defun my-maybe-insert-incude (open close)
+  (if (my-at-preprocessor-directive-p)
+      (progn
+        (move-to-column (my-preprocessor-indentation) t)
+        (insert "include " open)
+        (save-excursion
+          (insert close)))
+    (insert open)))
+
+(defun my-c-electric-gt (arg)
+  "Insert a greater-than character.
+The line will be re-indented if the buffer is in C++ mode.
+Exceptions are when a numeric argument is supplied, point is inside a
+literal, or `c-syntactic-indentation' is nil, in which case the line
+will not be re-indented."
+  (interactive "*P")
+  (let ((indentp (and c-syntactic-indentation
+                      (not arg)
+                      (not (c-in-literal))))
+        ;; shut this up
+        (c-echo-syntactic-information-p nil))
+    (self-insert-command (prefix-numeric-value arg))
+    (if indentp
+        (indent-according-to-mode))))
+
+(defun my-c-namespace-open-indent (langelem)
+  "Used with c-set-offset, indents namespace opening braces to the
+same indentation as the line on which the namespace declaration
+starts."
+  (save-excursion
+    (goto-char (cdr langelem))
+    (let ((column (current-column)))
+      (beginning-of-line)
+      (skip-chars-forward " \t")
+      (- (current-column) column))))

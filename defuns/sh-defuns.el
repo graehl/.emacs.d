@@ -170,3 +170,4 @@ and initial semicolons."
     (insert "}")
     (newline)
     (indent-to indentation)))
+

@@ -4,10 +4,10 @@
 
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
-
 ;; Set up load path
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path site-lisp-dir)
+
 
 ;; Add external projects to load path
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
@@ -42,15 +42,13 @@
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
+(require 'setup-ack)
+(require 'setup-shell-mode)
+(require 'setup-sourcepair)
 
 ;; Map files to modes
 (require 'mode-mappings)
 
-;; Functions (load all files in defuns-dir)
-(setq defuns-dir (expand-file-name "defuns" dotfiles-dir))
-(dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)
-    (load file)))
 (require 'recall-position)
 (require 'expand-region)
 (require 'mark-more-like-this)
@@ -61,6 +59,15 @@
 ;; Setup key mappings
 (require 'key-chords)
 (require 'key-bindings)
+
+
+;; Functions (load all files in defuns-dir)
+(setq defuns-dir (expand-file-name "defuns" dotfiles-dir))
+(dolist (file (directory-files defuns-dir t "\\w+"))
+  (when (file-regular-p file)
+    (load file)))
+
+;; below use defuns.
 
 ;; Misc
 (require 'appearance)
@@ -76,6 +83,7 @@
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+(require 'grep-buffers)
 (require 'scratch)
 (require 'wrap-region)
 ;(iswitchb-mode 1)
@@ -83,4 +91,11 @@
 (require 'buffer-init)
 (require 'iswitchb)
 (iswitchb-mode 1)
+(auto-compression-mode 1)
 
+(autoload 'live-mode "live-mode" "live mode" t)
+(setq case-fold-search t)
+(setq dabbrev-case-fold-search nil)
+(setq dabbrev-case-distinction nil)
+
+(safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))

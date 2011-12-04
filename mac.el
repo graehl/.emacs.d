@@ -19,4 +19,14 @@
 ;; Ignore .DS_Store files with ido mode
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
+(setq inferior-octave-program "/Applications/Octave.app/Contents/MacOS/Octave")
+
+(add-hook 'shell-mode-hook 'my-magic-prompt)
+(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
+(setq shell-prompt-pattern "^|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]? *")
+(setq shell-prompt-pattern "^\\(|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]?\\|[^#$%>\n]*[#$%>]\\) *")
+
+(enable-magic-dirtrack)
+(size-frame 200 60)
+
 (provide 'mac)

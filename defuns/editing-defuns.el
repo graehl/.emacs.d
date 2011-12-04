@@ -218,3 +218,26 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive)
   (add-change-log-entry nil "TODO" t t)
   )
+
+(defun electric-pair ()
+  "Insert character pair without sournding spaces"
+  (interactive)
+  (let (parens-require-spaces)
+    (insert-pair)))
+
+(defun my-matching-paren (arg)
+  (interactive "P")
+  (if arg
+      () ;;(insert "%")  ; insert the character we're bound to
+    (cond ((looking-at "[[({]")
+           (forward-sexp 1)
+           (forward-char -1))
+          ((looking-at "[]})]")
+           (forward-char 1)
+           (forward-sexp -1))
+          (t
+           ;; (insert "%")  ; insert the character we're bound to
+           ))))
+
+(defun slash-to-backslash (text)
+  (substitute ?\\ ?/ text))

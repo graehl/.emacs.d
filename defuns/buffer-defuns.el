@@ -196,3 +196,27 @@ Symbols matching the text at point are put first in the completion list."
                 (if (not (buffer-modified-p))
                     (revert-buffer nil t t))
                 ))))))
+
+(defun my-kill-buffer ()
+  "Just kill the current buffer without asking, unless of course it's a
+modified file"
+  (interactive)
+  (kill-buffer (current-buffer)))
+
+
+(defun revert-all-buffers()
+  "Refreshs all open buffers from their respective files"
+  (interactive)
+  (let* ((list (buffer-list))
+         (buffer (car list)))
+    (while buffer
+      (if (string-match "\\*" (buffer-name buffer))
+          (progn
+            (setq list (cdr list))
+            (setq buffer (car list)))
+        (progn
+          (set-buffer buffer)
+          (revert-buffer t t t)
+          (setq list (cdr list))
+          (setq buffer (car list))))))
+  (message "Refreshing open files"))

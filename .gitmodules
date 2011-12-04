@@ -58,3 +58,12 @@
 [submodule "site-lisp/wrap-region"]
 	path = site-lisp/wrap-region
 	url = https://github.com/rejeep/wrap-region.git
+[submodule "site-lisp/multi-term"]
+	path = site-lisp/multi-term
+	url = https://github.com/emacsmirror/multi-term.git
+[submodule "site-lisp/fit-frame"]
+	path = site-lisp/fit-frame
+	url = https://github.com/emacsmirror/fit-frame.git
+[submodule "site-lisp/misc-fns"]
+	path = site-lisp/misc-fns
+	url = https://github.com/emacsmirror/misc-fns.git

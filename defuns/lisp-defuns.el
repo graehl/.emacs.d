@@ -20,3 +20,9 @@
             (setq retval (cons 'exception (list ex)))))
          retval)
      ,@clean-up))
+
+(defun my-unedebug-defun ()
+  "I can't believe emacs doesn't give you a way to do this!!"
+  (interactive t)
+  (eval-expression (edebug-read-top-level-form)))
+

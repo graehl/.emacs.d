@@ -31,6 +31,19 @@
   )
 
 
+
+(defun my-code-mode-hook ()
+                                        ;  (font-lock-mode t)
+  (show-paren-mode t)
+  (local-set-key [return] 'newline-and-indent)
+  (local-set-key [(control return)] 'newline)
+  (local-set-key [( control ?\( )] 'my-matching-paren)
+;  (make-local-variable 'dabbrev-case-fold-search)
+;  (setq dabbrev-case-fold-search nil)
+  )
+
+(add-hook 'coding-hooks 'my-code-mode-hook)
+
 (defun my-c-mode-hook ()
   (c-set-style "bsd")
   (setq c-default-style "bsd"
@@ -109,5 +122,10 @@
   (local-set-key [return] 'newline-and-indent)
   (local-set-key [(control return)] 'newline)
   )
+
+(require 'gud)
+(defun my-gud-run-to-cursor ()
+  (gud-tbreak)
+  (gud-cont))
 
 (provide 'setup-c-mode)

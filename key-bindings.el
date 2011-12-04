@@ -216,4 +216,25 @@
 (global-set-key "\C-xr\C-y" 'my-yank-replace-rectangle)
 (global-set-key "\C-xr\C-w" 'my-save-rectangle)
 (global-set-key "\C-x\M-Q" 'my-force-writable)
+(global-set-key [( control ?\( )] 'my-matching-paren)
+(global-set-key "\C-x\C-k" 'my-kill-buffer) ; without asking
+(global-set-key (kbd "C-<tab>") 'tab-to-tab-stop) ; regular spaces-to-next-tabstop, not autoindent
+(global-set-key  [(meta left)] 'backward-sexp)
+(global-set-key  [(meta right)] 'forward-sexp)
+(global-set-key  [(meta return)] 'dabbrev-expand)
+(global-set-key  [(control shift prior)] 'upcase-word)
+(global-set-key  [(control shift next)] 'downcase-word)
+(global-set-key [(control f1)] 'query-replace-regexp)
+(global-set-key (kbd "<C-S-return>") 'fullscreen)
+;(define-key shell-mode-map "\C-r" 'isearch-backward)
+
+
+;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
+;; Other useful strokes and commands
+;; M-: (alt-shift-;) - evaluate lisp expression
+;; C-x C-e - evaluate the preceding lisp expression on this line
+;; edebug-<tab> a suite of elisp debugging functions (e.g. edebug-defun)
+;; M-! (alt-shift-1) - do a shell command, e.g. tlm edit
+;; C-x C-f (visit file) to make a buffer modifiable after you've 'tlm edited' it.
+
 

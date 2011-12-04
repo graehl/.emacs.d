@@ -42,6 +42,7 @@
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
+(require 'setup-js-mode)
 (require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)

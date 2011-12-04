@@ -47,6 +47,7 @@
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
 (require 'setup-scala-mode)
+(require 'setup-clojure-mode)
 
 ;; Map files to modes
 (require 'mode-mappings)

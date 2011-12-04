@@ -1,3 +1,4 @@
+(require 'scala-mode nil 'noerror)
 (defun my-scala-eval-line ()
   "eval current line"
   (interactive)

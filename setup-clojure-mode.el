@@ -1,7 +1,9 @@
-(require 'clojure-mode)
+(require 'clojure-mode nil 'noerror)
 (require 'paredit)
+
 (defun turn-on-paredit () (paredit-mode 1))
 (add-hook 'clojure-mode-hook 'turn-on-paredit)
+
 (defun clojure-font-lock-setup ()
   (interactive)
   (set (make-local-variable 'lisp-indent-function)
@@ -29,6 +31,7 @@
           (font-lock-mark-block-function . mark-defun)
           (font-lock-syntactic-face-function
            . lisp-font-lock-syntactic-face-function))))
+
 (add-hook 'slime-repl-mode-hook
           (lambda ()
             (font-lock-mode nil)

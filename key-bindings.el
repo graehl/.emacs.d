@@ -228,7 +228,6 @@
 (global-set-key  [(meta return)] 'dabbrev-expand)
 (global-set-key  [(control shift prior)] 'upcase-word)
 (global-set-key  [(control shift next)] 'downcase-word)
-(global-set-key [(control f1)] 'query-replace-regexp)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
                                         ;(define-key shell-mode-map "\C-r" 'isearch-backward)
 (global-set-key (kbd "M-x") 'smex)
@@ -246,6 +245,9 @@
 (global-set-key (kbd "C-x f") 'hobo-find-file) (require 'hobo)
 (global-set-key (kbd "C-e") 'end-of-line)
 (global-set-key (kbd "C-a") 'beginning-of-line)
+(global-set-key (kbd "M-m") 'query-replace)
+(global-set-key (kbd "M-<f1>") 'replace-string)
+(global-set-key (kbd "C-<f1>") 'replace-string)
 ;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands

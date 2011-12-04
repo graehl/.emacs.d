@@ -196,7 +196,6 @@
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
-(global-set-key (kbd "M-]") 'split-window-horizontally)
 
                                         ;(global-set-key (kbd "M-s") 'fixup-whitespace)
                                         ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
@@ -258,3 +257,6 @@
 
 (global-set-key (kbd "<home>") 'beginning-of-visual-line)
 (global-set-key (kbd "<end>") 'end-of-visual-line)
+(global-set-key [(meta \[)] 'split-window-horizontally)
+(when nil (global-set-key [(meta \])] 'same-buffer-other-window))
+(global-set-key (kbd "M-]") 'same-buffer-other-window)

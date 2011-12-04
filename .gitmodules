@@ -52,9 +52,6 @@ url = https://github.com/emacsmirror/fic-mode.git
 [submodule "site-lisp/grep-buffers"]
 path = site-lisp/grep-buffers
 url = https://github.com/emacsmirror/grep-buffers.git
-[submodule "site-lisp/wrap-region"]
-path = site-lisp/wrap-region
-url = https://github.com/rejeep/wrap-region.git
 [submodule "site-lisp/multi-term"]
 path = site-lisp/multi-term
 url = https://github.com/emacsmirror/multi-term.git
@@ -82,3 +79,6 @@ url = https://github.com/emacsmirror/paredit.git
 [submodule "site-lisp/hobo"]
 path = site-lisp/hobo
 url = https://github.com/emacsmirror/hobo.git
+[submodule "site-lisp/wrap-region"]
+	path = site-lisp/wrap-region
+	url = git@github.com:graehl/wrap-region.git

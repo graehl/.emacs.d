@@ -11,4 +11,6 @@
           ("<down>"  . ignore             ))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 ;; /awesome
+(iswitchb-mode 1)
+
 (provide 'setup-iswitchb)

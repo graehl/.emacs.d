@@ -67,3 +67,9 @@
 [submodule "site-lisp/misc-fns"]
 	path = site-lisp/misc-fns
 	url = https://github.com/emacsmirror/misc-fns.git
+[submodule "site-lisp/smex"]
+	path = site-lisp/smex
+	url = https://github.com/emacsmirror/smex.git
+[submodule "site-lisp/ack"]
+	path = site-lisp/ack
+	url = https://github.com/emacsmirror/ack.git

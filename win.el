@@ -77,4 +77,6 @@
                                         ;(defadvice compilation-find-file (before my-compilation-translate-cygwin-paths activate)  (ad-set-arg 1 (my-translate-cygwin-paths (ad-get-arg 1)) t))
 
 
+;(size-frame 200 40)
+
 (provide 'win)

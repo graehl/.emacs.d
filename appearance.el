@@ -82,3 +82,5 @@
 ;; Enable these two supposedly "advanced" commands which come disabled by default.
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
+(delete-other-windows)
+(split-window-horizontally)

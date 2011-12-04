@@ -27,6 +27,5 @@
 (setq shell-prompt-pattern "^\\(|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]?\\|[^#$%>\n]*[#$%>]\\) *")
 
 (enable-magic-dirtrack)
-(size-frame 200 60)
-
+(default-size-frame 200 60)
 (provide 'mac)

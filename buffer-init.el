@@ -8,9 +8,6 @@ file name begins matches PATTERN."
   ':type 'alist
   )
 
-
-(provide 'buffer-init)
-
 (setq my-initials "LW")
 
 (defun boost-copyright ()
@@ -29,7 +26,6 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)"))
   (concat "Copyright SDL " (number-to-string (nth 5 (decode-time)))
           ". All rights reserved."))
 
-
 (defcustom my-namespace-roots
   '(("boost". boost-copyright) ("fluid" . fluid-copyright) ("x" . lw-copyright))
   "An alist of root directory names and associated copyright
@@ -41,3 +37,4 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)"))
       (cons "LW" (remove "include" (cdr pe)))
     pe))
 
+(provide 'buffer-init)

@@ -45,6 +45,7 @@
 (require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
+(require 'setup-iswitchb)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -72,8 +73,7 @@
 ;; Misc
 (require 'appearance)
 (require 'misc)
-(when (equal system-type 'darwin) (require 'mac))
-(when (equal system-type 'windows-nt) (require 'win))
+
 ;; Emacs server
 (require 'server)
 (unless (server-running-p)
@@ -89,8 +89,6 @@
 ;(iswitchb-mode 1)
 ;(icomplete-mode 1)
 (require 'buffer-init)
-(require 'iswitchb)
-(iswitchb-mode 1)
 (auto-compression-mode 1)
 
 (autoload 'live-mode "live-mode" "live mode" t)
@@ -99,3 +97,13 @@
 (setq dabbrev-case-distinction nil)
 
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
+(defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
+(defalias 'list-buffers 'ibuffer) ; always use ibuffer
+
+(require 'aliases)
+(require 'smex) ;M-x
+(smex-initialize)
+(require 'ace-jump-mode)
+
+(when (equal system-type 'darwin) (require 'mac))
+(when (equal system-type 'windows-nt) (require 'win))

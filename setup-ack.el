@@ -1,4 +1,5 @@
-(setq ack-command (concat "perl " dotfiles-dir "ack-standalone --no-heading --no-color -a"))
+(require 'ack)
+(setq ack-command (concat "perl " dotfiles-dir "ack-standalone --no-heading --no-color"))
 (require 'grep)
-(grep-apply-setting 'grep-find-command ack-command)
+;(grep-apply-setting 'grep-find-command ack-command)
 (provide 'setup-ack)

@@ -197,6 +197,8 @@
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
+(global-set-key (kbd "M-]") 'split-window-horizontally)
+
 (require 'grep-buffers)
 (global-set-key (kbd "M-n") 'grep-buffers)
 (global-set-key (kbd "C-M-n") 'rgrep)
@@ -221,12 +223,17 @@
 (global-set-key (kbd "C-<tab>") 'tab-to-tab-stop) ; regular spaces-to-next-tabstop, not autoindent
 (global-set-key  [(meta left)] 'backward-sexp)
 (global-set-key  [(meta right)] 'forward-sexp)
+(global-set-key (kbd "M-<backspace>") 'backward-kill-sexp)
+(global-set-key (kbd "M-C-d") 'kill-sexp)
 (global-set-key  [(meta return)] 'dabbrev-expand)
 (global-set-key  [(control shift prior)] 'upcase-word)
 (global-set-key  [(control shift next)] 'downcase-word)
 (global-set-key [(control f1)] 'query-replace-regexp)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 ;(define-key shell-mode-map "\C-r" 'isearch-backward)
+(global-set-key (kbd "M-x") 'smex)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+(define-key global-map (kbd "C-c C-s") 'occur)
 
 
 ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize

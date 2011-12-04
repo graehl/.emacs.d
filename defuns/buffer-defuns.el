@@ -6,13 +6,13 @@
   "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
   (interactive)
   (let ((n 0)
-	bufname)
+        bufname)
     (while (progn
-	     (setq bufname (concat "*scratch"
-				   (if (= n 0) "" (int-to-string n))
-				   "*"))
-	     (setq n (1+ n))
-	     (get-buffer bufname)))
+             (setq bufname (concat "*scratch"
+                                   (if (= n 0) "" (int-to-string n))
+                                   "*"))
+             (setq n (1+ n))
+             (get-buffer bufname)))
     (switch-to-buffer (get-buffer-create bufname))
     (if (= n 1) (lisp-interaction-mode)) ; 1, because n was incremented
     ))
@@ -134,10 +134,10 @@ Symbols matching the text at point are put first in the completion list."
          (delete-region (1+ (match-beginning 0)) (match-end 0)))))
 
 (defmacro with-whole-buffer (fn)
-`(save-excursion 
-    (save-restriction 
-      (widen) (goto-char (point-min))
-      (save-match-data (progn ,fn)))))
+  `(save-excursion
+     (save-restriction
+       (widen) (goto-char (point-min))
+       (save-match-data (progn ,fn)))))
 
 
 (defconst excessive-newlines-regexp "\n\n\n\n+" "regexp to replace")
@@ -153,9 +153,14 @@ Symbols matching the text at point are put first in the completion list."
      (dotimes (i nrepl) (insert excessive-newlines-replacement)))))
 
 
+(defvar untabify-except-modes '(makefile-mode make-mode)
+  "A list of modes in which saving shouldn't remove tabs.")
+
+(defun do-untabify() (not (member major-mode untabify-except-modes)))
 (defun untabify-buffer ()
   (interactive)
-  (untabify (point-min) (point-max)))
+  (when (do-untabify)
+    (untabify (point-min) (point-max))))
 
 (defvar cleanup-buffer-excessive-newlines nil)
 (defun cleanup-buffer ()
@@ -265,7 +270,9 @@ modified file"
   (indent-region (point-min) (point-max)))
 
 (defun indent-buffer () "whole buffer!"
-  (interactive) (save-excursion (indent-region (point-min) (point-max) nil)))
+  (interactive)
+  (when (do-untabify)
+    (save-excursion (indent-region (point-min) (point-max) nil))))
 
 (defun prev-line (n) (forward-line (- n)))
 (defun bufend() (goto-char (point-max)))
@@ -276,3 +283,9 @@ modified file"
   (interactive)
   (switch-to-buffer-other-window (current-buffer))
   )
+
+(defun set-mark-and-goto-line (line)
+  "Set mark and prompt for a line to go to."
+  (interactive "NLine #: ")
+  (push-mark nil t nil)
+  (goto-line line))

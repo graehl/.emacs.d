@@ -2,7 +2,7 @@
 
                                         ;(setq word-wrap t)
 (global-visual-line-mode t)
-(defvar global-line-move-visual line-move-visual)
+(defvar global-line-move-visual t)
 (defun regular-line-move () (setq line-move-visual global-line-move-visual))
 (regular-line-move)
 (add-hook 'iswitchb-minibuffer-setup-hook

@@ -2,7 +2,7 @@
   (gnu-font-sz "Verdana" "8")
   (gnu-font "Axel")
   (gnu-font "Franklin Gothic Medium"))
-(gnu-font "Consolas")
+(gnu-font-sz "Consolas" "10")
 
 ;; We don't know what this does but Brad swears it helps with NT
 ;;
@@ -18,7 +18,7 @@
 ;; (setq comint-process-echoes t) ;; reported that this is no longer needed
 (setq comint-eol-on-send t)
                                         ;          (setq w32-quote-process-args ?\")
-;(make-variable-buffer-local 'comint-completion-addsuffix) ; shell-mode-hook
+                                        ;(make-variable-buffer-local 'comint-completion-addsuffix) ; shell-mode-hook
 ;; (setq comint-process-echoes t) ;; reported that this is no longer needed
 (setq w32-quote-process-args ?\")
 
@@ -77,7 +77,7 @@
                                         ;(defadvice compilation-find-file (before my-compilation-translate-cygwin-paths activate)  (ad-set-arg 1 (my-translate-cygwin-paths (ad-get-arg 1)) t))
 
 
-;(size-frame 200 40)
+                                        ;(size-frame 200 40)
 
 (default-size-frame 160 45)
 (provide 'win)

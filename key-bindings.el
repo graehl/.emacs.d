@@ -260,3 +260,4 @@
 (global-set-key [(meta \[)] 'split-window-horizontally)
 (when nil (global-set-key [(meta \])] 'same-buffer-other-window))
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
+(global-set-key (kbd "C-M-r") 'query-replace)

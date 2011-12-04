@@ -153,10 +153,13 @@ Symbols matching the text at point are put first in the completion list."
      (dotimes (i nrepl) (insert excessive-newlines-replacement)))))
 
 
-(defvar untabify-except-modes '(makefile-mode make-mode)
-  "A list of modes in which saving shouldn't remove tabs.")
+(defun do-untabify () (not (member major-mode make-modes)))
 
-(defun do-untabify() (not (member major-mode untabify-except-modes)))
+(defun indent-buffer () "indent whole buffer!"
+  (interactive)
+  (when (do-untabify)
+    (save-excursion (indent-region (point-min) (point-max) nil))))
+
 (defun untabify-buffer ()
   (interactive)
   (when (do-untabify)
@@ -264,15 +267,6 @@ modified file"
           (setq buffer (car list))))))
   (message "Refreshing open files"))
 
-
-(defun indent-buffer ()
-  (interactive)
-  (indent-region (point-min) (point-max)))
-
-(defun indent-buffer () "whole buffer!"
-  (interactive)
-  (when (do-untabify)
-    (save-excursion (indent-region (point-min) (point-max) nil))))
 
 (defun prev-line (n) (forward-line (- n)))
 (defun bufend() (goto-char (point-max)))

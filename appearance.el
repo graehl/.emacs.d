@@ -16,9 +16,10 @@
 
 (require 'hl-line+)
 (global-hl-line-mode 0)
-(toggle-hl-line-when-idle)
+;;(toggle-hl-line-when-idle)
 (set-face-background 'hl-line "#442233")
 ;;(set-face-background 'region "#222222")
+
 ;; Highlight in yasnippet
 (set-face-background 'yas/field-highlight-face "#333399")
 
@@ -91,3 +92,5 @@
 (split-window-horizontally)
 (when (require 'rainbow-delimiters nil 'noerror)
   (install-hook 'coding-hooks 'rainbow-delimiters-mode))
+
+(setq split-height-threshold 999)

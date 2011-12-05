@@ -231,3 +231,14 @@ modified file"
   (interactive "NLine #: ")
   (push-mark nil t nil)
   (goto-line line))
+
+(defun set-unix-newlines ()
+  (interactive)
+  (set-buffer-file-coding-system 'undecided-unix))
+
+(defun convert-to-unix-newlines ()
+  (interactive)
+  (set-unix-newlines)
+  (save-buffer))
+
+(provide 'buffer-defuns)

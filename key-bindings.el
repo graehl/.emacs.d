@@ -146,9 +146,10 @@
      (jump-to-register magit-status-fullscreen-window-configuration-register)))
 
 ;; Clever newlines
-;;(global-set-key (kbd "<C-return>") 'new-line-below)
-;;(global-set-key (kbd "<C-S-return>") 'new-line-above)
-;;(global-set-key (kbd "<M-return>") 'new-line-in-between)
+(global-set-key (kbd "<C-return>") 'new-line-below)
+(global-set-key (kbd "<C-M-up>") 'new-line-above)
+(global-set-key (kbd "<C-M-down>") 'new-line-in-between)
+
 ;;major-mode
 ;; Duplicate region
 (global-set-key (kbd "C-c d") 'duplicate-current-line-or-region)
@@ -209,8 +210,6 @@
 (global-set-key (kbd "M-o") 'nuke-line)
 (global-set-key (kbd "C-/") 'tweakemacs-comment-dwim-region-or-one-line)
 (global-set-key (kbd "M-;") 'comment-dwim)
-(global-set-key [C-M-up] 'tweakemacs-move-one-line-upward)
-(global-set-key [C-M-down] 'tweakemacs-move-one-line-downward)
 (global-set-key (kbd "C-x K") 'kill-others-of-this-name)
 (global-set-key (kbd "C-/") 'c-comment-region)
 (global-set-key (kbd "<C-,>") 'backward-word)
@@ -273,3 +272,4 @@
 (global-set-key (kbd "<kp-delete>") 'delete-forward-char)
 ;;'tweakemacs-delete-region-or-char)
 (global-set-key (kbd "C-<return>") 'toggle-windows-split)
+(global-set-key (kbd "C-<f5>") 'convert-to-unix-newlines)

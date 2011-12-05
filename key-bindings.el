@@ -226,7 +226,6 @@
 (global-set-key  [(meta left)] 'backward-sexp)
 (global-set-key  [(meta right)] 'forward-sexp)
 (global-set-key (kbd "M-<backspace>") 'backward-kill-sexp)
-(global-set-key (kbd "M-C-d") 'kill-sexp)
 (global-set-key  [(control shift prior)] 'upcase-word)
 (global-set-key  [(control shift next)] 'downcase-word)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
@@ -273,3 +272,4 @@
 ;;'tweakemacs-delete-region-or-char)
 (global-set-key (kbd "C-<return>") 'toggle-windows-split)
 (global-set-key (kbd "C-<f5>") 'convert-to-unix-newlines)
+(global-set-key (kbd "M-C-d") 'kill-sexp)

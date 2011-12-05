@@ -1,12 +1,13 @@
 (defun my-makefile-mode-hook ()
-  (font-lock-mode t)
-  (show-paren-mode t)
   (setq indent-tabs-mode t)  ; Makefiles actually _need_ tabs :(
-  (local-set-key [( control ?\( )] 'my-matching-paren)
+  ;;  (local-set-key [( control ?\( )] 'my-matching-paren)
   (local-set-key [return] 'newline-and-indent)
-  (local-set-key [(control return)] 'newline)
+  ;;(local-set-key [(control return)] 'newline)
   )
 
-(add-hook 'makefile-mode-hook 'my-makefile-mode-hook)
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt\\'" . cmake-mode))
+(add-to-list 'auto-mode-alist '("\\.cmake\\'" . cmake-mode))
 
+(require 'setup-code-modes)
+(install-hooks make-modes-hook 'my-makefile-mode-hook)
 (provide 'setup-makefile-mode)

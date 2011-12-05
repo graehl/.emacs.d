@@ -2,17 +2,6 @@
 
 (require 'imenu)
 
-(defmacro safe-wrap (fn &rest clean-up)
-  `(unwind-protect
-       (let (retval)
-         (condition-case ex
-             (setq retval (progn ,fn))
-           ('error
-            (message (format "Caught exception: [%s]" ex))
-            (setq retval (cons 'exception (list ex)))))
-         retval)
-     ,@clean-up))
-
 (setq max-specpdl-size 5000) ; reduce protection against bugs
 
 (defmacro with-whole-buffer (&rest body)

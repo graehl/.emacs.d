@@ -103,10 +103,22 @@
         while (> 0 (forward-line))
         ))
 (defvar gr-cleanup-buffer-excessive-newlines 3)
+
+
+(defmacro gr-safe-wrap (&rest body)
+  `(unwind-protect
+       (let (retval)
+         (condition-case ex
+             (setq retval (progn ,@body))
+           ('error
+            (message (format "Caught exception: [%s]" ex))
+            (setq retval (cons 'exception (list ex)))))
+         retval)))
+
 (defun gr-cleanup-buffer-impl ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
-  (safe-wrap
+  (gr-safe-wrap
    (gr-indent-buffer)
    (gr-untabify-buffer)
    (unless (eq nil gr-cleanup-buffer-excessive-newlines)
@@ -115,10 +127,12 @@
    (delete-trailing-newlines)
    (gr-cleanup-buffer-compress-whitespace-impl)
    ))
+
 (defun gr-cleanup-buffer-save ()
   "gr-cleanup-buffer catching errors"
   (message "cleaning up buffer on save (catching errors) ...")
-  (safe-wrap  (gr-cleanup-buffer-impl)))
+  (save-excursion
+    (gr-cleanup-buffer-impl)))
 (defun gr-cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)

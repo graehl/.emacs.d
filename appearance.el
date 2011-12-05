@@ -74,6 +74,7 @@
  sgml-validate-command "tidy"
  teach-extended-commands-p t
  truncate-partial-width-windows nil
+
                                         ; mode-line-buffer-identification '("%12b [%f]")
  indent-tabs-mode nil
  ediff-window-setup-function 'ediff-setup-windows-plain
@@ -89,6 +90,4 @@
 (delete-other-windows)
 (split-window-horizontally)
 (when (require 'rainbow-delimiters nil 'noerror)
-   (add-hook 'coding-hooks 'rainbow-delimiters-mode))
-
-
+  (add-hook 'coding-hooks 'rainbow-delimiters-mode))

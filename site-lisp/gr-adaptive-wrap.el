@@ -44,19 +44,20 @@
         (restore-buffer-modified-p mod)))))
 
 
-
 ;;;###autoload
 (defun turn-on-gr-adaptive-wrap-mode ()
   "Turn on `gr-adaptive-wrap-mode'"
   (interactive)
   (unless (member major-mode gr-adaptive-wrap-except-modes)
+    (gr-adaptive-wrap-hook)
     (gr-adaptive-wrap-mode +1)))
 
 ;;;###autoload
 (defun turn-off-gr-adaptive-wrap-mode ()
   "Turn off `gr-adaptive-wrap-mode'"
   (interactive)
-  (gr-adaptive-wrap-mode -1))
+  (unless (member major-mode gr-adaptive-wrap-except-modes)
+    (gr-adaptive-wrap-mode -1)))
 
 ;;;###autoload
 (define-globalized-minor-mode gr-adaptive-wrap-global-mode

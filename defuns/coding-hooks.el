@@ -2,12 +2,7 @@
 ;; which causes (run-coding-hooks) to run (append=t or nil) for all declared coding modes
 
 (setq coding-hooks '())
-(defun install-hook (h f &optional append local)
-  (remove-hook h f local)
-  (add-hook h f append local))
-
-(defun install-hooks (hs f &optional append local)
-  (loop for h in hs do (install-hook h f append local)))
+(require 'hooks-defuns)
 
 (defun install-coding-hooks (&optional append local)
   (interactive)
@@ -32,8 +27,7 @@
 (defun symbol-plus-mode (x) (sym-dash-sym x 'mode))
 (defun symbol-plus-mode-hook (x) (sym-dash-sym x 'mode-hook))
 
-
-(defun run-coding-hooks () (loop for h in coding-hooks do (funcall h)))
+(defun run-coding-hooks () (run-hook coding-hooks))
 
 (setq all-code-modes nil)
 (setq all-code-modes-hook '(c-mode-common-hook))

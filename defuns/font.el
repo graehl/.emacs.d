@@ -9,3 +9,8 @@
 
 (defun gnu-font (font) (interactive)
   (gnu-font-sz font "11"))
+
+(defvar mac-font-default "Monaco-12")
+(defun mac-font (&optional font) (interactive)
+  (if (eq nil font) (setq font mac-font-default))
+  (set-face-attribute 'default nil :font font))

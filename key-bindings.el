@@ -256,7 +256,7 @@
 
 (global-set-key (kbd "<home>") 'beginning-of-visual-line)
 (global-set-key (kbd "<end>") 'end-of-visual-line)
-(global-set-key [(meta \[)] 'split-window-horizontally)
+(global-set-key (kbd "M-[") 'default-split)
 (when nil (global-set-key [(meta \])] 'same-buffer-other-window))
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
 (global-set-key (kbd "C-M-r") 'query-replace)
@@ -271,4 +271,5 @@
 (global-set-key (kbd "M-<kp-4>") 'backward-move-char)
 (global-set-key (kbd "M-<kp-6>") 'forward-move-char)
 (global-set-key (kbd "C-d") 'delete-backward-char)
+(global-set-key (kbd "<kp-delete>") 'delete-backward-char)
 ;;'tweakemacs-delete-region-or-char)

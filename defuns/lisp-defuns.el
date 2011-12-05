@@ -10,17 +10,6 @@
     (error (message "Invalid expression")
            (insert (current-kill 0)))))
 
-(defmacro safe-wrap (fn &rest clean-up)
-  `(unwind-protect
-       (let (retval)
-         (condition-case ex
-             (setq retval (progn ,fn))
-           ('error
-            (message (format "Caught exception: [%s]" ex))
-            (setq retval (cons 'exception (list ex)))))
-         retval)
-     ,@clean-up))
-
 (defun my-unedebug-defun ()
   "I can't believe emacs doesn't give you a way to do this!!"
   (interactive t)

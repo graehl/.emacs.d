@@ -1,4 +1,23 @@
 ;; Basic text editing defuns
+(defun forward-skip-space (&optional lim)
+  (interactive)
+  (skip-syntax-forward "\s" lim))
+
+                                        ;(defun bol-skip-space () (interactive) (beginning-of-line) (forward-skip-space))
+(defalias 'bol-skip-space 'backward-to-indentation)
+
+(defun backward-move-char ()
+  (interactive)
+  (forward-char)
+  (transpose-chars 1)
+  (backward-char))
+
+(defun forward-move-char ()
+  (interactive)
+  (transpose-chars 1)
+  (backward-char)
+  (backward-char)
+  )
 
 (defun new-line-below ()
   (interactive)
@@ -92,21 +111,21 @@ region-end is used. Adds the duplicated text to the kill ring."
 (defun toggle-quotes ()
   (interactive)
   (if (point-is-in-string-p)
-    (let ((old-quotes (char-to-string (current-quotes-char)))
-          (new-quotes (char-to-string (alternate-quotes-char)))
-          (start (make-marker))
-          (end (make-marker)))
-      (save-excursion
-        (move-point-forward-out-of-string)
-        (backward-delete-char 1)
-        (set-marker end (point))
-        (insert new-quotes)
-        (move-point-backward-out-of-string)
-        (delete-char 1)
-        (insert new-quotes)
-        (set-marker start (point))
-        (replace-string new-quotes (concat "\\" new-quotes) nil start end)
-        (replace-string (concat "\\" old-quotes) old-quotes nil start end)))
+      (let ((old-quotes (char-to-string (current-quotes-char)))
+            (new-quotes (char-to-string (alternate-quotes-char)))
+            (start (make-marker))
+            (end (make-marker)))
+        (save-excursion
+          (move-point-forward-out-of-string)
+          (backward-delete-char 1)
+          (set-marker end (point))
+          (insert new-quotes)
+          (move-point-backward-out-of-string)
+          (delete-char 1)
+          (insert new-quotes)
+          (set-marker start (point))
+          (replace-string new-quotes (concat "\\" new-quotes) nil start end)
+          (replace-string (concat "\\" old-quotes) old-quotes nil start end)))
     (error "Point isn't in a string")))
 
 ;; kill region if active, otherwise kill backward word
@@ -183,7 +202,7 @@ region-end is used. Adds the duplicated text to the kill ring."
 
 (defun backward-delete-whitespace-to-column ()
   "delete back to the previous column of whitespace, or just one
-    char if that's not possible. This emulates vim's softtabs
+    char if that's not possible. This emulates vim's softtabse-search
     feature."
   (interactive)
   (if indent-tabs-mode
@@ -227,11 +246,11 @@ region-end is used. Adds the duplicated text to the kill ring."
       (comment-dwim arg)
     (save-excursion
       (let ((has-comment? (progn (beginning-of-line) (looking-at (concat "\\s-*" (regexp-quote comment-start))))))
-	(push-mark (point) nil t)
-	(end-of-line)
-	(if has-comment?
-	    (uncomment-region (mark) (point))
-	  (comment-region (mark) (point)))))))
+        (push-mark (point) nil t)
+        (end-of-line)
+        (if has-comment?
+            (uncomment-region (mark) (point))
+          (comment-region (mark) (point)))))))
 
 (defun my-add-todo-entry ()
   "like add-change-log-entry but uses filename of TODO"
@@ -270,3 +289,31 @@ region-end is used. Adds the duplicated text to the kill ring."
 
 (defun slash-to-backslash (text)
   (substitute ?\\ ?/ text))
+
+(defun downcase-whole-word ()
+  (interactive) (backward-word 1) (downcase-word 1))
+
+(defun downcase-whole-word ()
+  (interactive) (backward-word 1) (downcase-word 1))
+
+(defun at-eol ()
+  (= (point) (point-at-eol)))
+
+(defvar compress-whitespace-over 1)
+(defun compress-whitespace (&optional over limit)
+  "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by default"
+  (interactive "p")
+  (when (eq nil over) (setq over compress-whitespace-over))
+  (when (eq nil limit) (setq limit (point-at-eol)))
+  (let ((maxsp (make-string over ? )))
+    (push-mark)
+    (bol-skip-space)
+    (loop until (>= (point) limit)
+          do (skip-syntax-forward "^\s" limit)
+          do (set-mark (point))
+          do (skip-syntax-forward "\s" limit)
+          do (when (> (- (point) (mark)) over)
+               (delete-region (mark) (point))
+               (insert maxsp)))
+    (goto-char (mark))
+    (pop-mark)))

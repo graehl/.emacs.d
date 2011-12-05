@@ -8,10 +8,12 @@
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path site-lisp-dir)
 
+(defun file-not-autosave (path)
+  (not (string-match "#$" path)))
 
 ;; Add external projects to load path
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (file-directory-p project)
+  (when (and (file-not-autosave project) (file-directory-p project))
     (add-to-list 'load-path project)))
 
 ;; Keep emacs Custom-settings in separate file
@@ -51,6 +53,7 @@
 (require 'setup-clojure-mode)
 (require 'setup-js-mode)
 (require 'setup-line-mode)
+(require 'setup-paredit)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -70,7 +73,7 @@
 ;; Functions (load all files in defuns-dir)
 (setq defuns-dir (expand-file-name "defuns" dotfiles-dir))
 (dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (file-regular-p file)
+  (when (and (file-not-autosave file) (file-regular-p file))
     (load file)))
 
 ;; below use defuns.
@@ -90,8 +93,8 @@
 
 (require 'grep-buffers)
 (require 'scratch-back)
-;(iswitchb-mode 1)
-;(icomplete-mode 1)
+                                        ;(iswitchb-mode 1)
+                                        ;(icomplete-mode 1)
 (require 'buffer-init)
 
 (autoload 'live-mode "live-mode" "live mode" t)
@@ -106,13 +109,15 @@
 
 (require 'paredit)
 (defun turn-on-paredit () (interactive) (paredit-mode 1))
-
 (when (equal system-type 'darwin) (require 'mac))
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 
+(install-coding-hooks)
+(require 'wrap-region)
+(wrap-region-global-mode t)
+(require 'setup-code-modes)
 
-
-
-
-
+(require 'gr-cleanup-save)
+(setq gr-cleanup-save-excessive-spaces 1)
+(gr-cleanup-save-global-mode)

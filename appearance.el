@@ -1,21 +1,24 @@
-                                        ; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
+;; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
 (require 'solarized-dark-theme)
 
 
-                                        ; emacs-24 enable-theme does not work;
-                                        ;(add-to-list 'custom-theme-load-path solarized-path)
+;; emacs-24 enable-theme does not work;
+;;(add-to-list 'custom-theme-load-path solarized-path)
 (setq solarized-path (concat (expand-file-name "emacs-color-theme-solarized" site-lisp-dir)))
 (require 'color-theme-solarized)
 (color-theme-solarized-dark)
-                                        ;(color-theme-solarized-light)
+;;(color-theme-solarized-light)
 
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
-(global-hl-line-mode 1)
-(set-face-background 'region "#222222")
+(require 'hl-line+)
+(global-hl-line-mode 0)
+(toggle-hl-line-when-idle)
+(set-face-background 'hl-line "#442233")
+;;(set-face-background 'region "#222222")
 ;; Highlight in yasnippet
 (set-face-background 'yas/field-highlight-face "#333399")
 

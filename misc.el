@@ -11,8 +11,7 @@
                                         ;(add-hook 'before-save-hook 'time-stamp)
 
 
-(setq cleanup-buffer-excessive-newlines 3)
-(add-hook 'before-save-hook 'cleanup-buffer)
+(remove-hook 'before-save-hook 'cleanup-buffer-save)
 
 ;; Misc in misc
 (setq ediff-window-setup-function 'ediff-setup-windows-plain
@@ -36,7 +35,5 @@
 
 (setq longlines-wrap-follows-window-size t)
 
-(require 'wrap-region)
-(wrap-region-global-mode t)
 
 (provide 'misc)

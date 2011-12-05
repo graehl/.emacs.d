@@ -56,7 +56,9 @@
 (defcustom scratch-mode-alist
   '((erc-mode . fundamental-mode)
     (sql-interactive-mode . sql-mode)
-    (shell-mode . sh-mode))
+    (shell-mode . sh-mode)
+    (help-mode . text-mode)
+    )
   "Alist of mappings from major modes to major modes for SCRATCH.
 
 Some interactive modes don't lend themselves well to scratch

@@ -6,6 +6,9 @@
   (remove-hook h f local)
   (add-hook h f append local))
 
+(defun install-hooks (hs f &optional append local)
+  (loop for h in hs do (install-hook h f append local)))
+
 (defun install-coding-hooks (&optional append local)
   (interactive)
   (loop for m in all-code-modes-hook do

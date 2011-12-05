@@ -9,8 +9,10 @@
   (setq dabbrev-case-fold-search nil)
   )
 
-(add-hook 'coding-hooks 'my-code-mode-hook)
+(install-hook 'coding-hooks 'my-code-mode-hook)
 
+;;sets e.g. c-modes c-modes-hook
+;; suggestion: either (for all) (install-hook 'coding-hooks X) or (install-hooks lisp-mode-hooks X)
 (set-coding-modes 'c js js2 c idl c++ cc java go)
 (set-coding-modes 'lisp scheme lisp emacs-lisp lisp-interaction)
 (set-coding-modes 'jvm java scala clojure tuareg)

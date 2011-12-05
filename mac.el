@@ -1,3 +1,5 @@
+(push "/usr/local/bin" exec-path) ;brew
+
 ;; change command to meta, and ignore option to use weird norwegian keyboard
 (setq mac-option-modifier 'control)
 (setq mac-command-modifier 'meta)

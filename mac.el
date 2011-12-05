@@ -1,10 +1,14 @@
 ;; change command to meta, and ignore option to use weird norwegian keyboard
-(setq mac-option-modifier 'none)
+(setq mac-option-modifier 'control)
 (setq mac-command-modifier 'meta)
 
 ;; mac friendly font
 ;;(set-face-attribute 'default nil :font "Monaco-12")
 ;;(mac-font "Monaco-12")
+(when nil
+  ;;(mac-font "Lucida Console-14")
+  (mac-font "Andale Mono-14")
+  )
 (mac-font "Consolas-14")
 ;; make sure path is correct when launched as application
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))

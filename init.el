@@ -25,9 +25,9 @@
                                         (concat dotfiles-dir "backups")))))
 
 ;; Save point position between sessions
+(setq save-place-file (expand-file-name ".places" dotfiles-dir))
 (require 'saveplace)
 (setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" dotfiles-dir))
 
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)

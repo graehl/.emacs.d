@@ -126,10 +126,9 @@
 
 (defun gr-cleanup-buffer-compress-whitespace-impl ()
   (goto-char (point-min))
-  (loop do (gr-compress-whitespace gr-cleanup-buffer-excessive-spaces)
+  (loop do (gr-compress-whitespace gr-cleanup-save-excessive-spaces)
         while (> 0 (forward-line))
         ))
-(defvar gr-cleanup-buffer-excessive-newlines 3)
 
 
 (defmacro gr-safe-wrap (&rest body)
@@ -142,6 +141,7 @@
             (setq retval (cons 'exception (list ex)))))
          retval)))
 
+(defvar gr-cleanup-buffer-excessive-newlines 3)
 (defun gr-cleanup-buffer-impl ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)

@@ -10,12 +10,12 @@
   (interactive)
   (loop for m in all-code-modes-hook do
         (loop for f in coding-hooks do
-              (install-hook f m append local))))
+              (install-hook m f append local))))
 
 (defun remove-coding-hooks (&optional local)
   (loop for m in all-code-modes-hook do
         (loop for f in coding-hooks do
-              (remove-hook f m local))))
+              (remove-hook m f local))))
 
 (defmacro set-coding-modes-sym-2 (MuNiQ HuNiQ &rest Usyms)
   `(progn

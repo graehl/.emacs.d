@@ -270,4 +270,5 @@
 (global-set-key (kbd "M-<kp-2>") 'down-move-char)
 (global-set-key (kbd "M-<kp-4>") 'backward-move-char)
 (global-set-key (kbd "M-<kp-6>") 'forward-move-char)
-(global-set-key (kbd "C-d") 'delete-backward-char) ;'tweakemacs-delete-region-or-char)
+(global-set-key (kbd "C-d") 'delete-backward-char)
+;;'tweakemacs-delete-region-or-char)

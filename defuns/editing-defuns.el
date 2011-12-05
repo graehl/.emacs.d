@@ -4,7 +4,8 @@
   (skip-syntax-forward "\s" lim))
 
                                         ;(defun bol-skip-space () (interactive) (beginning-of-line) (forward-skip-space))
-(defalias 'bol-skip-space 'backward-to-indentation)
+
+;;(defalias 'bol-skip-space 'backward-to-indentation)
 
 (defun forward-move-char ()
   (interactive)
@@ -18,33 +19,66 @@
   (backward-char)
   (backward-char))
 
-(defun down-move-char ()
+(defun count-words (&optional start end pat)
+  "Print number of words in the region or line."
+  (interactive "r")
+  (when (eq nil pat) (setq pat " [^ ]+"))
+  (when (eq nil start) (setq start (point-at-bol)))
+  (when (eq nil end) (setq end (point-at-eol)))
+  (let ((n (count-matches pat start end (interactive-p))))
+    (when (interactive-p) (message (format "# of tokens in region: %d" n)))
+    n))
+
+(defun count-nonblank (&optional start end)
+  "print # of non-blank chars in region or line."
+  (interactive "r")
+  (let ((pat "[^ ]"))
+    (when (eq nil start) (setq start (point-at-bol)))
+    (when (eq nil end) (setq end (point-at-eol)))
+    (let ((n (count-matches pat start end (interactive-p))))
+      (when (interactive-p) (message (format "# non-blank in region: %d" n)))
+      n)))
+
+(defun single-nonblank-char-line ()
+  (= 1 (count-nonblank (point-at-bol) (point-at-eol))))
+
+(defun is-single-char-line () (interactive)
+  (when (single-nonblank-char-line) (message "single-char!")))
+
+(defun down-move-char (&optional up)
   (interactive)
-  (forward-char)
-  (transpose-chars 1)
-  (backward-char))
+  (let ((col (current-column)))
+    (if (single-nonblank-char-line)
+        (progn (if (eq up t)
+                   (tweakemacs-move-one-line-upward) (tweakemacs-move-one-line-downward)))
+      (progn
+        (let ((ch (char-after)))
+          (delete-char 1)
+          (end-of-line)
+          (insert "\n")
+          (when (eq up t) (previous-line 2))
+          (insert (make-string col ? ))
+          (insert ch))))
+    (move-to-column col)))
 
 (defun up-move-char ()
   (interactive)
-  (transpose-chars 1)
-  (backward-char)
-  (backward-char)
-  )
+  (down-move-char t))
 
-(defun new-line-below ()
+(defun new-line-below (&optional noindent)
   (interactive)
   (if (eolp)
       (newline)
     (end-of-line)
     (newline)
-    (indent-for-tab-command)))
+    (unless (eq noindent nil) (indent-for-tab-command))))
 
-(defun new-line-above ()
+(defun new-line-above (&optional noindent)
   (interactive)
   (beginning-of-line)
   (newline)
   (previous-line)
-  (indent-for-tab-command))
+  (unless (eq noindent nil) (indent-for-tab-command)))
 
 (defun new-line-in-between ()
   (interactive)
@@ -243,7 +277,7 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive)
   (forward-line)
   (transpose-lines 1)
-  (prev-line 1))
+  (forward-line -1))
 
 (defun tweakemacs-move-one-line-upward ()
   "Move current line upward once."

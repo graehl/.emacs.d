@@ -98,8 +98,8 @@
     (untabify (point-min) (point-max))))
 
 (defun gr-compress-whitespace (&optional over limit)
-  "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by default"
-  (interactive "p")
+  "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"
+  (interactive)
   (when (eq nil over) (setq over compress-whitespace-over))
   (when (eq nil limit) (setq limit (point-at-eol)))
   (push-mark)

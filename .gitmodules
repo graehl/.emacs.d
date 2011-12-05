@@ -88,3 +88,6 @@ url = https://github.com/emacsmirror/hobo.git
 [submodule "site-lisp/isearch-plus"]
 	path = site-lisp/isearch-plus
 	url = https://github.com/emacsmirror/isearch-plus.git
+[submodule "site-lisp/misc-cmds"]
+	path = site-lisp/misc-cmds
+	url = https://github.com/emacsmirror/misc-cmds.git

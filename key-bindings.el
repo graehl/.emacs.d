@@ -274,3 +274,4 @@
 (global-set-key (kbd "C-<f5>") 'convert-to-unix-newlines)
 (global-set-key (kbd "M-C-d") 'kill-sexp)
 (global-set-key (kbd "M-a") 'bol-indent)
+(require 'setup-isearch)(global-set-key (kbd "M-w") 'isearch-toggle-word)

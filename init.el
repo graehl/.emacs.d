@@ -122,4 +122,4 @@
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)
 (gr-cleanup-save-global-mode)
-(require 'isearch+)
+(require 'setup-isearch)

@@ -1,4 +1,4 @@
-
+(require 'coding-hooks)
 
 (defun my-code-mode-hook ()
   (show-paren-mode t)

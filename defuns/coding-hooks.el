@@ -39,3 +39,5 @@
 (setq all-code-modes-hook '(c-mode-common-hook))
 
 (defvar make-modes '(fundamental-mode))
+
+(provide 'coding-hooks)

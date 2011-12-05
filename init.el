@@ -32,6 +32,13 @@
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
 
+;; Functions (load all files in defuns-dir)
+(setq defuns-dir (expand-file-name "defuns" dotfiles-dir))
+(add-to-list 'load-path defuns-dir)
+(dolist (file (directory-files defuns-dir t "\\w+"))
+  (when (and (file-not-autosave file) (file-regular-p file))
+    (load file)))
+
 ;; Setup extensions
 (require 'setup-ido)
 (require 'setup-yasnippet)
@@ -70,12 +77,6 @@
 (require 'key-bindings)
 
 
-;; Functions (load all files in defuns-dir)
-(setq defuns-dir (expand-file-name "defuns" dotfiles-dir))
-(dolist (file (directory-files defuns-dir t "\\w+"))
-  (when (and (file-not-autosave file) (file-regular-p file))
-    (load file)))
-
 ;; below use defuns.
 
 ;; Misc
@@ -113,11 +114,12 @@
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 
+(require 'setup-code-modes)
 (install-coding-hooks)
 (require 'wrap-region)
 (wrap-region-global-mode t)
-(require 'setup-code-modes)
 
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)
 (gr-cleanup-save-global-mode)
+(require 'isearch+)

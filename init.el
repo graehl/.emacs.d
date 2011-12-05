@@ -123,3 +123,4 @@
 (setq gr-cleanup-save-excessive-spaces 1)
 (gr-cleanup-save-global-mode)
 (require 'setup-isearch)
+(require 'setup-ediff)

@@ -1,6 +1,7 @@
 (defcustom use-cygwin-root "c:/cygwin" "use cygwin if it exists at this path" ':type 'string)
 
 (defun setup-cygwin () "" (interactive)
+  (require 'cygwin-mount)
   (setq cygwin-mount-cygwin-bin-directory (concat use-cygwin-root "/bin"))
   (when (and (file-executable-p use-cygwin-root) (file-executable-p cygwin-mount-cygwin-bin-directory))
     (require 'cygwin-mount)

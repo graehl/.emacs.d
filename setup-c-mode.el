@@ -31,6 +31,7 @@
   )
 
 (defun my-c-mode-hook ()
+  (c-toggle-auto-hungry-state 1)
   (key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"

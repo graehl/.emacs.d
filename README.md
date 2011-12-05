@@ -12,6 +12,13 @@ To grab all the dependencies, either:
     git clone --recursive git://github.com/graehl/.emacs.d.git
     cd .emacs.d
 
+Todo
+----
+
+* Stuff in defuns/ should use require/provide.
+* bindings should all be prefaced by a require
+* bindings should be uniformly (kbd "C-<f1>")
+* see also TODO
 
 
 Install emacs on mac

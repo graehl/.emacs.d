@@ -5,7 +5,7 @@
 
                                         ;(defun bol-skip-space () (interactive) (beginning-of-line) (forward-skip-space))
 
-;;(defalias 'bol-skip-space 'backward-to-indentation)
+(defun bol-indent () (interactive) (indent-according-to-mode) (backward-to-indentation 0))
 
 (defun forward-move-char ()
   (interactive)

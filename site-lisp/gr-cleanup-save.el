@@ -105,7 +105,7 @@
   (push-mark)
   (set-mark (point))
   (let ((maxsp (make-string over ? )) (ndel 0) (s nil) (col (current-column)))
-    (backward-to-indentation)
+    (backward-to-indentation 0)
     (loop until (>= (point) limit)
           do (skip-syntax-forward "^\s" limit)
           until (>= (point) limit)

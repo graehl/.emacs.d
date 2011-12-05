@@ -1,16 +1,16 @@
 .emacs
 =================
 
-Thanks to magnars, the guy from the [Emacs Rocks](http://emacsrocks.com) screencasts, for inspiring me to update my .emacs config.
+Thanks to magnars, the guy from the [Emacs Rocks](http://emacsrocks.com) screencasts, for inspiring me to update my .emacs config (I've forked his).
 
 Setup
 -----
-To grab all the dependencies, either:
+To grab all the dependencies:
 
     cd ~
     mkdir old.emacs && mv .emacs* old.emacs
+
     git clone --recursive git://github.com/graehl/.emacs.d.git
-    cd .emacs.d
 
 Todo
 ----

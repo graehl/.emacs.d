@@ -47,4 +47,4 @@ simply by calling this command again."
               (window-configuration-to-register ?u)
               (delete-other-windows))
           (jump-to-register ?u))))
-  (my-iswitchb-close))
+  (iswitchb-close))

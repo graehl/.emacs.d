@@ -49,7 +49,7 @@
   "Turn on `gr-adaptive-wrap-mode'"
   (interactive)
   (unless (member major-mode gr-adaptive-wrap-except-modes)
-    (gr-adaptive-wrap-hook)
+    (loop for h in gr-adaptive-wrap-hook do (funcall h))
     (gr-adaptive-wrap-mode +1)))
 
 ;;;###autoload

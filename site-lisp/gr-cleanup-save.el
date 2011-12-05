@@ -24,7 +24,7 @@
   (interactive)
   (gr-install-hook 'gr-cleanup-save-maybe 'before-save-hook)
   (when (gr-cleanup-ok-mode)
-    (gr-cleanup-save-hook)
+    (loop for h in gr-cleanup-save-hook do (funcall h))
     (gr-cleanup-save-mode +1)))
 
 ;;;###autoload

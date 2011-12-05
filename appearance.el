@@ -89,4 +89,6 @@
 (delete-other-windows)
 (split-window-horizontally)
 (when (require 'rainbow-delimiters nil 'noerror)
-  (add-hook 'coding-hooks 'rainbow-delimiters-mode))
+   (add-hook 'coding-hooks 'rainbow-delimiters-mode))
+
+

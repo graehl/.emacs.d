@@ -17,12 +17,17 @@
 (defun gr-cleanup-enabled ()
   (and (gr-cleanup-ok-mode)))
                                         ;gr-cleanup-save-mode
+(defun gr-cleanup-save-maybe ()
+  ""
+  (interactive)
+  (message "gr-cleanup-save-maybe?")
+  (when (gr-cleanup-enabled) (gr-cleanup-buffer-save)))
 
 ;;;###autoload
 (defun turn-on-gr-cleanup-save-mode ()
   "Turn on `gr-cleanup-save-mode'"
   (interactive)
-  (gr-install-hook 'gr-cleanup-save-maybe 'before-save-hook)
+  (gr-install-hook 'before-save-hook 'gr-cleanup-save-maybe) ;; before-save-hook
   (when (gr-cleanup-ok-mode)
     (loop for h in gr-cleanup-save-hook do (funcall h))
     (gr-cleanup-save-mode +1)))
@@ -45,10 +50,6 @@
   :init-value nil
   :lighter " CS"
   )
-
-(defun gr-cleanup-save-maybe ()
-  (message "gr-cleanup-save-maybe?")
-  (when (gr-cleanup-enabled) gr-cleanup-buffer-save))
 
 
 ;;; impl:

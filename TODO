@@ -1,1 +1,3 @@
 greedy-whitespace munching fwd/back delete - leave one space if there was more than 1. also cross line boundaries. check existing dwim el first? - http://www.emacswiki.org/emacs/motion-and-kill-dwim.el
+
+eval shell advice from http://snarfed.org/why_i_run_shells_inside_emacs

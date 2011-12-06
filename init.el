@@ -116,8 +116,10 @@
 
 (require 'setup-code-modes)
 (install-coding-hooks)
-(require 'wrap-region)
-(wrap-region-global-mode t)
+
+(when nil ; redundant with autopair
+  (require 'wrap-region)
+  (wrap-region-global-mode t))
 
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)

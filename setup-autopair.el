@@ -1,14 +1,13 @@
-;; Autopair parens
+;; Autopair () {} <> "" '' etc
 
 (require 'autopair)
-(autopair-global-mode) ;; to enable in all buffers
-(setq autopair-blink nil) ;; no no no! NO BLINKING! NOOO!
+(autopair-global-mode)
+(setq autopair-blink nil)
 
 (defun autopair-dont ()
   (interactive)
   (setq autopair-dont-activate t))
 
-;; Don't autopair lisp
 (add-hook 'emacs-lisp-mode-hook 'autopair-dont)
 (add-hook 'lisp-interaction-mode 'autopair-dont)
 
@@ -17,4 +16,31 @@
 
 (set-default 'autopair-dont-activate #'(lambda ()
                                          (eq major-mode 'term-mode)))
+
+(setq autopair-autowrap t)
+
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (setq autopair-handle-action-fns
+                    (list #'autopair-default-handle-action
+                          #'autopair-python-triple-quote-action))))
+
+
+(add-hook 'c++-mode-hook
+          #'(lambda ()
+              (push ?{
+                    (getf autopair-dont-pair :comment))))
+
+(add-hook 'c++-mode-hook
+          #'(lambda ()
+              (push '(?< . ?>)
+                    (getf autopair-extra-pairs :code))))
+
+
+(add-hook 'latex-mode-hook
+          #'(lambda ()
+              (set (make-local-variable 'autopair-handle-action-fns)
+                   (list #'autopair-default-handle-action
+                         #'autopair-latex-mode-paired-delimiter-action))))
+
 (provide 'setup-autopair)

@@ -8,6 +8,6 @@
 (defun remove-hooks (hs f &optional append local)
   (loop for h in hs do (remove-hook h f append local)))
 
-(defun run-hook h (loop for f in h do (funcall f)))
+(defun run-hook (h) (loop for f in h do (funcall f)))
 
 (provide 'hooks-defuns)

@@ -9,10 +9,10 @@
   (default-split))
 
 (defun size-frame (&optional w h)
+  "with no args, set frame to default w/h"
   (interactive)
-  (when (nil w) (setq w (cdr (assoc 'width default-frame-alist))))
-  (when (nil h) (setq h (cdr (assoc 'height default-frame-alist))))
-  (interactive)
+  (when (eq nil w) (setq w (cdr (assoc 'width default-frame-alist))))
+  (when (eq nil h) (setq h (cdr (assoc 'height default-frame-alist))))
   (set-frame-position (selected-frame) 0 0)
   (set-frame-size (selected-frame) w h)
   (my-save-frame))

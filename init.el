@@ -1,6 +1,3 @@
-(require 'cl)
-(require 'ansi-color)
-(require 'uniquify)
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 
 ;; Set path to .emacs.d

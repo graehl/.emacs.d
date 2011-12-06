@@ -1,93 +1,96 @@
 [submodule "site-lisp/yaml-mode"]
-path = site-lisp/yaml-mode
-url = https://github.com/yoshiki/yaml-mode.git
+	path = site-lisp/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git
 [submodule "site-lisp/recall-position"]
-path = site-lisp/recall-position
-url = http://github.com/cjohansen/recall-position.el.git
+	path = site-lisp/recall-position
+	url = http://github.com/cjohansen/recall-position.el.git
 [submodule "site-lisp/buster-mode"]
-path = site-lisp/buster-mode
-url = git://gitorious.org/buster/buster-mode.git
+	path = site-lisp/buster-mode
+	url = git://gitorious.org/buster/buster-mode.git
 [submodule "site-lisp/evil"]
-path = site-lisp/evil
-url = git://gitorious.org/evil/evil.git
+	path = site-lisp/evil
+	url = git://gitorious.org/evil/evil.git
 [submodule "site-lisp/undo-tree"]
-path = site-lisp/undo-tree
-url = http://www.dr-qubit.org/git/undo-tree.git
+	path = site-lisp/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
 [submodule "site-lisp/js2-mode"]
-path = site-lisp/js2-mode
-url = https://github.com/magnars/js2-mode
+	path = site-lisp/js2-mode
+	url = https://github.com/magnars/js2-mode
 [submodule "site-lisp/jade-mode"]
-path = site-lisp/jade-mode
-url = https://github.com/brianc/jade-mode
+	path = site-lisp/jade-mode
+	url = https://github.com/brianc/jade-mode
 [submodule "site-lisp/coffee-mode"]
-path = site-lisp/coffee-mode
-url = https://github.com/defunkt/coffee-mode
+	path = site-lisp/coffee-mode
+	url = https://github.com/defunkt/coffee-mode
 [submodule "site-lisp/ace-jump-mode"]
-path = site-lisp/ace-jump-mode
-url = https://github.com/winterTTr/ace-jump-mode.git
+	path = site-lisp/ace-jump-mode
+	url = https://github.com/winterTTr/ace-jump-mode.git
 [submodule "site-lisp/buster-snippets"]
-path = site-lisp/buster-snippets
-url = git@github.com:magnars/buster-snippets.el.git
+	path = site-lisp/buster-snippets
+	url = git@github.com:magnars/buster-snippets.el.git
 [submodule "site-lisp/yasnippet"]
-path = site-lisp/yasnippet
-url = https://github.com/capitaomorte/yasnippet.git
+	path = site-lisp/yasnippet
+	url = https://github.com/capitaomorte/yasnippet.git
 [submodule "site-lisp/expand-region"]
-path = site-lisp/expand-region
-url = git@github.com:magnars/expand-region.el.git
+	path = site-lisp/expand-region
+	url = git@github.com:magnars/expand-region.el.git
 [submodule "site-lisp/php-mode"]
-path = site-lisp/php-mode
-url = https://github.com/ejmr/php-mode.git
+	path = site-lisp/php-mode
+	url = https://github.com/ejmr/php-mode.git
 [submodule "site-lisp/magit"]
-path = site-lisp/magit
-url = https://github.com/magit/magit.git
+	path = site-lisp/magit
+	url = https://github.com/magit/magit.git
 [submodule "site-lisp/emacs-color-theme-solarized"]
-path = site-lisp/emacs-color-theme-solarized
-url = https://github.com/sellout/emacs-color-theme-solarized.git
+	path = site-lisp/emacs-color-theme-solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "site-lisp/fic-mode"]
-path = site-lisp/fic-mode
-url = https://github.com/emacsmirror/fic-mode.git
+	path = site-lisp/fic-mode
+	url = https://github.com/emacsmirror/fic-mode.git
 [submodule "site-lisp/grep-buffers"]
-path = site-lisp/grep-buffers
-url = https://github.com/emacsmirror/grep-buffers.git
+	path = site-lisp/grep-buffers
+	url = https://github.com/emacsmirror/grep-buffers.git
 [submodule "site-lisp/multi-term"]
-path = site-lisp/multi-term
-url = https://github.com/emacsmirror/multi-term.git
+	path = site-lisp/multi-term
+	url = https://github.com/emacsmirror/multi-term.git
 [submodule "site-lisp/fit-frame"]
-path = site-lisp/fit-frame
-url = https://github.com/emacsmirror/fit-frame.git
+	path = site-lisp/fit-frame
+	url = https://github.com/emacsmirror/fit-frame.git
 [submodule "site-lisp/misc-fns"]
-path = site-lisp/misc-fns
-url = https://github.com/emacsmirror/misc-fns.git
+	path = site-lisp/misc-fns
+	url = https://github.com/emacsmirror/misc-fns.git
 [submodule "site-lisp/smex"]
-path = site-lisp/smex
-url = https://github.com/emacsmirror/smex.git
+	path = site-lisp/smex
+	url = https://github.com/emacsmirror/smex.git
 [submodule "site-lisp/ack"]
-path = site-lisp/ack
-url = https://github.com/emacsmirror/ack.git
+	path = site-lisp/ack
+	url = https://github.com/emacsmirror/ack.git
 [submodule "site-lisp/rainbow-delimiters"]
-path = site-lisp/rainbow-delimiters
-url = https://github.com/emacsmirror/rainbow-delimiters.git
+	path = site-lisp/rainbow-delimiters
+	url = https://github.com/emacsmirror/rainbow-delimiters.git
 [submodule "site-lisp/cygwin-mount"]
-path = site-lisp/cygwin-mount
-url = https://github.com/emacsmirror/cygwin-mount.git
+	path = site-lisp/cygwin-mount
+	url = https://github.com/emacsmirror/cygwin-mount.git
 [submodule "site-lisp/paredit"]
-path = site-lisp/paredit
-url = https://github.com/emacsmirror/paredit.git
+	path = site-lisp/paredit
+	url = https://github.com/emacsmirror/paredit.git
 [submodule "site-lisp/hobo"]
-path = site-lisp/hobo
-url = https://github.com/emacsmirror/hobo.git
+	path = site-lisp/hobo
+	url = https://github.com/emacsmirror/hobo.git
 [submodule "site-lisp/wrap-region"]
 	path = site-lisp/wrap-region
-	url = git@github.com:graehl/wrap-region.git
+	url = https://github.com/graehl/wrap-region.git
 [submodule "site-lisp/hl-line-plus"]
 	path = site-lisp/hl-line-plus
 	url = https://github.com/emacsmirror/hl-line-plus.git
 [submodule "site-lisp/mark-multiple"]
 	path = site-lisp/mark-multiple
-	url = git@github.com:graehl/mark-multiple.el.git
+	url = https://github.com/graehl/mark-multiple.el.git
 [submodule "site-lisp/isearch-plus"]
 	path = site-lisp/isearch-plus
 	url = https://github.com/emacsmirror/isearch-plus.git
 [submodule "site-lisp/misc-cmds"]
 	path = site-lisp/misc-cmds
 	url = https://github.com/emacsmirror/misc-cmds.git
+[submodule "site-lisp/autopair-el"]
+	path = site-lisp/autopair-el
+	url = https://github.com/graehl/autopair-el.git

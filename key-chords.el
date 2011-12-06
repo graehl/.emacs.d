@@ -1,4 +1,7 @@
 (require 'key-chord)
+
+(setq key-chord-two-keys-delay 0.05)
+
 (key-chord-mode 1)
 
 ;; Move to char similar to "f" in vim, f+j forward, f+h backward

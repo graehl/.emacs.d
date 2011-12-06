@@ -11,6 +11,10 @@
   (gnu-font-sz font "11"))
 
 (defvar mac-font-default "Monaco-12")
-(defun mac-font (&optional font) (interactive)
+(defun mac-font (&optional font weight) (interactive)
+  "s"
+  (if (eq nil weight) (setq weight 'light))
   (if (eq nil font) (setq font mac-font-default))
-  (set-face-attribute 'default nil :font font))
+  (set-face-attribute 'default nil :font font :weight weight))
+
+(provide 'font)

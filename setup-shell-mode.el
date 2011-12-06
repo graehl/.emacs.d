@@ -3,23 +3,30 @@
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+(defun shell-mode-up () (interactive)
+  (if (comint-after-pmark-p)
+      (comint-previous-input 1)
+    (prev-line 1)))
+
+(defun shell-mode-down () (interactive)
+  (if (comint-after-pmark-p)
+      (comint-next-input 1)
+    (forward-line 1)))
+
 (defun my-on-shell () (interactive)
                                         ;            (define-key shell-mode-map [up] 'ewd-comint-up)
                                         ;            (define-key shell-mode-map [down] 'ewd-comint-down)
   (define-key shell-mode-map [(control k)] 'comint-kill-input)
   (local-set-key [C-a] 'comint-bol)
                                         ;            (local-set-key [home] 'comint-bol)       ; move to beginning of line, after prompt
-(local-set-key [up]          ; cycle backward through command history
-               '(lambda () (interactive)
-                  (if (comint-after-pmark-p)
-                      (comint-previous-input 1)
-                    (prev-line 1))))
-(local-set-key [down]        ; cycle forward through command history
-               '(lambda () (interactive)
-                  (if (comint-after-pmark-p)
-                      (comint-next-input 1)
-                    (forward-line 1)))))
 
+                                        ; use history if at prompt
+
+
+  (local-set-key [up] 'shell-mode-up)
+  (local-set-key [down] 'shell-mode-down)
+  )
+;; note: can still use ctrl-n ctrl-p for regular movement
 
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 

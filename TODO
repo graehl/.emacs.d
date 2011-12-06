@@ -5,3 +5,7 @@ eval shell advice from http://snarfed.org/why_i_run_shells_inside_emacs
 move char (from wrap-region {} closing) up/down line as well as left/right. keybind all 4.
 
 autopair annoys me. disable entirely? or enable only when at end of line, or cursor not already on a char? fns to wrap the autopair binds or advice. or if char already on something, put matching } at eol (decided to quote something). or at least allow type-over (match already inserted char to exit, e.g. "a" - can either right-arrow or " to advance)
+
+ediff replacement - stock can't quit properly - infinite macro loop when trying to restore windows?
+
+autopair - smart keybind to advance two chars to the right, skipping the close?

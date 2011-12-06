@@ -43,4 +43,13 @@
 
 (enable-magic-dirtrack)
 (default-size-frame 200 60)
+
+(defun top-mode-mac-generate-top-command (user)
+  (if (not user)
+      "top -l 1"
+    (format "top -l 1 -user %s" user)))
+(setq top-mode-generate-top-command-function
+      'top-mode-mac-generate-top-command)
+(setq top-mode-strace-command "/usr/sbin/dtrace")
+
 (provide 'mac)

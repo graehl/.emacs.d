@@ -126,3 +126,4 @@
 (gr-cleanup-save-global-mode)
 (require 'setup-isearch)
 (require 'setup-ediff)
+(transient-mark-mode t)

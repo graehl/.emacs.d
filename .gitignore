@@ -1,12 +1,9 @@
-dagtt
 auto-save-list
 backups
 *~
 .places
 session.*
 tramp
-elpa
-emms
-site-lisp/adventur-mode
 *.elc
 .DS_Store
+#*

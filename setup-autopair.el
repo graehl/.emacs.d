@@ -15,8 +15,6 @@
 (require 'setup-code-modes)
 (install-hooks lisp-modes-hook 'autopair-dont)
 
-https://github.com/graehl/autopair-el
-
 (set-default 'autopair-dont-activate #'(lambda ()
                                          (eq major-mode 'term-mode)))
 (provide 'setup-autopair)

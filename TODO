@@ -11,3 +11,5 @@ ediff replacement - stock can't quit properly - infinite macro loop when trying 
 autopair - smart keybind to advance two chars to the right, skipping the close?
 
 is chord mode messing with my timing? i release control, then press backspace ... bad
+
+i seem to stumble over key-replaces active region. is there some mode changing region behavior? sticky? i want typing w/ region selected to type normally, not replace. or maybe i'll get used to it. it's more like standard gui - just be more careful w/ mark?

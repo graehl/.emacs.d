@@ -11,10 +11,15 @@
   (gnu-font-sz font "11"))
 
 (defvar mac-font-default "Monaco-12")
-(defun mac-font (&optional font weight) (interactive)
-  "s"
-  (if (eq nil weight) (setq weight 'light))
+(defvar mac-size-default 12)
+(defvar mac-weight-default 'extra-light)
+(defun mac-font (&optional font size weight)
+  (interactive "sFont name (Monaco, Andale Mono, Consolas): \nipoints (height in 1/72 in): ")
+  (if (eq nil weight) (setq weight mac-weight-default))
+  (if (eq nil size) (setq size mac-size-default))
   (if (eq nil font) (setq font mac-font-default))
-  (set-face-attribute 'default nil :font font :weight weight))
+  (set-face-attribute 'default nil :font font :height (* 10 size) :weight weight)
+
+  )
 
 (provide 'font)

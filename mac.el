@@ -5,13 +5,19 @@
 (setq mac-option-modifier 'control)
 (setq mac-command-modifier 'meta)
 
+(setq mac-font-default "Monaco")
+(setq mac-font-default "Andale Mono")
+(setq mac-font-default "Consolas")
+(mac-font mac-font-default mac-size-default mac-weight-default)
+(mac-font)
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
 (when nil
   ;;(mac-font "Lucida Console-14")
   (mac-font "Andale Mono-14")
   )
-(mac-font "Consolas-14")
+
+
                                         ;(custom-set-faces '(default ((t (:height 100 :family "Consolas" :embolden nil)))))
 
 ;; make sure path is correct when launched as application

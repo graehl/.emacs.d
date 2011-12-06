@@ -1,16 +1,26 @@
 (require 'setup-ediff)
 
-(defun size-frame (w h)
+(defun my-save-frame ()
+  (when (fboundp 'my-ediff-bsh) (my-ediff-bsh)))
+
+(defun my-default-frame (&optional full)
+  (interactive)
+  (my-size-frame)
+  (default-split))
+
+(defun size-frame (&optional w h)
+  (interactive)
+  (when (nil w) (setq w (cdr (assoc 'width default-frame-alist))))
+  (when (nil h) (setq h (cdr (assoc 'height default-frame-alist))))
   (interactive)
   (set-frame-position (selected-frame) 0 0)
   (set-frame-size (selected-frame) w h)
-  (my-ediff-bsh)
-  )
+  (my-save-frame))
+
 (defun maximize-frame ()
   (interactive)
   (size-frame 270 76)
-  (my-ediff-bsh)
-  )
+  (my-save-frame))
 
 (defun fullscreen (&optional f)
   (interactive)
@@ -26,13 +36,13 @@
                                '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
         (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
                                '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0)))))
-  (my-ediff-bsh))
+  (my-save-frame))
 
 (defun default-size-frame (w h)
   (interactive)
   (add-to-list 'default-frame-alist (cons 'height h))
   (add-to-list 'default-frame-alist (cons 'width w))
-  (my-ediff-bsh)
+  (my-save-frame)
   )
 
 (defun default-split ()

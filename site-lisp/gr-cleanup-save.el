@@ -126,6 +126,7 @@
     ))
 
 (defun gr-cleanup-buffer-compress-whitespace-impl ()
+  ()
   (goto-char (point-min))
   (loop do (gr-compress-whitespace gr-cleanup-save-excessive-spaces)
         while (> 0 (forward-line))

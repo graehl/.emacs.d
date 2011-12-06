@@ -37,11 +37,11 @@
 (setq inferior-octave-program "/Applications/Octave.app/Contents/MacOS/Octave")
 
 (add-hook 'shell-mode-hook 'my-magic-prompt)
-(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
-(setq shell-prompt-pattern "^|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]? *")
+;;(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
+;;(setq shell-prompt-pattern "^|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]? *")
 (setq shell-prompt-pattern "^\\(|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]?\\|[^#$%>\n]*[#$%>]\\) *")
+(require 'setup-shell-prompt)
 
-(enable-magic-dirtrack)
 (default-size-frame 200 60)
 
 (defun top-mode-mac-generate-top-command (user)

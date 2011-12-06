@@ -185,7 +185,7 @@
 (global-set-key (kbd "<f5>") 'kill-this-buffer)
 (global-set-key (kbd "<f6>") 'iswitchb-buffer) ; 'ido-switch-buffer
 (global-set-key (kbd "<f7>") 'save-buffer)
-(global-set-key (kbd "<f9>") 'grep)
+(global-set-key (kbd "<f9>") 'ack)
 (global-set-key (kbd "<f10>") 'recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)

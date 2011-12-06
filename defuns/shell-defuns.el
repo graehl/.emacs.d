@@ -24,5 +24,4 @@
   (shell-dirtrack-mode t)
   (add-hook 'shell-mode-hook 'gr-magic-prompt))
 
-
 (provide 'shell-defuns)

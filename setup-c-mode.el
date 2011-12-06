@@ -10,6 +10,7 @@
     (c-electric-pound . t)
     (c-syntactic-indentation-in-macros . t)
     (c-indent-comments-syntactically-p . t)
+    (c-offsets-alist . (innamespace . 0))
     (c-hanging-braces-alist . (
                                ;; We like hanging open braces.
                                (brace-list-open)

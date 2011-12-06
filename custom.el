@@ -29,5 +29,8 @@
  '(js2-strict-inconsistent-return-warning nil)
  '(kill-whole-line t)
  '(line-move-visual t)
+ '(next-error-highlight t)
+ '(next-error-highlight-no-select (quote fringe-arrow))
+ '(next-error-recenter (quote (4)))
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify)))

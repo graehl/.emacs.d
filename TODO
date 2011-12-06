@@ -6,4 +6,4 @@ ediff replacement - stock can't quit properly - infinite macro loop when trying 
 
 is chord mode messing with my timing? i release control, then press backspace ... disabled for now. maybe it was key/backspace replaces region. i should probably disable that too.
 
-i like isearch setting region, but when i C-g out of search, it should restore old mark
+i like isearch setting region, but when i do any movement or C-g out of search, it should restore old mark (or lack of one). i only have it set region so i can yank or mark-multiple

@@ -2,16 +2,8 @@ greedy-whitespace munching fwd/back delete - leave one space if there was more t
 
 eval shell advice from http://snarfed.org/why_i_run_shells_inside_emacs
 
-move char (from wrap-region {} closing) up/down line as well as left/right. keybind all 4.
-
-autopair annoys me. disable entirely? or enable only when at end of line, or cursor not already on a char? fns to wrap the autopair binds or advice. or if char already on something, put matching } at eol (decided to quote something). or at least allow type-over (match already inserted char to exit, e.g. "a" - can either right-arrow or " to advance)
-
 ediff replacement - stock can't quit properly - infinite macro loop when trying to restore windows?
 
-autopair - smart keybind to advance two chars to the right, skipping the close?
+is chord mode messing with my timing? i release control, then press backspace ... disabled for now. maybe it was key/backspace replaces region. i should probably disable that too.
 
-is chord mode messing with my timing? i release control, then press backspace ... bad
-
-i seem to stumble over key-replaces active region. is there some mode changing region behavior? sticky? i want typing w/ region selected to type normally, not replace. or maybe i'll get used to it. it's more like standard gui - just be more careful w/ mark?
-
-i like isearch setting region, but when i C-g, it should restore mark
+i like isearch setting region, but when i C-g out of search, it should restore old mark

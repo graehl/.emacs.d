@@ -29,4 +29,5 @@
  '(js2-strict-inconsistent-return-warning nil)
  '(kill-whole-line t)
  '(line-move-visual t)
- '(safe-local-variable-values (quote ((encoding . utf-8)))))
+ '(safe-local-variable-values (quote ((encoding . utf-8))))
+ '(uniquify-buffer-name-style (quote post-forward) nil (uniquify)))

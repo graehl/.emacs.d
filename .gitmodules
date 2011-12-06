@@ -66,7 +66,7 @@
 	url = https://github.com/emacsmirror/ack.git
 [submodule "site-lisp/rainbow-delimiters"]
 	path = site-lisp/rainbow-delimiters
-	url = https://github.com/emacsmirror/rainbow-delimiters.git
+	url = https://github.com/emacsmirror/rainbow
 [submodule "site-lisp/cygwin-mount"]
 	path = site-lisp/cygwin-mount
 	url = https://github.com/emacsmirror/cygwin-mount.git

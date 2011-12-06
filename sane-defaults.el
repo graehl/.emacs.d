@@ -1,3 +1,6 @@
+(require 'ansi-color)
+(require 'uniquify)
+
 ;; Allow pasting selection outside of Emacs
 (setq x-select-enable-clipboard t)
 
@@ -46,6 +49,7 @@
 ;; Lines should be 80 characters wide, not 72
 (setq fill-column 80)
 
+(require 'recentf)
 ;; Save a list of recent files visited.
 (recentf-mode 1)
 

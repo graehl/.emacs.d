@@ -1,3 +1,8 @@
+(require 'cl)
+(require 'ansi-color)
+(require 'uniquify)
+;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
+
 ;; Set path to .emacs.d
 (setq dotfiles-dir (file-name-directory
                     (or (buffer-file-name) load-file-name)))

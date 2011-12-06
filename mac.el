@@ -12,6 +12,8 @@
   (mac-font "Andale Mono-14")
   )
 (mac-font "Consolas-14")
+                                        ;(custom-set-faces '(default ((t (:height 100 :family "Consolas" :embolden nil)))))
+
 ;; make sure path is correct when launched as application
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 (push "/usr/local/bin" exec-path)

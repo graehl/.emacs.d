@@ -1,6 +1,6 @@
 (require 'key-chord)
 
-(setq key-chord-two-keys-delay 0.03)
+(setq key-chord-two-keys-delay 0.05)
 
 (key-chord-mode 1)
 

@@ -9,3 +9,5 @@ autopair annoys me. disable entirely? or enable only when at end of line, or cur
 ediff replacement - stock can't quit properly - infinite macro loop when trying to restore windows?
 
 autopair - smart keybind to advance two chars to the right, skipping the close?
+
+is chord mode messing with my timing? i release control, then press backspace ... bad

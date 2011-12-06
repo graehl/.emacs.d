@@ -35,7 +35,7 @@ newer, then compilation is skipped."
         ;; Byte-compile runs emacs-lisp-mode-hook; disable it
         emacs-lisp-mode-hook)
     (if (file-directory-p file)
-        (byte-recompile-directory file 0)
+        (make-byte-compile-file-or-directory file 0)
       (make-byte-compile-file file))))
 
 (provide 'make-byte-compile)

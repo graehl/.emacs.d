@@ -1,5 +1,5 @@
 (require 'isearch+)
-(setq isearchp-set-region-flag t)
+(setq isearchp-set-region-flag nil) ; i like t, but need it to restore state after i move or it's unusable
 (require 'misc-cmds)
 (provide 'setup-isearch)
 

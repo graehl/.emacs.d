@@ -128,7 +128,7 @@
 (gr-cleanup-save-global-mode)
 (require 'setup-isearch)
 (require 'setup-ediff)
-(transient-mark-mode t)
 (require 'make-byte-compile)
 (defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
+(delete-selection-mode nil)

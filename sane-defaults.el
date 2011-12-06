@@ -40,7 +40,7 @@
 (transient-mark-mode 1)
 
 ;; Remove text in active region if inserting text
-(delete-selection-mode 1)
+(delete-selection-mode nil)
 
 ;; Always display line and column numbers
 (setq line-number-mode t)

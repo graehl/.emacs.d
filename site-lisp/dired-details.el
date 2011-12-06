@@ -262,7 +262,7 @@ hidden in this buffer."
 
 (defun dired-details-frob-overlays ( hide )
   (if dired-details-internal-overlay-list
-    (mapc '(lambda (list)
+    (mapc (lambda (list)
              (mapc (if hide 'dired-details-hide-overlay 'dired-details-show-overlay)
                    (cdr list)))
           dired-details-internal-overlay-list)))

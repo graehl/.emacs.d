@@ -94,3 +94,6 @@
 [submodule "site-lisp/autopair-el"]
 	path = site-lisp/autopair-el
 	url = https://github.com/graehl/autopair-el.git
+[submodule "site-lisp/smooth-scroll-el"]
+	path = site-lisp/smooth-scroll-el
+	url = https://github.com/k-talo/smooth-scroll.el.git

@@ -129,3 +129,5 @@
 (require 'setup-isearch)
 (require 'setup-ediff)
 (transient-mark-mode t)
+(require 'make-byte-compile)
+(defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))

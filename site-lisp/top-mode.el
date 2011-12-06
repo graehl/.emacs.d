@@ -384,4 +384,4 @@ from string."
   (interactive)
   (top-mode-kill t))
 
-(provide 'top)
+(provide 'top-mode)

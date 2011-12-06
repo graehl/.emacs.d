@@ -178,8 +178,6 @@
 ;; Easy-mode rgrep
 (global-set-key (kbd "M-s s") 'rgrep)
 
-(provide 'key-bindings)
-
 (global-set-key (kbd "M-/") 'dabbrev-expand)
 (global-set-key (kbd "M-k") 'kill-whole-line)
 (global-set-key (kbd "C-k") 'kill-line)
@@ -274,5 +272,9 @@
 (global-set-key (kbd "C-<f5>") 'convert-to-unix-newlines)
 (global-set-key (kbd "M-C-d") 'kill-sexp)
 (global-set-key (kbd "M-a") 'bol-indent)
-(require 'setup-zoom) (global-set-key (kbd "C-M-z") 'toggle-zoom-full)
-(require 'top)(global-set-key (kbd "C-M-S-t") 'top)
+(require 'setup-zoom) 
+(global-set-key (kbd "C-M-z") 'toggle-zoom-full)
+(require 'top-mode)
+(global-set-key (kbd "C-M-S-t") 'top)
+
+(provide 'key-bindings)

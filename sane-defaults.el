@@ -67,6 +67,8 @@
 
 ;; Keep cursor away from edges when scrolling up/down
 (require 'smooth-scrolling)
+(setq smooth-scroll t)
+(setq smooth-scroll/vscroll-setp-size 3)
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
 (require 'undo-tree)

@@ -62,11 +62,15 @@ to case differences."
          (eq t (compare-strings str1 nil nil
                                 str2 (- l2 l1) nil ignore-case)))))
 
+(if (not (fboundp 'file-not-autosave))
+    (defun file-not-autosave (path)
+      (not (string-match "#$" path))))
+
 (defun make-byte-compile-ext (el &optional extension)  
   (interactive "f")
   (if (eq nil extension) (setq extension ".el"))
   (message (format "make-byte-compile %s ext=%s" el extension))
-  (when (string-suffix-p extension el)
+  (when (and (file-not-autosave el) (string-suffix-p extension el))
     (make-byte-compile-file el)))
 
 (defun make-byte-compile-el-visitor (dir file)

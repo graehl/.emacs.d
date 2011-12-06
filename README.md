@@ -12,6 +12,11 @@ To grab all the dependencies:
 
     git clone --recursive git://github.com/graehl/.emacs.d.git
 
+To update including submodules:
+
+    git pull
+    git submodule update --init
+
 Todo
 ----
 

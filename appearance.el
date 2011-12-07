@@ -15,8 +15,8 @@
       truncate-partial-width-windows nil)
 
 (require 'hl-line+)
-(global-hl-line-mode t)
-;;(toggle-hl-line-when-idle)
+;;(global-hl-line-mode t)
+(toggle-hl-line-when-idle)
 (set-face-background 'hl-line "#222266")
 ;;(set-face-background 'region "#222222")
 

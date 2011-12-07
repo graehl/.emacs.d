@@ -99,6 +99,7 @@
 (defun gr-indent-buffer () "indent whole buffer!"
   (interactive)
   (when (not (gr-cleanup-skip-indent-p))
+    (widen)
     (indent-region (point-min) (point-max) nil)))
 
 (defun gr-untabify-buffer ()

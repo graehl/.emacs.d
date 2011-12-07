@@ -1,9 +1,15 @@
+(defun c-strip-leading-ns (s) (interactive "s")
+  (replace-regexp-in-string "\\([^:<]+\\)[:]+" "" s))
+(defun c-strip-all-ns (s) (interactive "s")
+  (c-strip-leading-ns (c-strip-leading-ns (c-strip-leading-ns s))))
+
 (defun default-typedef-base-name (s) (interactive "s")
-  (replace-regexp-in-string "\\([^:<]+\\)[:]" "" (replace-regexp-in-string "<.*$" "" s)))
-(defun default-typedef-name (s) (interactive "s")
+  (c-strip-all-ns (replace-regexp-in-string "<.*$" "" s)))
+(defun uc-typedef-name (s) (interactive "s")
   (upper-camel-case (default-typedef-base-name s)))
-
-
+(defun lc-typedef-name (s) (interactive "s")
+  (concat (default-typedef-base-name s) "_t"))
+(defalias 'default-typedef-name 'lc-typedef-name)
 (defconst graehl-style
   '(
                                         ; (c-offsets-alist . (

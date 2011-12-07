@@ -2,6 +2,8 @@
 ;; c-mode for these files.
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
+(add-to-list 'auto-mode-alist '("\\.ipp$" . c++-mode))
+
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode))
@@ -61,9 +63,9 @@
 
 
 ;; Buster.JS
-;(autoload 'buster-mode "buster-mode")
-;(setq buster-node-executable "/usr/local/bin/node")
-;(add-file-find-hook-with-pattern "test\\.js$" (lambda () (buster-mode)) "require(\\(\"\\|'\\)buster")
+                                        ;(autoload 'buster-mode "buster-mode")
+                                        ;(setq buster-node-executable "/usr/local/bin/node")
+                                        ;(add-file-find-hook-with-pattern "test\\.js$" (lambda () (buster-mode)) "require(\\(\"\\|'\\)buster")
 
 ;; Markdown
 (autoload 'markdown-mode "markdown-mode")
@@ -78,9 +80,9 @@
 
 ;; Apache config
 (autoload 'apache-mode "apache-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.htaccess\\'"   . apache-mode))
-(add-to-list 'auto-mode-alist '("httpd\\.conf\\'"  . apache-mode))
-(add-to-list 'auto-mode-alist '("srm\\.conf\\'"    . apache-mode))
+(add-to-list 'auto-mode-alist '("\\.htaccess\\'" . apache-mode))
+(add-to-list 'auto-mode-alist '("httpd\\.conf\\'" . apache-mode))
+(add-to-list 'auto-mode-alist '("srm\\.conf\\'" . apache-mode))
 (add-to-list 'auto-mode-alist '("access\\.conf\\'" . apache-mode))
 (add-to-list 'auto-mode-alist '("sites-\\(available\\|enabled\\)/" . apache-mode))
 

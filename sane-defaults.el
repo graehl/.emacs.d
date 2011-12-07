@@ -78,4 +78,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+(setq gc-cons-threshold 35000000)
+(setq garbage-collection-messages nil)
+
 (provide 'sane-defaults)

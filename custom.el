@@ -18,6 +18,7 @@
  '(compilation-ask-about-save nil)
  '(custom-safe-themes (quote ("0174d99a8f1fdc506fa54403317072982656f127" default)))
  '(fill-column 80)
+ '(gr-cleanup-skip-compress-whitespace-modes (quote \'\(fundamental-mode\)))
  '(ido-use-filename-at-point nil)
  '(isearchp-initiate-edit-commands (quote (backward-char left-char)))
  '(js2-allow-rhino-new-expr-initializer nil)

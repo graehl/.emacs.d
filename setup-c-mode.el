@@ -1,16 +1,30 @@
+(defun default-typedef-base-name (s) (interactive "s")
+  (replace-regexp-in-string "\\([^:<]+\\)[:]" "" (replace-regexp-in-string "<.*$" "" s)))
+(defun default-typedef-name (s) (interactive "s")
+  (upper-camel-case (default-typedef-base-name s)))
+
+;;(default-typedef-name "s::a<b>")
+;; (with-temp-buffer
+;; (insert s)
+;; (goto-char (point-max))
+;; (while (search-backward "::") (replace-match "")
+;; regex-search-forward
+;; (buffer-string))
+)
+
 (defconst graehl-style
   '(
-                                        ;        (c-offsets-alist . (
-                                        ;                        (defun-block-intro . 2)
+                                        ; (c-offsets-alist . (
+                                        ; (defun-block-intro . 2)
     ;; ...no exceptions.
-                                        ;                        (substatement-open . 0)
-                                        ;                        (inline-open . 0)
-                                        ;                        (comment-intro . 0)
-                                        ;     ))
+                                        ; (substatement-open . 0)
+                                        ; (inline-open . 0)
+                                        ; (comment-intro . 0)
+                                        ; ))
     (c-electric-pound . t)
     (c-syntactic-indentation-in-macros . t)
     (c-indent-comments-syntactically-p . t)
-;;    (c-offsets-alist . ((innamespace . 0)))
+    ;; (c-offsets-alist . ((innamespace . 0)))
     (c-hanging-braces-alist . (
                                ;; We like hanging open braces.
                                (brace-list-open)
@@ -36,7 +50,7 @@
   (key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"
-                                        ;        c-backspace-function 'c-hungry-delete
+                                        ; c-backspace-function 'c-hungry-delete
                                         ;'backward-delete-char
         c-basic-offset 2
         c-tab-always-indent t)
@@ -53,9 +67,9 @@
   ;; indent access labels public/private/protected by 1 space, as in 'M'. I
   ;; kinda like that.
   (c-set-offset 'access-label -3)
-  (local-set-key [(control tab)]     ; move to next tempo mark
+  (local-set-key [(control tab)] ; move to next tempo mark
                  'tempo-forward-mark)
-                                        ;  (local-set-key (kbd "<delete>") 'c-hungry-delete-forward)
+                                        ; (local-set-key (kbd "<delete>") 'c-hungry-delete-forward)
 
   ;;
   ;;fixup template indentation
@@ -71,11 +85,11 @@
 
   (my-code-mode-hook)
 
-                                        ;  (local-set-key [tab] 'my-c-tab)
-                                        ;  (local-set-key [{] 'my-electric-braces)
+                                        ; (local-set-key [tab] 'my-c-tab)
+                                        ; (local-set-key [{] 'my-electric-braces)
   (local-set-key [?\M-{] "\C-q{")
   (local-set-key [(control ?{)] 'my-empty-braces)
-                                        ;  (local-set-key [(meta \`)] 'my-cpp-toggle-src-hdr)
+                                        ; (local-set-key [(meta \`)] 'my-cpp-toggle-src-hdr)
   (local-set-key [(meta \`)] 'sourcepair-load)
   (local-set-key [(control \`)] 'sourcepair-load)
   (local-set-key [?#] 'my-electric-pound)

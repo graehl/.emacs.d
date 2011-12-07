@@ -10,9 +10,11 @@
 (mapc 'yas/load-directory yas/root-directory)
 
 ;; Include snippets for Buster.js
-(require 'buster-snippets)
+                                        ;(require 'buster-snippets)
 
 ;; No dropdowns please, yas
 (setq yas/prompt-functions '(yas/ido-prompt yas/completing-prompt))
+
+(setq yas/wrap-around-region 'cua)
 
 (provide 'setup-yasnippet)

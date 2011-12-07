@@ -10,7 +10,7 @@
     (c-electric-pound . t)
     (c-syntactic-indentation-in-macros . t)
     (c-indent-comments-syntactically-p . t)
-    (c-offsets-alist . (innamespace . 0))
+;;    (c-offsets-alist . ((innamespace . 0)))
     (c-hanging-braces-alist . (
                                ;; We like hanging open braces.
                                (brace-list-open)
@@ -27,11 +27,11 @@
     )
   "graehl")
 
-(defun graehl-style-common-hook ()
-                                        ;   (c-add-style "graehl" graehl-style t)
-  )
 
-(defun my-c-mode-hook ()
+(require 'setup-sourcepair)
+(defun gr-c-mode-hook ()
+  (interactive)
+  (c-add-style "graehl" graehl-style t)
   (c-toggle-auto-hungry-state 1)
   (key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
@@ -90,22 +90,12 @@
 
   (c-toggle-auto-hungry-state 1)
   (define-key c-mode-base-map "\C-m" 'newline-and-indent)
-  (define-key c-mode-base-map [(control j)] 'dabbrev-expand)
+  (define-key c-mode-base-map (kbd "<ret>") 'newline-and-indent)
+  (define-key c-mode-base-map (kbd "C-j") 'dabbrev-expand)
   (c-set-offset 'c 'c-lineup-C-comments)
-
 
   ;; Set the comments to start where they ought to.
   (setq-default c-comment-continuation-stars "* ")
-                                        ;(graehl-style-common-hook)
-  )
-
-(defun my-makefile-mode-hook ()
-  (font-lock-mode t)
-  (show-paren-mode t)
-  (setq indent-tabs-mode t)  ; Makefiles actually _need_ tabs :(
-  (local-set-key [( control ?\( )] 'my-matching-paren)
-  (local-set-key [return] 'newline-and-indent)
-  (local-set-key [(control return)] 'newline)
   )
 
 (require 'gud)
@@ -113,4 +103,6 @@
   (gud-tbreak)
   (gud-cont))
 
+(require 'setup-code-modes)
+(install-hooks c-modes-hook 'gr-c-mode-hook)
 (provide 'setup-c-mode)

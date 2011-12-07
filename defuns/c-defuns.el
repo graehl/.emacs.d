@@ -1,3 +1,28 @@
+(defun my-empty-braces ()
+  "insert {  }"
+  (interactive "*")
+  (insert "{}")
+  (backward-char)
+  (indent-according-to-mode)
+  )
+
+
+(defun my-electric-braces ()
+  "Insert a pair of braces surrounding a blank line, indenting each according to the mode"
+  (interactive "*")
+  (let ((bolp
+         (save-excursion (skip-chars-backward " \t")
+                         (equal (current-column) 0))))
+    (insert "{}")
+    (if bolp
+        (eval (list indent-line-function)))
+    )
+  (backward-char)
+  (newline-and-indent)
+  (prev-line 1)
+  (end-of-line)
+  (newline-and-indent))
+
 (defun indent-cpp-buffer ()
   "text-mode then c++-mode - workaround bad-state bug without saving + reopening buffer"
   (interactive)

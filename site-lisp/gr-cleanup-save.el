@@ -6,11 +6,19 @@
   (add-hook h f append local))
 
 (defcustom gr-cleanup-save-except-modes '(calc-mode dired-mode)
-  "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(sybmol) :group 'gr-cleanup-save)
+  "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
+(defcustom make-modes '()
+  "A list of modes in which `gr-cleanup-untabify' and `gr-cleanup-indent' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
+(defcustom gr-cleanup-skip-compress-whitespace-modes '()
+  "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-excessive-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
-(defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
-(defun gr-cleanup-skip-indent-p () (member major-mode gr-cleanup-skip-indent-modes))
 
+(defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
+
+(defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
+(defun gr-cleanup-skip-indent-p () (member major-mode make-modes))
+(defun gr-cleanup-skip-untabify-p () (gr-cleanup-skip-indent-p))
+(defun gr-cleanup-skip-compress-whitespace-p () (member major-mode gr-cleanup-skip-compress-whitespace-modes))
 
 (defvar gr-cleanup-save-hook nil
   "Called when `gr-cleanup-save-mode' is turned on.")
@@ -95,7 +103,7 @@
 
 (defun gr-untabify-buffer ()
   (interactive)
-  (when (not (gr-cleanup-skip-indent-p))
+  (when (not (gr-cleanup-skip-untabify-p))
     (untabify (point-min) (point-max))))
 
 (defun gr-compress-whitespace (&optional over limit)
@@ -126,11 +134,12 @@
     ))
 
 (defun gr-cleanup-buffer-compress-whitespace-impl ()
-  ()
+  (interactive)
+  (when (not (gr-cleanup-skip-compress-whitespace-p))
   (goto-char (point-min))
   (loop do (gr-compress-whitespace gr-cleanup-save-excessive-spaces)
         while (> 0 (forward-line))
-        ))
+        )))
 
 
 (defmacro gr-safe-wrap (&rest body)

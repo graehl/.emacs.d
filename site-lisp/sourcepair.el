@@ -207,9 +207,9 @@ See the documentation for these variables for more info.
 	(let* ((extension (concat (member ?. (append filename nil))))
 		   (basename (substring filename 0 (- 0 (length extension)))))
 	  (if (member extension sourcepair-header-extensions)
-		  (cons sourcepair-source-path (mapcar '(lambda (arg) (concat basename arg)) sourcepair-source-extensions))
+		  (cons sourcepair-source-path (mapcar (lambda (arg) (concat basename arg)) sourcepair-source-extensions))
 		(if (member extension sourcepair-source-extensions)
-			(cons sourcepair-header-path (mapcar '(lambda (arg) (concat basename arg)) sourcepair-header-extensions))))))
+			(cons sourcepair-header-path (mapcar (lambda (arg) (concat basename arg)) sourcepair-header-extensions))))))
 
   (defun sourcepair-find-one-of (path choices recurse)
 	(catch 'matching-filename

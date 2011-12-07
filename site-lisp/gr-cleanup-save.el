@@ -7,11 +7,11 @@
 
 (defcustom gr-cleanup-save-except-modes '(calc-mode dired-mode)
   "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
-(defcustom make-modes '()
+(defcustom make-modes nil
   "A list of modes in which `gr-cleanup-untabify' and `gr-cleanup-indent' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-skip-compress-whitespace-modes '()
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
-(defcustom gr-cleanup-save-excessive-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
+(defcustom gr-cleanup-save-max-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
 
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
 
@@ -106,10 +106,10 @@
   (when (not (gr-cleanup-skip-untabify-p))
     (untabify (point-min) (point-max))))
 
-(defun gr-compress-whitespace (&optional over limit)
+(defun gr-compress-whitespace-line-impl (&optional over limit)
   "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"
   (interactive)
-  (when (eq nil over) (setq over compress-whitespace-over))
+  (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
   (when (eq nil limit) (setq limit (point-at-eol)))
   (push-mark)
   (set-mark (point))
@@ -133,14 +133,41 @@
     ndel
     ))
 
-(defun gr-cleanup-buffer-compress-whitespace-impl ()
+(defun gr-compress-whitespace-impl (&optional over)
   (interactive)
-  (when (not (gr-cleanup-skip-compress-whitespace-p))
+  (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
   (goto-char (point-min))
-  (loop do (gr-compress-whitespace gr-cleanup-save-excessive-spaces)
-        while (> 0 (forward-line))
-        )))
+  (loop do (gr-compress-whitespace-line-impl over)
+        while (= 0 (forward-line))
+        ))
 
+(defun gr-narrow-dwim-buffer ()
+  (interactive)
+  (if (region-active-p)
+      (narrow-to-region (region-beginning) (region-end))
+    (widen)))
+
+(defun gr-narrow-dwim-line ()
+  (interactive)
+  (if (region-active-p)
+      (narrow-to-region (region-beginning) (region-end))
+    (narrow-to-region (point-at-bol) (point-at-eol))))
+
+(defun gr-compress-whitespace-line (&optional over)
+  "region if active, else line"
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (gr-narrow-dwim-line)
+      (gr-compress-whitespace-impl over))))
+
+(defun gr-compress-whitespace-buffer (&optional over)
+  "region if active, else buffer"
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (gr-narrow-dwim-buffer)
+      (gr-compress-whitespace-impl over))))
 
 (defmacro gr-safe-wrap (&rest body)
   `(unwind-protect
@@ -163,7 +190,9 @@
      (excessive-newlines-compress gr-cleanup-buffer-excessive-newlines))
    (delete-trailing-whitespace)
    (delete-trailing-newlines)
-   (gr-cleanup-buffer-compress-whitespace-impl)
+   (if (gr-cleanup-skip-compress-whitespace-p)
+       (message (format "skipping whitespace compression for mode %s" major-mode))
+     (gr-compress-whitespace-impl))
    ))
 
 (defun gr-cleanup-buffer-save ()

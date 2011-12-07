@@ -9,7 +9,7 @@
   "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(sybmol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-excessive-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
-(defun gr-cleanup-skip-indent-p () (not (member major-mode gr-cleanup-skip-indent-modes)))
+(defun gr-cleanup-skip-indent-p () (member major-mode gr-cleanup-skip-indent-modes))
 
 
 (defvar gr-cleanup-save-hook nil
@@ -90,12 +90,12 @@
 
 (defun gr-indent-buffer () "indent whole buffer!"
   (interactive)
-  (when (gr-cleanup-skip-indent-p)
+  (when (not (gr-cleanup-skip-indent-p))
     (indent-region (point-min) (point-max) nil)))
 
 (defun gr-untabify-buffer ()
   (interactive)
-  (when (gr-cleanup-skip-indent-p)
+  (when (not (gr-cleanup-skip-indent-p))
     (untabify (point-min) (point-max))))
 
 (defun gr-compress-whitespace (&optional over limit)

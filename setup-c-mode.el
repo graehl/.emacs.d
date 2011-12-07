@@ -3,14 +3,6 @@
 (defun default-typedef-name (s) (interactive "s")
   (upper-camel-case (default-typedef-base-name s)))
 
-;;(default-typedef-name "s::a<b>")
-;; (with-temp-buffer
-;; (insert s)
-;; (goto-char (point-max))
-;; (while (search-backward "::") (replace-match "")
-;; regex-search-forward
-;; (buffer-string))
-)
 
 (defconst graehl-style
   '(

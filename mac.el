@@ -36,7 +36,6 @@
 
 (setq inferior-octave-program "/Applications/Octave.app/Contents/MacOS/Octave")
 
-(add-hook 'shell-mode-hook 'my-magic-prompt)
 ;;(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
 ;;(setq shell-prompt-pattern "^|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]? *")
 (setq shell-prompt-pattern "^\\(|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]?\\|[^#$%>\n]*[#$%>]\\) *")

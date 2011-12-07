@@ -11,3 +11,5 @@ i like isearch setting region, but when i do any movement or C-g out of search, 
 for isearch -> mark-more-like-this, would be nice if dabbrev had the match in its history. or else i should learn how to use isearch replace \1
 
 flymake?
+
+skip warnings and file-included-from in next-error like my old .emacs

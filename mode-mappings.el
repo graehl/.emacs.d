@@ -3,6 +3,7 @@
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ipp$" . c++-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . c++-mode)) ; e.g. boost
 
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 

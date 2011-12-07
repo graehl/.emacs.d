@@ -1,3 +1,4 @@
+(provide 'key-bindings)
 ;; I don't need to kill emacs that easily
 ;; the mnemonic is C-x REALLY QUIT
 (global-set-key (kbd "C-x r q") 'save-buffers-kill-terminal)
@@ -17,8 +18,8 @@
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
 ;; Quickly jump in document with ace-jump-mode
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "C-ø") 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-ø") 'ace-jump-mode)
 
 ;; Repeat last command - too cumbersome with C-x z
 (global-set-key (kbd "M-z") 'repeat)
@@ -54,11 +55,11 @@
 (global-set-key (kbd "M-i") 'back-to-indentation)
 
 ;; Font size
-(define-key global-map (kbd "M-s +") 'zoom-in)
-(define-key global-map (kbd "M-s -") 'zoom-out)
+(global-set-key (kbd "M-s +") 'zoom-in)
+(global-set-key (kbd "M-s -") 'zoom-out)
 
 ;; Create new frame (bound to regular mac-command)
-(define-key global-map (kbd "M-n") 'make-frame-command)
+(global-set-key (kbd "M-n") 'make-frame-command)
 
 ;; Jump to a definition in the current file. (This is awesome.)
 (global-set-key (kbd "C-x C-i") 'ido-imenu)
@@ -203,7 +204,7 @@
 ;; edebug-<tab> a suite of elisp debugging functions (e.g. edebug-defun)
 ;; M-! (alt-shift-1) - do a shell command, e.g. tlm edit
 ;; C-x C-f (visit file) to make a buffer modifiable after you've 'tlm edited' it.
-(global-set-key (kbd "M-n") 'grep-buffers) (require 'grep-buffers)
+(global-set-key (kbd "M-<f9>") 'multi-occur-in-matching-buffers) 
 (global-set-key (kbd "M-s s") 'rgrep)
 (global-set-key (kbd "M-o") 'nuke-line)
 (global-set-key (kbd "C-/") 'tweakemacs-comment-dwim-region-or-one-line)
@@ -229,8 +230,8 @@
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 (global-set-key (kbd "M-x") 'execute-extended-command)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-(define-key global-map (kbd "C-c C-s") 'occur)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+(global-set-key (kbd "C-c C-s") 'occur)
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key "\C-\\" 'set-mark-and-goto-line)
 (global-set-key (kbd "C-f") 'forward-word)
@@ -256,8 +257,7 @@
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
 (global-set-key (kbd "C-M-r") 'query-replace)
 (global-set-key (kbd "S-M-t") '(lambda () (interactive) (transpose-chars -1)))
-(define-key isearch-mode-map [next] 'isearch-repeat-forward)
-(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
+(define-key occur-mode-map "C-o" 'other-window)
 ;;(define-key shell-mode-map "\C-r" 'isearch-backward)
 ;;(define-key lisp-mode-map (kbd "<return>") 'newline-and-indent)
 (global-set-key (kbd "C-c \\") 'gr-indent-buffer)
@@ -277,4 +277,5 @@
 (require 'top-mode)
 (global-set-key (kbd "C-M-S-t") 'top)
 
-(provide 'key-bindings)
+;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
+;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)

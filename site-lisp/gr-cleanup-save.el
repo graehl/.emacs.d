@@ -106,14 +106,11 @@
   (when (not (gr-cleanup-skip-untabify-p))
     (untabify (point-min) (point-max))))
 
-(defun gr-compress-whitespace-line-impl (&optional over limit)
+(defun gr-compress-whitespace-line-impl (&optional over)
   "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"
   (interactive)
   (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
-  (when (eq nil limit) (setq limit (point-at-eol)))
-  (push-mark)
-  (set-mark (point))
-  (let ((maxsp (make-string over ? )) (ndel 0) s (col (current-column)))
+  (let ((maxsp (make-string over ? )) (ndel 0) (limit (point-at-eol)) s (col (current-column)))
     (backward-to-indentation 0)
     (loop until (>= (point) limit)
           do (skip-syntax-forward "^\s" limit)
@@ -121,15 +118,13 @@
           do (setq s (point))
           do (skip-syntax-forward "\s" limit)
           until (>= (point) limit)
-          do (let ((ex (- (point) (mark) over)))
+          do (let ((ex (- (point) s over)))
                (when (> over 0)
                  (setq ndel (+ ndel over))
                  (delete-region s (point))
                  (setq limit (point-at-eol))
                  (insert maxsp))))
-    (goto-char (mark))
     (move-to-column col)
-    (pop-mark)
     ndel
     ))
 

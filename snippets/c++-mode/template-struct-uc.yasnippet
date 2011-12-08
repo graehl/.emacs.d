@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: template-struct-uc
+# key: tsu
+# --
+template <class ${3:${2:$(default-template-arg-name text)}}>
+struct $1 {
+typedef $3 $2;
+typedef $1 self_type;
+$1() {}
+//$1($1 const& o) {}
+$0
+};

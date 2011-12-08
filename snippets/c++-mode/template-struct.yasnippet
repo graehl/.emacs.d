@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: template-struct
+# key: ts
+# --
+template <class ${2:T}>
+struct $1 {
+typedef $1 self_type;
+typedef $2 ${3:${2:$(default-typedef-name text)}};
+$1() {}
+//$1($1 const& o) {}
+$0
+};

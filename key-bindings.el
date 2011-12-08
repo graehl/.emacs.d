@@ -279,3 +279,6 @@
 (global-set-key (kbd "M-<f10>") 'menu-bar-open)
                                         ;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
                                         ;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
+(require 'setup-ido)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files-compl)
+(global-set-key (kbd "C-x C-r") 'recentf-ido-find-file)

@@ -204,7 +204,7 @@
 ;; edebug-<tab> a suite of elisp debugging functions (e.g. edebug-defun)
 ;; M-! (alt-shift-1) - do a shell command, e.g. tlm edit
 ;; C-x C-f (visit file) to make a buffer modifiable after you've 'tlm edited' it.
-(global-set-key (kbd "M-<f9>") 'multi-occur-in-matching-buffers) 
+(global-set-key (kbd "M-<f9>") 'multi-occur-in-matching-buffers)
 (global-set-key (kbd "M-s s") 'rgrep)
 (global-set-key (kbd "M-o") 'nuke-line)
 (global-set-key (kbd "C-/") 'tweakemacs-comment-dwim-region-or-one-line)
@@ -222,11 +222,11 @@
 (global-set-key [( control ?\( )] 'my-matching-paren)
 (global-set-key "\C-x\C-k" 'my-kill-buffer) ; without asking
 (global-set-key (kbd "C-<tab>") 'tab-to-tab-stop) ; regular spaces-to-next-tabstop, not autoindent
-(global-set-key  [(meta left)] 'backward-sexp)
-(global-set-key  [(meta right)] 'forward-sexp)
+(global-set-key [(meta left)] 'backward-sexp)
+(global-set-key [(meta right)] 'forward-sexp)
 (global-set-key (kbd "M-<backspace>") 'backward-kill-sexp)
-(global-set-key  [(control shift prior)] 'upcase-word)
-(global-set-key  [(control shift next)] 'downcase-word)
+(global-set-key [(control shift prior)] 'upcase-word)
+(global-set-key [(control shift next)] 'downcase-word)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 (global-set-key (kbd "M-x") 'execute-extended-command)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
@@ -237,8 +237,8 @@
 (global-set-key (kbd "C-f") 'forward-word)
 (require 'scratch-back)(global-set-key (kbd "M-<f2>") 'scratch-back)
 (global-set-key (kbd "M-<f3>") 'back-from-scratch)
-(global-set-key "\M-u"        '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
-(global-set-key "\M-l"        '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
+(global-set-key "\M-u" '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
+(global-set-key "\M-l" '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
 (global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
 (global-set-key (kbd "M-C-o") 'same-buffer-other-window)
 (global-set-key (kbd "C-x F") 'find-file)
@@ -272,10 +272,10 @@
 (global-set-key (kbd "C-<f5>") 'convert-to-unix-newlines)
 (global-set-key (kbd "M-C-d") 'kill-sexp)
 (global-set-key (kbd "M-a") 'bol-indent)
-(require 'setup-zoom) 
+(require 'setup-zoom)
 (global-set-key (kbd "C-M-z") 'toggle-zoom-full)
 (require 'top-mode)
 (global-set-key (kbd "C-M-S-t") 'top)
-
-;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
-;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
+(global-set-key (kbd "M-<f10>") 'menu-bar-open)
+                                        ;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
+                                        ;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)

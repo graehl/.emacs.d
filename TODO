@@ -13,3 +13,5 @@ for isearch -> mark-more-like-this, would be nice if dabbrev had the match in it
 flymake?
 
 skip warnings and file-included-from in next-error like my old .emacs
+
+speedup for gr-cleanup-save. immediately save before cleanup?

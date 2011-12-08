@@ -22,7 +22,7 @@
 
 ;; make sure path is correct when launched as application
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
-(push "/usr/local/bin" exec-path)
+(add-to-list 'exec-path "/usr/local/bin")
 
 ;; keybinding to toggle full screen mode
 (global-set-key (quote [M-f10]) (quote ns-toggle-fullscreen))
@@ -34,7 +34,13 @@
 ;; Ignore .DS_Store files with ido mode
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
-(setq inferior-octave-program "/Applications/Octave.app/Contents/MacOS/Octave")
+;;(setq inferior-octave-program "/Applications/Octave.app/Contents/MacOS/Octave")
+(setq inferior-octave-program "octave")
+;;(add-to-list 'exec-path "/Applications/Octave.app/Contents/Resources/bin")
+;;(autoload 'octave-mode "octave-mod" nil t)
+;;(setq auto-mode-alist (cons '("\\.m$" . octave-mode) auto-mode-alist))
+;;(add-hook 'octave-mode-hook (lambda () (abbrev-mode 1) (auto-fill-mode 1) (if (eq window-system 'x) (font-lock-mode 1))))
+(autoload 'run-octave "octave-inf" nil t)
 
 ;;(setq shell-prompt-pattern "^[^#$%>\n]*[#$%>] *")
 ;;(setq shell-prompt-pattern "^|PrOmPt|[^|\n]*|[^:\n]+:[^ \n]+ *[#$%>\n]? *")
@@ -51,4 +57,5 @@
       'top-mode-mac-generate-top-command)
 (setq top-mode-strace-command "/usr/sbin/dtrace")
 
+(menu-bar-mode t)
 (provide 'mac)

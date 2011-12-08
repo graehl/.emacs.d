@@ -130,3 +130,6 @@
 	ignore = untracked
 	path = site-lisp/smooth-scroll-el
 	url = https://github.com/k-talo/smooth-scroll.el.git
+[submodule "site-lisp/python-mode"]
+	path = site-lisp/python-mode
+	url = https://github.com/emacsmirror/python-mode.git

@@ -21,15 +21,15 @@
 [submodule "site-lisp/js2-mode"]
 	ignore = untracked
 	path = site-lisp/js2-mode
-	url = https://github.com/magnars/js2-mode
+	url = https://github.com/magnars/js2-mode.git
 [submodule "site-lisp/jade-mode"]
 	ignore = untracked
 	path = site-lisp/jade-mode
-	url = https://github.com/brianc/jade-mode
+	url = https://github.com/brianc/jade-mode.git
 [submodule "site-lisp/coffee-mode"]
 	ignore = untracked
 	path = site-lisp/coffee-mode
-	url = https://github.com/defunkt/coffee-mode
+	url = https://github.com/defunkt/coffee-mode.git
 [submodule "site-lisp/ace-jump-mode"]
 	ignore = untracked
 	path = site-lisp/ace-jump-mode
@@ -37,7 +37,7 @@
 [submodule "site-lisp/buster-snippets"]
 	ignore = untracked
 	path = site-lisp/buster-snippets
-	url = git@github.com:magnars/buster-snippets.el.git
+	url = https://github.com/magnars/buster-snippets.el.git
 [submodule "site-lisp/yasnippet"]
 	ignore = untracked
 	path = site-lisp/yasnippet
@@ -45,7 +45,7 @@
 [submodule "site-lisp/expand-region"]
 	ignore = untracked
 	path = site-lisp/expand-region
-	url = git@github.com:magnars/expand-region.el.git
+	url = https://github.com/magnars/expand-region.el.git
 [submodule "site-lisp/php-mode"]
 	ignore = untracked
 	path = site-lisp/php-mode

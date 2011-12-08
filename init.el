@@ -77,8 +77,8 @@
 ;; Setup key mappings
 (require 'key-chords) ; to enable: key-chord-mode
 (require 'key-bindings)
-
-
+(require 'setup-python)
+(require 'setup-term)
 ;; below use defuns.
 
 ;; Misc

@@ -3,6 +3,11 @@
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+(defun clear-shell ()
+  (interactive)
+  (let ((comint-buffer-maximum-size 0))
+    (comint-truncate-buffer)))
+
 (defun shell-mode-up () (interactive)
   (if (comint-after-pmark-p)
       (comint-previous-input 1)
@@ -14,11 +19,11 @@
     (forward-line 1)))
 
 (defun my-on-shell () (interactive)
-                                        ;            (define-key shell-mode-map [up] 'ewd-comint-up)
-                                        ;            (define-key shell-mode-map [down] 'ewd-comint-down)
+                                        ; (define-key shell-mode-map [up] 'ewd-comint-up)
+                                        ; (define-key shell-mode-map [down] 'ewd-comint-down)
   (define-key shell-mode-map [(control k)] 'comint-kill-input)
   (local-set-key [C-a] 'comint-bol)
-                                        ;            (local-set-key [home] 'comint-bol)       ; move to beginning of line, after prompt
+                                        ; (local-set-key [home] 'comint-bol) ; move to beginning of line, after prompt
 
                                         ; use history if at prompt
 
@@ -36,24 +41,14 @@
   (interactive)
   (ansi-term "bash" "localhost"))
 
-(require 'term)
-(defun term-switch-to-shell-mode ()
-  (interactive)
-  (if (equal major-mode 'term-mode)
-      (progn
-        (shell-mode)
-        (set-process-filter  (get-buffer-process (current-buffer)) 'comint-output-filter )
-        (local-set-key (kbd "C-j") 'term-switch-to-shell-mode)
-        (compilation-shell-minor-mode 1)
-        (comint-send-input)
-        )
-    (progn
-      (compilation-shell-minor-mode -1)
-      (font-lock-mode -1)
-      (set-process-filter  (get-buffer-process (current-buffer)) 'term-emulate-terminal)
-      (term-mode)
-      (term-char-mode)
-      (term-send-raw-string (kbd "C-l"))
-      )))
+(defun my-change-tmp-to-nfs (buffer &optional stat)
+  "change tmp to nfs"
+  (interactive "b")
+  (save-excursion
+    (set-buffer buffer)
+    (goto-char (point-min))
+    (let ((buffer-read-only nil))
+      (while (re-search-forward "/tmp/trunk.graehl/trunk/" nil t)
+        (replace-match "~/t/")))))
 
 (provide 'setup-shell-mode)

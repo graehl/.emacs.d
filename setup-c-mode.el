@@ -1,11 +1,46 @@
+(defun mapcar-first-rest (fn-head fn-rest list)
+  "applies a different function to the first element."
+  (if list
+      (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
+(defun upper-camel-case-wordlist (wl)
+  (mapconcat 'identity (mapcar
+                        '(lambda (word) (capitalize (downcase word))) wl) ""))
+(defun lower-camel-case-wordlist (wl)
+  (mapconcat 'identity (mapcar-first-rest
+                        '(lambda (word) (downcase word))
+                        '(lambda (word) (capitalize (downcase word))) wl) ""))
+(defun underscore-case-wordlist (wl)
+  (mapconcat 'downcase wl "_"))
+(setq default-underscore-type-suffix "type")
+;;(setq default-underscore-type-suffix "t")
+(defun upper-underscore-case-wordlist (s)
+  "Convert words list to words_list_[default-underscore-type-suffix"
+  (underscore-case-wordlist (concat s default-underscore-type-suffix)))
+(defun upper-underscore-case-wordlist (s)
+  "Convert words list to words_list Under_scoRe string S to under_score"
+  (underscore-case-wordlist s))
+(defun with-ctoken-words (s f)
+  (save-match-data)
+  (funcall f (split-string s "[_ ]")))
+
+
+(defun upper-camel-case (s)
+  "Convert under_score string S to CamelCase string."
+  (with-ctoken-words s 'upper-camel-case-wordlist))
+(defun lower-camel-case (s)
+  "Convert under_score string S to CamelCase string."
+  (with-ctoken-words s 'lower-camel-case-wordlist))
+(defun upper-underscore-case (s))
+(with-ctoken-words s 'upper-underscore-case-wordlist)
+(defun lower-underscore-case (s)
+  (with-ctoken-words s 'lower-underscore-case-wordlist))
 (defun c-strip-leading-ns (s) (interactive "s")
   (replace-regexp-in-string "\\([^:<]+\\)[:]+" "" s))
 (defun c-strip-all-ns (s) (interactive "s")
   (c-strip-leading-ns (c-strip-leading-ns (c-strip-leading-ns s))))
 (defun first-char-uc (s) (interactive "s")
   (if (equal s "") "" (substring (upcase s) 0 1)))
-(defun string-capitalize (s) (interactive "s")
-  (if (equal s "") "" (concat (first-char-uc s) (substring s 1))))
+;;(defun string-capitalize (s) (interactive "s") (if (equal s "") "" (concat (first-char-uc s) (substring s 1))))
 (defun no-suffix-type (s &optional suffix) (interactive "s")
   (if (eq nil suffix) (setq suffix "_type"))
   (if (string-suffix-p suffix s) (substring s 0 (- (length s) (length suffix))) s))
@@ -15,13 +50,14 @@
   (no-suffix-type (no-suffix-type s suffix) suffix2))
 (defun template-arg-name-no-type (s) (interactive "s")
   (let ((ns (no-suffix-type2 s)))
-    (if (equal s ns) (first-char-uc s) (string-capitalize ns))))
+    (if (equal s ns) (first-char-uc s) (capitalize ns))))
 (defun default-typedef-base-name (s) (interactive "s")
   (c-strip-all-ns (replace-regexp-in-string "<.*$" "" s)))
 (defun uc-typedef-name (s) (interactive "s")
   (upper-camel-case (default-typedef-base-name s)))
 (defun lc-typedef-name (s) (interactive "s")
   (concat (downcase (default-typedef-base-name s)) "_type"))
+
 (defalias 'default-typedef-name 'lc-typedef-name)
 (defalias 'default-template-arg-name 'template-arg-name-no-type)
 (defconst graehl-style

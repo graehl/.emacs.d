@@ -17,7 +17,7 @@
 (set-coding-modes 'lisp scheme lisp emacs-lisp lisp-interaction)
 (set-coding-modes 'jvm java scala clojure tuareg)
 (set-coding-modes 'ml ocaml ml haskell tuareg)
-(set-coding-modes 'make make cmake makefile makefile-gmake jam fundamental conf conf-unix)
+(set-coding-modes 'make make cmake makefile makefile-gmake jam fundamental conf conf-unix change-log)
 (set-coding-modes 'doc LaTeX html)
 
 (install-coding-hooks)

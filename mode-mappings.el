@@ -2,6 +2,9 @@
 ;; c-mode for these files.
 (add-to-list 'auto-mode-alist '("\\.h$" . c++-mode))
 
+(add-to-list 'auto-mode-alist '("CMakeLists\\.txt$" . cmake-mode))
+(add-to-list 'auto-mode-alist '("\\.cmake$" . cmake-mode))
+
 (add-to-list 'auto-mode-alist '("\\.ipp$" . c++-mode))
 (add-to-list 'auto-mode-alist '("\\.inc$" . c++-mode)) ; e.g. boost
 

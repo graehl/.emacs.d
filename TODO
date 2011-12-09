@@ -15,3 +15,7 @@ flymake?
 skip warnings and file-included-from in next-error like my old .emacs
 
 speedup for gr-cleanup-save. immediately save before cleanup?
+
+force enable autopair () for c++ in code; force-disable all in strings and comments
+
+does recompile keep default-dir even if you're in another dir's buffer?

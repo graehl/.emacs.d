@@ -76,9 +76,6 @@
             lc)))))
 (defun c++-var-from-type (s)
   (c++-var-from-type-noref (c++-strip-ref s)))
-;;(setq s "O const& ")
-;;(c++-strip-ref s)
-::(c++-var-from-type s)
 
 (defalias 'default-typedef-name 'lc-typedef-name)
 (defalias 'default-template-arg-name 'template-arg-name-no-type)

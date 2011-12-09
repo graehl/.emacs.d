@@ -65,7 +65,7 @@
   (concat (downcase (default-typedef-base-name s)) "_type"))
 
 (defun c++-strip-ref (s)
-  (replace-regexp-in-string " *const *& *$" "" s))
+  (replace-regexp-in-string "\\( *\\(const\\|&\\|\\*\\)*\\ *\\)*$" "" s))
 (defun c++-var-from-type-noref (s &optional suffix suffix2)
   (if (eq nil suffix) (setq suffix "_type"))
   (if (eq nil suffix2) (setq suffix2 "_t"))
@@ -76,6 +76,9 @@
             lc)))))
 (defun c++-var-from-type (s)
   (c++-var-from-type-noref (c++-strip-ref s)))
+;;(setq s "O const& ")
+;;(c++-strip-ref s)
+::(c++-var-from-type s)
 
 (defalias 'default-typedef-name 'lc-typedef-name)
 (defalias 'default-template-arg-name 'template-arg-name-no-type)

@@ -9,7 +9,7 @@
   "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom make-modes nil
   "A list of modes in which `gr-cleanup-untabify' and `gr-cleanup-indent' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
-(defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode)
+(defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode)
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-max-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
 

@@ -1,4 +1,5 @@
 ;; Buffer-related defuns
+(provide 'buffer-defuns)
 
 (require 'imenu)
 
@@ -33,7 +34,7 @@
         (t
          (setq i 1)
          (setq numWindows (count-windows))
-         (while  (< i numWindows)
+         (while (< i numWindows)
            (let* (
                   (w1 (elt (window-list) i))
                   (w2 (elt (window-list) (+ (% i numWindows) 1)))
@@ -44,7 +45,7 @@
                   (s1 (window-start w1))
                   (s2 (window-start w2))
                   )
-             (set-window-buffer w1  b2)
+             (set-window-buffer w1 b2)
              (set-window-buffer w2 b1)
              (set-window-start w1 s2)
              (set-window-start w2 s1)
@@ -176,7 +177,7 @@ Symbols matching the text at point are put first in the completion list."
   (set-mark (mark t)))
 
 (defun my-force-writable ()
-  "Make this buffer and its file writable.  Has no effect on
+  "Make this buffer and its file writable. Has no effect on
   buffers not associated with a file"
   (interactive)
   (let ((f (buffer-file-name)))
@@ -240,5 +241,3 @@ modified file"
   (interactive)
   (set-unix-newlines)
   (save-buffer))
-
-(provide 'buffer-defuns)

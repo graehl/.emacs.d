@@ -1,9 +1,10 @@
 (require 'hooks-defuns)
+(require 'buffer-defuns)
 (provide 'setup-change-log)
 (defun cleanup-change-log ()
-  (widen)
-  (beginning-of-buffer)
-  (replace-string "../r" "racerx"))
+  (interactive)
+  (with-whole-buffer
+   (replace-string "../r" "racerx")))
 (defun setup-change-log-hook ()
   (make-local-hook 'before-save-hook)
   (install-hook 'before-save-hook 'cleanup-change-log))

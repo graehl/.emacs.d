@@ -4,11 +4,11 @@
 # --
 template <class ${2:$(c++-strip-ref text)}>
 struct $1 {
-typedef void result_type;
-${2:S const&} ${3:${2:$(c++-var-from-type text)}};
-$1($2 $3) : $3($3) {}
+typedef ${3:void} result_type;
+${2:S const&} ${4:${2:$(c++-var-from-type text)}};
+$1($2 $4) : $4($4) {}
 template <class X>
 result_type operator()(X const& x) const {
-return ${4:result_type()}$0;
+${5:return result_type();}$0
 }
 };

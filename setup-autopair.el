@@ -36,6 +36,7 @@
               (push '(?< . ?>)
                     (getf autopair-extra-pairs :code))))
 
+(defun autopair-paren () (push '(?\( . ?\)) (getf autopair-extra-pairs :code)))
 
 (add-hook 'latex-mode-hook
           #'(lambda ()

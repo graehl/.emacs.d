@@ -102,10 +102,17 @@
     (widen)
     (indent-region (point-min) (point-max) nil)))
 
+(defun gr-buffer-contains-substring (string)
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (search-forward string nil t))))
+
 (defun gr-untabify-buffer ()
   (interactive)
   (when (not (gr-cleanup-skip-untabify-p))
-    (untabify (point-min) (point-max))))
+    (when (gr-buffer-contains-substring "\t")
+      (untabify (point-min) (point-max)))))
 
 (defun gr-compress-whitespace-line-impl (&optional over)
   "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"

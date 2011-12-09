@@ -15,14 +15,19 @@
 ;;(setq default-underscore-type-suffix "t")
 (defun upper-underscore-case-wordlist (s)
   "Convert words list to words_list_[default-underscore-type-suffix"
-  (underscore-case-wordlist (concat s default-underscore-type-suffix)))
-(defun upper-underscore-case-wordlist (s)
+  (underscore-case-wordlist (append s (list default-underscore-type-suffix))))
+(defun lower-underscore-case-wordlist (s)
   "Convert words list to words_list Under_scoRe string S to under_score"
   (underscore-case-wordlist s))
 (defun with-ctoken-words (s f)
   (save-match-data)
   (funcall f (split-string s "[_ ]")))
-
+(defun rest-of-string (s)
+  (if (equal "" s) "" (substring s 1)))
+(defun first-of-string (s)
+  (if (equal "" s) "" (substring s 0 1)))
+(defun uncapitalize (s)
+  (concat (downcase (first-of-string s)) (rest-of-string s)))
 
 (defun upper-camel-case (s)
   "Convert under_score string S to CamelCase string."
@@ -30,10 +35,11 @@
 (defun lower-camel-case (s)
   "Convert under_score string S to CamelCase string."
   (with-ctoken-words s 'lower-camel-case-wordlist))
-(defun upper-underscore-case (s))
-(with-ctoken-words s 'upper-underscore-case-wordlist)
+(defun upper-underscore-case (s)
+  (with-ctoken-words s 'upper-underscore-case-wordlist))
 (defun lower-underscore-case (s)
   (with-ctoken-words s 'lower-underscore-case-wordlist))
+(defalias 'lower-underscore-case 'underscore-case)
 (defun c-strip-leading-ns (s) (interactive "s")
   (replace-regexp-in-string "\\([^:<]+\\)[:]+" "" s))
 (defun c-strip-all-ns (s) (interactive "s")
@@ -58,8 +64,24 @@
 (defun lc-typedef-name (s) (interactive "s")
   (concat (downcase (default-typedef-base-name s)) "_type"))
 
+(defun c++-strip-ref (s)
+  (replace-regexp-in-string " *const *& *$" "" s))
+(defun c++-var-from-type-noref (s &optional suffix suffix2)
+  (if (eq nil suffix) (setq suffix "_type"))
+  (if (eq nil suffix2) (setq suffix2 "_t"))
+  (let ((ns (no-suffix-type2 s)))
+    (if (equal s ns)
+        (let ((lc (uncapitalize s)))
+          (if (equal s lc) (downcase (first-of-string s))
+            lc)))))
+(defun c++-var-from-type (s)
+  (c++-var-from-type-noref (c++-strip-ref s)))
+
 (defalias 'default-typedef-name 'lc-typedef-name)
 (defalias 'default-template-arg-name 'template-arg-name-no-type)
+(defalias 'default-c-var-case 'lower-underscore-case)
+(defalias 'default-c-type-case 'upper-underscore-case)
+
 (defconst graehl-style
   '(
                                         ; (c-offsets-alist . (

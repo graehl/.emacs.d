@@ -2,11 +2,10 @@
 # name: template-struct-uc
 # key: tsu
 # --
-template <class ${3:${2:$(default-template-arg-name text)}}>
+template <class $2>}>
 struct $1 {
-typedef $3 ${2:Arc};
-typedef $1 self_type;
-$1() {}
+$2 ${3:&}
+explicit $1($2) {}
 //$1($1 const& o) {}
 $0
 };

@@ -133,3 +133,9 @@
 [submodule "site-lisp/python-mode"]
 	path = site-lisp/python-mode
 	url = https://github.com/emacsmirror/python-mode.git
+[submodule "site-lisp/compile-"]
+	path = site-lisp/compile-
+	url = https://github.com/emacsmirror/compile-.git
+[submodule "site-lisp/compile-plus"]
+	path = site-lisp/compile-plus
+	url = https://github.com/emacsmirror/compile-plus.git

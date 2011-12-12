@@ -1,6 +1,8 @@
-(require 'cmake-mode)
+(require 'compile-)
 (require 'compile)
+(require 'compile+)
 (require 'compile-defuns)
+(require 'cmake-mode)
 
 (defun my-compilation-mode-hook ()
   (setq truncate-lines nil)
@@ -31,3 +33,5 @@ so we can watch errors as they come up"
   (my-end-of-current-compilation-buffer))
 
 (provide 'setup-compilation-mode)
+;;(setq compilation-skip-threshold 2)
+;;(setq next-error-recenter (quote (4)))

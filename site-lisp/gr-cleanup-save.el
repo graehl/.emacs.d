@@ -12,11 +12,12 @@
 (defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode)
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-max-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
+(defcustom gr-cleanup-never-indent t "never automatically indent buffer when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
 
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
 
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
-(defun gr-cleanup-skip-indent-p () (member major-mode make-modes))
+(defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode make-modes)))
 (defun gr-cleanup-skip-untabify-p () (gr-cleanup-skip-indent-p))
 (defun gr-cleanup-skip-compress-whitespace-p () (member major-mode gr-cleanup-skip-compress-whitespace-modes))
 

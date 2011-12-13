@@ -1,3 +1,4 @@
+(provide 'c-defuns)
 
 (defun my-c-comma-unindent (langelem)
   "Unindent for leading commas"

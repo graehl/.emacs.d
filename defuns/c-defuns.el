@@ -1,5 +1,46 @@
+
+(defun my-c-comma-unindent (langelem)
+  "Unindent for leading commas"
+  (if (my-c-leading-comma-p) '/))
+
+(defun my-c-comma-indent (langelem)
+  "Indent for leading commas"
+  (if (my-c-leading-comma-p) '*))
+
+(defun my-cleanup-pp-output ()
+  "Clean up preprocessor output so that it's at least semi-readable"
+  (interactive)
+
+  (let ((selection (my-selection))
+        (start (make-marker))
+        (end (make-marker))
+        )
+    (set-marker start (car selection))
+    (set-marker end (cdr selection))
+
+    (c++-mode)
+    ;; CR before function declaration id
+    (subst-re "\\([a-zA-Z0-9_]\\) +\\([a-zA-Z_][a-zA-Z0-9_]*(\\)" "\\1\n\\2" start end)
+    (subst-re "\\(\\<return\\>\\|\\<new\\>\\)\n" "\\1 " start end)
+
+    ;; CR after template parameter list
+    (subst-re "\\<template\\> *<\\([^<>]+\\)>" "template <\\1>\n" start end)
+
+    (subst-re " *\\(\\s.\\|[()]\\) *" "\\1" start end)
+    (subst-re " +" " " start end)
+
+    (subst-re "\\([{}];*\\)" "\\1\n" start end)  ;
+    (subst-re "\\([^ ].*\\)\\([{}]\\)" "\\1\n\\2" start end)
+
+    (subst-re ";\\(.\\)" ";\n\\1" start end)
+
+    (subst-re "\\([(]+\\)\\([(]\\)" "\\1\n\\2" start end)
+    (subst-re ">\\(\\<struct\\>\\|\\<class\\>\\)" ">\n\\1" start end)
+    (indent-region start end nil)
+    ))
+
 (defun my-empty-braces ()
-  "insert {  }"
+  "insert { }"
   (interactive "*")
   (insert "{}")
   (backward-char)
@@ -253,7 +294,7 @@ is not supplied, the boost copyright is used by default"
 from the namespace declaration iff the open brace sits on a line by itself."
   (save-excursion
     (if (progn (goto-char (cdr langelem))
-                                        ;               (setq column (current-column))
+                                        ; (setq column (current-column))
                (end-of-line)
                (while (and (search-backward "{" nil t)
                            (assoc 'incomment (c-guess-basic-syntax))))
@@ -287,6 +328,12 @@ Examples include:
           (looking-at "[A-Za-z_\\[(.]\\|::\\|->"))))
 
     (c-backward-token-2 1 t)))
+
+(defun my-c-leading-comma-p ()
+  (save-excursion
+    (beginning-of-line)
+    (c-forward-token-2 0 nil (c-point 'eol))
+    (eq (char-after) ?,)))
 
 (defun my-lineup-first-template-args (langelem)
   "Align lines beginning with the first template argument.
@@ -346,7 +393,7 @@ Works with: template-args-cont."
   space."
   (interactive "*P") ; Require a writable buffer/take a prefix arg in raw form
 
-  ;; Do the regular action.  Perhaps we should be using defadvice here?
+  ;; Do the regular action. Perhaps we should be using defadvice here?
   (c-electric-semi&comma arg)
 
   ;; Insert the space if this comma is the first token on the line, or

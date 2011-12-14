@@ -187,7 +187,6 @@
 (global-set-key (kbd "<f6>") 'iswitchb-buffer) ; 'ido-switch-buffer
 (global-set-key (kbd "<f7>") 'save-buffer)
 (global-set-key (kbd "<f9>") 'ack)
-(require 'setup-compilation-mode)
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)

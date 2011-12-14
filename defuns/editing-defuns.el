@@ -346,3 +346,27 @@ region-end is used. Adds the duplicated text to the kill ring."
   (= (point) (point-at-eol)))
 
 (defvar compress-whitespace-over 1)
+
+(defun point-at-indentation () (interactive) (save-excursion (backward-to-indentation 0) (point)))
+(defun line-past-indentation () (interactive) (save-excursion (backward-to-indentation 0) (buffer-substring (point) (point-at-eol))))
+(line-past-indentation)
+;;TODO: stack of completion attempts, cycle through when can't extend any more
+;;TODO: case-fold-search
+
+(defun gr-match-string (&optional group)
+  (when (eq group nil) (setq group 0))
+  (buffer-substring (match-beginning group) (match-end group)))
+
+(defun gr-append-line-completion (curline) (interactive "s")
+  (let ((creg (concat "^[[:blank:]]*" (regexp-quote curline) "\\(.+\\)$")))
+    (if (re-search-forward creg (point-max) t)
+       (progn (end-of-line)
+              (insert (gr-match-string 1)))
+      nil)))
+
+(defun gr-line-expand ()
+  "like dabbrev-expand, but expands shortest matching whole line (ignoring leading indent) that's at least 1 char longer than input so far"
+  (interactive)
+  (save-excursion
+    (let* ((curline (line-past-indentation)) (creg (concat "^[[:blank:]]*" (regexp-quote curline) "\\(.+\\)$")))
+         creg)))

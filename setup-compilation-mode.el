@@ -26,7 +26,9 @@ so we can watch errors as they come up"
         (pop-to-buffer "*compilation*")
         (recompile)
         (pop-to-buffer "*compilation*")
-        (bufend))
+        (bufend)
+        (other-window 1)
+        )
     ;; else
     (call-interactively 'my-compile))
   ;; force scrolling despite save-excursion

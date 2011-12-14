@@ -21,3 +21,5 @@ force enable autopair () for c++ in code; force-disable all in strings and comme
 does recompile keep default-dir even if you're in another dir's buffer?
 
 make ctrl-g exit isearch when minibuf not selected
+
+ctrl-o disabled in compilation and grep results - why?

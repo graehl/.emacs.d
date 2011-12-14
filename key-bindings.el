@@ -283,3 +283,5 @@
 (require 'setup-ido)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files-compl)
 (global-set-key (kbd "C-x C-r") 'recentf-ido-find-file)
+(require 'setup-compilation-mode)
+(define-key compilation-minor-mode-map (kbd "C-o") 'other-window)

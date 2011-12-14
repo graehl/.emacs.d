@@ -179,7 +179,6 @@
 ;; Easy-mode rgrep
 (global-set-key (kbd "M-s s") 'rgrep)
 
-(global-set-key (kbd "M-/") 'dabbrev-expand)
 (global-set-key (kbd "M-k") 'kill-whole-line)
 (global-set-key (kbd "C-k") 'kill-line)
 (global-set-key (kbd "C-M-k") 'kill-sentence)
@@ -284,3 +283,8 @@
 (global-set-key (kbd "C-x C-r") 'recentf-ido-find-file)
 (require 'setup-compilation-mode)
 (define-key compilation-minor-mode-map (kbd "C-o") 'other-window)
+(global-set-key (kbd "M-/") 'dabbrev-expand)
+(require 'editing-defuns)
+(global-set-key (kbd "S-<return>") 'gr-line-expand)
+(global-set-key (kbd "C-;") 'gr-line-expand)
+(global-set-key (kbd "C-'") 'gr-cleanup-always)

@@ -451,6 +451,6 @@ starts."
 (require 'editing-defuns)
 (defun gr-c-class-name (&optional else) (interactive)
   (save-excursion
-    (if (re-search-backward "^[[:blank:]]*\\(struct\\|class\\) +\\([^:[:blank:]]+\\)")
+    (if (re-search-backward "^[[:blank:]]*\\(struct\\|class\\) +\\([^\n[:blank:]]+\\)")
         (gr-match-string 2)
       else)))

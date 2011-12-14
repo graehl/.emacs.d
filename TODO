@@ -23,3 +23,5 @@ does recompile keep default-dir even if you're in another dir's buffer?
 make ctrl-g exit isearch when minibuf not selected
 
 ctrl-o disabled in compilation and grep results - why?
+
+isearch+ seems to have annoying get-stuck-ignore ctrl-g outside of minibuffer behavior, where when i switch to minibuffer to ctrl-g, it restores-excursion to another buffer. did regular isearch do this?

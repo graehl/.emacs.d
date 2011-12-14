@@ -1,3 +1,4 @@
+(provide 'editing-defuns)
 ;; Basic text editing defuns
 (defun forward-skip-space (&optional lim)
   (interactive)

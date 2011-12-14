@@ -13,9 +13,11 @@
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-max-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
 (defcustom gr-cleanup-never-indent t "never automatically indent buffer when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
-(defcustom gr-cleanup-never-compress t "never compress extra spaces when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
-(defcustom gr-cleanup-never-untabify t "never untabify when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
-
+(defcustom gr-cleanup-never-compress t "never compress extra spaces when saving (this is often VERY slow)" :type 'boolean :group 'gr-cleanup-save)
+(defcustom gr-cleanup-never-untabify nil "never untabify when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
+(setq gr-cleanup-never-untabify nil)
+(defcustom gr-cleanup-buffer-excessive-newlines 3 "if not nil or 0, replace excessive newlines with this many" :type 'integer :group 'gr-cleanup-save)
+(defcustom gr-cleanup-compress-whitespace-fast t "use simple regex rather than syntax tables - may affect comments/strings" :type 'boolean :group 'gr-cleanup-save)
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
 
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
@@ -95,16 +97,22 @@
 (defun excessive-newlines-compress (&optional nrepl)
   "replace excessive-newlines-regexp with nrepl newlines in the whole buffer"
   (interactive "p")
+  (message "compress blank lines...")
   (when (eq nrepl nil) (setq nrepl excessive-newlines-replacement-n))
   (while (re-search-forward excessive-newlines-regexp (point-max) t)
     (delete-region (match-beginning 0) (match-end 0))
     (dotimes (i nrepl) (insert excessive-newlines-replacement))))
 
-(defun gr-indent-buffer () "indent whole buffer!"
+(defun gr-indent-buffer-maybe () "indent whole buffer!"
   (interactive)
   (when (not (gr-cleanup-skip-indent-p))
-    (widen)
-    (indent-region (point-min) (point-max) nil)))
+    (gr-indent-buffer)))
+
+(defun gr-indent-buffer () "indent whole buffer!"
+  (interactive)
+  (message "indent...")
+  (widen)
+  (indent-region (point-min) (point-max) nil))
 
 (defun gr-buffer-contains-substring (string)
   (save-excursion
@@ -115,10 +123,20 @@
 (defun gr-untabify-buffer ()
   (interactive)
   (when (not (gr-cleanup-skip-untabify-p))
+    (message "untabify...")
     (when (gr-buffer-contains-substring "\t")
       (untabify (point-min) (point-max)))))
 
-(defun gr-compress-whitespace-line-impl (&optional over)
+;; this is fast but will mess with comments and string constants (may be surprising)
+(defun gr-compress-whitespace-fast-impl (&optional over)
+  "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"
+  (interactive)
+  (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
+  (let* ((maxsp (make-string over ? )) (repl (concat "\\b" maxsp " +")))
+    (replace-regexp repl maxsp)))
+
+;; this is very slow but should skip comments and strings.
+(defun gr-compress-whitespace-impl (&optional over)
   "starting from line-initial non-space char (after hanging indent), replace more than [over] spaces in the line or region. operates only on ascii space. if line is all spaces, no change. note: this doesn't skip string constants. [limit] is eol by DEFAULT"
   (interactive)
   (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
@@ -144,9 +162,11 @@
   (interactive)
   (when (eq nil over) (setq over gr-cleanup-save-max-spaces))
   (goto-char (point-min))
-  (loop do (gr-compress-whitespace-line-impl over)
-        while (= 0 (forward-line))
-        ))
+  (if gr-cleanup-compress-whitespace-fast
+      (gr-compress-whitespace-fast-impl)
+    (loop do (gr-compress-whitespace-line-impl over)
+          while (= 0 (forward-line))
+          )))
 
 (defun gr-narrow-dwim-buffer ()
   (interactive)
@@ -171,6 +191,7 @@
 (defun gr-compress-whitespace-buffer (&optional over)
   "region if active, else buffer"
   (interactive)
+  (message "compressing spaces...")
   (save-excursion
     (save-restriction
       (gr-narrow-dwim-buffer)
@@ -186,14 +207,23 @@
             (setq retval (cons 'exception (list ex)))))
          retval)))
 
-(defvar gr-cleanup-buffer-excessive-newlines 3)
+
+(defun gr-cleanup-always ()
+  (interactive)
+  (save-excursion
+    (gr-untabify-buffer)
+    (gr-indent-buffer)
+    (gr-compress-whitespace-buffer)
+    (excessive-newlines-compress)
+    (message "gr-cleanup done.")))
+
 (defun gr-cleanup-buffer-impl ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
   (gr-safe-wrap
-   (gr-indent-buffer)
+   (gr-indent-buffer-maybe)
    (gr-untabify-buffer)
-   (unless (eq nil gr-cleanup-buffer-excessive-newlines)
+   (unless (or (= 0 gr-cleanup-buffer-excessive-newlines) (eq nil gr-cleanup-buffer-excessive-newlines))
      (excessive-newlines-compress gr-cleanup-buffer-excessive-newlines))
    (delete-trailing-whitespace)
    (delete-trailing-newlines)

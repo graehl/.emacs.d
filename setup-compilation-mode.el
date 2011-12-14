@@ -1,6 +1,7 @@
+;; compile- + - one of these is killing my ctrl-o binding in global map.
 (require 'compile-)
 (require 'compile)
-(require 'compile+)
+;;(require 'compile+)
 (require 'compile-defuns)
 (require 'cmake-mode)
 

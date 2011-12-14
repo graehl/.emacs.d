@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: self-print
+# key: sp
+# --
+template <class O>
+void print(O &o) const {
+$0
+}
+template <class O>
+friend O& operator <<(O &o, `(gr-c-class-name "self_type")` const& self) { self.print(o); return o; }

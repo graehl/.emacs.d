@@ -133,3 +133,4 @@
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
 (delete-selection-mode nil)
 (require 'setup-change-log)
+(require 're-builder+)

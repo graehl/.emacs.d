@@ -355,18 +355,25 @@ region-end is used. Adds the duplicated text to the kill ring."
 
 (defun gr-match-string (&optional group)
   (when (eq group nil) (setq group 0))
-  (buffer-substring (match-beginning group) (match-end group)))
+  (let ((r (buffer-substring (match-beginning group) (match-end group))))
+    ;;(message (format "gr-match-string=%s" r))
+    r
+    ))
 
 (defun gr-append-line-completion (curline) (interactive "s")
-  (let ((creg (concat "^[[:blank:]]*" (regexp-quote curline) "\\(.+\\)$")))
-    (if (re-search-forward creg (point-max) t)
-       (progn (end-of-line)
-              (insert (gr-match-string 1)))
-      nil)))
+  (save-excursion
+    (widen)
+    (let ((creg (concat "^[[:blank:]]*" (regexp-quote curline) "\\(.+\\)$")) (eol (point-at-eol)))
+      ;;      (goto-char (point-min))
+      (message (format "gr-append-line-completion searching: %s" creg))
+      (if (re-search-backward creg nil t)
+          (progn (message "found line extension backward") (goto-char eol) (insert (gr-match-string 1)))
+        (if (re-search-forward creg nil t)
+            (progn (message "found line extension forward") (goto-char eol) (insert (gr-match-string 1)))
+          nil)))))
 
 (defun gr-line-expand ()
   "like dabbrev-expand, but expands shortest matching whole line (ignoring leading indent) that's at least 1 char longer than input so far"
   (interactive)
-  (save-excursion
-    (let* ((curline (line-past-indentation)) (creg (concat "^[[:blank:]]*" (regexp-quote curline) "\\(.+\\)$")))
-         creg)))
+  ;;    (message (line-past-indentation))
+  (gr-append-line-completion (line-past-indentation)))

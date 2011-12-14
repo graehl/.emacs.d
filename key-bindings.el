@@ -261,7 +261,7 @@
 (define-key occur-mode-map "C-o" 'other-window)
 ;;(define-key shell-mode-map "\C-r" 'isearch-backward)
 ;;(define-key lisp-mode-map (kbd "<return>") 'newline-and-indent)
-(global-set-key (kbd "C-c \\") 'gr-indent-buffer)
+(global-set-key (kbd "C-c \\") 'indent-buffer)
 (global-set-key (kbd "M-<kp-8>") 'up-move-char)
 (global-set-key (kbd "M-<kp-2>") 'down-move-char)
 (global-set-key (kbd "M-<kp-4>") 'backward-move-char)

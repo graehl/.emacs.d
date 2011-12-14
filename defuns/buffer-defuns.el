@@ -11,6 +11,11 @@
        (widen) (goto-char (point-min))
        (save-match-data (progn ,@body)))))
 
+(defun indent-buffer () (interactive)
+  (with-whole-buffer
+   (widen)
+   (indent-region (point-min) (point-max) nil)))
+
 (defun create-scratch-buffer nil
   "create a new scratch buffer to work in. (could be *scratch* - *scratchX*)"
   (interactive)

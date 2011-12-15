@@ -7,8 +7,8 @@ void print(O &o) const {
 $0
 }
 template <class C,class T>
-friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, `(gr-c-class-name "self_type")` const& self)
+friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, ${1:`(gr-c-class-name "self_type")`} const& self)
 { self.print(o); return o; }
 template <class C,class T>
-friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, `(gr-c-class-name "self_type")` const* selfp)
-{ o<<"@"<<(void*)self<<": "<<selfp->print(o); return o; }
+friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, $1 const* selfp)
+{ o<<"$1@0x"<<(void*)self<<": ";selfp->print(o); return o; }

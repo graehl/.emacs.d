@@ -31,10 +31,12 @@
               (push ?{
                     (getf autopair-dont-pair :comment))))
 
+(when nil
 (add-hook 'c++-mode-hook
           #'(lambda ()
               (push '(?< . ?>)
                     (getf autopair-extra-pairs :code))))
+)
 
 (defun autopair-paren () (push '(?\( . ?\)) (getf autopair-extra-pairs :code)))
 

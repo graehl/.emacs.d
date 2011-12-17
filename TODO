@@ -27,3 +27,5 @@ ctrl-o disabled in compilation and grep results - why?
 isearch+ seems to have annoying get-stuck-ignore ctrl-g outside of minibuffer behavior, where when i switch to minibuffer to ctrl-g, it restores-excursion to another buffer. did regular isearch do this? maybe it's my user of left-right arrow.
 
 typing a balanced paren expr inside parens in C++ - autopair fail
+
+autopair fallback c-electric-paren = nasty

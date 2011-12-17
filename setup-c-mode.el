@@ -178,6 +178,10 @@
   (define-key c-mode-base-map (kbd "C-j") 'dabbrev-expand)
   (c-set-offset 'c 'c-lineup-C-comments)
 
+; because autopair -> electric paren was bothering me - not sure if this fixes
+  (define-key c-mode-base-map (kbd "(") 'self-insert-command)
+  (define-key c-mode-base-map (kbd ")") 'self-insert-command)
+
   ;; Set the comments to start where they ought to.
   (setq-default c-comment-continuation-stars "* ")
   )

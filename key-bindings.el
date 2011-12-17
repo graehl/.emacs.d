@@ -288,3 +288,4 @@
 (global-set-key (kbd "S-<return>") 'gr-line-expand)
 (global-set-key (kbd "C-;") 'gr-line-expand)
 (global-set-key (kbd "C-'") 'gr-cleanup-always)
+;;isearch-mode-map left/right abort+move

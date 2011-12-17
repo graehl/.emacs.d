@@ -36,6 +36,8 @@
  '(next-error-highlight t)
  '(next-error-highlight-no-select (quote fringe-arrow))
  '(next-error-recenter (quote (4)))
+ '(recentf-max-menu-items 30)
+ '(recentf-max-saved-items 100)
  '(safe-local-variable-values (quote ((encoding . utf-8))))
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
  '(yas/also-auto-indent-first-line t)

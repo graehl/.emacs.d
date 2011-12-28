@@ -29,3 +29,7 @@ isearch+ seems to have annoying get-stuck-ignore ctrl-g outside of minibuffer be
 typing a balanced paren expr inside parens in C++ - autopair fail
 
 autopair fallback c-electric-paren = nasty
+
+next-error skip included-from! or compilation regexp skip it
+
+isearch - all arrow keys should end isearch! very annoying

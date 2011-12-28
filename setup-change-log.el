@@ -10,3 +10,4 @@
 ;  (make-local-hook 'before-save-hook)
   (install-hook 'before-save-hook 'cleanup-change-log nil t))
 (install-hook 'change-log-mode-hook 'setup-change-log-hook)
+(setq my-change-log-file "~/r/ChangeLog")

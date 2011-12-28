@@ -305,7 +305,7 @@ region-end is used. Adds the duplicated text to the kill ring."
   (add-change-log-entry nil "TODO" t t)
   )
 
-(defvar my-change-log-file "~/x/ChangeLog")
+(defvar my-change-log-file "~/r/ChangeLog")
 (defun my-change-log-entry ()
   "allow repeated entries, custom file"
   (interactive)

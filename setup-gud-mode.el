@@ -18,7 +18,7 @@
                         (comint-next-input 1)
                       (forward-line 1))))
   (local-set-key [f2] 'gud-cont)
-  (local-set-key [f11] 'gud-step)
+  (local-set-key [f12] 'gud-step)
   (local-set-key [f10] 'gud-next)
   (local-set-key [(shift f11)] 'gud-finish)
   (local-set-key [(control f10)] 'my-gud-run-to-cursor)
@@ -27,4 +27,5 @@
 
 (add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
+(setq )
 (provide 'setup-gud-mode)

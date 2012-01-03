@@ -157,7 +157,7 @@ is not supplied, the boost copyright is used by default"
   (interactive)
   (let* ((guard (my-include-guard))
          (source-prep (my-prepare-source))
-         (path-elts (lw-filter-path-elts (car source-prep)))
+         (path-elts (my-filter-path-elts (car source-prep)))
          (copyright (cdr source-prep)))
 
     (bufstart)
@@ -166,7 +166,7 @@ is not supplied, the boost copyright is used by default"
       (my-copyright))
 
     (insert "#ifndef " guard "\n"
-            "# define " guard "\n")
+            "#define " guard "\n")
 
     (let ((final nil) ;; final position
           (nsfini (if path-elts "\n" "")))

@@ -139,3 +139,6 @@
 [submodule "site-lisp/compile-plus"]
 	path = site-lisp/compile-plus
 	url = https://github.com/emacsmirror/compile-plus.git
+[submodule "site-lisp/pandoc-mode"]
+	path = site-lisp/pandoc-mode
+	url = git://github.com/joostkremers/pandoc-mode.git

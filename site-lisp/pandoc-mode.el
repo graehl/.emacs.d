@@ -1,0 +1,1 @@
+pandoc-mode/src/pandoc-mode.el

@@ -378,3 +378,13 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive)
   ;;    (message (line-past-indentation))
   (gr-append-line-completion (line-past-indentation)))
+
+(defun replace-string-case ()
+  (interactive)
+  (let ((case-fold-search nil))
+    (call-interactively 'replace-string)))
+
+(defun query-replace-case ()
+  (interactive)
+  (let ((case-fold-search nil))
+    (call-interactively 'query-replace)))

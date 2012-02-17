@@ -32,10 +32,13 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)"))
       functions from which to deduce C++ namespace names."
   ':type 'alist )
 
-(defun my-filter-path-elts (pe) pe)
-
-  ;; (if (equal (car pe) "racerx")
-  ;;     (cons "LW" (remove "include" (cdr pe)))
-  ;;   pe))
+(defun my-filter-path-elts
+(if (equal (car pe) "x")
+    (my-filter-path-elts (cdr pe))
+  (if (or (equal (car pe) "r") (equal (car pe) "racerx"))
+      (my-filter-path-elts (cons "LW" (my-filter-path-elts (cdr pe))))
+    (if (equal (car pe) "LWUtil")
+        nil
+      pe))))
 
 (provide 'buffer-init)

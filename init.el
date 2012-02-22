@@ -134,3 +134,5 @@
 (delete-selection-mode nil)
 (require 'setup-change-log)
 (require 're-builder+)
+(require 'pandoc-mode)
+(require 'setup-spell)

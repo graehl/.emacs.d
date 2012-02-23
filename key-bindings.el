@@ -292,4 +292,5 @@
 (global-set-key (kbd "C-M-r") 'query-replace)
 ;;isearch-mode-map left/right abort+move
 (global-set-key (kbd "C-M-g") 'keyboard-quit)
+(require 'minibuffer-defuns)
 (global-set-key (kbd "C-g") 'keyboard-really-quit)

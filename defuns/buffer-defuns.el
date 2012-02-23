@@ -5,11 +5,14 @@
   (interactive)
   (if (> (minibuffer-depth) 0) (exit-minibuffer)))
 
+(defun quit-minibuffer ()
+  (interactive)
+  (dotimes (i (minibuffer-depth)) (exit-minibuffer)))
+
 (defun keyboard-really-quit ()
   (interactive)
-  (leave-minibuffer)
-  (keyboard-quit)
-  )
+  (quit-minibuffer)
+  (keyboard-quit))
 
 (require 'imenu)
 

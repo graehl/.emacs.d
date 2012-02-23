@@ -1,6 +1,16 @@
 ;; Buffer-related defuns
 (provide 'buffer-defuns)
 
+(defun leave-minibuffer ()
+  (interactive)
+  (if (> (minibuffer-depth) 0) (exit-minibuffer)))
+
+(defun keyboard-really-quit ()
+  (interactive)
+  (leave-minibuffer)
+  (keyboard-quit)
+  )
+
 (require 'imenu)
 
 (setq max-specpdl-size 5000) ; reduce protection against bugs

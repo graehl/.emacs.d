@@ -12,7 +12,7 @@
 (defun gr-python ()
 
   (interactive)
-;;  (switch-to-buffer-other-window (apply 'make-comint py-which-bufname py-which-shell nil py-which-args))
+  ;;  (switch-to-buffer-other-window (apply 'make-comint py-which-bufname py-which-shell nil py-which-args))
   (make-local-variable 'comint-prompt-regexp)
   (make-local-variable 'font-lock-defaults)
   (setq comint-prompt-regexp "^python% \\|^> \\|^(pdb) "
@@ -24,9 +24,14 @@
   (local-set-key "\C-c\C-a" 'beginning-of-line)
   (python-mode)
   (mapcar (lambda (c) (local-set-key (car c) (cdr c))) py-keys)
-;;(local-set-key (kbd "S-<f10>") 'py-pychecker-run))
-;;  (define-py-keys)
-  (font-lock-mode))
+  ;;(local-set-key (kbd "S-<f10>") 'py-pychecker-run))
+  ;;  (define-py-keys)
+  (font-lock-mode)
+  (setq indent-tabs-mode nil)
+  (setq python-indent 2)
+  (setq python-indent-offset 2)
+  (setq tab-width 2)
+  )
 
 
 (defun my-python-send-region (beg end)

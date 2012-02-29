@@ -1,6 +1,6 @@
 ;; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
 (require 'solarized-dark-theme)
-
+(setq default-tab-width 2)
 
 ;; emacs-24 enable-theme does not work;
 ;;(add-to-list 'custom-theme-load-path solarized-path)

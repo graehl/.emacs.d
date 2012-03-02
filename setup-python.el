@@ -1,5 +1,7 @@
+(autoload 'python-mode "python-mode" "Python Mode." t)
 (require 'python-mode)
-
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+(add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (setq py-keys (list
                (cons (kbd "S-<f10>") 'py-pychecker-run)
                (cons (kbd "<M-left>") 'py-shift-left)
@@ -51,5 +53,13 @@
                     (copy-marker (region-end)))
                    (t (line-end-position)))))
     (python-send-region beg end)))
+
+(require 'autopair)
+
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (setq autopair-handle-action-fns
+                    (list #'autopair-default-handle-action
+                          #'autopair-python-triple-quote-action))))
 
 (provide 'setup-python)

@@ -13,6 +13,7 @@
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
 (add-to-list 'compilation-error-regexp-alist '("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2))
+(add-to-list 'compilation-error-regexp-alist '("^ + [0-9]+>\\([^(]+\\)(\\([0-9]+\\)): [^ ]" 1 2))
 (setq debug-on-error t)
 
 (defun my-recompile ()

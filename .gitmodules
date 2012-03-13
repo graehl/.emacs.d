@@ -73,11 +73,6 @@
 	ignore = untracked
 	path = site-lisp/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
-[submodule "site-lisp/fic-mode"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/fic-mode
-	url = https://github.com/emacsmirror/fic-mode.git
 [submodule "site-lisp/grep-buffers"]
 	ignore = untracked
 	ignore = untracked

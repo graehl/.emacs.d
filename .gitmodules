@@ -8,11 +8,6 @@
 	ignore = untracked
 	path = site-lisp/recall-position
 	url = http://github.com/cjohansen/recall-position.el.git
-[submodule "site-lisp/buster-mode"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/buster-mode
-	url = git://gitorious.org/buster/buster-mode.git
 [submodule "site-lisp/evil"]
 	ignore = untracked
 	ignore = untracked
@@ -43,11 +38,6 @@
 	ignore = untracked
 	path = site-lisp/ace-jump-mode
 	url = https://github.com/winterTTr/ace-jump-mode.git
-[submodule "site-lisp/buster-snippets"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/buster-snippets
-	url = https://github.com/magnars/buster-snippets.el.git
 [submodule "site-lisp/yasnippet"]
 	ignore = untracked
 	ignore = untracked

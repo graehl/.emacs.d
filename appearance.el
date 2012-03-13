@@ -93,4 +93,5 @@
 (when (require 'rainbow-delimiters nil 'noerror)
   (install-hook 'coding-hooks 'rainbow-delimiters-mode))
 
-(setq split-height-threshold 999)
+(setq split-height-threshold nil)
+(setq split-width-threshold nil)

@@ -1,144 +1,181 @@
 [submodule "site-lisp/yaml-mode"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
 [submodule "site-lisp/recall-position"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/recall-position
 	url = http://github.com/cjohansen/recall-position.el.git
 [submodule "site-lisp/buster-mode"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/buster-mode
 	url = git://gitorious.org/buster/buster-mode.git
 [submodule "site-lisp/evil"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/evil
 	url = git://gitorious.org/evil/evil.git
 [submodule "site-lisp/undo-tree"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
 [submodule "site-lisp/js2-mode"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/js2-mode
 	url = https://github.com/magnars/js2-mode.git
 [submodule "site-lisp/jade-mode"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/jade-mode
 	url = https://github.com/brianc/jade-mode.git
 [submodule "site-lisp/coffee-mode"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/coffee-mode
 	url = https://github.com/defunkt/coffee-mode.git
 [submodule "site-lisp/ace-jump-mode"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/ace-jump-mode
 	url = https://github.com/winterTTr/ace-jump-mode.git
 [submodule "site-lisp/buster-snippets"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/buster-snippets
 	url = https://github.com/magnars/buster-snippets.el.git
 [submodule "site-lisp/yasnippet"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/yasnippet
 	url = https://github.com/capitaomorte/yasnippet.git
 [submodule "site-lisp/expand-region"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/expand-region
 	url = https://github.com/magnars/expand-region.el.git
 [submodule "site-lisp/php-mode"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/php-mode
 	url = https://github.com/ejmr/php-mode.git
 [submodule "site-lisp/magit"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/magit
 	url = https://github.com/magit/magit.git
 [submodule "site-lisp/emacs-color-theme-solarized"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/emacs-color-theme-solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
 [submodule "site-lisp/fic-mode"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/fic-mode
 	url = https://github.com/emacsmirror/fic-mode.git
 [submodule "site-lisp/grep-buffers"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/grep-buffers
 	url = https://github.com/emacsmirror/grep-buffers.git
 [submodule "site-lisp/multi-term"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/multi-term
 	url = https://github.com/emacsmirror/multi-term.git
 [submodule "site-lisp/fit-frame"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/fit-frame
 	url = https://github.com/emacsmirror/fit-frame.git
 [submodule "site-lisp/misc-fns"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/misc-fns
 	url = https://github.com/emacsmirror/misc-fns.git
 [submodule "site-lisp/smex"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/smex
 	url = https://github.com/emacsmirror/smex.git
 [submodule "site-lisp/ack"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/ack
 	url = https://github.com/emacsmirror/ack.git
 [submodule "site-lisp/rainbow-delimiters"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/rainbow-delimiters
 	url = https://github.com/emacsmirror/rainbow-delimiters.git
 [submodule "site-lisp/cygwin-mount"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/cygwin-mount
 	url = https://github.com/emacsmirror/cygwin-mount.git
 [submodule "site-lisp/paredit"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/paredit
 	url = https://github.com/emacsmirror/paredit.git
 [submodule "site-lisp/hobo"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/hobo
 	url = https://github.com/emacsmirror/hobo.git
 [submodule "site-lisp/wrap-region"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/wrap-region
 	url = https://github.com/graehl/wrap-region.git
 [submodule "site-lisp/hl-line-plus"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/hl-line-plus
 	url = https://github.com/emacsmirror/hl-line-plus.git
 [submodule "site-lisp/mark-multiple"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/mark-multiple
 	url = https://github.com/graehl/mark-multiple.el.git
 [submodule "site-lisp/isearch-plus"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/isearch-plus
 	url = https://github.com/emacsmirror/isearch-plus.git
 [submodule "site-lisp/misc-cmds"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/misc-cmds
 	url = https://github.com/emacsmirror/misc-cmds.git
 [submodule "site-lisp/autopair-el"]
+	ignore = untracked
 	ignore = untracked
 	path = site-lisp/autopair-el
 	url = https://github.com/graehl/autopair-el.git
 [submodule "site-lisp/smooth-scroll-el"]
 	ignore = untracked
+	ignore = untracked
 	path = site-lisp/smooth-scroll-el
 	url = https://github.com/k-talo/smooth-scroll.el.git
 [submodule "site-lisp/python-mode"]
+	ignore = untracked
 	path = site-lisp/python-mode
 	url = https://github.com/emacsmirror/python-mode.git
 [submodule "site-lisp/compile-"]
+	ignore = untracked
 	path = site-lisp/compile-
 	url = https://github.com/emacsmirror/compile-.git
 [submodule "site-lisp/compile-plus"]
+	ignore = untracked
 	path = site-lisp/compile-plus
 	url = https://github.com/emacsmirror/compile-plus.git
 [submodule "site-lisp/pandoc-mode"]
+	ignore = untracked
 	path = site-lisp/pandoc-mode
 	url = git://github.com/joostkremers/pandoc-mode.git

@@ -177,20 +177,23 @@ is not supplied, the boost copyright is used by default"
             path-elts)
       (insert nsfini)
 
-      (setq final (point))
       (newline)
 
+      (setq final (point))
+      (newline)
       (bufend)
       ;; make sure the next stuff goes on its own line
       (if (not (equal (current-column) 0))
           (newline))
-
+      (newline)
       ;; closing namespace stuff
       (mapc (lambda (n) (insert "}")) path-elts)
+(when nil
       (reduce (lambda (prefix n)
                 (insert prefix n) "::")
               path-elts
               :initial-value " // namespace ")
+)
       (insert nsfini)
       (insert nsfini)
       (insert "#endif // " guard)

@@ -1,6 +1,14 @@
 (require 'isearch+)
 (setq isearchp-set-region-flag nil) ; i like t, but need it to restore state after i move or it's unusable
 (require 'misc-cmds)
+(defun isearchp-set-region ()
+  "Set region around search target, if `isearchp-set-region-flag'.
+Used only for Transient Mark mode."
+  (when (and isearchp-set-region-flag transient-mark-mode)
+    (push-mark isearch-other-end t 'activate)))
+
+(add-hook 'isearch-mode-end-hook 'isearchp-set-region)
+
 (provide 'setup-isearch)
 
 

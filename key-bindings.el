@@ -294,3 +294,4 @@
 (global-set-key (kbd "C-M-g") 'keyboard-quit)
 (require 'minibuffer-defuns)
 (global-set-key (kbd "C-g") 'keyboard-really-quit)
+(global-set-key (kbd "M-g") '(lambda () (interactive) (exchange-point-and-mark 1)))

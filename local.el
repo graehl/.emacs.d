@@ -5,3 +5,4 @@
 (when (string= system-name "LATTE")
   (setq inferior-octave-program "C:\\octave\\Octave3.6.1_gcc4.6.2\\bin\\octave.exe")
 )
+(setq transient-mark-mode t)

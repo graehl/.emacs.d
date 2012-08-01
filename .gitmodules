@@ -164,3 +164,9 @@
 	ignore = untracked
 	path = site-lisp/pandoc-mode
 	url = git://github.com/joostkremers/pandoc-mode.git
+[submodule "site-lisp/python"]
+	path = site-lisp/python
+	url = git://github.com/fgallina/python.el.git
+[submodule "site-lisp/git-commit-mode"]
+	path = site-lisp/git-commit-mode
+	url = git://github.com/rafl/git-commit-mode.git

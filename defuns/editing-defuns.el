@@ -1,4 +1,18 @@
 (provide 'editing-defuns)
+
+(defun to-configure ()
+  (interactive)
+      (save-excursion
+        (save-restriction
+          (narrow-to-region
+           (query-replace "OD" "Config")
+           (query-replace "add_options" "configure")
+           (query-replace "all_options" "c")
+           (query-replace ".defaulted(" "c(")
+           (query-replace "\")" "\");")
+           (query-replace ",\"" ")(\"")
+           )
+          )))
 ;; Basic text editing defuns
 (defun forward-skip-space (&optional lim)
   (interactive)

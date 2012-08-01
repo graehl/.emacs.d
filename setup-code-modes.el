@@ -20,5 +20,6 @@
 (set-coding-modes 'make make cmake makefile makefile-gmake jam fundamental conf conf-unix change-log)
 (set-coding-modes 'doc LaTeX html)
 
+(require 'python)
 (install-coding-hooks)
 (provide 'setup-code-modes)

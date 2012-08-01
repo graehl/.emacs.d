@@ -8,7 +8,7 @@ file name begins matches PATTERN."
   ':type 'alist
   )
 
-(setq my-initials "LW")
+(setq my-initials "JG")
 
 (defun boost-copyright ()
   "Return the appropriate boost copyright for the current user and year"

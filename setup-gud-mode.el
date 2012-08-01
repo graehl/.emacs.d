@@ -1,4 +1,6 @@
 (require 'gud)
+(require 'setup-shell-mode)
+
 (defun my-gud-run-to-cursor ()
   (gud-tbreak)
   (gud-cont))
@@ -23,9 +25,11 @@
   (local-set-key [f11] 'gud-finish)
   (local-set-key [(control f10)] 'my-gud-run-to-cursor)
   (local-set-key [f9] 'gud-break)
-  (local-set-key [(shift f9)] 'gud-remove))
+  (local-set-key [(shift f9)] 'gud-remove)
+(setq comint-scroll-to-bottom-on-output 'this)
+(my-comint)
+)
 
 (add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
-(setq )
 (provide 'setup-gud-mode)

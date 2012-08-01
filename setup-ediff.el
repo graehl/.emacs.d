@@ -22,5 +22,5 @@
 (add-hook 'ediff-before-setup-hook 'my-ediff-bsh)
 (add-hook 'ediff-after-setup-windows-hook 'my-ediff-aswh)
 (add-hook 'ediff-quit-hook 'my-ediff-qh)
-
+(require 'ediff)
 (provide 'setup-ediff)

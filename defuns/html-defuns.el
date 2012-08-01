@@ -30,7 +30,7 @@ This makes a region of source code appear correctly in an HTML file."
 
     (save-some-buffers (not compilation-ask-about-save) nil)
                                         ;compile-internal
-    (compilation-start cmd "No more errors")
+    (compilation-start cmd) ; No more errors
                                         ;  (sgml-validate cmd)
     ))
 

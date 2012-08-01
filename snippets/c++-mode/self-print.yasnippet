@@ -2,13 +2,10 @@
 # name: self-print
 # key: sp
 # --
-template <class O>
-void print(O &o) const {
+template <class Out>
+void print(Out &o) const {
 $0
 }
-template <class C,class T>
-friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, ${1:`(gr-c-class-name "self_type")`} const& self)
+template <class Ch,class Tr>
+friend std::basic_ostream<Ch,Tr>& operator<<(std::basic_ostream<Ch,Tr> &o, ${1:`(gr-c-class-name "self_type")`} const& self)
 { self.print(o); return o; }
-template <class C,class T>
-friend std::basic_ostream<C,T>& operator<<(std::basic_ostream<C,T> &o, $1 const* selfp)
-{ o<<"$1@0x"<<(void*)selfp<<": ";if (selfp) selfp->print(o); return o; }

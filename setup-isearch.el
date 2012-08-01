@@ -1,5 +1,4 @@
 (require 'isearch+)
-(setq isearchp-set-region-flag nil) ; i like t, but need it to restore state after i move or it's unusable
 (require 'misc-cmds)
 (defun isearchp-set-region ()
   "Set region around search target, if `isearchp-set-region-flag'.
@@ -104,3 +103,5 @@ Used only for Transient Mark mode."
 ;;  * You can, by default, select text with the mouse, then hit `C-s'
 ;;    etc. to search for it.  This is controlled by user option
 ;;    `isearchp-mouse-2-flag'.
+
+(setq isearchp-set-region-flag nil) ; i like t, but need it to restore state after i move or it's unusable

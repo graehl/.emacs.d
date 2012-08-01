@@ -14,10 +14,19 @@
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
+(defun cursor-color (color) "set color even for new frames"
+(interactive)
+(add-hook 'window-setup-hook '(lambda () (set-cursor-color color)))
+(add-hook 'after-make-frame-functions '(lambda (f) (with-selected-frame f (set-cursor-color color)))))
+;(cursor-color "red") ; doesn't work with hl-line or what?
+
 (require 'hl-line+)
 ;;(global-hl-line-mode t)
 (toggle-hl-line-when-idle)
-(set-face-background 'hl-line "#222266")
+(set-face-background 'hl-line "#111144")
+(set-face-background 'cursor "#111144") ; magic value same as hl-line makes grey? cool
+(set-face-background 'cursor "#777777")
+
 ;;(set-face-background 'region "#222222")
 
 ;; Highlight in yasnippet
@@ -95,3 +104,6 @@
 
 (setq split-height-threshold nil)
 (setq split-width-threshold nil)
+;(setq compilation-scroll-output nil)
+(setq comint-scroll-to-bottom-on-output 'this)
+(setq scroll-conservatively 15)

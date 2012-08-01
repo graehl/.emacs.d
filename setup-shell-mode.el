@@ -3,6 +3,15 @@
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+(defun my-comint ()
+  (interactive)
+  (setq comint-prompt-read-only t)
+  (setq comint-scroll-to-bottom-on-input 'this)
+  (setq comint-scroll-show-maximum-output t)
+  (setq comint-prompt-read-only t)
+  (setq comint-get-old-input (lambda () ""))
+  )
+
 (defun clear-shell ()
   (interactive)
   (let ((comint-buffer-maximum-size 0))
@@ -30,6 +39,12 @@
 
   (local-set-key [up] 'shell-mode-up)
   (local-set-key [down] 'shell-mode-down)
+  (my-comint)
+  (setq comint-scroll-to-bottom-on-input 'this)
+  (setq comint-scroll-to-bottom-on-output nil)
+  (setq comint-scroll-show-maximum-output t)
+  ;;(setq comint-prompt-read-only nil)
+  (setq comint-get-old-input (lambda () ""))
   )
 ;; note: can still use ctrl-n ctrl-p for regular movement
 
@@ -50,5 +65,39 @@
     (let ((buffer-read-only nil))
       (while (re-search-forward "/tmp/trunk.graehl/trunk/" nil t)
         (replace-match "~/t/")))))
+
+(defvar my-local-shells
+  '("*shell*" "*shell1*" "*shell2*" "*shell0*"))
+(defvar my-remote-shells
+  '())
+(defvar my-shells (append my-local-shells my-remote-shells))
+
+(defun make-my-shell-output-read-only (text)
+  "Add to comint-output-filter-functions to make stdout read only in my shells."
+  (if (member (buffer-name) my-shells)
+      (let ((inhibit-read-only t)
+            (output-end (process-mark (get-buffer-process (current-buffer)))))
+        (put-text-property comint-last-output-start output-end 'read-only t))))
+(add-hook 'comint-output-filter-functions 'make-my-shell-output-read-only)
+
+(defadvice comint-send-input (around go-to-end-of-multiline activate)
+  "When I press enter, jump to the end of the *buffer*, instead of the end of
+the line, to capture multiline input. (This only has effect if
+`comint-eol-on-send' is non-nil."
+  (flet ((end-of-line () (end-of-buffer)))
+    ad-do-it))
+
+(defun enter-again-if-enter ()
+  "Make the return key select the current item in minibuf and shell history isearch.
+An alternate approach would be after-advice on isearch-other-meta-char."
+  (when (and (not isearch-mode-end-hook-quit)
+             (equal (this-command-keys-vector) [13])) ; == return
+    (cond ((active-minibuffer-window) (minibuffer-complete-and-exit))
+          ((member (buffer-name) my-shells) (comint-send-input)))))
+(add-hook 'isearch-mode-end-hook 'enter-again-if-enter)
+
+;; not sure why, but comint needs to be reloaded from the source (*not*
+;; compiled) elisp to make the above advise stick.
+(load "comint.el.gz")
 
 (provide 'setup-shell-mode)

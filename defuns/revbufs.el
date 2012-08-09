@@ -34,7 +34,7 @@
 
 ;;; Code:
 
-(defun revbufs ()
+(defun revbufs (&optional kill-orphans)
   (interactive)
   (let ((conflicts  '())
         (orphans    '())
@@ -52,7 +52,9 @@
                   ((not file-name) nil)
                   ;; If buf file doesn't exist, buf is an orphan.
                   ((not (file-exists-p file-name))
-                   (setq orphans (nconc orphans (list buf))))
+                   (if kill-orphans
+                       (kill-buffer buf)
+                     (setq orphans ((not  )conc orphans (list buf)))))
                   ;; If file modified since buf visit, buf is either a conflict
                   ;; (if it's modified) or we should revert it.
                   ((not (verify-visited-file-modtime buf))
@@ -85,7 +87,7 @@
 	   (concat
 	    (format "Reverted %s with"
 		    (revbufs-quantity (length reverts) "buffer"))
-	    (if conflicts 
+	    (if conflicts
 		(format " %s%s"
 			(revbufs-quantity (length conflicts) "conflict")
 			(if orphans " and" "")))
@@ -96,11 +98,16 @@
           (message "Reverted %s." (revbufs-quantity (length reverts) "buffer"))
         (message "No buffers need reverting.")))))
 
+(defun revbufs-kill ()
+  (interactive)
+  (revbufs t))
+
+
 (defun revbufs-format-list (list label)
   (if list
       (concat label
               (format " (%s):\n" (length list))
-              (mapconcat 
+              (mapconcat
                (function
                 (lambda (buf)
                   (format "  %-20s %s\n"

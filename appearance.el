@@ -92,6 +92,7 @@
  )
 
 (global-auto-revert-mode 1)
+(global-auto-revert-mode -1)
 (transient-mark-mode 1)
 
 ;; Enable these two supposedly "advanced" commands which come disabled by default.

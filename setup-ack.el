@@ -1,6 +1,6 @@
 (require 'ack)
 (setq ack-command "ack --nogroup --nocolor ")
-(setq ack-command (concat "perl " dotfiles-dir "ack-standalone --nogroup --nocolor "))
+(setq ack-command (concat "perl " dotfiles-dir "/ack-standalone --nogroup --nocolor "))
 ;;no-heading
 (require 'grep)
 ;(grep-apply-setting 'grep-find-command ack-command)

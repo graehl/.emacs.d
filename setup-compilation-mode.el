@@ -37,6 +37,6 @@ so we can watch errors as they come up"
   (my-end-of-current-compilation-buffer))
 
 (provide 'setup-compilation-mode)
-(setq compilation-skip-threshold 2)
 (setq compilation-skip-threshold 1)
+(setq compilation-skip-threshold 2)
 ;;(setq next-error-recenter (quote (4)))

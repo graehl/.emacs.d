@@ -169,6 +169,7 @@
   (local-set-key [?e] 'my-electric-pound-e)
   (local-set-key [?,] 'my-c-electric-comma)
   (local-set-key (kbd ";") 'self-insert-command)
+  (local-set-key (kbd "*") 'self-insert-command)
   (make-local-variable 'parens-require-spaces)
   (setq parens-require-spaces nil)
 

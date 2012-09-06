@@ -54,7 +54,7 @@
                   ((not (file-exists-p file-name))
                    (if kill-orphans
                        (kill-buffer buf)
-                     (setq orphans ((not  )conc orphans (list buf)))))
+                     (setq orphans (nconc orphans (list buf)))))
                   ;; If file modified since buf visit, buf is either a conflict
                   ;; (if it's modified) or we should revert it.
                   ((not (verify-visited-file-modtime buf))

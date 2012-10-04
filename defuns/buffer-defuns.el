@@ -5,6 +5,7 @@
 
 (setq max-specpdl-size 5000) ; reduce protection against bugs
 
+
 (defmacro with-whole-buffer (&rest body)
   `(save-excursion
      (save-restriction

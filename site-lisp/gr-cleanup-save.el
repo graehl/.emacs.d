@@ -20,6 +20,7 @@
 (defcustom gr-cleanup-compress-whitespace-fast t "use simple regex rather than syntax tables - may affect comments/strings" :type 'boolean :group 'gr-cleanup-save)
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
 
+(defun gr-save-with-cleanup () "gr-cleanup-always and save-buffer" (interactive) (gr-cleanup-always) (save-buffer))
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
 (defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode make-modes)))
 (defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (gr-cleanup-skip-indent-p)))

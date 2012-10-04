@@ -1,8 +1,29 @@
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 
+(defun emacs-version-get-component (component)
+  (let ((old-match-data (match-data))
+	(version 0)
+	(regexp (cond
+		 ((eq 'major component) "^\\([0-9]+\\)")
+		 ((eq 'minor component) "^[0-9]+\\.\\([0-9]+\\)")
+		 ((eq 'build component) "^[0-9]+\\.[0-9]+\\.\\([0-9]+\\)"))))
+    (unwind-protect
+	(and (string-match regexp emacs-version)
+	     (setq version
+		   (string-to-int (substring emacs-version
+					     (match-beginning 1)
+					     (match-end 1)))))
+      (store-match-data old-match-data))
+    version))
+
+(defun emacs-version-major ()
+  "Returns (as an integer) the major version number."
+  (interactive)
+  (emacs-version-get-component 'major))
+
 ;; Set path to .emacs.d
-(setq dotfiles-dir (file-name-directory
-                    (or (buffer-file-name) load-file-name)))
+(setq dotfiles-dir "~/.emacs.d")
+;(file-name-directory                    (or (buffer-file-name) "~/.emacs.d")))
 
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
@@ -47,20 +68,19 @@
 (require 'setup-dired)
 (require 'setup-magit)
 (require 'setup-hippie)
-(require 'setup-autopair)
+;(require 'setup-autopair)
 (require 'setup-c-mode)
 (require 'setup-compilation-mode)
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
-(require 'setup-js-mode)
+;(require 'setup-js-mode)
 (require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
-(require 'setup-scala-mode)
-(require 'setup-clojure-mode)
-(require 'setup-js-mode)
+;(require 'setup-scala-mode)
+;(require 'setup-clojure-mode)
 (require 'setup-line-mode)
 (require 'setup-paredit)
 
@@ -117,7 +137,7 @@
 (require 'setup-code-modes)
 (install-coding-hooks)
 
-(when nil ; redundant with autopair
+(when t ; redundant with autopair
   (require 'wrap-region)
   (wrap-region-global-mode t))
 

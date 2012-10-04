@@ -152,6 +152,13 @@ is not supplied, the boost copyright is used by default"
          )
     (cons path-elts copyright)))
 
+(setq default-my-doxygen-file-header "\n/** \\file\n\n     .\n*/\n")
+;;(setq my-doxygen-file-header default-my-doxygen-file-header)
+(defcustom my-doxygen-file-header
+  default-my-doxygen-file-header
+  "doxygen file comment"
+  :type 'string)
+
 (defun my-begin-header ()
   "Begin a C/C++ header with include guards and a copyright."
   (interactive)
@@ -166,37 +173,42 @@ is not supplied, the boost copyright is used by default"
       (my-copyright))
 
     (insert "#ifndef " guard "\n"
-            "#define " guard "\n")
+            "#define " guard "\n"
+            my-doxygen-file-header
+    )
 
-    (let ((final nil) ;; final position
-          (nsfini (if path-elts "\n" "")))
+  (let ((final nil) ;; final position
+        (nsfini (if path-elts "\n" "")))
 
-      ;; opening namespace stuff
-      (insert nsfini)
-      (mapc (lambda (n) (insert "namespace " n " { "))
-            path-elts)
-      (insert nsfini)
+    ;; opening namespace stuff
+    (insert nsfini)
+    (mapc (lambda (n) (insert "namespace " n " { "))
+          path-elts)
+    (insert nsfini)
 
-      (setq final (point))
-      (newline)
+    (newline)
 
-      (bufend)
-      ;; make sure the next stuff goes on its own line
-      (if (not (equal (current-column) 0))
-          (newline))
-
-      ;; closing namespace stuff
-      (mapc (lambda (n) (insert "}")) path-elts)
+    (setq final (point))
+    (newline)
+    (bufend)
+    ;; make sure the next stuff goes on its own line
+    (if (not (equal (current-column) 0))
+        (newline))
+    (newline)
+    ;; closing namespace stuff
+    (mapc (lambda (n) (insert "}")) path-elts)
+    (when nil
       (reduce (lambda (prefix n)
                 (insert prefix n) "::")
               path-elts
               :initial-value " // namespace ")
-      (insert nsfini)
-      (insert nsfini)
-      (insert "#endif // " guard)
-      (goto-char final))
-    )
+      )
+    (insert nsfini)
+    (insert nsfini)
+    (insert "#endif // " guard)
+    (goto-char final))
   )
+)
 
 
 (defun my-begin-source ()
@@ -214,6 +226,7 @@ is not supplied, the boost copyright is used by default"
         (my-copyright copyright)
       (my-copyright))
 
+    (insert my-doxygen-file-header)
     (let ((final nil) ;; final position
           (nsfini (if path-elts "\n" "")))
 

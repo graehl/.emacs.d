@@ -24,4 +24,12 @@ in register specified by the magit-status-register variable."
   (window-configuration-to-register magit-status-fullscreen-register))
 
 
+(add-hook 'magit-log-edit-mode-hook '(lambda () (setq fill-column 70) (auto-fill-mode t)))
+
+(setq magit-commit-all-when-nothing-staged t)
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook
+  '(lambda() (set-fill-column 70)))
+
 (provide 'setup-magit)

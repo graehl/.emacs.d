@@ -21,7 +21,7 @@
 ;;(set-face-background 'region "#222222")
 
 ;; Highlight in yasnippet
-(set-face-background 'yas/field-highlight-face "#333399")
+(set-face-background 'yas-field-highlight-face "#333399")
 
 ;; org-mode colors
 (setq org-todo-keyword-faces
@@ -95,3 +95,14 @@
 
 (setq split-height-threshold nil)
 (setq split-width-threshold nil)
+
+(defun my-find-file-check-make-large-file-read-only-hook ()
+  "If a file is over a given size, make the buffer read only."
+  (when (> (buffer-size) (* 10 1024 1024))
+    (setq buffer-read-only t)
+    (buffer-disable-undo)
+    (fundamental-mode)
+    ; (message "Buffer is set to read-only because it is large.  Undo also disabled.")
+    ))
+
+(add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)

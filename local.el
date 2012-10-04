@@ -4,4 +4,9 @@
 (setq compile-command (with-sh "HYPERGRAPH_DBG=6 HGBEST_DBG=10 LAZYK_DBG=10 tests=Hypergraph/Best racm Debug"))
 (when (string= system-name "LATTE")
   (setq inferior-octave-program "C:\\octave\\Octave3.6.1_gcc4.6.2\\bin\\octave.exe")
+(setq py-python-command "c:/cygwin/bin/python.exe")
+(setq python-command "c:/cygwin/bin/python.exe")
+(setup-cygwin)
 )
+
+(global-set-key (kbd "<insert>") (lambda () (interactive )(switch-to-buffer "*Inferior Octave*")))

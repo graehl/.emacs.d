@@ -6,7 +6,7 @@
 
 ;; We don't know what this does but Brad swears it helps with NT
 ;;
-(when nil
+(when t
 (require 'comint)
 (fset 'original-comint-exec-1 (symbol-function 'comint-exec-1))
 (defun comint-exec-1 (name buffer command switches)

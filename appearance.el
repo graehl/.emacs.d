@@ -105,7 +105,7 @@
 
 (setq split-height-threshold nil)
 (setq split-width-threshold nil)
-<<<<<<< HEAD
+
 
 (defun my-find-file-check-make-large-file-read-only-hook ()
   "If a file is over a given size, make the buffer read only."
@@ -117,8 +117,3 @@
     ))
 
 (add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
-=======
-;(setq compilation-scroll-output nil)
-(setq comint-scroll-to-bottom-on-output 'this)
-(setq scroll-conservatively 15)
->>>>>>> 98df42b27f13930cb8cbc7652a556c94c069f600

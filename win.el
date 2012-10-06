@@ -6,6 +6,7 @@
 
 ;; We don't know what this does but Brad swears it helps with NT
 ;;
+(when nil
 (require 'comint)
 (fset 'original-comint-exec-1 (symbol-function 'comint-exec-1))
 (defun comint-exec-1 (name buffer command switches)
@@ -20,6 +21,7 @@
                                         ;          (setq w32-quote-process-args ?\")
                                         ;(make-variable-buffer-local 'comint-completion-addsuffix) ; shell-mode-hook
 ;; (setq comint-process-echoes t) ;; reported that this is no longer needed
+)
 (setq w32-quote-process-args ?\")
 
 (defadvice find-file (after my-gud-translate-cygwin-paths activate)

@@ -34,7 +34,7 @@
 
 ;;; Code:
 
-(defun revbufs (&optional kill-orphans)
+(defun revbufs-impl (&optional kill-orphans)
   (interactive)
   (let ((conflicts  '())
         (orphans    '())
@@ -98,10 +98,15 @@
           (message "Reverted %s." (revbufs-quantity (length reverts) "buffer"))
         (message "No buffers need reverting.")))))
 
+(require 'twice)
+
 (defun revbufs-kill ()
   (interactive)
-  (revbufs t))
+  (twice (lambda () (revbufs-impl t))))
 
+(defun revbufs ()
+  (interactive)
+  (twice 'revbufs-impl))
 
 (defun revbufs-format-list (list label)
   (if list

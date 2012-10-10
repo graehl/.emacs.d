@@ -164,6 +164,9 @@
 	ignore = untracked
 	path = site-lisp/pandoc-mode
 	url = git://github.com/joostkremers/pandoc-mode.git
+[submodule "site-lisp/scala-mode"]
+	path = site-lisp/scala-mode
+	url = git://github.com/daimrod/scala-mode.git
 [submodule "site-lisp/python"]
 	path = site-lisp/python
 	url = git://github.com/fgallina/python.el.git

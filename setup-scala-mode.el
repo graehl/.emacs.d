@@ -31,7 +31,6 @@
         (beginning-of-line))
       (message "region %s %s" (point) end)
       (scala-eval-region (point) end))))
-(add-hook 'scala-mode-hook 'me-turn-off-indent-tabs-mode)
 (add-hook 'scala-mode-hook (lambda () (local-set-key (kbd "M-;") 'my-scala-eval-line) (local-set-key (kbd "M-'") 'scala-eval-region)))
 ;(require 'scala-mode)
 

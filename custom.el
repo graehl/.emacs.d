@@ -23,7 +23,6 @@
  '(gr-cleanup-skip-compress-whitespace-modes (quote \'\(fundamental-mode\)))
  '(gud-gdb-command-name "gdb --fullname")
  '(ido-use-filename-at-point nil)
- ;;'(inferior-octave-program "C:\\cache\\Octave3.4.3_gcc4.5.2\\bin\\octave.exe")
  '(inferior-octave-prompt "\\(^octave\\(\\|.bin\\|.exe\\)?\\(-[.0-9]+\\)?\\(:[0-9]+\\)?\\|^debug\\|^\\)>+ ")
  '(isearchp-initiate-edit-commands (quote (backward-char)))
  '(js2-allow-rhino-new-expr-initializer nil)

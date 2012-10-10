@@ -117,7 +117,7 @@
   (interactive)
   (c-add-style "graehl" graehl-style t)
   (c-toggle-auto-hungry-state 1)
-  (key-chord-define c-mode-map ";;" "\C-e")
+  ;(key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"
                                         ; c-backspace-function 'c-hungry-delete

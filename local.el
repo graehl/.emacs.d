@@ -3,9 +3,9 @@
 (setq compile-command (with-sh "HYPERGRAPH_DBG=6 LAZYK_DBG=10 test=Hypergraph/Best raccm Debug"))
 (setq compile-command (with-sh "g1 configure_program_options.hpp -DGRAEHL_CONFIGURE_SAMPLE_MAIN=1"))
 (setq compile-command (with-sh "makerun Utf8Normalize --help"))
-(setq compile-command (with-sh "tests=Hypergraph/Best racm Debug"))
+(setq compile-command (with-sh "test=Hypergraph/Best racm Debug"))
 (when (string= system-name "LATTE")
-  (setq inferior-octave-program "C:\\octave\\Octave3.6.1_gcc4.6.2\\bin\\octave.exe")
+  ;(setq inferior-octave-program "C:\\octave\\Octave3.6.1_gcc4.6.2\\bin\\octave.exe")
 )
 (setq transient-mark-mode t)
 

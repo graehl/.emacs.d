@@ -30,7 +30,8 @@
 ;;(set-face-background 'region "#222222")
 
 ;; Highlight in yasnippet
-(set-face-background 'yas/field-highlight-face "#333399")
+(ignore-errors
+(set-face-background 'yas-field-highlight-face "#333399"))
 
 ;; org-mode colors
 (setq org-todo-keyword-faces

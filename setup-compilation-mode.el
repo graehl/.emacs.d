@@ -27,6 +27,10 @@ so we can watch errors as they come up"
         ;; executed from the same directory it originated from.
         (pop-to-buffer "*compilation*")
         (recompile)
+        ;;(font-lock-mode -1)
+        ;;(setq truncate-lines t)
+        ;;(toggle-word-wrap -1)
+        (toggle-word-wrap 1)
         (pop-to-buffer "*compilation*")
         (bufend)
         (other-window 1)
@@ -34,7 +38,10 @@ so we can watch errors as they come up"
     ;; else
     (call-interactively 'my-compile))
   ;; force scrolling despite save-excursion
-  (my-end-of-current-compilation-buffer))
+
+;; testing turning this off:
+  (my-end-of-current-compilation-buffer)
+)
 
 (provide 'setup-compilation-mode)
 (setq compilation-skip-threshold 1)

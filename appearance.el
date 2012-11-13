@@ -66,18 +66,21 @@
 (add-hook 'before-make-frame-hook 'turn-off-tool-bar)
 
 ;; Ditch them scrollbars
+(when (fboundp 'scroll-bar-mode)
 (scroll-bar-mode -1)
 
 ;; Make zooming affect frame instead of buffers
 (require 'zoom-frm)
 
-
+(require 'fit-frame)
+(setq split-height-threshold nil)
+(setq split-width-threshold nil)
+)
 (provide 'appearance)
 ()
 (remove-dos-eol)
 (require 'avoid)
 (require 'misc-fns)
-(require 'fit-frame)
 
 (setq-default
  sgml-quick-keys t
@@ -103,8 +106,6 @@
 (when (require 'rainbow-delimiters nil 'noerror)
   (install-hook 'coding-hooks 'rainbow-delimiters-mode))
 
-(setq split-height-threshold nil)
-(setq split-width-threshold nil)
 
 
 (defun my-find-file-check-make-large-file-read-only-hook ()

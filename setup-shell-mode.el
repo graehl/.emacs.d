@@ -1,4 +1,7 @@
 (require 'shell)
+
+;;(setq ansi-color-for-comint-mode nil)
+
 (add-hook 'shell-mode-hook 'my-on-shell)
 
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -80,12 +83,15 @@
         (put-text-property comint-last-output-start output-end 'read-only t))))
 (add-hook 'comint-output-filter-functions 'make-my-shell-output-read-only)
 
+(when nil
+;; this is nice but something is breaking my eol keybind when i type too fast
 (defadvice comint-send-input (around go-to-end-of-multiline activate)
   "When I press enter, jump to the end of the *buffer*, instead of the end of
 the line, to capture multiline input. (This only has effect if
 `comint-eol-on-send' is non-nil."
   (flet ((end-of-line () (end-of-buffer)))
     ad-do-it))
+)
 
 (defun enter-again-if-enter ()
   "Make the return key select the current item in minibuf and shell history isearch.

@@ -82,7 +82,8 @@
 ;(require 'setup-scala-mode)
 ;(require 'setup-clojure-mode)
 (require 'setup-line-mode)
-(require 'setup-paredit)
+;(require 'setup-paredit)
+(require 'setup-ispell)
 
 ;; Map files to modes
 (require 'mode-mappings)

@@ -5,7 +5,7 @@
 (setq compile-command (with-sh "makerun Utf8Normalize --help"))
 (setq compile-command (with-sh "test=Hypergraph/Best racm Debug"))
 
-;(global-set-key (kbd "<insert>") (lambda () (interactive )(switch-to-buffer "*Inferior Octave*")))
+(global-set-key (kbd "<home>") (lambda () (interactive )(switch-to-buffer "*Inferior Octave*")))
 (setq transient-mark-mode t)
 
 (setq gud-latest "~/bin/egdbFsTokenize --nbest=1 --tokenizer /Users/graehl/x/RegressionTests/FsTokenize/morenums-train.stdout-expected  /Users/graehl/x/RegressionTests/FsTokenize/nums.untok --prune-to-nbest 0")

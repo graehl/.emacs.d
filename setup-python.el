@@ -1,5 +1,6 @@
 ;(autoload 'python-mode "python-mode" "Python Mode." t)
 ;(require 'python-mode)
+(when (fboundp 'syntax-propertize-rules)
 (require 'python)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
@@ -62,5 +63,5 @@
               (setq autopair-handle-action-fns
                     (list #'autopair-default-handle-action
                           #'autopair-python-triple-quote-action))))
-
+)
 (provide 'setup-python)

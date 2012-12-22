@@ -168,6 +168,3 @@
 [submodule "site-lisp/git-commit-mode"]
 	path = site-lisp/git-commit-mode
 	url = git://github.com/rafl/git-commit-mode.git
-[submodule "site-lisp/ace-jump-mode"]
-	path = site-lisp/ace-jump-mode
-	url = https://github.com/winterTTr/ace-jump-mode.git

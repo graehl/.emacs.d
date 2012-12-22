@@ -71,8 +71,8 @@
 (setq smooth-scroll/vscroll-setp-size 3)
 
 ;; Represent undo-history as an actual tree (visualize with C-x u)
-(require 'undo-tree)
-(global-undo-tree-mode)
+;;(require 'undo-tree)
+;;(global-undo-tree-mode)
 
 ;; Add parts of each file's directory to the buffer name if not unique
 (require 'uniquify)

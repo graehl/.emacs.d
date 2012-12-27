@@ -301,4 +301,6 @@
 (global-set-key (kbd "S-<right>") 'forward-sentence)
 (global-set-key (kbd "S-<left>") 'backward-sentence)
 (global-set-key (kbd "M-c") 'magit-status)
+;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
+(global-set-key (kbd ",") 'self-insert-command)
 (require 'setup-magit)

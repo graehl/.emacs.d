@@ -1,5 +1,17 @@
 (provide 'c-defuns)
 
+(defun in-comment ()
+  (interactive)
+  (save-excursion
+    (setq in-comment-p (comment-beginning))))
+
+(defun insert-if-comment (outside inside)
+  '(lambda ()
+     (interactive)
+     (if (in-comment)
+         (insert inside)
+       (insert outside))))
+
 (defun my-c-comma-unindent (langelem)
   "Unindent for leading commas"
   (if (my-c-leading-comma-p) '/))
@@ -152,7 +164,7 @@ is not supplied, the boost copyright is used by default"
          )
     (cons path-elts copyright)))
 
-(setq default-my-doxygen-file-header "\n/** \\file\n\n     .\n*/\n")
+(setq default-my-doxygen-file-header "/** \\file\n\n     .\n*/\n")
 ;;(setq my-doxygen-file-header default-my-doxygen-file-header)
 (defcustom my-doxygen-file-header
   default-my-doxygen-file-header
@@ -172,9 +184,10 @@ is not supplied, the boost copyright is used by default"
         (my-copyright copyright)
       (my-copyright))
 
-    (insert "#ifndef " guard "\n"
-            "#define " guard "\n"
+    (insert
             my-doxygen-file-header
+            "\n#ifndef " guard "\n"
+            "#define " guard "\n"
     )
 
   (let ((final nil) ;; final position

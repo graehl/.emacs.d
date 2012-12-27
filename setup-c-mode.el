@@ -170,6 +170,7 @@
   (local-set-key [?,] 'my-c-electric-comma)
   (local-set-key (kbd ";") 'self-insert-command)
   (local-set-key (kbd "*") 'self-insert-command)
+  ;;(local-set-key [?:] (insert-if-comment ":" ": "))
   (make-local-variable 'parens-require-spaces)
   (setq parens-require-spaces nil)
 

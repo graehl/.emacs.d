@@ -141,10 +141,6 @@
 
 ;; Magit
 (global-set-key (kbd "C-x m") 'magit-status-fullscreen)
-(define-key magit-status-mode-map (kbd "q")
-  '(lambda ()
-     (interactive)
-     (jump-to-register magit-status-fullscreen-window-configuration-register)))
 
 ;; Clever newlines
 (global-set-key (kbd "<C-return>") 'new-line-below)
@@ -228,20 +224,17 @@
 (global-set-key [(control shift next)] 'downcase-word)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 (global-set-key (kbd "M-x") 'execute-extended-command)
-(require 'smex)(global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "C-c C-s") 'occur)
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key "\C-\\" 'set-mark-and-goto-line)
 (global-set-key (kbd "C-f") 'forward-word)
-(require 'scratch-back)(global-set-key (kbd "M-<f2>") 'scratch-back)
 (global-set-key (kbd "M-<f3>") 'back-from-scratch)
 (global-set-key "\M-u" '(lambda () (interactive) (backward-word 1) (upcase-word 1))) ; whole word
 (global-set-key "\M-l" '(lambda () (interactive) (backward-word 1) (downcase-word 1)))
 (global-set-key "\M-\C-u" 'turn-on-auto-capitalize-mode)
 (global-set-key (kbd "M-C-o") 'same-buffer-other-window)
 (global-set-key (kbd "C-x F") 'find-file)
-;;(require 'hobo)(global-set-key (kbd "C-x F") 'hobo-find-file)
 (global-set-key (kbd "C-e") 'end-of-line)
 (global-set-key (kbd "C-a") 'beginning-of-line)
 (global-set-key (kbd "M-m") 'query-replace)
@@ -300,5 +293,3 @@
 (global-set-key (kbd "<insert>") 'gud-finish)
 (global-set-key (kbd "S-<right>") 'forward-sentence)
 (global-set-key (kbd "S-<left>") 'backward-sentence)
-(global-set-key (kbd "M-c") 'magit-status)
-(require 'setup-magit)

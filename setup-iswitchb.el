@@ -12,5 +12,5 @@
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 ;; /awesome
 (iswitchb-mode 1)
-
+(setq ido-max-directory-size 100000)
 (provide 'setup-iswitchb)

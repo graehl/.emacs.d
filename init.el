@@ -47,6 +47,7 @@
 (setq backup-directory-alist `(("." . ,(expand-file-name
                                         (concat dotfiles-dir "backups")))))
 
+
 ;; Save point position between sessions
 (setq save-place-file (expand-file-name ".places" dotfiles-dir))
 (require 'saveplace)
@@ -62,6 +63,9 @@
   (when (and (file-not-autosave file) (file-regular-p file))
     (load file)))
 
+
+(require 'key-bindings)
+	
 ;; Setup extensions
 (require 'setup-ido)
 (require 'setup-yasnippet)
@@ -93,11 +97,10 @@
 (require 'mark-more-like-this)
 (require 'inline-string-rectangle)
 (require 'iy-go-to-char)
-(require 'ace-jump-mode)
+;;(require 'ace-jump-mode)
 
 ;; Setup key mappings
-(require 'key-chords) ; to enable: key-chord-mode
-(require 'key-bindings)
+;;(require 'key-chords) ; to enable: key-chord-mode
 (require 'setup-python)
 (require 'setup-term)
 ;; below use defuns.
@@ -129,7 +132,6 @@
 (require 'aliases)
 (require 'smex) ;M-x
 (smex-initialize)
-(require 'ace-jump-mode)
 
 (when (equal system-type 'darwin) (require 'mac))
 (when (equal system-type 'windows-nt) (require 'win))
@@ -155,3 +157,4 @@
 (require 're-builder+)
 (require 'pandoc-mode)
 (require 'setup-spell)
+(require 'optional-bindings)

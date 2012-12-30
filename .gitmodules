@@ -33,11 +33,6 @@
 	ignore = untracked
 	path = site-lisp/coffee-mode
 	url = https://github.com/defunkt/coffee-mode.git
-[submodule "site-lisp/ace-jump-mode"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/ace-jump-mode
-	url = https://github.com/winterTTr/ace-jump-mode.git
 [submodule "site-lisp/yasnippet"]
 	ignore = untracked
 	ignore = untracked
@@ -176,3 +171,4 @@
 [submodule "site-lisp/scala-mode2"]
 	path = site-lisp/scala-mode2
 	url = https://github.com/hvesalai/scala-mode2.git
+	url = git://github.com/rafl/git-commit-mode.git

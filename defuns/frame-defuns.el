@@ -48,7 +48,9 @@
 (defun default-split ()
   (interactive)
   (delete-other-windows)
-  (split-window-side-by-side))
+  ;;(split-window-side-by-side)
+  (split-window-right)
+)
 
 (defun toggle-windows-split()
   "Switch back and forth between one window and whatever split of windows we might have in the frame.

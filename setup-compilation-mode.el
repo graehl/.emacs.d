@@ -2,7 +2,7 @@
 (require 'compile-)
 (require 'compile)
 ;;(require 'compile+)
-(require 'compile-defuns)
+;;(require 'compile-defuns)
 (require 'cmake-mode)
 
 (defun my-compilation-mode-hook ()

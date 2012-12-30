@@ -11,7 +11,7 @@
 (add-to-list 'auto-mode-alist '("\\.scala$" . scala-mode))
 
 (add-to-list 'auto-mode-alist '("\\.ml[ily]?$" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.fs\\w?" . tuareg-mode))
+;;(add-to-list 'auto-mode-alist '("\\.fs\\w?" . tuareg-mode))
 
 ;; YAML
 (autoload 'yaml-mode "yaml-mode")

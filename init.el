@@ -65,12 +65,12 @@
 
 
 (require 'key-bindings)
-	
+
 ;; Setup extensions
 (require 'setup-ido)
 (require 'setup-yasnippet)
 (require 'setup-dired)
-(require 'setup-magit)
+;;(require 'setup-magit)
 (require 'setup-hippie)
 ;(require 'setup-autopair)
 (require 'setup-c-mode)

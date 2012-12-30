@@ -141,10 +141,6 @@
 
 ;; Magit
 (global-set-key (kbd "C-x m") 'magit-status-fullscreen)
-(define-key magit-status-mode-map (kbd "q")
-  '(lambda ()
-     (interactive)
-     (jump-to-register magit-status-fullscreen-window-configuration-register)))
 
 ;; Clever newlines
 (global-set-key (kbd "<C-return>") 'new-line-below)

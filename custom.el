@@ -21,7 +21,7 @@
  '(custom-safe-themes (quote ("0174d99a8f1fdc506fa54403317072982656f127" default)))
  '(fill-column 80)
  '(gr-cleanup-skip-compress-whitespace-modes (quote \'\(fundamental-mode\)))
- '(gud-gdb-command-name "gdb --fullname")
+ '(gud-gdb-command-name "~/bin/egdbHgCompose --fsm-compose 0")
  '(ido-use-filename-at-point nil)
  '(inferior-octave-prompt "\\(^octave\\(\\|.bin\\|.exe\\)?\\(-[.0-9]+\\)?\\(:[0-9]+\\)?\\|^debug\\|^\\)>+ ")
  '(isearchp-initiate-edit-commands (quote (backward-char)))

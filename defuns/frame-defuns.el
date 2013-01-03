@@ -48,9 +48,11 @@
 (defun default-split ()
   (interactive)
   (delete-other-windows)
-  ;;(split-window-side-by-side)
-  (split-window-right)
-)
+  (if (eq (emacs-version) "GNU Emacs 24.0.90.2 (x86_64-apple-darwin11.1.0, NS apple-appkit-1138.00)
+ of 2011-10-11 on graehl.local")
+      (split-window-side-by-side)
+    (split-window-right))
+  )
 
 (defun toggle-windows-split()
   "Switch back and forth between one window and whatever split of windows we might have in the frame.

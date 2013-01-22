@@ -48,7 +48,7 @@
 (defun default-split ()
   (interactive)
   (delete-other-windows)
-  (if (eq (emacs-version) "GNU Emacs 24.0.90.2 (x86_64-apple-darwin11.1.0, NS apple-appkit-1138.00)
+  (if (equal (emacs-version) "GNU Emacs 24.0.90.2 (x86_64-apple-darwin11.1.0, NS apple-appkit-1138.00)
  of 2011-10-11 on graehl.local")
       (split-window-side-by-side)
     (split-window-right))

@@ -300,4 +300,5 @@
 ;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
 (global-set-key (kbd ",") 'self-insert-command)
 (global-set-key (kbd "C-=") 'gr-include)
+(global-set-key (kbd "M-'") 'gr-space-operators)
 (require 'setup-magit)

@@ -481,11 +481,6 @@ starts."
         (gr-match-string 2)
       else)))
 
-(defun gr-beginning-of-line-after-ws () (interactive)
-  (beginning-of-line)
-  (skip-chars-forward " \t")
-  )
-
 (defun gr-ends-with (s ending)
   "return non-nil if string S ends with ENDING."
   (let ((elength (length ending)))
@@ -497,6 +492,7 @@ starts."
          (string-equal (substring s 0 (length arg)) arg))
         (t nil)))
 
+
 (defun gr-current-line ()
   "return current line (no EOL)"
   (interactive)
@@ -507,10 +503,14 @@ starts."
   (interactive)
   (buffer-substring-no-properties (point) (line-end-position)))
 
+(defun gr-beginning-of-line-after-ws () (interactive)
+  (beginning-of-line)
+  (skip-chars-forward " \t")
+  )
+
 (setq gr-include-prefix "xmt/")
 (setq gr-include-suffix ".hpp")
-
-;;(setq debug-on-error nil)
+(setq gr-skip-prefix "boost/")
 
 (defun gr-buffer-contains (string) "whether buffer contains string"
   (save-excursion
@@ -529,8 +529,10 @@ starts."
   (interactive)
   (let* ((line (gr-current-line))
          (have-slash (string-match "/" line))
-         (have-prefix (string-match gr-include-prefix line))
-         )
+         (have-prefix (or (string-match gr-include-prefix line)
+                          (string-match gr-skip-prefix line)
+                          )))
+    (end-of-line)
     (when have-slash (insert gr-include-suffix))
     (insert ">")
     (gr-beginning-of-line-after-ws)
@@ -541,10 +543,11 @@ starts."
     (gr-beginning-of-line-after-ws)
     (save-excursion
       (let ((rest (gr-rest-line)))
-      (kill-line)
-      (when (not (gr-buffer-contains rest))
-        (if (re-search-backward "^\\# *include" nil t)
-            (progn (next-line) (beginning-of-line))
-          (beginning-of-buffer))
-        (yank)
-        )))))
+        (kill-line)
+        (when (not (gr-buffer-contains rest))
+          (if (re-search-backward "^\\# *include" nil t)
+              (progn (next-line) (beginning-of-line))
+            (if (re-search-backward "^#ifndef " nil t) (progn (next-line) (next-line) (beginning-of-line))
+              (beginning-of-buffer)))
+          (insert rest "\n")
+          )))))

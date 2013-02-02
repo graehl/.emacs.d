@@ -198,8 +198,9 @@
       (gr-narrow-dwim-buffer)
       (gr-compress-whitespace-impl over))))
 
+;;\\|[?:]
 (defconst gr-comma-regexp "[,;]" "comma - space after")
-(defconst gr-assign-regexp "\\([-+*/^]\?=\\|||\\|[?:]\\)" "assignment - space before and after")
+(defconst gr-assign-regexp "\\([-+*/^]\?=\\|||\\)" "assignment - space before and after")
 (defconst gr-no-space-regexp "[^ =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
 

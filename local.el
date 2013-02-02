@@ -1,7 +1,7 @@
 (defun with-sh (c) (concat ". ~/.e; " c))
 (setq compile-command (with-sh "buildgraehl forest-em"))
 (setq compile-command (with-sh "HYPERGRAPH_DBG=6 LAZYK_DBG=10 test=Hypergraph/Best raccm Debug"))
-(setq compile-command (with-sh "g1 configure_program_options.hpp -DGRAEHL_CONFIGURE_SAMPLE_MAIN=1"))
+(setq compile-command (with-sh "ARGS='--b.xs 1 2 --a.xs 1 asdf --a.str hi' g1 configure_program_options.hpp -DGRAEHL_CONFIGURE_SAMPLE_MAIN=1 g1 configure_program_options.hpp -Wno-unused -DGRAEHL_CONFIGURE_SAMPLE_MAIN=1"))
 (setq compile-command (with-sh "makerun Utf8Normalize --help"))
 (setq compile-command (with-sh "test=Hypergraph/Best racm Debug"))
 

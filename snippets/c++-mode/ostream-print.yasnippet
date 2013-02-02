@@ -2,8 +2,10 @@
 # name: ostream-print
 # key: op
 # --
-friend inline std::ostream& operator<<(std::ostream &out,
-${1:`(gr-c-class-name "self_type")`} const& x) {
-  $0
+friend inline std::ostream& operator<<(std::ostream &out, ${1:`(gr-c-class-name "self_type")`} const& self) {
+  self.print(out);
   return out;
+}
+void print(std::ostream &out) const {
+  $0
 }

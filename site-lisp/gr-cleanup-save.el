@@ -210,8 +210,8 @@
       (get-char-property (point) 'face)))
 
 (defun gr-face-is-code (face)
-    (not (or (eq face 'font-lock-string-face)
-        (eq face 'font-lock-comment-face))))
+  (not (or (eq face 'font-lock-string-face)
+           (eq face 'font-lock-comment-face))))
 
 (defun gr-what-face-is-code (pos)
   (interactive "d")
@@ -240,15 +240,15 @@
     (while (re-search-forward (concat gr-no-space-regexp gr-assign-regexp gr-no-space-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))
-      (insert " ")
-      (goto-char (+ (match-beginning 0) 1))
-      (insert " ")))
+        (insert " ")
+        (goto-char (+ (match-beginning 0) 1))
+        (insert " ")))
     (goto-char (point-min))
     (while (re-search-forward gr-access-spec (point-max) t)
       (when (gr-what-face-is-code (point))
-      (goto-char (- (match-end 0) 2))
-      (delete-char 1)))
-))
+        (goto-char (- (match-end 0) 2))
+        (delete-char 1)))
+    ))
 
 (defun gr-space-operators (&optional over)
   "region if active, else buffer"

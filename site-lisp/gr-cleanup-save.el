@@ -204,6 +204,29 @@
 (defconst gr-no-space-regexp "[^ =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
 
+(defun gr-what-face (pos)
+  (interactive "d")
+  (or (get-char-property (point) 'read-face-name)
+      (get-char-property (point) 'face)))
+
+(defun gr-face-is-code (face)
+    (not (or (eq face 'font-lock-string-face)
+        (eq face 'font-lock-comment-face))))
+
+(defun gr-what-face-is-code (pos)
+  (interactive "d")
+  (gr-face-is-code (gr-what-face pos)))
+
+
+(defun gr-what-face-msg (pos)
+  (interactive "d")
+  (let ((face (gr-what-face pos)))
+    (if face (message "Face: %s" face) (message "No face at %d" pos))))
+
+(defun gr-what-face-is-code-msg (pos)
+  (interactive "d")
+  (message (if (gr-what-face-is-code pos) "CODE" "comment or string")))
+
 (defun gr-space-operators-impl ()
   (interactive)
   (message (concat "space operators - after comma: " gr-comma-regexp ", before/after assignment=:" gr-assign-regexp " ..."))
@@ -211,17 +234,20 @@
     (goto-char (point-min))
     (while (re-search-forward (concat gr-comma-regexp gr-no-space-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
-      (insert " "))
+      (when (gr-what-face-is-code (point))
+        (insert " ")))
     (goto-char (point-min))
     (while (re-search-forward (concat gr-no-space-regexp gr-assign-regexp gr-no-space-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
+      (when (gr-what-face-is-code (point))
       (insert " ")
       (goto-char (+ (match-beginning 0) 1))
-      (insert " "))
+      (insert " ")))
     (goto-char (point-min))
     (while (re-search-forward gr-access-spec (point-max) t)
+      (when (gr-what-face-is-code (point))
       (goto-char (- (match-end 0) 2))
-      (delete-char 1))
+      (delete-char 1)))
 ))
 
 (defun gr-space-operators (&optional over)

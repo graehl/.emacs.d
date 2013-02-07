@@ -170,5 +170,4 @@
 	url = git://github.com/rafl/git-commit-mode.git
 [submodule "site-lisp/scala-mode2"]
 	path = site-lisp/scala-mode2
-	url = https://github.com/hvesalai/scala-mode2.git
 	url = git://github.com/rafl/git-commit-mode.git

@@ -74,6 +74,7 @@
 ;; Markdown
 (autoload 'markdown-mode "markdown-mode")
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.rmd$" . markdown-mode))
 
 ;; PHP
 (autoload 'php-mode "php-mode")

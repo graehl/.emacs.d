@@ -105,11 +105,7 @@
          (extension (if ext (concat "_" ext) ""))
          )
     (upcase
-     (concat
-      prefix "_" my-initials
-      (number-to-string (nth 5 time))
-      (number-to-string (nth 4 time))
-      (number-to-string (nth 3 time)) extension))))
+     (format "%s_%s_%04d_%02d_%02d%s" prefix my-initials (nth 5 time) (nth 4 time) (nth 3 time) extension))))
 
 
 (defun my-copyright (&optional copyright)

@@ -32,4 +32,9 @@ in register specified by the magit-status-register variable."
 (add-hook 'text-mode-hook
   '(lambda() (set-fill-column 70)))
 
+(define-key magit-status-mode-map (kbd "q")
+  '(lambda ()
+     (interactive)
+     (jump-to-register magit-status-fullscreen-window-configuration-register)))
+
 (provide 'setup-magit)

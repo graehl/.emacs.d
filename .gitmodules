@@ -168,3 +168,6 @@
 [submodule "site-lisp/git-commit-mode"]
 	path = site-lisp/git-commit-mode
 	url = git://github.com/rafl/git-commit-mode.git
+[submodule "site-lisp/scala-mode2"]
+	path = site-lisp/scala-mode2
+	url = git://github.com/rafl/git-commit-mode.git

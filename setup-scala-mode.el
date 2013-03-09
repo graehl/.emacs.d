@@ -1,4 +1,5 @@
-(require 'scala-mode nil 'noerror)
+;;(require 'scala-mode nil 'noerror)
+
 (defun my-scala-eval-line ()
   "eval current line"
   (interactive)
@@ -31,7 +32,10 @@
         (beginning-of-line))
       (message "region %s %s" (point) end)
       (scala-eval-region (point) end))))
-(add-hook 'scala-mode-hook (lambda () (local-set-key (kbd "M-;") 'my-scala-eval-line) (local-set-key (kbd "M-'") 'scala-eval-region)))
+;;(add-hook 'scala-mode-hook (lambda () (local-set-key (kbd "M-;") 'my-scala-eval-line) (local-set-key (kbd "M-'") 'scala-eval-region)))
 ;(require 'scala-mode)
+
+(require 'scala-mode2)
+(add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 
 (provide 'setup-scala-mode)

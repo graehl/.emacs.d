@@ -1,5 +1,17 @@
 (provide 'c-defuns)
 
+(defun in-comment ()
+  (interactive)
+  (save-excursion
+    (setq in-comment-p (comment-beginning))))
+
+(defun insert-if-comment (outside inside)
+  '(lambda ()
+     (interactive)
+     (if (in-comment)
+         (insert inside)
+       (insert outside))))
+
 (defun my-c-comma-unindent (langelem)
   "Unindent for leading commas"
   (if (my-c-leading-comma-p) '/))
@@ -93,11 +105,7 @@
          (extension (if ext (concat "_" ext) ""))
          )
     (upcase
-     (concat
-      prefix "_" my-initials
-      (number-to-string (nth 5 time))
-      (number-to-string (nth 4 time))
-      (number-to-string (nth 3 time)) extension))))
+     (format "%s_%s_%04d_%02d_%02d%s" prefix my-initials (nth 5 time) (nth 4 time) (nth 3 time) extension))))
 
 
 (defun my-copyright (&optional copyright)
@@ -152,7 +160,7 @@ is not supplied, the boost copyright is used by default"
          )
     (cons path-elts copyright)))
 
-(setq default-my-doxygen-file-header "\n/** \\file\n\n     .\n*/\n")
+(setq default-my-doxygen-file-header "/** \\file\n\n .\n*/\n")
 ;;(setq my-doxygen-file-header default-my-doxygen-file-header)
 (defcustom my-doxygen-file-header
   default-my-doxygen-file-header
@@ -172,43 +180,44 @@ is not supplied, the boost copyright is used by default"
         (my-copyright copyright)
       (my-copyright))
 
-    (insert "#ifndef " guard "\n"
-            "#define " guard "\n"
-            my-doxygen-file-header
+    (insert
+     my-doxygen-file-header
+     "\n#ifndef " guard "\n"
+     "#define " guard "\n"
+     )
+
+    (let ((final nil) ;; final position
+          (nsfini (if path-elts "\n" "")))
+
+      ;; opening namespace stuff
+      (insert nsfini)
+      (mapc (lambda (n) (insert "namespace " n " { "))
+            path-elts)
+      (insert nsfini)
+
+      (newline)
+
+      (setq final (point))
+      (newline)
+      (bufend)
+      ;; make sure the next stuff goes on its own line
+      (if (not (equal (current-column) 0))
+          (newline))
+      (newline)
+      ;; closing namespace stuff
+      (mapc (lambda (n) (insert "}")) path-elts)
+      (when nil
+        (reduce (lambda (prefix n)
+                  (insert prefix n) "::")
+                path-elts
+                :initial-value " // namespace ")
+        )
+      (insert nsfini)
+      (insert nsfini)
+      (insert "#endif // " guard)
+      (goto-char final))
     )
-
-  (let ((final nil) ;; final position
-        (nsfini (if path-elts "\n" "")))
-
-    ;; opening namespace stuff
-    (insert nsfini)
-    (mapc (lambda (n) (insert "namespace " n " { "))
-          path-elts)
-    (insert nsfini)
-
-    (newline)
-
-    (setq final (point))
-    (newline)
-    (bufend)
-    ;; make sure the next stuff goes on its own line
-    (if (not (equal (current-column) 0))
-        (newline))
-    (newline)
-    ;; closing namespace stuff
-    (mapc (lambda (n) (insert "}")) path-elts)
-    (when nil
-      (reduce (lambda (prefix n)
-                (insert prefix n) "::")
-              path-elts
-              :initial-value " // namespace ")
-      )
-    (insert nsfini)
-    (insert nsfini)
-    (insert "#endif // " guard)
-    (goto-char final))
   )
-)
 
 
 (defun my-begin-source ()
@@ -467,3 +476,74 @@ starts."
     (if (re-search-backward "^[[:blank:]]*\\(struct\\|class\\) +\\([^\n[:blank:]]+\\)")
         (gr-match-string 2)
       else)))
+
+(defun gr-ends-with (s ending)
+  "return non-nil if string S ends with ENDING."
+  (let ((elength (length ending)))
+    (string= (substring s (- 0 elength)) ending)))
+
+(defun gr-starts-with (s arg)
+  "returns non-nil if string S starts with ARG.  Else nil."
+  (cond ((>= (length s) (length arg))
+         (string-equal (substring s 0 (length arg)) arg))
+        (t nil)))
+
+
+(defun gr-current-line ()
+  "return current line (no EOL)"
+  (interactive)
+  (buffer-substring-no-properties (line-beginning-position) (line-end-position)))
+
+(defun gr-rest-line ()
+  "return rest of current line (no EOL)"
+  (interactive)
+  (buffer-substring-no-properties (point) (line-end-position)))
+
+(defun gr-beginning-of-line-after-ws () (interactive)
+  (beginning-of-line)
+  (skip-chars-forward " \t")
+  )
+
+(setq gr-include-prefix "xmt/")
+(setq gr-include-suffix ".hpp")
+(setq gr-skip-prefix "boost/")
+
+(defun gr-buffer-contains (string) "whether buffer contains string"
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (search-forward string nil t))))
+
+(defun gr-buffer-matches (re) "whether buffer matches re"
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (re-search-forward re nil t))))
+
+(defun gr-include ()
+  "insert #include line after previous include, with contents of current line inside #include <>"
+  (interactive)
+  (let* ((line (gr-current-line))
+         (have-slash (string-match "/" line))
+         (have-prefix (or (string-match gr-include-prefix line)
+                          (string-match gr-skip-prefix line)
+                          )))
+    (end-of-line)
+    (when have-slash (insert gr-include-suffix))
+    (insert ">")
+    (gr-beginning-of-line-after-ws)
+    (when (and have-slash (not have-prefix))
+      (insert gr-include-prefix)
+      (gr-beginning-of-line-after-ws))
+    (insert "#include <")
+    (gr-beginning-of-line-after-ws)
+    (save-excursion
+      (let ((rest (gr-rest-line)))
+        (kill-line)
+        (when (not (gr-buffer-contains rest))
+          (if (re-search-backward "^\\# *include" nil t)
+              (progn (next-line) (beginning-of-line))
+            (if (re-search-backward "^#ifndef " nil t) (progn (next-line) (next-line) (beginning-of-line))
+              (beginning-of-buffer)))
+          (insert rest "\n")
+          )))))

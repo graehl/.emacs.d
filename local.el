@@ -11,6 +11,3 @@
 (setq gud-latest "~/bin/egdbFsTokenize --nbest=1 --tokenizer /Users/graehl/x/RegressionTests/FsTokenize/morenums-train.stdout-expected  /Users/graehl/x/RegressionTests/FsTokenize/nums.untok --prune-to-nbest 0")
 
 (setq gud-latest "~/bin/egdbHgBest --nbest=2 /Users/graehl/x/bugs/xyz/fsaw")
-
-(add-to-list 'load-path "c:/msys/ess/lisp")
-(require 'ess-site)

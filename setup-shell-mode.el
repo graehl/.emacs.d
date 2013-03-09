@@ -4,7 +4,11 @@
 
 (add-hook 'shell-mode-hook 'my-on-shell)
 
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;;(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+;;(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+
+(require 'ansi-color)
+(setq ansi-color-for-comint-mode 'filter)
 
 (defun my-comint ()
   (interactive)
@@ -51,7 +55,6 @@
   )
 ;; note: can still use ctrl-n ctrl-p for regular movement
 
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 
 (require 'multi-term)
 (setq multi-term-program "/bin/bash")

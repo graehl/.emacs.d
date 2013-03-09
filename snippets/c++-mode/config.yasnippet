@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: config
+# key: conf
+# --
+template <class Config>
+void configure(Config &config) {
+  config.is("${1:`(gr-c-class-name "self_type")`}");
+  config("$0");
+}

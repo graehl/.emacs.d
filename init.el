@@ -32,7 +32,8 @@
 (add-to-list 'load-path site-lisp-dir)
 
 (defun file-not-autosave (path)
-  (not (string-match "#$" path)))
+  (not (or (string-match "#$" path)
+           (string-match "~$" path))))
 
 ;; Add external projects to load path
 (dolist (project (directory-files site-lisp-dir t "\\w+"))
@@ -63,14 +64,13 @@
   (when (and (file-not-autosave file) (file-regular-p file))
     (load file)))
 
-
 (require 'key-bindings)
-	
+
 ;; Setup extensions
 (require 'setup-ido)
 (require 'setup-yasnippet)
 (require 'setup-dired)
-(require 'setup-magit)
+;;(require 'setup-magit)
 (require 'setup-hippie)
 ;(require 'setup-autopair)
 (require 'setup-c-mode)

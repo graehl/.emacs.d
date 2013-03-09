@@ -1,8 +1,8 @@
 (require 'dirtrack)
 (defun gr-system (string) (interactive) (string= system-name string))
-(defun dirtrack-on () (not (gr-system "K")))
+(defun gr-dirtrack-on () (not (gr-system "K")))
 
-(defun dirtrack-filter-out-pwd-prompt (string)
+(defun gr-dirtrack-filter-out-pwd-prompt (string)
   "dirtrack-mode doesn't remove the PWD match from the prompt.  This does."
   ;; TODO: support dirtrack-mode's multiline regexp.
   (if (and (stringp string) (string-match (first dirtrack-list) string))
@@ -13,7 +13,7 @@
   (shell-dirtrack-mode nil)
   (dirtrack-mode t)
   (add-hook 'comint-preoutput-filter-functions
-            'dirtrack-filter-out-pwd-prompt t t)
+            'gr-dirtrack-filter-out-pwd-prompt t t)
   )
 
 (defun gr-magic-prompt () "" (interactive)

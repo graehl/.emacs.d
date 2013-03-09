@@ -41,7 +41,7 @@
  '(next-error-recenter (quote (4)))
  '(recentf-max-menu-items 30)
  '(recentf-max-saved-items 300)
- '(safe-local-variable-values (quote ((indent-tabs-mode . 1) (encoding . utf-8))))
+ '(safe-local-variable-values (quote ((whitespace-style face tabs spaces trailing lines space-before-tab::space newline indentation::space empty space-after-tab::space space-mark tab-mark newline-mark) (indent-tabs-mode . 1) (encoding . utf-8))))
  '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
  '(yas/also-auto-indent-first-line t)
  '(yas/next-field-key (quote ("TAB" "<tab>" "M-<return>")))

@@ -95,4 +95,10 @@
   (concat (mapcar (function (lambda (c)
                               (if (= c ?/) ?\\ c)))
                   filename)))
+
+(defun shell-msys ()
+  (interactive)
+  (let ((explicit-sh.exe-args '("--login" "-i")))
+    (shell-explicit "c:/msys/bin/bash.exe" "Msys" ?/ nil)))
+
 (require 'setup-cygwin)

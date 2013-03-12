@@ -7,3 +7,5 @@ tramp
 *.elc
 .DS_Store
 #*
+custom.el
+local.el

@@ -8,7 +8,7 @@
 (global-set-key (kbd "C-.") 'hippie-expand)
 
 ;; Expand region (increases selected region by semantic units)
-(global-set-key (kbd "C-@") 'er/expand-region)
+;;(global-set-key (kbd "C-@") 'er/expand-region)
 
 ;; Mark additional regions matching current region
 (global-set-key (kbd "C-å") 'mark-previous-like-this)
@@ -301,4 +301,5 @@
 (global-set-key (kbd ",") 'self-insert-command)
 (global-set-key (kbd "C-=") 'gr-include)
 (global-set-key (kbd "M-'") 'gr-space-operators)
+(global-set-key (kbd "C-@") 'set-mark-command)
 (require 'setup-magit)

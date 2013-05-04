@@ -107,7 +107,6 @@ An alternate approach would be after-advice on isearch-other-meta-char."
 
 ;; not sure why, but comint needs to be reloaded from the source (*not*
 ;; compiled) elisp to make the above advise stick.
-(when (< (emacs-version-major) 24)
-  (load "comint.el.gz"))
+;; (when (< (emacs-version-major) 24) (load "comint.el.gz"))
 
 (provide 'setup-shell-mode)

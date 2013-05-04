@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: warning
+# key: #warn
+# --
+#include <graehl/shared/warning_push.h>
+#if HAVE_PRAGMA_GCC_DIAGNOSTIC
+#pragma GCC diagnostic ignored "-W$0"
+#endif
+#include <graehl/shared/warning_pop.h>

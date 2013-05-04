@@ -1,6 +1,7 @@
 ;; Load and initialize yasnippet
 (require 'yasnippet)
-(yas-global-mode 1)
+(when (> (emacs-version-major) 23)
+  (yas-global-mode 1))
 
 ;; Develop in ~/emacs.d/snippets, but also
 ;; include snippets that come with yasnippet

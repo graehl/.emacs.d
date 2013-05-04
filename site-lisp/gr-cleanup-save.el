@@ -278,6 +278,30 @@
     (excessive-newlines-compress)
     (message "gr-cleanup done.")))
 
+(defun gr-delete-trailing-whitespace-except-tab ()
+  "Nuke all trailing whitespace in the buffer except tab."
+  (interactive)
+  (let ((bname (buffer-name)))
+    (cond ((or
+            (string= major-mode "rmail-mode")
+            (string= bname "RMAIL")
+            nil)); do nothing..
+
+          (t
+           (and (not buffer-read-only)
+                (save-match-data
+                  (save-excursion
+                    (save-restriction
+                      (widen)
+                      (goto-char (point-min))
+                      (while (re-search-forward "[ ]+$" (point-max) t)
+                        (delete-region (match-beginning 0)
+                                       (match-end 0)))))))))
+                             ;;(query-replace-regexp "[ \t]+$" "")))))))))
+
+    ;; always return nil, in case this is on write-file-hooks.
+    nil))
+
 (defun gr-cleanup-buffer-impl ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
@@ -286,7 +310,7 @@
    (gr-untabify-buffer)
    (unless (or (= 0 gr-cleanup-buffer-excessive-newlines) (eq nil gr-cleanup-buffer-excessive-newlines))
      (excessive-newlines-compress gr-cleanup-buffer-excessive-newlines))
-   (delete-trailing-whitespace)
+   (gr-delete-trailing-whitespace-except-tab)
    (delete-trailing-newlines)
    (if (gr-cleanup-skip-compress-whitespace-p)
        (message (format "skipping whitespace compression for mode %s" major-mode))

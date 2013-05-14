@@ -233,6 +233,14 @@ modified file"
   (switch-to-buffer-other-window (current-buffer))
   )
 
+(defun same-cursor-and-buffer-other-window ()
+  "switch to the current buffer in the other window"
+  (interactive)
+  (switch-to-buffer-other-window "*scratch*")
+  (other-window 1)
+  (switch-to-buffer-other-window (current-buffer))
+  )
+
 (defun set-mark-and-goto-line (line)
   "Set mark and prompt for a line to go to."
   (interactive "NLine #: ")

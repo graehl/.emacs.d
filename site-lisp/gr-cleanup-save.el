@@ -199,7 +199,7 @@
       (gr-compress-whitespace-impl over))))
 
 ;;\\|[?:]
-(defconst gr-comma-regexp "[,;]" "comma - space after")
+(defconst gr-comma-regexp "[,;][^,;) ]" "comma - space after")
 (defconst gr-assign-regexp "\\([-+*/^|&]\?=\\|||\\)" "assignment - space before and after")
 (defconst gr-no-space-regexp "[^-+*/^|& =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
@@ -232,7 +232,7 @@
   (message (concat "space operators - after comma: " gr-comma-regexp ", before/after assignment=:" gr-assign-regexp " ..."))
   (save-excursion
     (goto-char (point-min))
-    (while (re-search-forward (concat gr-comma-regexp gr-no-space-regexp) (point-max) t)
+    (while (re-search-forward (concat gr-comma-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))
         (insert " ")))

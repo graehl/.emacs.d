@@ -189,7 +189,7 @@
 (global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
-(global-set-key (kbd "M-]") 'same-buffer-other-window)
+(global-set-key (kbd "M-]") 'same-cursor-and-buffer-other-window)
 
                                         ;(global-set-key (kbd "M-s") 'fixup-whitespace)
                                         ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize

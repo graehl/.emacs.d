@@ -48,21 +48,21 @@ buffer is either a buffer object or a buffer name"
 (defun my-really-recompile()
   (interactive)
   (let ((frame (selected-frame)))
-          (with-current-buffer gr-compile-buffername
-            (save-excursion
-              ;; switching to the compilation buffer here causes the compile command to be
-              ;; executed from the same directory it originated from.
-              (pop-to-buffer gr-compile-buffername)
-              (flet ((yes-or-no-p (&rest args) t)
-             (y-or-n-p (&rest args) t))
-              (recompile))
-              (pop-to-buffer gr-compile-buffername)
-              (bufend)
-              (my-end-of-current-compilation-buffer)
-              )
-            )
-          (x-focus-frame frame)
-          ))
+    (with-current-buffer gr-compile-buffername
+      (save-excursion
+        ;; switching to the compilation buffer here causes the compile command to be
+        ;; executed from the same directory it originated from.
+        (pop-to-buffer gr-compile-buffername)
+        (flet ((yes-or-no-p (&rest args) t)
+               (y-or-n-p (&rest args) t))
+          (recompile))
+        (pop-to-buffer gr-compile-buffername)
+        (bufend)
+        (my-end-of-current-compilation-buffer)
+        )
+      )
+    (x-focus-frame frame)
+    ))
 
 (defun my-recompile ()
   "Run recompilation but put the point at the *end* of the buffer
@@ -227,7 +227,8 @@ so we can watch errors as they come up"
   (interactive)
   (when (my-buffer-exists gr-compile-buffername)
     (with-current-buffer gr-compile-buffername
-      (let ((text (buffer-substring (point-min) (point-max))))
+      (let ((text (buffer-substring (point-min) (point-max)))
+            (inhibit-read-only t))
         (with-current-buffer (find-file-noselect "~/tmp/last.comp")
           (delete-region (point-min) (point-max))
           (insert text)

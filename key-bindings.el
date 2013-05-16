@@ -185,7 +185,7 @@
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)
-(global-set-key (kbd "<f12>") 'next-error)
+(global-set-key (kbd "<f12>") 'next-error-no-select)
 (global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
@@ -303,3 +303,4 @@
 (global-set-key (kbd "M-'") 'gr-space-operators)
 (global-set-key (kbd "C-@") 'set-mark-command)
 (require 'setup-magit)
+(global-set-key (kbd "M-o") '(lambda () (interactive) (switch-to-buffer-other-window (other-buffer))))

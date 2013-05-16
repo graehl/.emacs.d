@@ -57,7 +57,7 @@
 The idea is to maximize the current buffer, while being able to go back to the previous split of windows in the frame
 simply by calling this command again."
   (interactive)
-  (if (not(window-minibuffer-p (selected-window)))
+  (if (not (window-minibuffer-p (selected-window)))
       (progn
         (if (<  1 (count-windows))
             (progn

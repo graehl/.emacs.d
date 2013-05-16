@@ -30,6 +30,9 @@
 (my-comint)
 )
 
+(setq gdb-create-source-file-list nil)
+
 (add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
+(require 'gdb-mi)
 (provide 'setup-gud-mode)

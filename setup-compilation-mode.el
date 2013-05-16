@@ -14,36 +14,10 @@
 
 (add-to-list 'compilation-error-regexp-alist '("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2))
 (add-to-list 'compilation-error-regexp-alist '("^ + [0-9]+>\\([^(]+\\)(\\([0-9]+\\)): [^ ]" 1 2))
+
 (setq debug-on-error t)
 
-(defun my-recompile ()
-  "Run recompilation but put the point at the *end* of the buffer
-so we can watch errors as they come up"
-  (interactive)
-  (if (and (my-buffer-exists "*compilation*")
-           compile-command)
-      (save-excursion
-        ;; switching to the compilation buffer here causes the compile command to be
-        ;; executed from the same directory it originated from.
-        (pop-to-buffer "*compilation*")
-        (flet ((yes-or-no-p (&rest args) t)
-               (y-or-n-p (&rest args) t))
-          (recompile))
-        ;;(font-lock-mode -1)
-        ;;(setq truncate-lines t)
-        ;;(toggle-word-wrap -1)
-        (toggle-word-wrap 1)
-        (pop-to-buffer "*compilation*")
-        (bufend)
-        (other-window 1)
-        )
-    ;; else
-    (call-interactively 'my-compile))
-  ;; force scrolling despite save-excursion
 
-  ;; testing turning this off:
-  (my-end-of-current-compilation-buffer)
-  )
 
 (require 'compile-defuns)
 
@@ -63,18 +37,6 @@ so we can watch errors as they come up"
            (unsplittable . t)
            (menu-bar-lines . 0))
          special-display-buffer-names)
-
-(defun my-yes-or-mumble-p (prompt)
-  "PROMPT user with a yes-or-no question, but only test for yes."
-  (if (string= "yes"
-               (downcase
-                (read-from-minibuffer
-                 (concat prompt "(yes or no) "))))
-      t
-    nil))
-
-;;(defalias 'yes-or-no-p 'my-yes-or-mumble-p)
-;; doesn't work for compile mode
 
 
 (provide 'setup-compilation-mode)

@@ -1,3 +1,31 @@
+
+(defun my-recompile-point-end ()
+  "Run recompilation but put the point at the *end* of the buffer
+so we can watch errors as they come up"
+  (interactive)
+  (if (and (my-buffer-exists "*compilation*")
+           compile-command)
+      (save-excursion
+        ;; switching to the compilation buffer here causes the compile command to be
+        ;; executed from the same directory it originated from.
+        (pop-to-buffer "*compilation*")
+        (flet ((yes-or-no-p (&rest args) t)
+               (y-or-n-p (&rest args) t))
+          (recompile))
+        ;;(font-lock-mode -1)
+        ;;(setq truncate-lines t)
+        ;;(toggle-word-wrap -1)
+        (toggle-word-wrap 1)
+        (pop-to-buffer "*compilation*")
+        (bufend)
+        (other-window 1)
+        )
+    ;; else
+    (call-interactively 'my-compile))
+  ;; force scrolling despite save-excursion
+  ;; testing turning this off:
+  (my-end-of-current-compilation-buffer))
+
 (defmacro compilation-recenter-end-with-selected-window (window &rest body)
   (if (eval-when-compile (fboundp 'with-selected-window))
       `(with-selected-window ,window ,@body)
@@ -173,6 +201,16 @@ so we can watch errors as they come up"
         (modify-frame-parameters
          frame (list (cons 'foreground-color orig-fg))))
       )))
+
+
+(defun my-yes-or-mumble-p (prompt)
+  "PROMPT user with a yes-or-no question, but only test for yes."
+  (if (string= "yes"
+               (downcase
+                (read-from-minibuffer
+                 (concat prompt "(yes or no) "))))
+      t
+    nil))
 
 
 (defun* qtmstr-compile-finish (buf status)

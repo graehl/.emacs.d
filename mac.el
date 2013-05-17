@@ -9,16 +9,18 @@
 (setq mac-weight-default 'light)
 (setq mac-font-default "Monaco")
 (setq mac-font-default "Andale Mono")
-(setq mac-font-default "Consolas" 12 'light)
+(setq mac-font-default "Consolas")
 (mac-font mac-font-default mac-size-default mac-weight-default)
 (mac-font)
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
 (when nil
   ;;(mac-font "Lucida Console-14")
+  (mac-font "Conolas" 14)
   (mac-font "Andale Mono" 14)
-  (mac-font "DejaVuSansMono" 12 'light)
+  (mac-font "DejaVuSansMono" 14 'light)
   (mac-font "Pragmata" 14 'light)
+  (mac-font "PragmataPro" 14)
   )
 
 
@@ -28,8 +30,10 @@
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "/usr/local/bin")
 
+(setq ns-use-native-fullscreen nil)
 ;; keybinding to toggle full screen mode
-(global-set-key (quote [M-f10]) (quote ns-toggle-fullscreen))
+(global-set-key (quote [M-f10]) 'toggle-frame-fullscreen)
+;;
 
 ;; Move to trash when deleting stuff
 (setq delete-by-moving-to-trash t

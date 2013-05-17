@@ -28,7 +28,8 @@
   (scroll-bar-mode -1) ;; no scroll bar
   (if (equal system-type 'darwin)
                                         ;          (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen) nil 'fullboth))
-      (ns-toggle-fullscreen)
+      (toggle-frame-fullscreen)
+      ;;(ns-toggle-fullscreen)
     (if (equal system-type 'windows-nt)
         (w32-send-sys-command 61488)
       (progn

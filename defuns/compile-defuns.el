@@ -9,6 +9,7 @@ so we can watch errors as they come up"
         ;; switching to the compilation buffer here causes the compile command to be
         ;; executed from the same directory it originated from.
         (pop-to-buffer "*compilation*")
+        (enlarge-window 20)
         (flet ((yes-or-no-p (&rest args) t)
                (y-or-n-p (&rest args) t))
           (recompile))
@@ -272,5 +273,23 @@ so we can watch errors as they come up"
           (insert text)
           (save-buffer))
         ))))
+
+(defun my-next-error ()
+  "Move point to next error and highlight it"
+  (interactive)
+  (progn
+    (next-error)
+    (end-of-line-nomark)
+    (beginning-of-line-mark)
+    ))
+
+(defun my-previous-error ()
+  "Move point to previous error and highlight it"
+  (interactive)
+  (progn
+    (previous-error)
+    (end-of-line-nomark)
+    (beginning-of-line-mark)
+    ))
 
 (provide 'compile-defuns)

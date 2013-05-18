@@ -217,7 +217,7 @@ so we can watch errors as they come up"
 (defconst qtmstr-finished-color "#042414")
 (defconst qtmstr-fail-color "#200015")
 
-(defun* qtmstr-compile-finish (buf status)
+(defun qtmstr-compile-finish (buf status)
   (with-current-buffer buf
     (message (format "qtmstr-compile-finish %s %s" buf status))
     (let* ((color (if (string-match "finished" status) ;;^finished\\b

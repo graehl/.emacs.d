@@ -30,7 +30,6 @@
 ;; Set up load path
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path site-lisp-dir)
-(load (concat site-lisp-dir "subr.el"))
 
 (defun file-not-autosave (path)
   (not (or (string-match "#$" path)

@@ -45,6 +45,7 @@
              (gdb-get-field record 'frame 'func)
              (gdb-get-field record 'reason)))))
 
-(add-to-list 'gdb-stopped-hooks #'my-gdb-stopped-hook)
+;;(add-to-list 'gdb-stopped-hooks #'my-gdb-stopped-hook)
+;; doesn't work - why?
 
 (provide 'setup-gud-mode)

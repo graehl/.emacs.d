@@ -1,4 +1,4 @@
-;;(require 'gud)
+(require 'gud)
 (require 'setup-shell-mode)
 
 (defun my-gud-run-to-cursor ()

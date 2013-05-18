@@ -214,11 +214,15 @@ so we can watch errors as they come up"
     nil))
 
 
+(defconst qtmstr-finished-color "#042414")
+(defconst qtmstr-fail-color "#200015")
+
 (defun* qtmstr-compile-finish (buf status)
   (with-current-buffer buf
-    (let* ((color (if (string-match "^finished\\b" status)
-                      "#042414"
-                    "#200015"))
+    (message (format "qtmstr-compile-finish %s %s" buf status))
+    (let* ((color (if (string-match "finished" status) ;;^finished\\b
+                      qtmstr-finished-color
+                    qtmstr-fail-color))
            found)
       (frame-parameter nil 'background-clor)
       (dolist (frame (find-dedicated-frames buf))
@@ -228,8 +232,7 @@ so we can watch errors as they come up"
          (list
           (cons 'orig-background (frame-parameter frame 'background-color))
           (cons 'orig-foreground (frame-parameter frame 'foreground-color))
-          ;;          (cons 'background-color "#041a26")
-          ;;          (cons 'foreground-color "#a08183")
+                    (cons 'background-color color)
           )))
 
       (unless found

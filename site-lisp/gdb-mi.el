@@ -95,7 +95,7 @@
 (require 'gud)
 (require 'json)
 (require 'bindat)
-(require 'cl-lib)
+(require 'cl-macs)
 (require 'gv)
 
 (declare-function speedbar-change-initial-expansion-list

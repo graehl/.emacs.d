@@ -92,7 +92,6 @@
 ;;; Code:
 
 (require 'macroexp)
-(require 'cl-macs)
 
 (defvar cl--optimize-speed 1)
 (defvar cl--optimize-safety 1)

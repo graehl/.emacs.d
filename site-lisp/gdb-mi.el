@@ -96,6 +96,7 @@
 (require 'json)
 (require 'bindat)
 (require 'cl-lib)
+(require 'gv)
 
 (declare-function speedbar-change-initial-expansion-list
                   "speedbar" (new-default))

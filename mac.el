@@ -5,13 +5,14 @@
 (setq mac-option-modifier 'control)
 (setq mac-command-modifier 'meta)
 
-(setq mac-size-default 12)
+(setq mac-size-default 14)
 (setq mac-weight-default 'light)
 (setq mac-font-default "Monaco")
 (setq mac-font-default "Andale Mono")
-(setq mac-font-default "Consolas")
-(mac-font mac-font-default mac-size-default mac-weight-default)
-(mac-font)
+(setq mac-font-default "PragmataPro")
+;;(setq mac-font-default "Consolas")
+;;(mac-font mac-font-default mac-size-default mac-weight-default)
+;;(mac-font)
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
 (when nil

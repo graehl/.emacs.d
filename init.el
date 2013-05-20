@@ -158,3 +158,4 @@
 (require 'pandoc-mode)
 (require 'setup-spell)
 (require 'optional-bindings)
+(require 'setup-helm)

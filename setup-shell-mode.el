@@ -68,7 +68,7 @@
   (save-excursion
     (set-buffer buffer)
     (goto-char (point-min))
-    (let ((buffer-read-only nil))
+    (let ((inhibit-read-only t))
       (while (re-search-forward "/tmp/trunk.graehl/trunk/" nil t)
         (replace-match "~/t/")))))
 

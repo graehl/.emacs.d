@@ -28,7 +28,8 @@
   (scroll-bar-mode -1) ;; no scroll bar
   (if (equal system-type 'darwin)
                                         ;          (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen) nil 'fullboth))
-      (ns-toggle-fullscreen)
+      (toggle-frame-fullscreen)
+      ;;(ns-toggle-fullscreen)
     (if (equal system-type 'windows-nt)
         (w32-send-sys-command 61488)
       (progn
@@ -57,7 +58,7 @@
 The idea is to maximize the current buffer, while being able to go back to the previous split of windows in the frame
 simply by calling this command again."
   (interactive)
-  (if (not(window-minibuffer-p (selected-window)))
+  (if (not (window-minibuffer-p (selected-window)))
       (progn
         (if (<  1 (count-windows))
             (progn

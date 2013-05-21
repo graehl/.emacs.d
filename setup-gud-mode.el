@@ -30,6 +30,22 @@
 (my-comint)
 )
 
-(add-hook 'gud-mode-hook 'my-gud-mode-hook)
+;;(add-hook 'gud-mode-hook 'my-gud-mode-hook)
+
+(require 'gdb-mi)
+
+(setq gdb-non-stop-setting t)
+(setq gdb-create-source-file-list nil)
+
+(defun my-gdb-stopped-hook (record)
+  (with-current-buffer (get-buffer-create "*debug-stop-log*")
+    (insert
+     (format "%s stopped in %s (%s)\n"
+             (gdb-get-field record 'thread-id)
+             (gdb-get-field record 'frame 'func)
+             (gdb-get-field record 'reason)))))
+
+;;(add-to-list 'gdb-stopped-hooks #'my-gdb-stopped-hook)
+;; doesn't work - why?
 
 (provide 'setup-gud-mode)

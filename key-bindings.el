@@ -8,7 +8,7 @@
 (global-set-key (kbd "C-.") 'hippie-expand)
 
 ;; Expand region (increases selected region by semantic units)
-(global-set-key (kbd "C-@") 'er/expand-region)
+;;(global-set-key (kbd "C-@") 'er/expand-region)
 
 ;; Mark additional regions matching current region
 (global-set-key (kbd "C-å") 'mark-previous-like-this)
@@ -185,11 +185,10 @@
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)
-(global-set-key (kbd "<f12>") 'next-error)
 (global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
-(global-set-key (kbd "M-]") 'same-buffer-other-window)
+(global-set-key (kbd "M-]") 'same-cursor-and-buffer-other-window)
 
                                         ;(global-set-key (kbd "M-s") 'fixup-whitespace)
                                         ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
@@ -296,9 +295,15 @@
 (global-set-key (kbd "<insert>") 'gud-finish)
 (global-set-key (kbd "S-<right>") 'forward-sentence)
 (global-set-key (kbd "S-<left>") 'backward-sentence)
+
+(require 'setup-magit)
 (global-set-key (kbd "M-c") 'magit-status)
 ;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
 (global-set-key (kbd ",") 'self-insert-command)
 (global-set-key (kbd "C-=") 'gr-include)
 (global-set-key (kbd "M-'") 'gr-space-operators)
-(require 'setup-magit)
+(global-set-key (kbd "C-@") 'set-mark-command)
+(global-set-key (kbd "M-o") '(lambda () (interactive) (switch-to-buffer-other-window (other-buffer))))
+;;(global-set-key (kbd "<f12>") 'next-error-no-select)
+(global-set-key (kbd "<f12>") 'my-next-error)
+(global-set-key (kbd "C-<f12>") 'my-previous-error)

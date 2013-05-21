@@ -72,21 +72,19 @@
 (require 'setup-dired)
 ;;(require 'setup-magit)
 (require 'setup-hippie)
-;(require 'setup-autopair)
+;;(require 'setup-autopair)
 (require 'setup-c-mode)
 (require 'setup-compilation-mode)
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
-;(require 'setup-js-mode)
 (require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
-;(require 'setup-scala-mode)
-;(require 'setup-clojure-mode)
+;;(require 'setup-scala-mode)
 (require 'setup-line-mode)
-;(require 'setup-paredit)
+;;(require 'setup-paredit)
 (require 'setup-ispell)
 
 ;; Map files to modes
@@ -100,7 +98,6 @@
 ;;(require 'ace-jump-mode)
 
 ;; Setup key mappings
-;;(require 'key-chords) ; to enable: key-chord-mode
 (require 'setup-python)
 (require 'setup-term)
 ;; below use defuns.
@@ -158,3 +155,4 @@
 (require 'pandoc-mode)
 (require 'setup-spell)
 (require 'optional-bindings)
+(require 'setup-helm)

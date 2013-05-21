@@ -8,11 +8,6 @@
 	ignore = untracked
 	path = site-lisp/recall-position
 	url = http://github.com/cjohansen/recall-position.el.git
-[submodule "site-lisp/evil"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/evil
-	url = git://gitorious.org/evil/evil.git
 [submodule "site-lisp/undo-tree"]
 	ignore = untracked
 	ignore = untracked
@@ -171,3 +166,6 @@
 [submodule "site-lisp/scala-mode2"]
 	path = site-lisp/scala-mode2
 	url = git://github.com/rafl/git-commit-mode.git
+[submodule "site-lisp/helm"]
+	path = site-lisp/helm
+	url = git://github.com/emacs-helm/helm.git

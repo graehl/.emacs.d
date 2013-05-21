@@ -165,3 +165,6 @@
 [submodule "site-lisp/helm"]
 	path = site-lisp/helm
 	url = git://github.com/emacs-helm/helm.git
+[submodule "site-lisp/python-mode"]
+	path = site-lisp/python-mode
+	url = git@github.com:graehl/python-mode.git

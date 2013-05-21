@@ -95,7 +95,6 @@
 (require 'mark-more-like-this)
 (require 'inline-string-rectangle)
 (require 'iy-go-to-char)
-;;(require 'ace-jump-mode)
 
 ;; Setup key mappings
 (require 'setup-python)

@@ -17,10 +17,6 @@
 ;; Replace rectangle-text with inline-string-rectangle
 (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
-;; Quickly jump in document with ace-jump-mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
-(global-set-key (kbd "C-ø") 'ace-jump-mode)
-
 ;; Repeat last command - too cumbersome with C-x z
 (global-set-key (kbd "M-z") 'repeat)
 
@@ -224,7 +220,6 @@
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 (global-set-key (kbd "M-x") 'execute-extended-command)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 (global-set-key (kbd "C-c C-s") 'occur)
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key "\C-\\" 'set-mark-and-goto-line)

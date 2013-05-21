@@ -35,7 +35,7 @@
 ;;(add-hook 'scala-mode-hook (lambda () (local-set-key (kbd "M-;") 'my-scala-eval-line) (local-set-key (kbd "M-'") 'scala-eval-region)))
 ;(require 'scala-mode)
 
-(require 'scala-mode2)
+(require 'scala-mode)
 (add-to-list 'auto-mode-alist '("\\.scala\\'" . scala-mode))
 
 (provide 'setup-scala-mode)

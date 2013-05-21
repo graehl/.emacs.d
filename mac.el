@@ -12,7 +12,7 @@
 (setq mac-font-default "PragmataPro")
 ;;(setq mac-font-default "Consolas")
 ;;(mac-font mac-font-default mac-size-default mac-weight-default)
-;;(mac-font)
+(mac-font)
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
 (when nil
@@ -21,7 +21,6 @@
   (mac-font "Andale Mono" 14)
   (mac-font "DejaVuSansMono" 14 'light)
   (mac-font "Pragmata" 14 'light)
-  (mac-font "PragmataPro" 14)
   )
 
 

@@ -277,6 +277,17 @@ so we can watch errors as they come up"
           (save-buffer))
         ))))
 
+
+(defun end-of-line-nomark ()
+  (interactive)
+  (end-of-line)
+)
+
+(defun beginning-of-line-mark ()
+  (interactive)
+  (beginning-of-line)
+)
+
 (defun my-next-error ()
   "Move point to next error and highlight it"
   (interactive)

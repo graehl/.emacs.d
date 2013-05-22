@@ -35,6 +35,7 @@ so we can watch errors as they come up"
        ,@body)))
 (put 'compilation-recenter-end-with-selected-window 'lisp-indent-function 1)
 
+
 (defun compilation-recenter-end-at-finish (buffer string)
   (dolist (window (get-buffer-window-list buffer))
     (compilation-recenter-end-with-selected-window window
@@ -232,7 +233,7 @@ so we can watch errors as they come up"
          (list
           (cons 'orig-background (frame-parameter frame 'background-color))
           (cons 'orig-foreground (frame-parameter frame 'foreground-color))
-                    (cons 'background-color color)
+          (cons 'background-color color)
           )))
 
       (unless found
@@ -286,12 +287,19 @@ so we can watch errors as they come up"
 (defun beginning-of-line-mark ()
   (interactive)
   (beginning-of-line)
+  (mark)
 )
+
+(defmacro gr-save-focus (&rest body)
+  `(let ((frame (selected-frame))
+         (val (progn ,@body)))
+     (x-focus-frame frame)
+     val))
 
 (defun my-next-error ()
   "Move point to next error and highlight it"
   (interactive)
-  (progn
+  (gr-save-focus
     (next-error)
     (end-of-line-nomark)
     (beginning-of-line-mark)
@@ -300,7 +308,7 @@ so we can watch errors as they come up"
 (defun my-previous-error ()
   "Move point to previous error and highlight it"
   (interactive)
-  (progn
+  (gr-save-focus
     (previous-error)
     (end-of-line-nomark)
     (beginning-of-line-mark)

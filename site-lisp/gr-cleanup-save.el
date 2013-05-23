@@ -199,14 +199,14 @@
       (gr-compress-whitespace-impl over))))
 
 ;;\\|[?:]
-(defconst gr-comma-regexp "[,;][^,;) ]" "comma - space after")
+(defconst gr-comma-regexp "[,;][^,@;) ]" "comma - space after")
 (defconst gr-assign-regexp "\\([-+*/^|&]?=\\|||\\)" "assignment, || - space before and after")
 (defconst gr-no-space-regexp "[^-+*/^|& =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
 
 (defun gr-what-face (pos)
   (interactive "d")
-  (jit-lock-fontify-now pos (+ 1 pos))
+  (jit-lock-fontify-now pos (+ 500 pos))
   (or (get-char-property (point) 'read-face-name)
       (get-char-property (point) 'face)))
 
@@ -215,10 +215,10 @@
            (eq face 'font-lock-comment-face)
            (eq face 'font-lock-doc-face)
            (eq face 'font-lock-comment-delimiter-face)
-           (eq face '(font-lock-regexp-grouping-construct font-lock-string-face))
-           (eq face '(font-lock-regexp-grouping-backslash font-lock-string-face))
-           (eq face '(font-lock-regexp-negation-char-face font-lock-string-face))
-)))
+           (equal face '(font-lock-regexp-grouping-construct font-lock-string-face))
+           (equal face '(font-lock-regexp-grouping-backslash font-lock-string-face))
+           (equal face '(font-lock-regexp-negation-char-face font-lock-string-face))
+           )))
 
 (defun gr-what-face-is-code (pos)
   (interactive "d")
@@ -236,13 +236,14 @@
 ;; not reliable - why?
 (defun gr-force-fontify ()
   (interactive)
-    (font-lock-fontify-buffer)
-    (jit-lock-refontify (point-min) (point-max))
-    (sleep-for 0 20)
-)
+  (font-lock-fontify-buffer)
+  ;;(jit-lock-refontify (point-min) (point-max))
+  (jit-lock-fontify-now)
+  (sleep-for 0 20)
+  )
 
 (defun gr-syntax-at-point ()
-    (thing-at-point 'syntax))
+  (thing-at-point 'syntax))
 
 (defun show-syntax ()
   (interactive)
@@ -251,9 +252,9 @@
 (defun gr-next-assignment-nospace ()
   (interactive)
   (when (re-search-forward (concat gr-no-space-regexp gr-assign-regexp gr-no-space-regexp) (point-max) t)
-      (progn
-        (goto-char (- (match-end 0) 1))
-        t))
+    (progn
+      (goto-char (- (match-end 0) 1))
+      t)))
 
 (defun gr-space-operators-impl ()
   (interactive)
@@ -326,7 +327,7 @@
                       (while (re-search-forward "[ ]+$" (point-max) t)
                         (delete-region (match-beginning 0)
                                        (match-end 0)))))))))
-                             ;;(query-replace-regexp "[ \t]+$" "")))))))))
+    ;;(query-replace-regexp "[ \t]+$" "")))))))))
 
     ;; always return nil, in case this is on write-file-hooks.
     nil))

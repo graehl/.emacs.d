@@ -39,6 +39,6 @@
 
 
 (setq fit-frame-max-width-percent 50)
-(setq fit-frame-max-height-percent 95)
+(setq fit-frame-max-height-percent 75)
 (provide 'setup-compilation-mode)
 ;;(add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)

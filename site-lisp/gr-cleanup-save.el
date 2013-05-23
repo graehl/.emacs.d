@@ -200,23 +200,29 @@
 
 ;;\\|[?:]
 (defconst gr-comma-regexp "[,;][^,;) ]" "comma - space after")
-(defconst gr-assign-regexp "\\([-+*/^|&]\?=\\|||\\)" "assignment - space before and after")
+(defconst gr-assign-regexp "\\([-+*/^|&]?=\\|||\\)" "assignment, || - space before and after")
 (defconst gr-no-space-regexp "[^-+*/^|& =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
 
 (defun gr-what-face (pos)
   (interactive "d")
+  (jit-lock-fontify-now pos (+ 1 pos))
   (or (get-char-property (point) 'read-face-name)
       (get-char-property (point) 'face)))
 
 (defun gr-face-is-code (face)
   (not (or (eq face 'font-lock-string-face)
-           (eq face 'font-lock-comment-face))))
+           (eq face 'font-lock-comment-face)
+           (eq face 'font-lock-doc-face)
+           (eq face 'font-lock-comment-delimiter-face)
+           (eq face '(font-lock-regexp-grouping-construct font-lock-string-face))
+           (eq face '(font-lock-regexp-grouping-backslash font-lock-string-face))
+           (eq face '(font-lock-regexp-negation-char-face font-lock-string-face))
+)))
 
 (defun gr-what-face-is-code (pos)
   (interactive "d")
   (gr-face-is-code (gr-what-face pos)))
-
 
 (defun gr-what-face-msg (pos)
   (interactive "d")
@@ -227,17 +233,40 @@
   (interactive "d")
   (message (if (gr-what-face-is-code pos) "CODE" "comment or string")))
 
+;; not reliable - why?
+(defun gr-force-fontify ()
+  (interactive)
+    (font-lock-fontify-buffer)
+    (jit-lock-refontify (point-min) (point-max))
+    (sleep-for 0 20)
+)
+
+(defun gr-syntax-at-point ()
+    (thing-at-point 'syntax))
+
+(defun show-syntax ()
+  (interactive)
+  (message "syntax-at-point: %s" (gr-syntax-at-point)))
+
+(defun gr-next-assignment-nospace ()
+  (interactive)
+  (when (re-search-forward (concat gr-no-space-regexp gr-assign-regexp gr-no-space-regexp) (point-max) t)
+      (progn
+        (goto-char (- (match-end 0) 1))
+        t))
+
 (defun gr-space-operators-impl ()
   (interactive)
   (message (concat "space operators - after comma: " gr-comma-regexp ", before/after assignment=:" gr-assign-regexp " ..."))
   (save-excursion
+    (gr-force-fontify)
     (goto-char (point-min))
     (while (re-search-forward (concat gr-comma-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))
         (insert " ")))
     (goto-char (point-min))
-    (while (re-search-forward (concat gr-no-space-regexp gr-assign-regexp gr-no-space-regexp) (point-max) t)
+    (while (gr-next-assignment-nospace)
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))
         (insert " ")
@@ -245,16 +274,16 @@
         (insert " ")))
     (goto-char (point-min))
     (while (re-search-forward gr-access-spec (point-max) t)
+      (goto-char (- (match-end 0) 2))
       (when (gr-what-face-is-code (point))
-        (goto-char (- (match-end 0) 2))
         (delete-char 1)))
     ))
 
 (defun gr-space-operators (&optional over)
   "region if active, else buffer"
   (interactive)
-  (message "compressing spaces...")
   (save-restriction
+    (message "adding some spaces for code face ...")
     (gr-narrow-dwim-buffer)
     (gr-space-operators-impl)))
 

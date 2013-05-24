@@ -19,13 +19,13 @@
 (defcustom gr-cleanup-buffer-excessive-newlines 3 "if not nil or 0, replace excessive newlines with this many" :type 'integer :group 'gr-cleanup-save)
 (defcustom gr-cleanup-compress-whitespace-fast t "use simple regex rather than syntax tables - may affect comments/strings" :type 'boolean :group 'gr-cleanup-save)
 (defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
-
+(defvar shell-modes '(shell-script shell-mode sh-mode)) ;; don't add space around var=val
 (defun gr-save-with-cleanup () "gr-cleanup-always and save-buffer" (interactive) (gr-cleanup-always) (save-buffer))
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
 (defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode make-modes)))
 (defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (gr-cleanup-skip-indent-p)))
 (defun gr-cleanup-skip-compress-whitespace-p () (or gr-cleanup-never-compress (member major-mode gr-cleanup-skip-compress-whitespace-modes)))
-
+(defun gr-cleanup-space-assign () (not (or (member major-mode shell-modes) (member major-mode make-modes))))
 (defvar gr-cleanup-save-hook nil
   "Called when `gr-cleanup-save-mode' is turned on.")
 
@@ -268,13 +268,15 @@
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))
         (insert " ")))
-    (goto-char (point-min))
-    (while (gr-next-assignment-nospace)
-      (goto-char (- (match-end 0) 1))
-      (when (gr-what-face-is-code (point))
-        (insert " ")
-        (goto-char (+ (match-beginning 0) 1))
-        (insert " ")))
+    (when (gr-cleanup-space-assign)
+      (goto-char (point-min))
+      (while (gr-next-assignment-nospace)
+        (goto-char (- (match-end 0) 1))
+        (when (gr-what-face-is-code (point))
+          (insert " ")
+          (goto-char (+ (match-beginning 0) 1))
+          (insert " ")))
+      )
     (goto-char (point-min))
     (while (re-search-forward gr-access-spec (point-max) t)
       (goto-char (- (match-end 0) 2))

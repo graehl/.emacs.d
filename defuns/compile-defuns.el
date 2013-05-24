@@ -181,6 +181,8 @@ so we can watch errors as they come up"
 
 (require 'cl)
 
+(defvar gr-compile-dedicated-frame nil)
+
 (defun find-dedicated-frames (buf)
   (let (result)
     (dolist (window (get-buffer-window-list buf t) result)
@@ -193,16 +195,17 @@ so we can watch errors as they come up"
   (modify-syntax-entry ?< "(")
   (modify-syntax-entry ?> ")")
 
-  (dolist (frame (find-dedicated-frames (current-buffer)))
-    (let ((orig (frame-parameter frame 'orig-background))
-          (orig-fg (frame-parameter frame 'orig-foreground)))
-      (when orig
-        (modify-frame-parameters
-         frame (list (cons 'background-color orig))))
-      (when orig-fg
-        (modify-frame-parameters
-         frame (list (cons 'foreground-color orig-fg))))
-      )))
+  (when gr-compile-dedicated-frame
+    (dolist (frame (find-dedicated-frames (current-buffer)))
+      (let ((orig (frame-parameter frame 'orig-background))
+            (orig-fg (frame-parameter frame 'orig-foreground)))
+        (when orig
+          (modify-frame-parameters
+           frame (list (cons 'background-color orig))))
+        (when orig-fg
+          (modify-frame-parameters
+           frame (list (cons 'foreground-color orig-fg))))
+        ))))
 
 
 (defun my-yes-or-mumble-p (prompt)
@@ -218,7 +221,6 @@ so we can watch errors as they come up"
 (defconst qtmstr-finished-color "#042414")
 (defconst qtmstr-fail-color "#200015")
 
-(defvar gr-compile-dedicated-frame nil)
 (defun qtmstr-compile-finish (buf status)
   (with-current-buffer buf
     (message (format "qtmstr-compile-finish %s %s" buf status))
@@ -284,13 +286,13 @@ so we can watch errors as they come up"
 (defun end-of-line-nomark ()
   (interactive)
   (end-of-line)
-)
+  )
 
 (defun beginning-of-line-mark ()
   (interactive)
   (beginning-of-line)
   (mark)
-)
+  )
 
 (defmacro gr-save-focus (&rest body)
   `(let ((frame (selected-frame))
@@ -302,18 +304,18 @@ so we can watch errors as they come up"
   "Move point to next error and highlight it"
   (interactive)
   (gr-save-focus
-    (next-error)
-    (end-of-line-nomark)
-    (beginning-of-line-mark)
-    ))
+   (next-error)
+   (end-of-line-nomark)
+   (beginning-of-line-mark)
+   ))
 
 (defun my-previous-error ()
   "Move point to previous error and highlight it"
   (interactive)
   (gr-save-focus
-    (previous-error)
-    (end-of-line-nomark)
-    (beginning-of-line-mark)
-    ))
+   (previous-error)
+   (end-of-line-nomark)
+   (beginning-of-line-mark)
+   ))
 
 (provide 'compile-defuns)

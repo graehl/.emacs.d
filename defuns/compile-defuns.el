@@ -218,6 +218,7 @@ so we can watch errors as they come up"
 (defconst qtmstr-finished-color "#042414")
 (defconst qtmstr-fail-color "#200015")
 
+(defvar gr-compile-dedicated-frame nil)
 (defun qtmstr-compile-finish (buf status)
   (with-current-buffer buf
     (message (format "qtmstr-compile-finish %s %s" buf status))
@@ -226,6 +227,7 @@ so we can watch errors as they come up"
                     qtmstr-fail-color))
            found)
       (frame-parameter nil 'background-clor)
+      (when gr-compile-dedicated-frame
       (dolist (frame (find-dedicated-frames buf))
         (setq found t)
         (modify-frame-parameters
@@ -234,7 +236,7 @@ so we can watch errors as they come up"
           (cons 'orig-background (frame-parameter frame 'background-color))
           (cons 'orig-foreground (frame-parameter frame 'foreground-color))
           (cons 'background-color color)
-          )))
+          ))))
 
       (unless found
         (let ((overlay)

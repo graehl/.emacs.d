@@ -228,15 +228,15 @@ so we can watch errors as they come up"
            found)
       (frame-parameter nil 'background-clor)
       (when gr-compile-dedicated-frame
-      (dolist (frame (find-dedicated-frames buf))
-        (setq found t)
-        (modify-frame-parameters
-         frame
-         (list
-          (cons 'orig-background (frame-parameter frame 'background-color))
-          (cons 'orig-foreground (frame-parameter frame 'foreground-color))
-          (cons 'background-color color)
-          ))))
+        (dolist (frame (find-dedicated-frames buf))
+          (setq found t)
+          (modify-frame-parameters
+           frame
+           (list
+            (cons 'orig-background (frame-parameter frame 'background-color))
+            (cons 'orig-foreground (frame-parameter frame 'foreground-color))
+            (cons 'background-color color)
+            ))))
 
       (unless found
         (let ((overlay)

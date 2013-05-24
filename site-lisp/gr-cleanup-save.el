@@ -215,6 +215,8 @@
            (eq face 'font-lock-comment-face)
            (eq face 'font-lock-doc-face)
            (eq face 'font-lock-comment-delimiter-face)
+           (eq face 'sh-heredoc)
+           (eq face 'sh-quoted-exec)
            (equal face '(font-lock-regexp-grouping-construct font-lock-string-face))
            (equal face '(font-lock-regexp-grouping-backslash font-lock-string-face))
            (equal face '(font-lock-regexp-negation-char-face font-lock-string-face))

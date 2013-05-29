@@ -255,3 +255,20 @@ modified file"
   (interactive)
   (set-unix-newlines)
   (save-buffer))
+
+
+(defmacro gr-save-focus (&rest body)
+  `(let ((frame (selected-frame))
+         (val (progn ,@body)))
+     (x-focus-frame frame)
+     val))
+
+(defun gr-raise-buffer-other-frame (buffer)
+  (interactive (list (current-buffer)))
+  (gr-save-focus
+   (switch-to-buffer-other-frame buffer)))
+
+(defun gr-raise-buffer-other-window (buffer)
+  (interactive (list (current-buffer)))
+  (gr-save-focus
+   (switch-to-buffer-other-window buffer)))

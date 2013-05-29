@@ -302,3 +302,5 @@
 ;;(global-set-key (kbd "<f12>") 'next-error-no-select)
 (global-set-key (kbd "<f12>") 'my-next-error)
 (global-set-key (kbd "C-<f12>") 'my-previous-error)
+(global-set-key (kbd "C-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-frame "*compilation*")))
+(global-set-key (kbd "S-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-window "*compilation*")))

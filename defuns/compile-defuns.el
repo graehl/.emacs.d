@@ -1,4 +1,4 @@
-
+(require 'buffer-defuns)
 (defun my-recompile-point-end ()
   "Run recompilation but put the point at the *end* of the buffer
 so we can watch errors as they come up"
@@ -294,11 +294,6 @@ so we can watch errors as they come up"
   (mark)
   )
 
-(defmacro gr-save-focus (&rest body)
-  `(let ((frame (selected-frame))
-         (val (progn ,@body)))
-     (x-focus-frame frame)
-     val))
 
 (defun my-next-error ()
   "Move point to next error and highlight it"

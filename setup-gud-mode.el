@@ -32,7 +32,7 @@
 
 ;;(add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
-(require 'gdb-mi)
+;;(require 'gdb-mi)
 
 (setq gdb-non-stop-setting t)
 (setq gdb-create-source-file-list nil)

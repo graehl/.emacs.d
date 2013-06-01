@@ -66,7 +66,7 @@ so we can watch errors as they come up"
       ;; force scrolling despite save-excursion
       (my-end-of-current-compilation-buffer)
       )
-    (x-focus-frame frame)
+    (gr-focus-frame frame)
     )
   )
 
@@ -91,7 +91,7 @@ buffer is either a buffer object or a buffer name"
         (my-end-of-current-compilation-buffer)
         )
       )
-    (x-focus-frame frame)
+    (gr-focus-frame frame)
     ))
 
 (defun my-recompile ()

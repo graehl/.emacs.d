@@ -5,6 +5,13 @@
 
 (setq max-specpdl-size 5000) ; reduce protection against bugs
 
+(setq on-mac-port nil)
+
+(defun gr-focus-frame (frame)
+  (interactive)
+    (select-frame-set-input-focus frame)
+;; x-focus-frame
+    )
 
 (defmacro with-whole-buffer (&rest body)
   `(save-excursion
@@ -260,7 +267,7 @@ modified file"
 (defmacro gr-save-focus (&rest body)
   `(let ((frame (selected-frame))
          (val (progn ,@body)))
-     (x-focus-frame frame)
+     (gr-focus-frame frame)
      val))
 
 (defun gr-raise-buffer-other-frame (buffer)

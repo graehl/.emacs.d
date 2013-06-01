@@ -304,3 +304,4 @@
 (global-set-key (kbd "C-<f12>") 'my-previous-error)
 (global-set-key (kbd "C-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-frame "*compilation*")))
 (global-set-key (kbd "S-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-window "*compilation*")))
+(global-set-key (kbd "C-]") '(lambda () (interactive) (insert "}}}")))

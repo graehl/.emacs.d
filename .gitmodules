@@ -113,11 +113,6 @@
 	ignore = untracked
 	path = site-lisp/hl-line-plus
 	url = https://github.com/emacsmirror/hl-line-plus.git
-[submodule "site-lisp/mark-multiple"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/mark-multiple
-	url = https://github.com/graehl/mark-multiple.el.git
 [submodule "site-lisp/isearch-plus"]
 	ignore = untracked
 	ignore = untracked

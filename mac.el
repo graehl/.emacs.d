@@ -34,13 +34,14 @@
 ;; keybinding to toggle full screen mode
 (global-set-key (quote [M-f10]) 'toggle-frame-fullscreen)
 
+(setq on-mac-port nil)
 (defun toggle-frame-fullscreen-mac-port ()
   "Toggle full screen"
   (interactive)
   (set-frame-parameter
    nil 'fullscreen
    (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
-;;(global-set-key (quote [M-f10]) 'toggle-frame-fullscreen-mac-port)
+(when on-mac-port (global-set-key (quote [M-f10]) 'toggle-frame-fullscreen-mac-port))
 
 ;; Move to trash when deleting stuff
 (setq delete-by-moving-to-trash t

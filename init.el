@@ -155,3 +155,4 @@
 (require 'setup-spell)
 (require 'optional-bindings)
 (require 'setup-helm)
+;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))

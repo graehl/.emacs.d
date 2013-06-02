@@ -160,3 +160,6 @@
 [submodule "site-lisp/python-mode"]
 	path = site-lisp/python-mode
 	url = git@github.com:graehl/python-mode.git
+[submodule "site-lisp/multiple-cursors.el"]
+	path = site-lisp/multiple-cursors.el
+	url = git://github.com/magnars/multiple-cursors.el.git

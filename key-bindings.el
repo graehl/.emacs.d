@@ -219,7 +219,6 @@
 (global-set-key [(control shift next)] 'downcase-word)
 (global-set-key (kbd "<C-S-return>") 'fullscreen)
 (global-set-key (kbd "M-x") 'execute-extended-command)
-(require 'smex)(global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-c C-s") 'occur)
 (global-set-key (kbd "M-m") 'iy-go-to-char)
 (global-set-key "\C-\\" 'set-mark-and-goto-line)
@@ -305,3 +304,10 @@
 (global-set-key (kbd "C-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-frame "*compilation*")))
 (global-set-key (kbd "S-<f12>") '(lambda () (interactive) (gr-raise-buffer-other-window "*compilation*")))
 (global-set-key (kbd "C-]") '(lambda () (interactive) (insert "}}}")))
+(require 'setup-helm)
+(global-set-key (kbd "C-c h") 'helm-mini)
+(global-set-key (kbd "M-i") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-x y") 'helm-show-kill-ring)
+(require 'smex)(global-set-key (kbd "M-x") 'smex)
+
+;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

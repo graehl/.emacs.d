@@ -1,4 +1,4 @@
-
+(require 'buffer-defuns)
 (defun my-recompile-point-end ()
   "Run recompilation but put the point at the *end* of the buffer
 so we can watch errors as they come up"
@@ -66,7 +66,7 @@ so we can watch errors as they come up"
       ;; force scrolling despite save-excursion
       (my-end-of-current-compilation-buffer)
       )
-    (x-focus-frame frame)
+    (gr-focus-frame frame)
     )
   )
 
@@ -91,7 +91,7 @@ buffer is either a buffer object or a buffer name"
         (my-end-of-current-compilation-buffer)
         )
       )
-    (x-focus-frame frame)
+    (gr-focus-frame frame)
     ))
 
 (defun my-recompile ()
@@ -181,6 +181,8 @@ so we can watch errors as they come up"
 
 (require 'cl)
 
+(defvar gr-compile-dedicated-frame nil)
+
 (defun find-dedicated-frames (buf)
   (let (result)
     (dolist (window (get-buffer-window-list buf t) result)
@@ -193,16 +195,17 @@ so we can watch errors as they come up"
   (modify-syntax-entry ?< "(")
   (modify-syntax-entry ?> ")")
 
-  (dolist (frame (find-dedicated-frames (current-buffer)))
-    (let ((orig (frame-parameter frame 'orig-background))
-          (orig-fg (frame-parameter frame 'orig-foreground)))
-      (when orig
-        (modify-frame-parameters
-         frame (list (cons 'background-color orig))))
-      (when orig-fg
-        (modify-frame-parameters
-         frame (list (cons 'foreground-color orig-fg))))
-      )))
+  (when gr-compile-dedicated-frame
+    (dolist (frame (find-dedicated-frames (current-buffer)))
+      (let ((orig (frame-parameter frame 'orig-background))
+            (orig-fg (frame-parameter frame 'orig-foreground)))
+        (when orig
+          (modify-frame-parameters
+           frame (list (cons 'background-color orig))))
+        (when orig-fg
+          (modify-frame-parameters
+           frame (list (cons 'foreground-color orig-fg))))
+        ))))
 
 
 (defun my-yes-or-mumble-p (prompt)
@@ -226,15 +229,16 @@ so we can watch errors as they come up"
                     qtmstr-fail-color))
            found)
       (frame-parameter nil 'background-clor)
-      (dolist (frame (find-dedicated-frames buf))
-        (setq found t)
-        (modify-frame-parameters
-         frame
-         (list
-          (cons 'orig-background (frame-parameter frame 'background-color))
-          (cons 'orig-foreground (frame-parameter frame 'foreground-color))
-          (cons 'background-color color)
-          )))
+      (when gr-compile-dedicated-frame
+        (dolist (frame (find-dedicated-frames buf))
+          (setq found t)
+          (modify-frame-parameters
+           frame
+           (list
+            (cons 'orig-background (frame-parameter frame 'background-color))
+            (cons 'orig-foreground (frame-parameter frame 'foreground-color))
+            (cons 'background-color color)
+            ))))
 
       (unless found
         (let ((overlay)
@@ -282,19 +286,14 @@ so we can watch errors as they come up"
 (defun end-of-line-nomark ()
   (interactive)
   (end-of-line)
-)
+  )
 
 (defun beginning-of-line-mark ()
   (interactive)
   (beginning-of-line)
   (mark)
-)
+  )
 
-(defmacro gr-save-focus (&rest body)
-  `(let ((frame (selected-frame))
-         (val (progn ,@body)))
-     (x-focus-frame frame)
-     val))
 
 (defun my-next-error ()
   "Move point to next error and highlight it"

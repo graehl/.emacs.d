@@ -113,11 +113,6 @@
 	ignore = untracked
 	path = site-lisp/hl-line-plus
 	url = https://github.com/emacsmirror/hl-line-plus.git
-[submodule "site-lisp/mark-multiple"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/mark-multiple
-	url = https://github.com/graehl/mark-multiple.el.git
 [submodule "site-lisp/isearch-plus"]
 	ignore = untracked
 	ignore = untracked
@@ -165,3 +160,9 @@
 [submodule "site-lisp/python-mode"]
 	path = site-lisp/python-mode
 	url = git@github.com:graehl/python-mode.git
+[submodule "site-lisp/multiple-cursors.el"]
+	path = site-lisp/multiple-cursors.el
+	url = git://github.com/magnars/multiple-cursors.el.git
+[submodule "site-lisp/gitsum"]
+	path = site-lisp/gitsum
+	url = git://github.com/tomykaira/gitsum.git

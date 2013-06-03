@@ -1,7 +1,7 @@
-;(autoload 'python-mode "python-mode" "Python Mode." t)
+(autoload 'python-mode "python-mode" "Python Mode." t)
 ;(require 'python-mode)
 (when (fboundp 'syntax-propertize-rules)
-(require 'python)
+;;(require 'python)
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 (setq py-keys (list
@@ -9,6 +9,7 @@
                (cons (kbd "<M-left>") 'py-shift-left)
                (cons (kbd "<M-right>") 'py-shift-right)
                ))
+
 (defun define-py-keys ()
   (mapcar (lambda (c) (list 'py-mode-map (car c) (cdr c))) py-keys))
 (define-py-keys)

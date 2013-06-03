@@ -53,7 +53,7 @@
  '(recentf-max-menu-items 30)
  '(recentf-max-saved-items 300)
  '(safe-local-variable-values (quote ((indent-tabs-mode . 1) (encoding . utf-8))))
- '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
  '(yas/also-auto-indent-first-line t)
  '(yas/next-field-key (quote ("TAB" "<tab>" "M-<return>")))
  '(yas/prev-field-key (quote ("<backtab>" "<S-tab>" "C-<space>" "S-<return>"))))
+;; '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))

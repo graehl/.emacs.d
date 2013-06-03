@@ -1,3 +1,10 @@
+(defvar gr-packages
+  '(ack-and-a-half ace-jump-mode
+                   scala-mode
+                   flycheck gist gitconfig-mode gitignore-mode
+                   helm-projectile ido-ubiquitous
+                   solarized-theme zenburn-theme))
+
 (defun emacs-version-matches (substr)
   (string-match substr (emacs-version)))
 
@@ -16,6 +23,8 @@
  (require 'advice)
 )
 
+(require 'cl)
+
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
 
@@ -27,11 +36,9 @@
 (add-to-list 'load-path site-lisp-dir)
 
 ;; packages
-(require 'cl)
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
-(defvar gr-packages '(ack-and-a-half ace-jump-mode flycheck gist gitconfig-mode gitignore-mode helm-projectile ido-ubiquitous solarized-theme zenburn-theme))
 
 (defun gr-packages-installed-p ()
   "Check if all packages in `gr-packages' are installed."
@@ -39,6 +46,7 @@
 
 (defun gr-install-packages ()
   "Install all packages listed in `gr-packages'."
+  (interactive)
   (unless (gr-packages-installed-p)
     ;; check for new packages (package versions)
     (message "%s" "refreshing package database...")
@@ -129,7 +137,7 @@ Missing packages are installed automatically."
     (unwind-protect
 	(and (string-match regexp emacs-version)
 	     (setq version
-		   (string-to-int (substring emacs-version
+		   (string-to-number (substring emacs-version
 					     (match-beginning 1)
 					     (match-end 1)))))
       (store-match-data old-match-data))

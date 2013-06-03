@@ -64,13 +64,16 @@ to case differences."
 
 (if (not (fboundp 'file-not-autosave))
     (defun file-not-autosave (path)
-      (not (string-match "#$" path))))
+      (and
+       (not (string-match "#$" path))
+       (not (string-match ".#" path))
+       )))
 
-(defun make-byte-compile-ext (el &optional extension)  
+(defun make-byte-compile-ext (el &optional extension)
   (interactive "f")
   (if (eq nil extension) (setq extension ".el"))
-  (message (format "make-byte-compile %s ext=%s" el extension))
   (when (and (file-not-autosave el) (string-suffix-p extension el))
+    (message (format "make-byte-compile %s ext=%s" el extension))
     (make-byte-compile-file el)))
 
 (defun make-byte-compile-el-visitor (dir file)
@@ -86,5 +89,5 @@ to case differences."
 (defun make-byte-compile-directory (dir &optional symlink)
   (interactive "sElisp directory to byte-compile: ")
   (walk-path-nosymlink dir 'make-byte-compile-el-visitor symlink))
-  
+
 (provide 'make-byte-compile)

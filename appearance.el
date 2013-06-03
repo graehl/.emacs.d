@@ -1,14 +1,14 @@
-;; see http://codefork.com/blog/index.php/2011/11/27/getting-the-solarized-theme-to-work-in-emacs/ for instructions
-;; (require 'solarized-dark-theme)
 (setq default-tab-width 2)
 
+(require 'color-theme)
 ;; emacs-24 enable-theme does not work;
 ;;(add-to-list 'custom-theme-load-path solarized-path)
 (setq solarized-path (concat (expand-file-name "emacs-color-theme-solarized" site-lisp-dir)))
+(unless emacs-mac-port
 (require 'color-theme-solarized)
 (color-theme-solarized-dark)
 ;;(color-theme-solarized-light)
-
+)
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
@@ -105,7 +105,6 @@
 (split-window-horizontally)
 (when (require 'rainbow-delimiters nil 'noerror)
   (install-hook 'coding-hooks 'rainbow-delimiters-mode))
-
 
 
 (defun my-find-file-check-make-large-file-read-only-hook ()

@@ -1,13 +1,123 @@
+(defun emacs-version-matches (substr)
+  (string-match substr (emacs-version)))
+
+(defvar emacs-mac-port (emacs-version-matches "Carbon"))
+
+
+(if emacs-mac-port
+    (progn
+(unless (fboundp 'advice-add) (defun advice-add (&rest args) t))
+(unless (fboundp 'advice--add-function) (defun advice--add-function (&rest args) t))
+(unless (fboundp 'advice--p) (defun advice--p (&rest args) nil))
+(unless (fboundp 'advice-remove) (defun advice-remove (&rest args) t))
+
+(provide 'advice)
+)
+ (require 'advice)
+)
+
+;; Set path to .emacs.d
+(setq dotfiles-dir "~/.emacs.d")
+
+;; Set path to dependencies
+(setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
+;; Set up load path
+(when emacs-mac-port (add-to-list 'load-path "/usr/local/emacs-mac-port/share/emacs"))
+(add-to-list 'load-path dotfiles-dir)
+(add-to-list 'load-path site-lisp-dir)
+
+;; packages
+(require 'cl)
 (require 'package)
-(add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
- (defadvice package-compute-transaction
-  (before package-compute-transaction-reverse (package-list requirements) activate compile)
-    "reverse the requirements"
-    (setq requirements (reverse requirements))
-    (print requirements))
-;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
+(defvar gr-packages '(ack-and-a-half ace-jump-mode flycheck gist gitconfig-mode gitignore-mode helm-projectile ido-ubiquitous solarized-theme zenburn-theme))
+
+(defun gr-packages-installed-p ()
+  "Check if all packages in `gr-packages' are installed."
+  (every #'package-installed-p gr-packages))
+
+(defun gr-install-packages ()
+  "Install all packages listed in `gr-packages'."
+  (unless (gr-packages-installed-p)
+    ;; check for new packages (package versions)
+    (message "%s" "refreshing package database...")
+    (package-refresh-contents)
+    (message "%s" " done.")
+    ;; install the missing packages
+    (mapc #'package-install
+     (remove-if #'package-installed-p gr-packages))))
+
+(gr-install-packages)
+
+(defmacro gr-auto-install (extension package mode)
+  "When file with EXTENSION is opened triggers auto-install of PACKAGE.
+PACKAGE is installed only if not already present.  The file is opened in MODE."
+  `(add-to-list 'auto-mode-alist
+                `(,extension . (lambda ()
+                                 (unless (package-installed-p ',package)
+                                   (package-install ',package))
+                                 (,mode)))))
+
+(defvar gr-auto-install-alist
+  '(("\\.clj\\'" clojure-mode clojure-mode)
+    ("\\.coffee\\'" coffee-mode coffee-mode)
+    ("\\.css\\'" css-mode css-mode)
+    ("\\.csv\\'" csv-mode csv-mode)
+    ("\\.d\\'" d-mode d-mode)
+    ("\\.dart\\'" dart-mode dart-mode)
+    ("\\.erl\\'" erlang erlang-mode)
+    ("\\.feature\\'" feature-mode feature-mode)
+    ("\\.go\\'" go-mode go-mode)
+    ("\\.groovy\\'" groovy-mode groovy-mode)
+    ("\\.haml\\'" haml-mode haml-mode)
+    ("\\.hs\\'" haskell-mode haskell-mode)
+    ("\\.latex\\'" auctex LaTeX-mode)
+    ("\\.less\\'" less-css-mode less-css-mode)
+    ("\\.lua\\'" lua-mode lua-mode)
+    ("\\.markdown\\'" markdown-mode markdown-mode)
+    ("\\.md\\'" markdown-mode markdown-mode)
+    ("\\.ml\\'" tuareg tuareg-mode)
+    ("\\.php\\'" php-mode php-mode)
+    ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
+    ("\\.sass\\'" sass-mode sass-mode)
+    ("\\.scala\\'" scala-mode2 scala-mode)
+    ("\\.scss\\'" scss-mode scss-mode)
+    ("\\.slim\\'" slim-mode slim-mode)
+    ("\\.textile\\'" textile-mode textile-mode)
+    ("\\.yml\\'" yaml-mode yaml-mode)))
+
+;; build auto-install mappings
+(mapc
+ (lambda (entry)
+   (let ((extension (car entry))
+         (package (cadr entry))
+         (mode (cadr (cdr entry))))
+     (unless (package-installed-p package)
+       (gr-auto-install extension package mode))))
+ gr-auto-install-alist)
+
+(defun gr-ensure-module-deps (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+  (mapc #'package-install (remove-if #'package-installed-p packages)))
+
+
+;; markdown-mode doesn't have autoloads for the auto-mode-alist
+;; so we add them manually if it's already installed
+(when (package-installed-p 'markdown-mode)
+  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+
+(defun file-not-autosave (path)
+  (not (or (string-match "#$" path)
+           (string-match "~$" path))))
+
+;; Add external projects to load path
+(dolist (project (directory-files site-lisp-dir t "\\w+"))
+  (when (and (file-not-autosave project) (file-directory-p project))
+    (add-to-list 'load-path project)))
+
 
 (defun emacs-version-get-component (component)
   (let ((old-match-data (match-data))
@@ -30,24 +140,6 @@
   (interactive)
   (emacs-version-get-component 'major))
 
-;; Set path to .emacs.d
-(setq dotfiles-dir "~/.emacs.d")
-;(file-name-directory                    (or (buffer-file-name) "~/.emacs.d")))
-
-;; Set path to dependencies
-(setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
-;; Set up load path
-(add-to-list 'load-path dotfiles-dir)
-(add-to-list 'load-path site-lisp-dir)
-
-(defun file-not-autosave (path)
-  (not (or (string-match "#$" path)
-           (string-match "~$" path))))
-
-;; Add external projects to load path
-(dolist (project (directory-files site-lisp-dir t "\\w+"))
-  (when (and (file-not-autosave project) (file-directory-p project))
-    (add-to-list 'load-path project)))
 
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" dotfiles-dir))
@@ -156,6 +248,7 @@
 (require 'make-byte-compile)
 (defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
+(defun gr-lisp-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
 (delete-selection-mode nil)
 (require 'setup-change-log)
 (require 're-builder+)
@@ -164,3 +257,12 @@
 (require 'optional-bindings)
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
+
+(when nil
+ (defadvice package-compute-transaction
+  (before package-compute-transaction-reverse (package-list requirements) activate compile)
+    "reverse the requirements"
+    (setq requirements (reverse requirements))
+    (print requirements))
+)
+;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)

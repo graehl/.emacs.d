@@ -4,11 +4,11 @@
       (cons (funcall fn-head (car list)) (mapcar fn-rest (cdr list)))))
 (defun upper-camel-case-wordlist (wl)
   (mapconcat 'identity (mapcar
-                        '(lambda (word) (capitalize (downcase word))) wl) ""))
+                        #'(lambda (word) (capitalize (downcase word))) wl) ""))
 (defun lower-camel-case-wordlist (wl)
   (mapconcat 'identity (mapcar-first-rest
-                        '(lambda (word) (downcase word))
-                        '(lambda (word) (capitalize (downcase word))) wl) ""))
+                        #'(lambda (word) (downcase word))
+                        #'(lambda (word) (capitalize (downcase word))) wl) ""))
 (defun underscore-case-wordlist (wl)
   (mapconcat 'downcase wl "_"))
 (setq default-underscore-type-suffix "type")

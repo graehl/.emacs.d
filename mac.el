@@ -12,15 +12,17 @@
 (setq mac-font-default "PragmataPro")
 ;;(setq mac-font-default "Consolas")
 ;;(mac-font mac-font-default mac-size-default mac-weight-default)
-(mac-font)
+;;(mac-font)
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
+(set-face-attribute 'default nil :font mac-font-default)
+(set-face-attribute 'default nil :height (* 10 mac-size-default))
 (when nil
-  ;;(mac-font "Lucida Console-14")
-  (mac-font "Conolas" 14)
+  (mac-font "Consolas" 12)
   (mac-font "Andale Mono" 14)
   (mac-font "DejaVuSansMono" 14 'light)
   (mac-font "Pragmata" 14 'light)
+  (mac-font "PragmataPro" 14 'light)
   )
 
 

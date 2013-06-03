@@ -1,9 +1,9 @@
-(defvar gr-packages
+(setq gr-packages
   '(ack-and-a-half ace-jump-mode
                    scala-mode
                    flycheck gist gitconfig-mode gitignore-mode
                    helm-projectile ido-ubiquitous
-                   solarized-theme zenburn-theme))
+                   solarized-theme zenburn-theme rainbow-mode))
 
 (defun emacs-version-matches (substr)
   (string-match substr (emacs-version)))
@@ -38,12 +38,10 @@
 ;; packages
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
 
 (defun gr-packages-installed-p ()
   "Check if all packages in `gr-packages' are installed."
   (every #'package-installed-p gr-packages))
-
 (defun gr-install-packages ()
   "Install all packages listed in `gr-packages'."
   (interactive)
@@ -56,7 +54,11 @@
     (mapc #'package-install
      (remove-if #'package-installed-p gr-packages))))
 
-(gr-install-packages)
+(defun gr-init-packages ()
+  "Install all packages listed in `gr-packages'."
+  (interactive)
+  (gr-install-packages)
+  (package-initialize))
 
 (defmacro gr-auto-install (extension package mode)
   "When file with EXTENSION is opened triggers auto-install of PACKAGE.
@@ -149,6 +151,7 @@ Missing packages are installed automatically."
   (emacs-version-get-component 'major))
 
 
+
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" dotfiles-dir))
 (load custom-file)
@@ -209,8 +212,10 @@ Missing packages are installed automatically."
 (require 'setup-term)
 ;; below use defuns.
 
+(when (equal system-type 'darwin) (require 'mac))
+
 ;; Misc
-(require 'appearance)
+
 (require 'misc)
 
 ;; Emacs server
@@ -237,7 +242,6 @@ Missing packages are installed automatically."
 (require 'smex) ;M-x
 (smex-initialize)
 
-(when (equal system-type 'darwin) (require 'mac))
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 
@@ -256,7 +260,7 @@ Missing packages are installed automatically."
 (require 'make-byte-compile)
 (defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
-(defun gr-lisp-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
+(defun gr-byte-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
 (delete-selection-mode nil)
 (require 'setup-change-log)
 (require 're-builder+)
@@ -265,12 +269,6 @@ Missing packages are installed automatically."
 (require 'optional-bindings)
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
-
-(when nil
- (defadvice package-compute-transaction
-  (before package-compute-transaction-reverse (package-list requirements) activate compile)
-    "reverse the requirements"
-    (setq requirements (reverse requirements))
-    (print requirements))
-)
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
+(gr-init-packages)
+(require 'appearance)

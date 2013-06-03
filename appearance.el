@@ -1,24 +1,33 @@
 (setq default-tab-width 2)
 
-(require 'color-theme)
+
 ;; emacs-24 enable-theme does not work;
-;;(add-to-list 'custom-theme-load-path solarized-path)
-(setq solarized-path (concat (expand-file-name "emacs-color-theme-solarized" site-lisp-dir)))
-(unless emacs-mac-port
-(require 'color-theme-solarized)
-(color-theme-solarized-dark)
-;;(color-theme-solarized-light)
-)
+(require 'color-theme)
+(setq solarized-path (concat (expand-file-name "solarized-emacs" site-lisp-dir)))
+(add-to-list 'custom-theme-load-path solarized-path)
+
+(if emacs-mac-port
+    (progn
+      (ignore-errors (load-theme 'solarized-dark t))
+      (ignore-errors (load-theme 'solarized-dark t))
+      )
+  (progn
+    (require 'color-theme-solarized)
+    (color-theme-solarized-dark)
+    ;;(color-theme-solarized-light)
+    )
+  )
+
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
 
 (defun cursor-color (color) "set color even for new frames"
-(interactive)
-(add-hook 'window-setup-hook '(lambda () (set-cursor-color color)))
-(add-hook 'after-make-frame-functions '(lambda (f) (with-selected-frame f (set-cursor-color color)))))
-;(cursor-color "red") ; doesn't work with hl-line or what?
+  (interactive)
+  (add-hook 'window-setup-hook '(lambda () (set-cursor-color color)))
+  (add-hook 'after-make-frame-functions '(lambda (f) (with-selected-frame f (set-cursor-color color)))))
+                                        ;(cursor-color "red") ; doesn't work with hl-line or what?
 
 (require 'hl-line+)
 ;;(global-hl-line-mode t)
@@ -67,15 +76,15 @@
 
 ;; Ditch them scrollbars
 (when (fboundp 'scroll-bar-mode)
-(scroll-bar-mode -1)
+  (scroll-bar-mode -1)
 
-;; Make zooming affect frame instead of buffers
-(require 'zoom-frm)
+  ;; Make zooming affect frame instead of buffers
+  (require 'zoom-frm)
 
-(require 'fit-frame)
-(setq split-height-threshold nil)
-(setq split-width-threshold nil)
-)
+  (require 'fit-frame)
+  (setq split-height-threshold nil)
+  (setq split-width-threshold nil)
+  )
 (provide 'appearance)
 ()
 (remove-dos-eol)
@@ -113,7 +122,7 @@
     (setq buffer-read-only t)
     (buffer-disable-undo)
     (fundamental-mode)
-    ; (message "Buffer is set to read-only because it is large.  Undo also disabled.")
+                                        ; (message "Buffer is set to read-only because it is large.  Undo also disabled.")
     ))
 
 (add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)

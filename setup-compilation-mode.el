@@ -1,8 +1,10 @@
 ;; compile- + - one of these is killing my ctrl-o binding in global map.
 (require 'compile-)
+;;(require 'compile-20)
 (require 'compile)
-;;(require 'compile+)
-;;(require 'compile-defuns)
+;;(require 'compile+20)
+(require 'compile+)
+(require 'compile-defuns)
 (require 'cmake-mode)
 
 (defun my-compilation-mode-hook ()
@@ -38,7 +40,7 @@
          special-display-buffer-names)
 
 
-(setq fit-frame-max-width-percent 50)
+(setq fit-frame-max-width-percent 40)
 (setq fit-frame-max-height-percent 75)
 (provide 'setup-compilation-mode)
 ;;(add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)

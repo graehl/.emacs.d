@@ -299,17 +299,20 @@ so we can watch errors as they come up"
 (defun my-next-error ()
   "Move point to next error and highlight it"
   (interactive)
-  (gr-save-focus
-    (next-error)
-    (end-of-line-nomark)
-    (beginning-of-line-mark)
-    ))
+  (if t
+      (next-error 1)
+    (gr-save-focus
+     (next-error)
+     (end-of-line-nomark)
+     (beginning-of-line-mark)
+     ))
+  )
 
 (defun my-previous-error ()
   "Move point to previous error and highlight it"
   (interactive)
   (gr-save-focus
-    (previous-error)
+    (previous-error 1)
     (end-of-line-nomark)
     (beginning-of-line-mark)
     ))

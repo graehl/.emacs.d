@@ -1,3 +1,12 @@
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+ (defadvice package-compute-transaction
+  (before package-compute-transaction-reverse (package-list requirements) activate compile)
+    "reverse the requirements"
+    (setq requirements (reverse requirements))
+    (print requirements))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 
 (defun emacs-version-get-component (component)

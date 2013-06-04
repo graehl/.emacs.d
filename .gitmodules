@@ -73,11 +73,6 @@
 	ignore = untracked
 	path = site-lisp/ack
 	url = https://github.com/emacsmirror/ack.git
-[submodule "site-lisp/rainbow-delimiters"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/rainbow-delimiters
-	url = https://github.com/emacsmirror/rainbow-delimiters.git
 [submodule "site-lisp/cygwin-mount"]
 	ignore = untracked
 	ignore = untracked

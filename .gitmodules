@@ -68,11 +68,6 @@
 	ignore = untracked
 	path = site-lisp/smex
 	url = https://github.com/emacsmirror/smex.git
-[submodule "site-lisp/ack"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/ack
-	url = https://github.com/emacsmirror/ack.git
 [submodule "site-lisp/cygwin-mount"]
 	ignore = untracked
 	ignore = untracked

@@ -24,8 +24,7 @@
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist)
-  (add-to-list 'cl-lib))
-(whe
+  (add-to-list 'gr-packages 'cl-lib))
 ;; packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 

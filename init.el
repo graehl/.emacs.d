@@ -19,11 +19,11 @@
         ack-and-a-half ace-jump-mode
         paredit
         scala-mode
-        gist gitconfig-mode gitignore-mode
+        gitconfig-mode gitignore-mode
         helm-projectile ido-ubiquitous
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
-(when gr-on-mac (add-to-list 'gr-packages 'flycheck))
+(when gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist))
 
 ;; packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)

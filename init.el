@@ -8,23 +8,49 @@
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
 (load-file (expand-file-name "gr-config.el" dotfiles-dir))
+(if (< (emacs-version-major) 24)
+    (load-file (expand-file-name "package-23.el" dotfiles-dir))
+  (require 'package))
 
 (setq gr-packages
-  '(ag
-    autopair
-    ack
-    ack-and-a-half ace-jump-mode
-    paredit
-    scala-mode
-    gist gitconfig-mode gitignore-mode
-    helm-projectile ido-ubiquitous
-    rainbow-delimiters
-    solarized-theme zenburn-theme rainbow-mode))
-(when gr-on-24 (add-to-list 'gr-packages 'flycheck))
+      '(ag
+        autopair
+        ack
+        ack-and-a-half ace-jump-mode
+        paredit
+        scala-mode
+        gist gitconfig-mode gitignore-mode
+        helm-projectile ido-ubiquitous
+        rainbow-delimiters
+        solarized-theme zenburn-theme rainbow-mode))
+(when gr-on-mac (add-to-list 'gr-packages 'flycheck))
 
 ;; packages
-(require 'package-23)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+(defun gr-elpa-ensure-package (name)
+  "Make sure that a particular package is installed; if not then
+  automatically download, compile and install it.
+
+  This is primarily used by gr-elpa-require to allow deployment of
+  the configuration to a new machine - packages will therefore be
+  downloaded on that fresh machine (following installation they are
+  automatically kept up to date by the package manager).
+
+  Use this as follows:
+  (gr-elpa-ensure-package 'org)"
+  (if (not (package-installed-p name))
+      (package-install name)))
+
+(defun gr-elpa-require (name)
+  "A replacement for the standard Emacs 'require'
+  function. This uses gr-elpa-require to download and install a
+  package if necessary prior to using the standard 'require'
+  function to import it. This is useful to allow the configuration
+  to just 'gr-elpa-require' a package and not have to bother
+  checking whether it has been installed yet."
+  (gr-elpa-ensure-package name)
+  (require name))
 
 (defun gr-packages-installed-p ()
   "Check if all packages in `gr-packages' are installed."
@@ -40,13 +66,20 @@
     (message "%s" " done.")
     ;; install the missing packages
     (mapc #'package-install
-     (remove-if #'package-installed-p gr-packages))))
+          (remove-if #'package-installed-p gr-packages))))
 
 (defun gr-init-packages ()
   "Install all packages listed in `gr-packages'."
   (interactive)
+  (package-initialize)
   (gr-install-packages)
-  (package-initialize))
+  (package-initialize)
+  ;; markdown-mode doesn't have autoloads for the auto-mode-alist
+  ;; so we add them manually if it's already installed
+  (when (package-installed-p 'markdown-mode)
+    (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
+  )
 
 (defmacro gr-auto-install (extension package mode)
   "When file with EXTENSION is opened triggers auto-install of PACKAGE.
@@ -97,19 +130,12 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
          (gr-auto-install extension package mode))))
    gr-auto-install-alist))
 
-(gr-auto-install-install)
+(add-hook 'after-init-hook 'gr-auto-install-install)
 
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
   (mapc #'package-install (remove-if #'package-installed-p packages)))
-
-
-;; markdown-mode doesn't have autoloads for the auto-mode-alist
-;; so we add them manually if it's already installed
-(when (package-installed-p 'markdown-mode)
-  (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode)))
 
 (defun file-not-autosave (path)
   (not (or (string-match "#$" path)

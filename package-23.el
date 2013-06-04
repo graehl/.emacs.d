@@ -1,6 +1,5 @@
 ;;; package.el --- Simple package system for Emacs
 
-(provide 'package-23)
 
 (defun emacs-version-get-component (component)
   (let ((old-match-data (match-data))
@@ -26,7 +25,6 @@
 (if (> (emacs-version-major) 23)
     (require 'package)
 (progn
-  (provide 'package)
 ;; Copyright (C) 2007-2011 Free Software Foundation, Inc.
 
 ;; Author: Tom Tromey <tromey@redhat.com>
@@ -1758,4 +1756,7 @@ The list is displayed in a buffer named `*Packages*'."
 
 
 ;;; package.el ends here
+  (provide 'package)
 ))
+
+(provide 'package-23)

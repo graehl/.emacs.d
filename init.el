@@ -14,12 +14,12 @@
 
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
-(load-file "config.el")
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
-(add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path site-lisp-dir)
+(add-to-list 'load-path dotfiles-dir)
+(load-file "config.el")
 
 ;; packages
 (require 'package)

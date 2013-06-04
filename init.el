@@ -1,5 +1,6 @@
 (setq gr-packages
   '(ack-and-a-half ace-jump-mode
+                   paredit
                    scala-mode
                    flycheck gist gitconfig-mode gitignore-mode
                    helm-projectile ido-ubiquitous

@@ -1,8 +1,13 @@
-(require 'ack)
-(setq ack-command "ack --nogroup --nocolor ")
-(if (string= system-name "K")
+(if gr-have-ag
+    (progn
+      (require 'ag)
+      )
+  (progn
+    (require 'ack-and-a-half)
     (setq ack-command (concat "perl " dotfiles-dir "/ack-standalone --nogroup --nocolor "))
-  (setq ack-command "ag --nogroup --nocolor "))
+    ))
+
+(when nil
 ;;no-heading
 (require 'grep)
 ;;(grep-apply-setting 'grep-find-command ack-command)
@@ -23,5 +28,6 @@
     (call-interactively 'grep)
     (setq ack-history grep-history
           ack-host-defaults-alist grep-host-defaults-alist)))
+)
 
 (provide 'setup-ack)

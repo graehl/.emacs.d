@@ -1,5 +1,6 @@
 (setq gr-packages
   '(ag
+    autopair
     ack
     ack-and-a-half ace-jump-mode
     paredit
@@ -9,29 +10,11 @@
     rainbow-delimiters
     solarized-theme zenburn-theme rainbow-mode))
 
-(defun emacs-version-matches (substr)
-  (string-match substr (emacs-version)))
-
-(defvar emacs-mac-port (emacs-version-matches "Carbon"))
-
-
-(if emacs-mac-port
-    (progn
-(unless (fboundp 'advice-add) (defun advice-add (&rest args) t))
-(unless (fboundp 'advice--add-function) (defun advice--add-function (&rest args) t))
-(unless (fboundp 'advice--p) (defun advice--p (&rest args) nil))
-(unless (fboundp 'advice-remove) (defun advice-remove (&rest args) t))
-
-(provide 'advice)
-)
- (require 'advice)
-)
-
 (require 'cl)
 
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
-
+(load-file "config.el")
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
@@ -46,6 +29,7 @@
 (defun gr-packages-installed-p ()
   "Check if all packages in `gr-packages' are installed."
   (every #'package-installed-p gr-packages))
+
 (defun gr-install-packages ()
   "Install all packages listed in `gr-packages'."
   (interactive)
@@ -101,15 +85,19 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.textile\\'" textile-mode textile-mode)
     ("\\.yml\\'" yaml-mode yaml-mode)))
 
-;; build auto-install mappings
-(mapc
- (lambda (entry)
-   (let ((extension (car entry))
-         (package (cadr entry))
-         (mode (cadr (cdr entry))))
-     (unless (package-installed-p package)
-       (gr-auto-install extension package mode))))
- gr-auto-install-alist)
+(defun gr-auto-install-install ()
+  "build auto-install mappings"
+  (interactive)
+  (mapc
+   (lambda (entry)
+     (let ((extension (car entry))
+           (package (cadr entry))
+           (mode (cadr (cdr entry))))
+       (unless (package-installed-p package)
+         (gr-auto-install extension package mode))))
+   gr-auto-install-alist))
+
+(gr-auto-install-install)
 
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.
@@ -149,11 +137,7 @@ Missing packages are installed automatically."
       (store-match-data old-match-data))
     version))
 
-(defun emacs-version-major ()
-  "Returns (as an integer) the major version number."
-  (interactive)
-  (emacs-version-get-component 'major))
-
+(gr-init-packages)
 
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" dotfiles-dir))
@@ -273,5 +257,4 @@ Missing packages are installed automatically."
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
-(gr-init-packages)
 (require 'appearance)

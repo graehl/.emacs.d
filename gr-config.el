@@ -13,3 +13,5 @@
   "Returns (as an integer) the major version number."
   (interactive)
   (emacs-version-get-component 'major))
+
+(provide 'gr-config)

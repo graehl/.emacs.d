@@ -19,7 +19,7 @@
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
-(load-file "config.el")
+(load-file (expand-file-name "gr-config.el" dotfiles-dir))
 
 ;; packages
 (require 'package)

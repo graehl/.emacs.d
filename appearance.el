@@ -1,23 +1,31 @@
 (setq default-tab-width 2)
 
-(require 'color-theme)
-
-(if gr-mac-port
-    (progn
-      (ignore-errors (load-theme 'solarized-dark t))
-      (ignore-errors (load-theme 'solarized-dark t))
-      )
-  (progn
-    (require 'color-theme-solarized)
-    (color-theme-solarized-dark)
-    ;;(color-theme-solarized-light)
-    )
-  )
-
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
       truncate-partial-width-windows nil)
+
+;; Highlight matching parentheses when the point is on them.
+(show-paren-mode 1)
+
+;; No menu bars
+(menu-bar-mode -1)
+
+(transient-mark-mode 1)
+
+(require 'color-theme)
+
+(if gr-on-24
+    (progn
+      (ignore-errors (load-theme 'solarized-dark t))
+      (ignore-errors (load-theme 'solarized-dark t))
+      ))
+
+(when nil
+  (require 'color-theme-solarized)
+  (color-theme-solarized-dark)
+  ;;(color-theme-solarized-light)
+  )
 
 (defun cursor-color (color) "set color even for new frames"
   (interactive)
@@ -56,11 +64,6 @@
   (set-face-foreground 'magit-diff-add "#00cc33")
   )
 
-;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
-
-;; No menu bars
-(menu-bar-mode -1)
 
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -81,9 +84,7 @@
   (setq split-height-threshold nil)
   (setq split-width-threshold nil)
   )
-(provide 'appearance)
-()
-(remove-dos-eol)
+
 (require 'avoid)
 (require 'misc-fns)
 
@@ -99,9 +100,8 @@
  ediff-split-window-function 'split-window-horizontally
  )
 
-(global-auto-revert-mode 1)
+;;(global-auto-revert-mode 1)
 (global-auto-revert-mode -1)
-(transient-mark-mode 1)
 
 ;; Enable these two supposedly "advanced" commands which come disabled by default.
 (put 'upcase-region 'disabled nil)
@@ -122,3 +122,5 @@
     ))
 
 (add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
+
+(provide 'appearance)

@@ -1,15 +1,3 @@
-(setq gr-packages
-  '(ag
-    autopair
-    ack
-    ack-and-a-half ace-jump-mode
-    paredit
-    scala-mode
-    flycheck gist gitconfig-mode gitignore-mode
-    helm-projectile ido-ubiquitous
-    rainbow-delimiters
-    solarized-theme zenburn-theme rainbow-mode))
-
 (require 'cl)
 
 ;; Set path to .emacs.d
@@ -20,6 +8,19 @@
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
 (load-file (expand-file-name "gr-config.el" dotfiles-dir))
+
+(setq gr-packages
+  '(ag
+    autopair
+    ack
+    ack-and-a-half ace-jump-mode
+    paredit
+    scala-mode
+    gist gitconfig-mode gitignore-mode
+    helm-projectile ido-ubiquitous
+    rainbow-delimiters
+    solarized-theme zenburn-theme rainbow-mode))
+(when gr-on-24 (add-to-list 'gr-packages 'flycheck))
 
 ;; packages
 (require 'package-23)

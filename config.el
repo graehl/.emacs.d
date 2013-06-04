@@ -30,5 +30,6 @@
   (interactive)
   (emacs-version-get-component 'major))
 
+(setq gr-on-24 (>= (emacs-version-major) 24))
 
 (provide 'gr-config)

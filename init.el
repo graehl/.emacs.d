@@ -119,23 +119,6 @@ Missing packages are installed automatically."
   (when (and (file-not-autosave project) (file-directory-p project))
     (add-to-list 'load-path project)))
 
-
-(defun emacs-version-get-component (component)
-  (let ((old-match-data (match-data))
-	(version 0)
-	(regexp (cond
-		 ((eq 'major component) "^\\([0-9]+\\)")
-		 ((eq 'minor component) "^[0-9]+\\.\\([0-9]+\\)")
-		 ((eq 'build component) "^[0-9]+\\.[0-9]+\\.\\([0-9]+\\)"))))
-    (unwind-protect
-	(and (string-match regexp emacs-version)
-	     (setq version
-		   (string-to-number (substring emacs-version
-					     (match-beginning 1)
-					     (match-end 1)))))
-      (store-match-data old-match-data))
-    version))
-
 (gr-init-packages)
 
 ;; Keep emacs Custom-settings in separate file

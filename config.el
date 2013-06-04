@@ -5,7 +5,7 @@
 
 (setq gr-on-mac (eq system-type 'darwin))
 (setq gr-on-linux (eq system-type 'gnu/linux))
-(setq gr-on-win (not (or gr-on-mac gr-onlinux)))
+(setq gr-on-win (not (or gr-on-mac gr-on-linux)))
 
 (defvar gr-have-ag (not gr-on-win))
 

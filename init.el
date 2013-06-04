@@ -18,7 +18,6 @@
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
-(when emacs-mac-port (add-to-list 'load-path "/usr/local/emacs-mac-port/share/emacs"))
 (add-to-list 'load-path dotfiles-dir)
 (add-to-list 'load-path site-lisp-dir)
 

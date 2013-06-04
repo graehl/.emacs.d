@@ -1,12 +1,8 @@
 (setq default-tab-width 2)
 
-
-;; emacs-24 enable-theme does not work;
 (require 'color-theme)
-(setq solarized-path (concat (expand-file-name "solarized-emacs" site-lisp-dir)))
-(add-to-list 'custom-theme-load-path solarized-path)
 
-(if emacs-mac-port
+(if gr-mac-port
     (progn
       (ignore-errors (load-theme 'solarized-dark t))
       (ignore-errors (load-theme 'solarized-dark t))

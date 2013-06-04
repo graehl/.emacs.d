@@ -28,7 +28,7 @@
   (scroll-bar-mode -1) ;; no scroll bar
   (if (equal system-type 'darwin)
                                         ;          (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen) nil 'fullboth))
-      (if emacs-mac-port
+      (if gr-mac-port
           (set-frame-parameter nil 'fullscreen (if (frame-parameter nil 'fullscreen)
                                                    nil
                                                  'fullboth))

@@ -23,8 +23,9 @@
         helm-projectile ido-ubiquitous
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
-(when gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist))
-
+(if gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist)
+  (add-to-list 'cl-lib))
+(whe
 ;; packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 

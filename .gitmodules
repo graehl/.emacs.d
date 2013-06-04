@@ -133,6 +133,3 @@
 [submodule "site-lisp/gitsum"]
 	path = site-lisp/gitsum
 	url = git://github.com/tomykaira/gitsum.git
-[submodule "site-lisp/solarized-emacs"]
-	path = site-lisp/solarized-emacs
-	url = git://github.com/bbatsov/solarized-emacs.git

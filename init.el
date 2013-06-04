@@ -1,11 +1,13 @@
 (setq gr-packages
-  '(ack-and-a-half ace-jump-mode
-                   paredit
-                   scala-mode
-                   flycheck gist gitconfig-mode gitignore-mode
-                   helm-projectile ido-ubiquitous
-                   rainbow-delimiters
-                   solarized-theme zenburn-theme rainbow-mode))
+  '(ag
+    ack
+    ack-and-a-half ace-jump-mode
+    paredit
+    scala-mode
+    flycheck gist gitconfig-mode gitignore-mode
+    helm-projectile ido-ubiquitous
+    rainbow-delimiters
+    solarized-theme zenburn-theme rainbow-mode))
 
 (defun emacs-version-matches (substr)
   (string-match substr (emacs-version)))

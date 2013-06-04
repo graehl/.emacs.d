@@ -30,4 +30,5 @@
   (interactive)
   (emacs-version-get-component 'major))
 
+
 (provide 'gr-config)

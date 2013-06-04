@@ -22,7 +22,7 @@
 (load-file (expand-file-name "gr-config.el" dotfiles-dir))
 
 ;; packages
-(require 'package)
+(require 'package-23)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
 (defun gr-packages-installed-p ()

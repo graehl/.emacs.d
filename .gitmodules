@@ -108,11 +108,6 @@
 	ignore = untracked
 	path = site-lisp/misc-cmds
 	url = https://github.com/emacsmirror/misc-cmds.git
-[submodule "site-lisp/autopair-el"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/autopair-el
-	url = https://github.com/graehl/autopair-el.git
 [submodule "site-lisp/smooth-scroll-el"]
 	ignore = untracked
 	ignore = untracked

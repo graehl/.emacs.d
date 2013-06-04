@@ -267,3 +267,8 @@ Missing packages are installed automatically."
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 (require 'appearance)
+(defun gr-load-appearance ()
+  (interactive)
+  (when gr-on-mac
+    (load-file (expand-file-name "appearance.el" dotfiles-dir))))
+(add-hook 'after-init-hook 'gr-load-appearance)

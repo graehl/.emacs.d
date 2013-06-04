@@ -1,4 +1,4 @@
-(push "/usr/local/bin" exec-path) ;brew
+;;(push "/usr/local/bin" exec-path) ;brew
 
 (require 'font)
 ;; change command to meta, and ignore option to use weird norwegian keyboard
@@ -12,7 +12,7 @@
 (setq mac-font-default "PragmataPro")
 ;;(setq mac-font-default "Consolas")
 ;;(mac-font mac-font-default mac-size-default mac-weight-default)
-;;(mac-font)
+;;(mac-font "PragmataPro")
 ;; mac friendly font
 ;;(mac-font "Monaco-12")
 (set-face-attribute 'default nil :font mac-font-default)

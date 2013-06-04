@@ -312,5 +312,6 @@
 
 (require 'setup-ack)
 
-(global-set-key (kbd "<f9>") (if gr-have-ag 'ag-project 'ack))
+(global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
+(global-set-key (kbd "S-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
 ;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

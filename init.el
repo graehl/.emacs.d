@@ -151,7 +151,6 @@ Missing packages are installed automatically."
   (emacs-version-get-component 'major))
 
 
-
 ;; Keep emacs Custom-settings in separate file
 (setq custom-file (expand-file-name "custom.el" dotfiles-dir))
 (load custom-file)

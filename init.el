@@ -20,6 +20,7 @@
         paredit
         scala-mode
         gitconfig-mode gitignore-mode
+        helm
         helm-projectile ido-ubiquitous
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))

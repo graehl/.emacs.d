@@ -20,7 +20,7 @@
 (when nil
   (mac-font "Consolas" 12)
   (mac-font "Andale Mono" 14)
-  (mac-font "DejaVuSansMono" 14 'light)
+  (mac-font "DejaVu Sans Mono" 14 'light)
   (mac-font "Pragmata" 14 'light)
   (mac-font "PragmataPro" 14 'light)
   )

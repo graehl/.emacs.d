@@ -402,3 +402,9 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive)
   (let ((case-fold-search nil))
     (call-interactively 'query-replace)))
+
+(defun unfill-paragraph ()
+  "Unfill paragraph at or after point."
+  (interactive "*")
+  (let ((fill-column most-positive-fixnum))
+    (fill-paragraph nil (region-active-p))))

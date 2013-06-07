@@ -12,6 +12,6 @@
 
 (require 'multiple-cursors)
 (defalias 'rename-sgml-tag 'mc/mark-sgml-tag-pair)
-(provide 'rename-sgml-cursors)
+(provide 'rename-sgml-tag)
 
 (provide 'setup-html-mode)

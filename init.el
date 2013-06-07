@@ -14,6 +14,7 @@
 
 (setq gr-packages
       '(ag
+        flyspell
         autopair
         ack
         ack-and-a-half ace-jump-mode

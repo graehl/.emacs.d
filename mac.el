@@ -18,7 +18,7 @@
 (set-face-attribute 'default nil :font mac-font-default)
 (set-face-attribute 'default nil :height (* 10 mac-size-default))
 (when nil
-  (mac-font "Consolas" 12)
+  (mac-font "Consolas" 14)
   (mac-font "Andale Mono" 14)
   (mac-font "DejaVu Sans Mono" 14 'light)
   (mac-font "Pragmata" 14 'light)

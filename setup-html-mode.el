@@ -10,4 +10,8 @@
 
 (add-hook 'html-mode-hook 'my-html-mode-hook)
 
+(require 'multiple-cursors)
+(defalias 'rename-sgml-tag 'mc/mark-sgml-tag-pair)
+(provide 'rename-sgml-cursors)
+
 (provide 'setup-html-mode)

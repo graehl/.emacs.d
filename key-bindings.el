@@ -314,3 +314,6 @@
 (global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
 (global-set-key (kbd "C-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
 ;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "<kp-3>") 'ignore)
+(global-set-key (kbd "<kp-2>") 'ignore)
+(global-set-key (kbd "<kp-1>") 'ignore)

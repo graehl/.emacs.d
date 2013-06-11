@@ -2,12 +2,12 @@
 
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
+
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
-(load-file (expand-file-name "gr-config.el" dotfiles-dir))
 (if (< (emacs-version-major) 24)
     (load-file (expand-file-name "package-23.el" dotfiles-dir))
   (require 'package))
@@ -134,6 +134,8 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 (add-hook 'after-init-hook 'gr-auto-install-install)
 
+(load-file (expand-file-name "gr-config.el" dotfiles-dir))
+
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
@@ -210,7 +212,6 @@ Missing packages are installed automatically."
 (require 'setup-term)
 ;; below use defuns.
 
-(when (equal system-type 'darwin) (require 'mac))
 
 ;; Misc
 
@@ -264,6 +265,8 @@ Missing packages are installed automatically."
 (require 're-builder+)
 (require 'pandoc-mode)
 (require 'setup-spell)
+(require 'setup-compilation-mode)
+
 (require 'optional-bindings)
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
@@ -272,5 +275,13 @@ Missing packages are installed automatically."
 (defun gr-load-appearance ()
   (interactive)
   (when gr-on-mac
-    (load-file (expand-file-name "appearance.el" dotfiles-dir))))
+    (require 'mac)
+    (load-file (expand-file-name "appearance.el" dotfiles-dir))
+    (load-file (expand-file-name "mac.el" dotfiles-dir)
+    ))
 (add-hook 'after-init-hook 'gr-load-appearance)
+(defun gr-ag-after-init ()
+  (if gr-have-ag
+      (require 'setup-ag)
+    (require 'setup-ack)))
+(add-hook 'after-init-hook 'gr-ag-after-init)

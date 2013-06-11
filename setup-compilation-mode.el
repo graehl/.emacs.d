@@ -34,9 +34,17 @@
 ;;(setq next-error-recenter (quote (4)))
 
 (setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
-(if nil
-    (pushnew compilation-frame-spec special-display-buffer-names)
-  (setq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
+(setq gr-dedicated-compilation-frame nil)
+
+(if gr-on-24-3 (progn
+                 (setq display-buffer-alist nil)
+                 (if gr-dedicated-compilation-frame
+                     (pushnew compilation-frame-spec display-buffer-alist)
+                   (setq special-display-buffer-names (remove compilation-frame-spec display-buffer-alist))))
+  (if gr-dedicated-compilation-frame
+      (pushnew compilation-frame-spec special-display-buffer-names)
+    ((setq  )etq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
+  )
 
 (setq fit-frame-max-width-percent 40)
 (setq fit-frame-max-height-percent 75)

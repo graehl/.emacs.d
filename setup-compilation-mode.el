@@ -33,8 +33,10 @@
 (setq compilation-skip-threshold 2)
 ;;(setq next-error-recenter (quote (4)))
 
-;;(pushnew '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)) special-display-buffer-names)
-
+(setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
+(if nil
+    (pushnew compilation-frame-spec special-display-buffer-names)
+  (setq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
 
 (setq fit-frame-max-width-percent 40)
 (setq fit-frame-max-height-percent 75)

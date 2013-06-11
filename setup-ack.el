@@ -1,20 +1,3 @@
-(if gr-have-ag
-    (progn
-      (require 'ag)
-      (defun gr-ag-cd (pattern &optional directory)
-        (interactive "sGrep Literal String: ")
-        (ag/search pattern (or directory default-directory))
-        )
-      )
-  (progn
-    (require 'ack-and-a-half)
-    (setq ack-command (concat "perl " dotfiles-dir "/ack-standalone --nogroup --nocolor "))
-    (setq ack-and-a-half-executable ack-command)
-    (add-to-list 'ack-and-a-half-project-root-file-patterns "CMakeLists.txt")
-
-    ))
-
-
 (when nil
   ;;no-heading
   (require 'grep)

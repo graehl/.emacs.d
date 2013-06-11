@@ -310,7 +310,10 @@
 (global-set-key (kbd "C-x y") 'helm-show-kill-ring)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
 
-(require 'setup-ack)
+(if gr-have-ag
+  (require 'setup-ag)
+  (require 'setup-ack))
+
 (global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
 (global-set-key (kbd "C-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
 ;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)

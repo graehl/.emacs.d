@@ -7,7 +7,8 @@
 (setq gr-on-linux (eq system-type 'gnu/linux))
 (setq gr-on-win (not (or gr-on-mac gr-on-linux)))
 
-(defvar gr-have-ag (not gr-on-win))
+(setq gr-have-ag (not gr-on-win))
+(when gr-have-ag (require 'setup-ag))
 
 (defun emacs-version-get-component (component)
   (let ((old-match-data (match-data))

@@ -9,6 +9,11 @@
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
 
+(load-file (expand-file-name "gr-config.el" dotfiles-dir))
+(if (< (emacs-version-major) 24)
+    (load-file (expand-file-name "package-23.el" dotfiles-dir))
+  (require 'package))
+
 (setq gr-packages
       '(ag
         flyspell
@@ -131,10 +136,6 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 (add-hook 'after-init-hook 'gr-auto-install-install)
 
-(load-file (expand-file-name "gr-config.el" dotfiles-dir))
-(if (< (emacs-version-major) 24)
-    (load-file (expand-file-name "package-23.el" dotfiles-dir))
-  (require 'package))
 
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.

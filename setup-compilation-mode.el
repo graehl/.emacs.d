@@ -43,7 +43,7 @@
                    (setq special-display-buffer-names (remove compilation-frame-spec display-buffer-alist))))
   (if gr-dedicated-compilation-frame
       (pushnew compilation-frame-spec special-display-buffer-names)
-    ((setq  )etq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
+    (setq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
   )
 
 (setq fit-frame-max-width-percent 40)

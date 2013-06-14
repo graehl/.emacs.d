@@ -16,7 +16,6 @@
 
 (setq gr-packages
       '(ag
-        flyspell
         autopair
         ack
         ack-and-a-half ace-jump-mode
@@ -27,8 +26,10 @@
         helm-projectile ido-ubiquitous
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
-(if gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist)
+(if gr-on-24
+    (add-to-list 'gr-packages 'flycheck 'gist 'flyspell)
   (add-to-list 'gr-packages 'cl-lib))
+
 ;; packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 

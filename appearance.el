@@ -1,5 +1,25 @@
 (setq default-tab-width 2)
 
+(defface extra-whitespace-face
+   '((t (:background "pale green")))
+   "Used for tabs and such.")
+
+(defvar gr-extra-keywords
+   '(("\t" . 'extra-whitespace-face)))
+
+(defun gr-highlight-extra-whitespace
+  (interactive)
+  (font-lock-add-keywords nil my-extra-keywords))
+
+(add-hook 'text-mode-hook 'gr-highlight-extra-whitespace)
+	
+
+(add-hook 'font-lock-mode-hook
+          (lambda ()
+            (font-lock-add-keywords
+             nil
+             '(("\t" 0 'trailing-whitespace prepend)))))
+
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t

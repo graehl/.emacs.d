@@ -239,7 +239,6 @@
 
 (global-set-key (kbd "<home>") 'beginning-of-visual-line)
 (global-set-key (kbd "<end>") 'end-of-visual-line)
-(global-set-key (kbd "M-[") 'default-split)
 (when nil (global-set-key [(meta \])] 'same-buffer-other-window))
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
 (global-set-key (kbd "C-M-r") 'query-replace)
@@ -309,9 +308,8 @@
 (global-set-key (kbd "C-x y") 'helm-show-kill-ring)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
 
-(if gr-have-ag
-  (require 'setup-ag)
-  (require 'setup-ack))
+(require 'setup-ag)
+(require 'setup-ack)
 
 (global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
 (global-set-key (kbd "C-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
@@ -319,3 +317,12 @@
 (global-set-key (kbd "<kp-3>") 'ignore)
 (global-set-key (kbd "<kp-2>") 'ignore)
 (global-set-key (kbd "<kp-1>") 'ignore)
+(global-set-key (kbd "C-d") 'backward-delete-char-untabify)
+(global-set-key (kbd "<f3>") 'next-error)
+(global-set-key (kbd "<f4>") 'compile)
+;;(when gr-on-term (global-set-key (kbd "<f1>") 'shell)
+(global-unset-key (kbd "M-["))
+(if gr-on-term
+(global-set-key (kbd "<f1>") 'default-split)
+(global-set-key (kbd "M-[") 'default-split)
+)

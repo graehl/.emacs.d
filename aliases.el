@@ -17,7 +17,7 @@
 
 (defalias 'sh 'shell)
 (defalias 'ps 'powershell)
-(defalias 'fb 'flyspell-buffer)
+;;(defalias 'fb 'flyspell-buffer)
 (defalias 'sbc 'set-background-color)
 
 (defalias 'rof 'recentf-open-files)

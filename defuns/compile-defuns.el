@@ -181,7 +181,7 @@ so we can watch errors as they come up"
 
 (require 'cl)
 
-(defvar gr-compile-dedicated-frame nil)
+(setq gr-compile-dedicated-frame nil)
 
 (defun find-dedicated-frames (buf)
   (let (result)
@@ -315,5 +315,17 @@ so we can watch errors as they come up"
     (end-of-line-nomark)
     (beginning-of-line-mark)
     ))
+
+(defun gr-next-error-error (&optional arg reset)
+  "Move to next error line containing the string 'error'"
+  (interactive "P")
+  (if (consp arg) (setq reset t arg nil))
+  (when (setq next-error-last-buffer (next-error-find-buffer))
+    ;; we know here that next-error-function is a valid symbol we can funcall
+    (with-current-buffer next-error-last-buffer
+      (funcall next-error-function (prefix-numeric-value arg) reset)
+      (when next-error-recenter
+        (recenter next-error-recenter))
+      (run-hooks 'next-error-hook))))
 
 (provide 'compile-defuns)

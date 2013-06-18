@@ -33,6 +33,7 @@
  '(recentf-max-saved-items 300)
  '(safe-local-variable-values (quote ((eval when (fboundp (quote rainbow-mode)) (rainbow-mode 1)) (indent-tabs-mode . 1) (encoding . utf-8))))
  '(text-mode-hook (quote (er/add-text-mode-expansions (lambda nil (set-fill-column 70)) text-mode-hook-identify)))
+ '(xterm-extra-capabilities nil)
  '(yas/also-auto-indent-first-line t)
  '(yas/next-field-key (quote ("TAB" "<tab>" "M-<return>")))
  '(yas/prev-field-key (quote ("<backtab>" "<S-tab>" "C-<space>" "S-<return>"))))

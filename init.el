@@ -27,7 +27,7 @@
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24
-    (add-to-list 'gr-packages 'flycheck 'gist 'flyspell)
+    (add-to-list 'gr-packages 'gist) ;;  'flyspell
   (add-to-list 'gr-packages 'cl-lib))
 
 ;; packages
@@ -178,7 +178,6 @@ Missing packages are installed automatically."
   (when (and (file-not-autosave file) (file-regular-p file))
     (load file)))
 
-(require 'key-bindings)
 
 ;; Setup extensions
 (require 'setup-ido)
@@ -192,7 +191,6 @@ Missing packages are installed automatically."
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
-(require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
@@ -246,6 +244,12 @@ Missing packages are installed automatically."
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 
+(setq gr-on-term (eq system-uses-terminfo t))
+(when gr-on-term
+  (safe-wrap (load-file (expand-file-name "xterm256.el" dotfiles-dir)))
+  (safe-wrap (load-file (expand-file-name "sco-termkeys.el" dotfiles-dir)))
+)
+
 (require 'setup-code-modes)
 (install-coding-hooks)
 
@@ -278,12 +282,17 @@ Missing packages are installed automatically."
   (interactive)
   (when gr-on-mac
     (require 'mac)
-    (load-file (expand-file-name "appearance.el" dotfiles-dir))
-    (load-file (expand-file-name "mac.el" dotfiles-dir)
     ))
 (add-hook 'after-init-hook 'gr-load-appearance)
 (defun gr-ag-after-init ()
+  (gr-auto-install-install)
+  (load-file (expand-file-name "appearance.el" dotfiles-dir))
+  (load-file (expand-file-name "mac.el" dotfiles-dir)
+  (load-file (expand-file-name "setup-ag.el" dotfiles-dir)
+  (require 'key-bindings)
+  (require 'appearance)
   (if gr-have-ag
       (require 'setup-ag)
     (require 'setup-ack)))
+  (load-file (expand-file-name "key-bindings.el" dotfiles-dir)
 (add-hook 'after-init-hook 'gr-ag-after-init)

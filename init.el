@@ -27,7 +27,7 @@
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24
-    (add-to-list 'gr-packages 'gist) ;;  'flyspell
+    (add-to-list 'gr-packages 'gist 'flyspell) ;;  'flyspell
   (add-to-list 'gr-packages 'cl-lib))
 
 ;; packages
@@ -248,7 +248,7 @@ Missing packages are installed automatically."
 (when gr-on-term
   (safe-wrap (load-file (expand-file-name "xterm256.el" dotfiles-dir)))
   (safe-wrap (load-file (expand-file-name "sco-termkeys.el" dotfiles-dir)))
-)
+  )
 
 (require 'setup-code-modes)
 (install-coding-hooks)
@@ -287,12 +287,13 @@ Missing packages are installed automatically."
 (defun gr-ag-after-init ()
   (gr-auto-install-install)
   (load-file (expand-file-name "appearance.el" dotfiles-dir))
-  (load-file (expand-file-name "mac.el" dotfiles-dir)
-  (load-file (expand-file-name "setup-ag.el" dotfiles-dir)
+  (load-file (expand-file-name "mac.el" dotfiles-dir))
+  (load-file (expand-file-name "setup-ag.el" dotfiles-dir))
   (require 'key-bindings)
   (require 'appearance)
   (if gr-have-ag
       (require 'setup-ag)
-    (require 'setup-ack)))
-  (load-file (expand-file-name "key-bindings.el" dotfiles-dir)
+    (require 'setup-ack))
+  (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
+)
 (add-hook 'after-init-hook 'gr-ag-after-init)

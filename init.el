@@ -244,18 +244,14 @@ Missing packages are installed automatically."
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
 
-(setq gr-on-term (eq system-uses-terminfo t))
-(when gr-on-term
-  (safe-wrap (load-file (expand-file-name "xterm256.el" dotfiles-dir)))
-  (safe-wrap (load-file (expand-file-name "sco-termkeys.el" dotfiles-dir)))
-  )
-
 (require 'setup-code-modes)
 (install-coding-hooks)
 
 (when t ; redundant with autopair
   (require 'wrap-region)
   (wrap-region-global-mode t))
+
+(setq gr-on-term (eq system-uses-terminfo t))
 
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)
@@ -296,3 +292,4 @@ Missing packages are installed automatically."
   (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
 )
 (add-hook 'after-init-hook 'gr-ag-after-init)
+(load-file (expand-file-name "key-bindings.el" dotfiles-dir))

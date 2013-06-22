@@ -24,7 +24,8 @@
   (mac-font "Pragmata" 14 'light)
   (mac-font "PragmataPro" 14 'light)
   )
-
+(when (not (eq system-uses-terminfo t))
+(mac-font))
 
                                         ;(custom-set-faces '(default ((t (:height 100 :family "Consolas" :embolden nil)))))
 

@@ -12,14 +12,12 @@
   (font-lock-mode 1)
   (font-lock-add-keywords nil gr-extra-keywords))
 
-(add-hook 'text-mode-hook 'gr-highlight-extra-whitespace)
+;;(add-hook 'text-mode-hook 'gr-highlight-extra-whitespace)
 
+(defun gr-tab-higlight-add-font-lock ()
+  (font-lock-add-keywords nil '(("\t" 0 'trailing-whitespace prepend))))
 
-(add-hook 'font-lock-mode-hook
-          (lambda ()
-            (font-lock-add-keywords
-             nil
-             '(("\t" 0 'trailing-whitespace prepend)))))
+;;(add-hook 'font-lock-mode-hook 'gr-tab-highlight-add-font-lock)
 
 (setq visible-bell t
       font-lock-maximum-decoration t

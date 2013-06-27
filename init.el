@@ -266,7 +266,6 @@ Missing packages are installed automatically."
 (require 'setup-change-log)
 (require 're-builder+)
 (require 'pandoc-mode)
-(require 'setup-spell)
 (require 'setup-compilation-mode)
 
 (require 'optional-bindings)

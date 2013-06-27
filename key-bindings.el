@@ -185,8 +185,8 @@
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-cursor-and-buffer-other-window)
 
-                                        ;(global-set-key (kbd "M-s") 'fixup-whitespace)
-                                        ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
+;;(global-set-key (kbd "M-s") 'fixup-whitespace)
+;;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands
 ;; M-: (alt-shift-;) - evaluate lisp expression
 ;; C-x C-e - evaluate the preceding lisp expression on this line
@@ -263,8 +263,8 @@
 (require 'top-mode)
 (global-set-key (kbd "C-M-S-t") 'top)
 (global-set-key (kbd "M-<f10>") 'menu-bar-open)
-                                        ;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
-                                        ;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
+;;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
+;;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
 (require 'setup-ido)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files-compl)
 (global-set-key (kbd "C-x C-r") 'recentf-ido-find-file)
@@ -290,7 +290,7 @@
 
 (require 'setup-magit)
 (global-set-key (kbd "M-c") 'magit-status)
-;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
+;;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
 (global-set-key (kbd ",") 'self-insert-command)
 (global-set-key (kbd "C-=") 'gr-include)
 (global-set-key (kbd "M-'") 'gr-space-operators)
@@ -314,21 +314,24 @@
 (global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
 (global-set-key (kbd "C-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
 ;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "<kp-3>") 'ignore)
-(global-set-key (kbd "<kp-2>") 'ignore)
-(global-set-key (kbd "<kp-1>") 'ignore)
-(global-set-key (kbd "M-<kp-3>") 'ignore)
-(global-set-key (kbd "M-<kp-2>") 'ignore)
-(global-set-key (kbd "M-<kp-1>") 'ignore)
-(global-set-key (kbd "C-<kp-3>") 'ignore)
-(global-set-key (kbd "C-<kp-2>") 'ignore)
-(global-set-key (kbd "C-<kp-1>") 'ignore)
+
+(when gr-on-mac
+  (global-set-key (kbd "<kp-3>") 'ignore)
+  (global-set-key (kbd "<kp-2>") 'ignore)
+  (global-set-key (kbd "<kp-1>") 'ignore)
+  (global-set-key (kbd "M-<kp-3>") 'ignore)
+  (global-set-key (kbd "M-<kp-2>") 'ignore)
+  (global-set-key (kbd "M-<kp-1>") 'ignore)
+  (global-set-key (kbd "C-<kp-3>") 'ignore)
+  (global-set-key (kbd "C-<kp-2>") 'ignore)
+  (global-set-key (kbd "C-<kp-1>") 'ignore)
+  )
 (global-set-key (kbd "C-d") 'backward-delete-char-untabify)
 (global-set-key (kbd "<f3>") 'next-error)
 (global-set-key (kbd "<f4>") 'compile)
 ;;(when gr-on-term (global-set-key (kbd "<f1>") 'shell)
 (if gr-on-term
-(global-set-key (kbd "<f1>") 'default-split)
-(global-set-key (kbd "M-[") 'default-split)
-)
+    (global-set-key (kbd "<f1>") 'default-split)
+  (global-set-key (kbd "M-[") 'default-split)
+  )
 (global-unset-key (kbd "M-["))

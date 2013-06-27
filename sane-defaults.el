@@ -77,4 +77,11 @@
 (setq gc-cons-threshold 35000000)
 (setq garbage-collection-messages nil)
 
+(setq debug-on-error nil)
+
+(defun ignore-last-error ()
+  (interactive)
+  (add-to-list 'debug-ignored-errors "^$")
+;;TODO
+)
 (provide 'sane-defaults)

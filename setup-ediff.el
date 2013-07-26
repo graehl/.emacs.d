@@ -31,6 +31,9 @@
 (defvar ediff-after-quit-hooks nil
   "* Hooks to run after ediff or emerge is quit.")
 
+(require 'gr-config)
+
+(when gr-on-24-3
 (defadvice ediff-quit (after edit-after-quit-hooks activate)
   (run-hooks 'ediff-after-quit-hooks))
 
@@ -71,5 +74,6 @@
   (exit-recursive-edit))
 
 (add-hook 'ediff-after-quit-hooks 'git-mergetool-emacsclient-ediff-after-quit-hook 'append)
+) ;; end 24.3
 
 (provide 'setup-ediff)

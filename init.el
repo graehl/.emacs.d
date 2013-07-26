@@ -198,6 +198,7 @@ Missing packages are installed automatically."
 (require 'setup-line-mode)
 ;;(require 'setup-paredit)
 (require 'setup-ispell)
+(require 'setup-spell)
 
 ;; Map files to modes
 (require 'mode-mappings)

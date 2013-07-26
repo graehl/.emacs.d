@@ -7,4 +7,5 @@
 (load-file "appearance.el")
 (load-file "mac.el")
 (load-file "key-bindings.el")
-(global-unset-key (kbd "M-["))
+;;(global-unset-key (kbd "M-["))
+(load-file "setup-spell.el")

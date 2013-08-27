@@ -8,8 +8,8 @@
 (require 'cmake-mode)
 
 (defun my-compilation-mode-hook ()
-;;  (setq truncate-lines nil)
-;;  (add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)
+  ;;  (setq truncate-lines nil)
+  ;;  (add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)
   )
                                         ; Don't truncate lines in the compilation window
 ;;(add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
@@ -32,8 +32,12 @@
 (setq compilation-skip-threshold 2)
 ;;(setq next-error-recenter (quote (4)))
 
-(setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
 (setq gr-dedicated-compilation-frame nil)
+(when gr-dedicated-compilation-frame
+  (setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
+  (setq fit-frame-max-width-percent 40)
+  (setq fit-frame-max-height-percent 75)
+  )
 
 (if gr-on-24-3 (progn
                  (setq display-buffer-alist nil)
@@ -45,7 +49,21 @@
     (setq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
   )
 
-(setq fit-frame-max-width-percent 40)
-(setq fit-frame-max-height-percent 75)
+
+(defun growl (title message)
+  (when gr-on-mac
+    (start-process "growl" " growl" "growlnotify" title "-a" "Emacs")
+    (process-send-string " growl" message)
+    (process-send-string " growl" "\n")
+    (process-send-eof " growl")))
+
+(defun growl-compilation-result(buffer msg)
+  (if (string-match "^finished" msg)
+      (progn
+        (growl "Emacs compilation" "Compilation Successful :-)"))
+    (growl "Emacs compilation" "Compilation Failed :-(")))
+
+(add-to-list 'compilation-finish-functions 'growl-compilation-result)
+
 (provide 'setup-compilation-mode)
 ;;(add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)

@@ -279,6 +279,7 @@ Missing packages are installed automatically."
   (load-file (expand-file-name "appearance.el" dotfiles-dir))
   (when gr-on-mac
     (require 'mac)
+    (require 'mac-after)
     ))
 (add-hook 'after-init-hook 'gr-load-appearance)
 (defun gr-ag-after-init ()

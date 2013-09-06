@@ -252,7 +252,7 @@ Missing packages are installed automatically."
   (require 'wrap-region)
   (wrap-region-global-mode t))
 
-(setq gr-on-term (eq system-uses-terminfo t))
+(setq gr-on-term (eq window-system nil))
 
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)

@@ -58,10 +58,11 @@
     (process-send-eof " growl")))
 
 (defun growl-compilation-result(buffer msg)
-  (if (string-match "^finished" msg)
-      (progn
-        (growl "Emacs compilation" "Compilation Successful :-)"))
-    (growl "Emacs compilation" "Compilation Failed :-(")))
+  (when (string-match "^*com" (buffer-name buffer))
+    (if (string-match "^finished" msg)
+        (progn
+          (growl "Emacs compilation" "Compilation Successful :-)"))
+      (growl "Emacs compilation" "Compilation Failed :-("))))
 
 (add-to-list 'compilation-finish-functions 'growl-compilation-result)
 

@@ -117,7 +117,7 @@
   (interactive)
   (c-add-style "graehl" graehl-style t)
   (c-toggle-auto-hungry-state 1)
-  ;(key-chord-define c-mode-map ";;" "\C-e")
+                                        ;(key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"
                                         ; c-backspace-function 'c-hungry-delete
@@ -180,9 +180,9 @@
   (define-key c-mode-base-map (kbd "C-j") 'dabbrev-expand)
   (c-set-offset 'c 'c-lineup-C-comments)
 
-;; because autopair -> electric paren was bothering me - not sure if this fixes
-;;  (define-key c-mode-base-map (kbd "(") 'self-insert-command)
-;;  (define-key c-mode-base-map (kbd ")") 'self-insert-command)
+  ;; because autopair -> electric paren was bothering me - not sure if this fixes
+  ;;  (define-key c-mode-base-map (kbd "(") 'self-insert-command)
+  ;;  (define-key c-mode-base-map (kbd ")") 'self-insert-command)
 
   ;; Set the comments to start where they ought to.
   (setq-default c-comment-continuation-stars "* ")
@@ -295,3 +295,16 @@ Suitable for inclusion in `c-offsets-alist'."
 (install-hooks c-modes-hook 'google-set-c-style)
 (install-hooks c-modes-hook 'gr-c-mode-hook)
 (provide 'setup-c-mode)
+
+(defun gray-assert ()
+  (interactive)
+  ;; gray out the "assert(...)" wrapper
+  (font-lock-add-keywords nil
+                          '(("\\<\\(assert\(.*\);\\)" 1 '(:foreground "#444444") t)))
+
+  ;; gray out the stuff inside parenthesis with a slightly lighter color
+  (font-lock-add-keywords nil
+                          '(("\\<assert\\(\(.*\);\\)" 1 '(:foreground "#666666") t)))
+  )
+
+(add-hook 'c-mode-common-hook 'gray-assert)

@@ -335,3 +335,5 @@
   (global-set-key (kbd "M-[") 'default-split)
   )
 (global-unset-key (kbd "M-["))
+
+(global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)

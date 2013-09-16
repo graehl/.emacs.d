@@ -264,6 +264,8 @@
   (save-excursion
     (gr-force-fontify)
     (goto-char (point-min))
+    (replace-regexp "\\([^ ]\\){" "\\1 {")
+    (goto-char (point-min))
     (while (re-search-forward (concat gr-comma-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))
       (when (gr-what-face-is-code (point))

@@ -207,7 +207,6 @@ so we can watch errors as they come up"
            frame (list (cons 'foreground-color orig-fg))))
         ))))
 
-
 (defun my-yes-or-mumble-p (prompt)
   "PROMPT user with a yes-or-no question, but only test for yes."
   (if (string= "yes"

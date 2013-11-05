@@ -29,7 +29,6 @@
 ;; Use shell-like backspace C-h, rebind help to F1
 (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-delete-char)
-(global-set-key (kbd "<f1>") 'help-command)
 
 ;; Killing text
 (global-set-key (kbd "C-w") 'kill-region-or-backward-word)
@@ -85,8 +84,6 @@
 ;; Fetch the contents at a URL, display it raw.
 (global-set-key (kbd "C-x h") 'view-url)
 
-;; Help should search more than just commands
-(global-set-key (kbd "<f1> a") 'apropos)
 
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c e") 'eval-and-replace)
@@ -330,10 +327,18 @@
 (global-set-key (kbd "<f3>") 'next-error)
 (global-set-key (kbd "<f4>") 'compile)
 ;;(when gr-on-term (global-set-key (kbd "<f1>") 'shell)
+;; Help should search more than just commands
+;;(global-set-key (kbd "<f1> a") 'apropos)
+(global-set-key (kbd "<f1>") 'help-command)
+
+(setq gr-on-term (eq window-system nil))
+
 (if gr-on-term
-    (global-set-key (kbd "<f1>") 'default-split)
-  (global-set-key (kbd "M-[") 'default-split)
-  )
-(global-unset-key (kbd "M-["))
+    (progn
+      (global-unset-key (kbd "M-["))
+      (global-set-key (kbd "<f1>") 'default-split))
+  (progn
+   (global-set-key (kbd "M-[") 'default-split)
+      (global-set-key (kbd "<f1>") 'help-command)))
 
 (global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)

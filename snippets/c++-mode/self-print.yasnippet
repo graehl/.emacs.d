@@ -3,9 +3,9 @@
 # key: sp
 # --
 template <class Out>
-void print(Out &o) const {
-$0
+void print(Out &out) const {
+$0;
 }
 template <class Ch,class Tr>
 friend std::basic_ostream<Ch,Tr>& operator<<(std::basic_ostream<Ch,Tr> &o, ${1:`(gr-c-class-name "self_type")`} const& self)
-{ self.print(o); return o; }
+{ self.print(out); return out; }

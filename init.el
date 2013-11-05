@@ -16,6 +16,8 @@
 
 (setq gr-packages
       '(ag
+        artist
+        js2-mode
         autopair
         ack
         ack-and-a-half ace-jump-mode
@@ -252,6 +254,7 @@ Missing packages are installed automatically."
   (require 'wrap-region)
   (wrap-region-global-mode t))
 
+(defvar gr-on-term nil)
 (setq gr-on-term (eq window-system nil))
 
 (require 'gr-cleanup-save)
@@ -273,7 +276,6 @@ Missing packages are installed automatically."
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
-(require 'appearance)
 (defun gr-load-appearance ()
   (interactive)
   (load-file (expand-file-name "appearance.el" dotfiles-dir))
@@ -281,7 +283,8 @@ Missing packages are installed automatically."
     (require 'mac)
     (require 'mac-after)
     ))
-(add-hook 'after-init-hook 'gr-load-appearance)
+;;(require 'appearance)
+;;(add-hook 'after-init-hook 'gr-load-appearance)
 (defun gr-ag-after-init ()
   (gr-auto-install-install)
   (load-file (expand-file-name "setup-ag.el" dotfiles-dir))
@@ -294,3 +297,4 @@ Missing packages are installed automatically."
 )
 (add-hook 'after-init-hook 'gr-ag-after-init)
 (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
+(gr-ag-after-init)

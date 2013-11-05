@@ -9,3 +9,4 @@
 (load-file "key-bindings.el")
 ;;(global-unset-key (kbd "M-["))
 (load-file "setup-spell.el")
+(provide 'mac-after)

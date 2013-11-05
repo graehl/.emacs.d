@@ -1,8 +1,6 @@
 ;; compile- + - one of these is killing my ctrl-o binding in global map.
 (require 'compile-)
-;;(require 'compile-20)
 (require 'compile)
-;;(require 'compile+20)
 (require 'compile+)
 (require 'compile-defuns)
 (require 'cmake-mode)
@@ -16,7 +14,6 @@
 
 (add-to-list 'compilation-error-regexp-alist '("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2))
 (add-to-list 'compilation-error-regexp-alist '("^ + [0-9]+>\\([^(]+\\)(\\([0-9]+\\)): [^ ]" 1 2))
-
 
 
 (require 'compile-defuns)

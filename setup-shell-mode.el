@@ -24,13 +24,16 @@
   (let ((comint-buffer-maximum-size 0))
     (comint-truncate-buffer)))
 
+(defun my-after-prompt-p () (interactive)
+  (and (eq major-mode 'shell-mode) (comint-after-pmark-p)))
+
 (defun shell-mode-up () (interactive)
-  (if (comint-after-pmark-p)
+  (if (my-after-prompt-p)
       (comint-previous-input 1)
     (prev-line 1)))
 
 (defun shell-mode-down () (interactive)
-  (if (comint-after-pmark-p)
+  (if (my-after-prompt-p)
       (comint-next-input 1)
     (forward-line 1)))
 

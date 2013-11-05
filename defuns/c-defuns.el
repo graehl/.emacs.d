@@ -325,6 +325,8 @@ from the namespace declaration iff the open brace sits on a line by itself."
                (bolp))
         2)))
 
+(require 'cc-engine)
+
 (defun my-c-backward-template-prelude ()
   "Back up over expressions that end with a template argument list.
 
@@ -338,7 +340,7 @@ Examples include:
       (save-excursion
         ;; Inspect the previous token or balanced pair to
         ;; see whether to skip backwards over it
-        (c-backward-syntactic-ws)
+        (c-backward-syntactic-ws) ;;//TODO
         (or
          ;; is it the end of a nested template argument list?
          (and

@@ -1,7 +1,8 @@
 ;; compile- + - one of these is killing my ctrl-o binding in global map.
-;;(require 'compile-) ;; i don't like this - it forces a dedicated frame for compilation output via fit-1-window-frames-on
+(require 'compile-)
 (require 'compile)
 (require 'compile+)
+(remove-hook 'compilation-mode-hook 'fit-1-window-frames-on) ;; i don't like this - it forces a dedicated frame
 (require 'compile-defuns)
 (require 'cmake-mode)
 

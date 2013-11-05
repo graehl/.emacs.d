@@ -296,5 +296,7 @@ Missing packages are installed automatically."
   (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
 )
 (add-hook 'after-init-hook 'gr-ag-after-init)
-(load-file (expand-file-name "key-bindings.el" dotfiles-dir))
 (gr-ag-after-init)
+(when (not (boundp 'gr-init-once-t))
+  (setq gr-init-once-t t)
+  (load-file (expand-file-name "init.el" dotfiles-dir)))

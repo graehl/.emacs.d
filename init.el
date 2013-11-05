@@ -293,7 +293,9 @@ Missing packages are installed automatically."
   (if gr-have-ag
       (require 'setup-ag)
     (require 'setup-ack))
-  (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
+  (load-file (expand-file-name "key-bindings.el" dotfiles-dir)
+  (load-file (expand-file-name "setup-compilation-mode.el" dotfiles-dir)
+)
 )
 (add-hook 'after-init-hook 'gr-ag-after-init)
 (gr-ag-after-init)

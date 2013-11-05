@@ -2,7 +2,6 @@
 (require 'compile-)
 (require 'compile)
 (require 'compile+)
-(remove-hook 'compilation-mode-hook 'fit-1-window-frames-on) ;; i don't like this - it forces a dedicated frame
 (require 'compile-defuns)
 (require 'cmake-mode)
 
@@ -25,18 +24,18 @@
 
 (add-hook 'compilation-finish-functions #'qtmstr-compile-finish)
 (add-hook 'compilation-mode-hook #'qtmstr-setup-compile-mode)
+ ;; i don't like this - it forces a dedicated frame
+(remove-hook 'compilation-finish-functions 'fit-1-window-frames-on)
 
 (setq compilation-skip-threshold 1)
 (setq compilation-skip-threshold 2)
 ;;(setq next-error-recenter (quote (4)))
 
 (setq gr-dedicated-compilation-frame nil)
-(when gr-dedicated-compilation-frame
-  (setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
-  (setq fit-frame-max-width-percent 40)
-  (setq fit-frame-max-height-percent 75)
-  )
+(setq compilation-frame-spec '("*compilation*" (minibuffer . nil) (unsplittable . t) (menu-bar-lines . 0)))
 
+(setq fit-frame-max-width-percent 40)
+(setq fit-frame-max-height-percent 75)
 (if gr-on-24-3 (progn
                  (setq display-buffer-alist nil)
                  (if gr-dedicated-compilation-frame
@@ -46,7 +45,6 @@
       (pushnew compilation-frame-spec special-display-buffer-names)
     (setq special-display-buffer-names (remove compilation-frame-spec special-display-buffer-names)))
   )
-
 
 (defun growl (title message)
   (when gr-on-mac
@@ -62,7 +60,7 @@
           (growl "Emacs compilation" "Compilation Successful :-)"))
       (growl "Emacs compilation" "Compilation Failed :-("))))
 
-(add-to-list 'compilation-finish-functions 'growl-compilation-result)
+(add-hook 'compilation-finish-functions 'growl-compilation-result)
 
 (provide 'setup-compilation-mode)
 ;;(add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)

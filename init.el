@@ -1,15 +1,18 @@
-(require 'cl)
-
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
 
+(defun load-dotfile (file)
+  (load-file (expand-file-name file dotfiles-dir)))
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
 
-(load-file (expand-file-name "gr-config.el" dotfiles-dir))
+(require 'cl)
+
+(require 'gr-config)
+;;(load-file (expand-file-name "gr-config.el" dotfiles-dir))
 (if (< (emacs-version-major) 24)
     (load-file (expand-file-name "package-23.el" dotfiles-dir))
   (require 'package))
@@ -293,10 +296,10 @@ Missing packages are installed automatically."
   (if gr-have-ag
       (require 'setup-ag)
     (require 'setup-ack))
-  (load-file (expand-file-name "key-bindings.el" dotfiles-dir)
-  (load-file (expand-file-name "setup-compilation-mode.el" dotfiles-dir)
+  (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
+  (load-file (expand-file-name "setup-compilation-mode.el" dotfiles-dir))
 )
-)
+
 (add-hook 'after-init-hook 'gr-ag-after-init)
 (gr-ag-after-init)
 (when nil (not (boundp 'gr-init-once-t))

@@ -203,6 +203,7 @@
 (defconst gr-assign-regexp "\\([-+*/^|&]?=\\|||\\)" "assignment, || - space before and after")
 (defconst gr-no-space-regexp "[^-+*/^|& =\"'><!:]" "not-space (and not-quote - substitute for visiting only text outside of strings). also hack to avoid separating == :: >= <= etc")
 (defconst gr-access-spec "\\(public\\|private\\|\protected\\) :" "c++ access specifiers - no extra space before colon")
+(defconst gr-cond-spec "\\(if\\|for\\|foreach\\|while\\)" "c++ conditional/loop")
 
 (defun gr-what-face (pos)
   (interactive "d")
@@ -264,7 +265,8 @@
   (save-excursion
     (gr-force-fontify)
     (goto-char (point-min))
-    (replace-regexp "\\([^ ]\\){" "\\1 {")
+    (replace-regexp "\\([^ \n]\\){" "\\1 {")
+    (replace-regexp (concat "\\([ ]*" gr-cond-spec "\\)(") "\\1 (")
     (goto-char (point-min))
     (while (re-search-forward (concat gr-comma-regexp) (point-max) t)
       (goto-char (- (match-end 0) 1))

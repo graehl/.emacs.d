@@ -34,11 +34,10 @@
 
 (require 'color-theme)
 
-(if gr-on-24
-    (progn
-      (ignore-errors (load-theme 'solarized-dark t))
-      (ignore-errors (load-theme 'solarized-dark t))
-      ))
+(when gr-on-24
+  (if gr-on-term
+      (ignore-errors (load-theme 'solarized-light t))
+    (ignore-errors (load-theme 'solarized-dark t))))
 
 (when nil
   (require 'color-theme-solarized)

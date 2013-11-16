@@ -8,7 +8,8 @@
 (defun my-compilation-mode-hook ()
   ;;  (setq truncate-lines nil)
   ;;  (add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)
-  (local-set-key (kbd "C-o") 'other-window)
+  ;; (global-set-key (kbd "C-o") 'other-window)
+  (define-key compilation-mode-map (kbd "C-o") 'other-window)
   )
                                         ; Don't truncate lines in the compilation window
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)

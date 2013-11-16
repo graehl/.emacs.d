@@ -333,7 +333,7 @@
 
 (setq gr-on-term (eq window-system nil))
 
-(if gr-on-term
+(if (and nil gr-on-term)
     (progn
       (global-unset-key (kbd "M-["))
       (global-set-key (kbd "<f1>") 'default-split))

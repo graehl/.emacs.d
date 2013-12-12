@@ -244,8 +244,9 @@ Missing packages are installed automatically."
 (defalias 'list-buffers 'ibuffer) ; always use ibuffer
 
 (require 'aliases)
-(require 'smex) ;M-x
-(smex-initialize)
+(when gr-on-24
+  (require 'smex) ;M-x
+  (smex-initialize))
 
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))

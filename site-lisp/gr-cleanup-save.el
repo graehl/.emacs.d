@@ -266,6 +266,7 @@
     (gr-force-fontify)
     (goto-char (point-min))
     (replace-regexp "\\([^ \n]\\){" "\\1 {")
+    (goto-char (point-min))
     (replace-regexp (concat "\\([ ]*" gr-cond-spec "\\)(") "\\1 (")
     (goto-char (point-min))
     (while (re-search-forward (concat gr-comma-regexp) (point-max) t)
@@ -286,6 +287,8 @@
       (goto-char (- (match-end 0) 2))
       (when (gr-what-face-is-code (point))
         (delete-char 1)))
+    (goto-char (point-min))
+    (replace-regexp "^ {){" "{")
     ))
 
 (defun gr-space-operators (&optional over)

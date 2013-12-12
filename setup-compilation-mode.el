@@ -10,6 +10,7 @@
   ;;  (add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)
   ;; (global-set-key (kbd "C-o") 'other-window)
   (define-key compilation-mode-map (kbd "C-o") 'other-window)
+  (setq bidi-paragraph-direction 'left-to-right)
   )
                                         ; Don't truncate lines in the compilation window
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)

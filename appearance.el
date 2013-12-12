@@ -1,5 +1,8 @@
 (setq default-tab-width 2)
 
+(setq bidi-display-reordering nil)
+(setq bidi-paragraph-direction 'left-to-right)
+
 (defface extra-whitespace-face
    '((t (:background "pale green")))
    "Used for tabs and such.")

@@ -597,7 +597,18 @@ backward-paragraph and forward-paragraph so is brittle"
               (gr-raise-buffer-other-window buffercpp))))
       (message "gr-fn-to-cpp: move cursor to .hpp function with ) ... { where .cpp already exists"))))
 
-;;(setq start 0)
-;;(setq end 10000)
-;;(setq buffer (current-buffer))
-;;(setq buffer "t.hpp")
+(defun gr-replace-string-all (from to)
+  (goto-char (point-min))
+  (while (search-forward from nil t)
+    (replace-match to nil t)))
+
+(defun gr-cstr ()
+  (interactive)
+  (insert
+   (with-temp-buffer (yank)
+                     (gr-replace-string-all "\"" "\\\"")
+                     (gr-replace-string-all "\n" "\\n\"\n")
+                     (goto-char (point-min))
+                     (replace-regexp "^." "\"\\1")
+                     (buffer-substring-no-properties (point-min) (point-max))
+                     )))

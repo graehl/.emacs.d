@@ -17,10 +17,11 @@
     (load-file (expand-file-name "package-23.el" dotfiles-dir))
   (require 'package))
 
+(defun all-to-list (list all)
+  (mapc (lambda (x) (add-to-list list x)) all))
+
 (setq gr-packages
       '(ag
-        artist
-        js2-mode
         autopair
         ack
         ack-and-a-half ace-jump-mode
@@ -32,7 +33,7 @@
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24
-    (add-to-list 'gr-packages 'gist 'flyspell) ;;  'flyspell
+    (all-to-list 'gr-packages '(smex gist flyspell pcache logito js2-mode gh flycheck artist))
   (add-to-list 'gr-packages 'cl-lib))
 
 ;; packages
@@ -244,7 +245,7 @@ Missing packages are installed automatically."
 (defalias 'list-buffers 'ibuffer) ; always use ibuffer
 
 (require 'aliases)
-(when gr-on-24
+(when (and nil gr-on-24)
   (require 'smex) ;M-x
   (smex-initialize))
 

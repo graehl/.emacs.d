@@ -237,8 +237,9 @@ modified file"
 (defun same-buffer-other-window ()
   "switch to the current buffer in the other window"
   (interactive)
-  (switch-to-buffer-other-window (current-buffer))
-  )
+  (let ((p (point)))
+    (switch-to-buffer-other-window (current-buffer))
+    (goto-char p)))
 
 (defun same-cursor-and-buffer-other-window ()
   "switch to the current buffer in the other window"

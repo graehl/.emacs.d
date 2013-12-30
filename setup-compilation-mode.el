@@ -31,7 +31,7 @@
 (remove-hook 'compilation-finish-functions 'fit-1-window-frames-on)
 
 (setq compilation-skip-threshold 1)
-(setq compilation-skip-threshold 2)
+;;(setq compilation-skip-threshold 2)
 ;;(setq next-error-recenter (quote (4)))
 
 (setq gr-dedicated-compilation-frame nil)

@@ -342,3 +342,7 @@
       (global-set-key (kbd "<f1>") 'help-command)))
 
 (global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)
+
+(define-key isearch-mode-map (kbd "C-y") 'isearch-yank-kill)
+
+(global-set-key (kbd "M-:") 'gr-goto-changelog-end)

@@ -4,12 +4,12 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(make-modes (quote (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode))
  '(add-log-current-defun-function (quote ignore))
  '(c-require-final-newline (quote ((c-mode . t) (c++-mode . t) (objc-mode . t) (java-mode))))
  '(compilation-ask-about-save nil)
  '(compilation-skip-threshold 2)
  '(fill-column 80)
- '(gr-cleanup-skip-compress-whitespace-modes (quote \'\(fundamental-mode\)))
  '(gud-gdb-command-name "~/bin/egdbHgCompose --fsm-compose 0")
  '(ido-use-filename-at-point nil)
  '(inferior-octave-prompt "\\(^octave\\(\\|.bin\\|.exe\\)?\\(-[.0-9]+\\)?\\(:[0-9]+\\)?\\|^debug\\|^\\)>+ ")
@@ -44,3 +44,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;(setq gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode sh-mode shell-mode cmake-mode))
+;;(setq make-modes (quote (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode))

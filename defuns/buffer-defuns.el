@@ -280,3 +280,15 @@ modified file"
   (interactive (list (current-buffer)))
   (gr-save-focus
    (switch-to-buffer-other-window buffer)))
+
+(defun gr-goto-changelog-end (buffer)
+  "go to end of changelog or COMMIT_EDITMSG, else end of file"
+  (interactive (list (current-buffer)))
+  (goto-char (point-min))
+  (if (search-forward "Change-Id: " nil t)
+      (previous-line)
+    (if (search-forward "# Please enter the commit message for your changes" nil t)
+        (previous-line)
+      (goto-char (point-max))))
+  (insert "\n\n")
+  (previous-line))

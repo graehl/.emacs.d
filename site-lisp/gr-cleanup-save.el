@@ -9,7 +9,7 @@
   "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom make-modes nil
   "A list of modes in which `gr-cleanup-untabify' and `gr-cleanup-indent' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
-(defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode)
+(defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode sh-mode shell-mode cmake-mode)
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-save-max-spaces 1 "after initial hanging indent, replace > this many whitespace chars with this many spaces" :type 'integer :group 'gr-cleanup-save)
 (defcustom gr-cleanup-never-indent t "never automatically indent buffer when saving (this is often slow)" :type 'boolean :group 'gr-cleanup-save)
@@ -23,8 +23,9 @@
 (defun gr-save-with-cleanup () "gr-cleanup-always and save-buffer" (interactive) (gr-cleanup-always) (save-buffer))
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
 (defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode make-modes)))
-(defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (gr-cleanup-skip-indent-p)))
-(defun gr-cleanup-skip-compress-whitespace-p () (or gr-cleanup-never-compress (member major-mode gr-cleanup-skip-compress-whitespace-modes)))
+(defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (member major-mode make-modes)))
+(defun gr-skip-manual-compress-whitespace-p () (member major-mode gr-cleanup-skip-compress-whitespace-modes))
+(defun gr-cleanup-skip-compress-whitespace-p () (or gr-cleanup-never-compress (gr-skip-manual-compress-whitespace-p)))
 (defun gr-cleanup-space-assign () (not (or (member major-mode shell-modes) (member major-mode make-modes))))
 (defvar gr-cleanup-save-hook nil
   "Called when `gr-cleanup-save-mode' is turned on.")
@@ -123,10 +124,14 @@
 
 (defun gr-untabify-buffer ()
   (interactive)
-  (when (not (gr-cleanup-skip-untabify-p))
-    (message "untabify...")
-    (when (gr-buffer-contains-substring "\t")
-      (untabify (point-min) (point-max)))))
+  (if (gr-cleanup-skip-untabify-p)
+      (message "skip untabify (gr-cleanup-skip-untabify-p)")
+    (progn
+      (message "untabify...")
+      (save-excursion
+        (goto-char (point-min))
+        (when (search-forward "\t" nil t)
+          (untabify (1- (point)) (point-max)))))))
 
 ;; this is fast but will mess with comments and string constants (may be surprising)
 (defun gr-compress-whitespace-fast-impl (&optional over)
@@ -300,10 +305,12 @@
 (defun gr-space-operators (&optional over)
   "region if active, else buffer"
   (interactive)
-  (save-restriction
-    (message "adding some spaces for code face ...")
-    (gr-narrow-dwim-buffer)
-    (gr-space-operators-impl)))
+  (if (gr-skip-manual-compress-whitespace-p)
+      (message (format "skipping gr-space-operators for mode %s" major-mode))
+    (save-restriction
+      (message "adding some spaces for code face ...")
+      (gr-narrow-dwim-buffer)
+      (gr-space-operators-impl))))
 
 (defmacro gr-safe-wrap (&rest body)
   `(unwind-protect
@@ -314,7 +321,6 @@
             (message (format "Caught exception: [%s]" ex))
             (setq retval (cons 'exception (list ex)))))
          retval)))
-
 
 (defun gr-cleanup-always ()
   (interactive)

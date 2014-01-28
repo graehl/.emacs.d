@@ -4,7 +4,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(make-modes (quote (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode))
+ '(make-modes (quote (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode)))
  '(add-log-current-defun-function (quote ignore))
  '(c-require-final-newline (quote ((c-mode . t) (c++-mode . t) (objc-mode . t) (java-mode))))
  '(compilation-ask-about-save nil)
@@ -37,7 +37,6 @@
  '(yas/also-auto-indent-first-line t)
  '(yas/next-field-key (quote ("TAB" "<tab>" "M-<return>")))
  '(yas/prev-field-key (quote ("<backtab>" "<S-tab>" "C-<space>" "S-<return>"))))
-;; '(uniquify-buffer-name-style (quote post-forward) nil (uniquify))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -45,5 +44,3 @@
  ;; If there is more than one, they won't work right.
  )
 
-;;(setq gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode sh-mode shell-mode cmake-mode))
-;;(setq make-modes (quote (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode))

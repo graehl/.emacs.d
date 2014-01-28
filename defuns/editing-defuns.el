@@ -2,17 +2,17 @@
 
 (defun to-configure ()
   (interactive)
-      (save-excursion
-        (save-restriction
-          (narrow-to-region
-           (query-replace "OD" "Config")
-           (query-replace "add_options" "configure")
-           (query-replace "all_options" "c")
-           (query-replace ".defaulted(" "c(")
-           (query-replace "\")" "\");")
-           (query-replace ",\"" ")(\"")
-           )
-          )))
+  (save-excursion
+    (save-restriction
+      (narrow-to-region
+       (query-replace "OD" "Config")
+       (query-replace "add_options" "configure")
+       (query-replace "all_options" "c")
+       (query-replace ".defaulted(" "c(")
+       (query-replace "\")" "\");")
+       (query-replace ",\"" ")(\"")
+       )
+      )))
 ;; Basic text editing defuns
 (defun forward-skip-space (&optional lim)
   (interactive)
@@ -338,7 +338,7 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive "P")
   (if arg
       () ;;(insert "%")  ; insert the character we're bound to
-    (cond ((looking-at "[[({]")
+    (cond ((looking-at "[[( {]")
            (forward-sexp 1)
            (forward-char -1))
           ((looking-at "[]})]")
@@ -408,3 +408,61 @@ region-end is used. Adds the duplicated text to the kill ring."
   (interactive "*")
   (let ((fill-column most-positive-fixnum))
     (fill-paragraph nil (region-active-p))))
+
+(defun get-point (symbol &optional arg)
+  "get the point"
+  (funcall symbol arg)
+  (point)
+  )
+
+(defun copy-thing (begin-of-thing end-of-thing &optional arg)
+  "copy thing between beg & end into kill ring"
+  (save-excursion
+    (let ((beg (get-point begin-of-thing 1))
+          (end (get-point end-of-thing arg)))
+      (copy-region-as-kill beg end)
+      (message (buffer-substring beg end))
+      )))
+
+(defun in-shell-mode ()
+  (string= "shell-mode" major-mode))
+
+(defun paste-to-mark (&optional arg)
+  "Paste things to mark, or to the prompt in shell-mode"
+  (let ((pasteMe
+         (lambda()
+           (if (in-shell-mode)
+               (progn (comint-next-prompt 25535) (yank))
+             (progn (goto-char (mark)) (yank) )))))
+    (if arg
+        (if (= arg 1)
+            nil
+          (funcall pasteMe))
+      (funcall pasteMe))
+    ))
+
+(defun copy-word (&optional arg)
+  "Copy words at point into kill-ring"
+  (interactive "P")
+  (copy-thing 'backward-word 'forward-word arg)
+  )
+
+(defun copy-word-to-mark (&optional arg)
+  "Copy words at point into kill-ring and paste at mark"
+  (interactive "P")
+  (copy-thing 'backward-word 'forward-word arg)
+  (paste-to-mark arg)
+  )
+
+(defun copy-line (&optional arg)
+  "Save current line into Kill-Ring without marking the line"
+  (interactive "P")
+  (copy-thing 'beginning-of-line 'end-of-line arg)
+  )
+
+(defun copy-line-to-mark (&optional arg)
+  "Save current line into Kill-Ring without marking the line and paste at mark"
+  (interactive "P")
+  (copy-thing 'beginning-of-line 'end-of-line arg)
+  (paste-to-mark arg)
+  )

@@ -338,11 +338,15 @@
       (global-unset-key (kbd "M-["))
       (global-set-key (kbd "<f1>") 'default-split))
   (progn
-   (global-set-key (kbd "M-[") 'default-split)
-      (global-set-key (kbd "<f1>") 'help-command)))
+    (global-set-key (kbd "M-[") 'default-split)
+    (global-set-key (kbd "<f1>") 'help-command)))
 
 (global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)
 
 (define-key isearch-mode-map (kbd "C-y") 'isearch-yank-kill)
 
 (global-set-key (kbd "M-:") 'gr-goto-changelog-end)
+
+(global-set-key (kbd "C-c w")   'copy-word)
+(global-set-key (kbd "C-c l")   'copy-line)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)

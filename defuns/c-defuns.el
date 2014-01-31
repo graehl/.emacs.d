@@ -325,6 +325,8 @@ from the namespace declaration iff the open brace sits on a line by itself."
                (bolp))
         2)))
 
+(require 'cc-engine)
+
 (defun my-c-backward-template-prelude ()
   "Back up over expressions that end with a template argument list.
 
@@ -338,7 +340,7 @@ Examples include:
       (save-excursion
         ;; Inspect the previous token or balanced pair to
         ;; see whether to skip backwards over it
-        (c-backward-syntactic-ws)
+        (c-backward-syntactic-ws) ;;//TODO
         (or
          ;; is it the end of a nested template argument list?
          (and
@@ -547,3 +549,66 @@ starts."
               (beginning-of-buffer)))
           (insert rest "\n")
           )))))
+
+(require 'buffer-defuns)
+
+(defun gr-fn-to-cpp ()
+  "use sourcepair-load to find .cpp for current buffer and, if
+found, move function implementation there. uses
+backward-paragraph and forward-paragraph so is brittle"
+  (interactive)
+  (let ( (start (make-marker))
+         (mid (make-marker))
+         (end (make-marker))
+         (buffer (current-buffer))
+         (buffer2)
+         )
+    (message (format "buffer: %s" buffer))
+    (forward-paragraph)
+    (set-marker end (point))
+    (backward-paragraph)
+    (save-excursion (when (re-search-forward "inline " end t) (delete-char -7)))
+    (forward-paragraph)
+    (set-marker end (point))
+    (backward-paragraph)
+    (set-marker start (point))
+    (if
+        (and (re-search-forward "{" end t)
+             (re-search-backward ")" start t))
+        (progn
+          (kill-ring-save start end)
+          (set-marker mid (point))
+          (let ((buffercpp (sourcepair-load)))
+            (when buffercpp
+              (end-of-buffer)
+              (backward-paragraph)
+              (backward-paragraph)
+              (end-of-line)
+              ;;(insert "\n")
+              (yank)
+              ;;(insert "\n")
+              (switch-to-buffer buffer t t)
+              (delete-region (+ 1 mid) end)
+              (goto-char (+ 1 mid))
+              (insert ";\n")
+              (goto-char start)
+              (insert "\n")
+              ;;(other-window)
+              (gr-raise-buffer-other-window buffercpp))))
+      (message "gr-fn-to-cpp: move cursor to .hpp function with ) ... { where .cpp already exists"))))
+
+(defun gr-replace-string-all (from to)
+  (goto-char (point-min))
+  (while (search-forward from nil t)
+    (replace-match to nil t)))
+
+(defun gr-cstr ()
+  (interactive)
+  (insert
+   (with-temp-buffer (yank)
+                     (gr-replace-string-all "\"" "\\\"")
+                     (gr-replace-string-all "\n" "\\n\"\n")
+                     (goto-char (point-min))
+                     (replace-regexp "^." "\"\\1")
+                     (buffer-substring-no-properties (point-min) (point-max))
+                     )))

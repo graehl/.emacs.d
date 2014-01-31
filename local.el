@@ -12,3 +12,4 @@
 
 (setq gud-latest "~/bin/egdbHgBest --nbest=2 /Users/graehl/x/bugs/xyz/fsaw")
 (setq compilation-skip-threshold 1)
+(setq compile-command (with-sh "cjen Debug"))

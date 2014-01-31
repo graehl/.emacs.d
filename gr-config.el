@@ -7,7 +7,7 @@
 (setq gr-on-linux (eq system-type 'gnu/linux))
 (setq gr-on-win (not (or gr-on-mac gr-on-linux)))
 
-(defvar gr-have-ag (not gr-on-win))
+(setq gr-have-ag (not gr-on-win))
 
 (defun emacs-version-get-component (component)
   (let ((old-match-data (match-data))
@@ -31,5 +31,6 @@
   (emacs-version-get-component 'major))
 
 (setq gr-on-24 (>= (emacs-version-major) 24))
-
+(setq gr-on-25 (>= (emacs-version-major) 25))
+(setq gr-on-24-3 (or gr-on-25 (and (= (emacs-version-major) 24) (>= (emacs-version-get-component 'minor) 3))))
 (provide 'gr-config)

@@ -1,20 +1,27 @@
-(require 'cl)
-
 ;; Set path to .emacs.d
 (setq dotfiles-dir "~/.emacs.d")
+
+(defun load-dotfile (file)
+  (load-file (expand-file-name file dotfiles-dir)))
 ;; Set path to dependencies
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path dotfiles-dir)
-(load-file (expand-file-name "gr-config.el" dotfiles-dir))
+
+(require 'cl)
+
+(require 'gr-config)
+;;(load-file (expand-file-name "gr-config.el" dotfiles-dir))
 (if (< (emacs-version-major) 24)
     (load-file (expand-file-name "package-23.el" dotfiles-dir))
   (require 'package))
 
+(defun all-to-list (list all)
+  (mapc (lambda (x) (add-to-list list x)) all))
+
 (setq gr-packages
       '(ag
-        flyspell
         autopair
         ack
         ack-and-a-half ace-jump-mode
@@ -25,8 +32,10 @@
         helm-projectile ido-ubiquitous
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
-(if gr-on-24 (add-to-list 'gr-packages 'flycheck 'gist)
+(if gr-on-24
+    (all-to-list 'gr-packages '(smex gist flyspell pcache logito js2-mode gh flycheck artist))
   (add-to-list 'gr-packages 'cl-lib))
+
 ;; packages
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
@@ -134,6 +143,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 (add-hook 'after-init-hook 'gr-auto-install-install)
 
+
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
@@ -174,7 +184,6 @@ Missing packages are installed automatically."
   (when (and (file-not-autosave file) (file-regular-p file))
     (load file)))
 
-(require 'key-bindings)
 
 ;; Setup extensions
 (require 'setup-ido)
@@ -188,7 +197,6 @@ Missing packages are installed automatically."
 (require 'setup-gud-mode)
 (require 'setup-html-mode)
 (require 'setup-sh-mode)
-(require 'setup-ack)
 (require 'setup-shell-mode)
 (require 'setup-sourcepair)
 (require 'setup-iswitchb)
@@ -196,6 +204,7 @@ Missing packages are installed automatically."
 (require 'setup-line-mode)
 ;;(require 'setup-paredit)
 (require 'setup-ispell)
+(require 'setup-spell)
 
 ;; Map files to modes
 (require 'mode-mappings)
@@ -210,7 +219,6 @@ Missing packages are installed automatically."
 (require 'setup-term)
 ;; below use defuns.
 
-(when (equal system-type 'darwin) (require 'mac))
 
 ;; Misc
 
@@ -237,8 +245,9 @@ Missing packages are installed automatically."
 (defalias 'list-buffers 'ibuffer) ; always use ibuffer
 
 (require 'aliases)
-(require 'smex) ;M-x
-(smex-initialize)
+(when (and nil gr-on-24)
+  (require 'smex) ;M-x
+  (smex-initialize))
 
 (when (equal system-type 'windows-nt) (require 'win))
 (safe-wrap (load-file (expand-file-name "local.el" dotfiles-dir)))
@@ -249,6 +258,9 @@ Missing packages are installed automatically."
 (when t ; redundant with autopair
   (require 'wrap-region)
   (wrap-region-global-mode t))
+
+(defvar gr-on-term nil)
+(setq gr-on-term (eq window-system nil))
 
 (require 'gr-cleanup-save)
 (setq gr-cleanup-save-excessive-spaces 1)
@@ -263,14 +275,35 @@ Missing packages are installed automatically."
 (require 'setup-change-log)
 (require 're-builder+)
 (require 'pandoc-mode)
-(require 'setup-spell)
+(require 'setup-compilation-mode)
+
 (require 'optional-bindings)
 (require 'setup-helm)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
-(require 'appearance)
 (defun gr-load-appearance ()
   (interactive)
+  (load-file (expand-file-name "appearance.el" dotfiles-dir))
   (when gr-on-mac
-    (load-file (expand-file-name "appearance.el" dotfiles-dir))))
-(add-hook 'after-init-hook 'gr-load-appearance)
+    (require 'mac)
+    (require 'mac-after)
+    ))
+;;(require 'appearance)
+;;(add-hook 'after-init-hook 'gr-load-appearance)
+(defun gr-ag-after-init ()
+  (gr-auto-install-install)
+  (load-file (expand-file-name "setup-ag.el" dotfiles-dir))
+  (require 'key-bindings)
+  (gr-load-appearance)
+  (if gr-have-ag
+      (require 'setup-ag)
+    (require 'setup-ack))
+  (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
+  (load-file (expand-file-name "setup-compilation-mode.el" dotfiles-dir))
+)
+
+(add-hook 'after-init-hook 'gr-ag-after-init)
+(gr-ag-after-init)
+(when nil (not (boundp 'gr-init-once-t))
+  (setq gr-init-once-t t)
+  (load-file (expand-file-name "init.el" dotfiles-dir)))

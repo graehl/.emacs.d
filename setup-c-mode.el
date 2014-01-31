@@ -117,7 +117,7 @@
   (interactive)
   (c-add-style "graehl" graehl-style t)
   (c-toggle-auto-hungry-state 1)
-  ;(key-chord-define c-mode-map ";;" "\C-e")
+                                        ;(key-chord-define c-mode-map ";;" "\C-e")
   (c-set-style "bsd")
   (setq c-default-style "bsd"
                                         ; c-backspace-function 'c-hungry-delete
@@ -180,111 +180,14 @@
   (define-key c-mode-base-map (kbd "C-j") 'dabbrev-expand)
   (c-set-offset 'c 'c-lineup-C-comments)
 
-;; because autopair -> electric paren was bothering me - not sure if this fixes
-;;  (define-key c-mode-base-map (kbd "(") 'self-insert-command)
-;;  (define-key c-mode-base-map (kbd ")") 'self-insert-command)
+  ;; because autopair -> electric paren was bothering me - not sure if this fixes
+  ;;  (define-key c-mode-base-map (kbd "(") 'self-insert-command)
+  ;;  (define-key c-mode-base-map (kbd ")") 'self-insert-command)
 
   ;; Set the comments to start where they ought to.
   (setq-default c-comment-continuation-stars "* ")
   )
-
-;; Wrapper function needed for Emacs 21 and XEmacs (Emacs 22 offers the more
-;; elegant solution of composing a list of lineup functions or quantities with
-;; operators such as "add")
-(defun google-c-lineup-expression-plus-4 (langelem)
-  "Indents to the beginning of the current C expression plus 4 spaces.
-
-This implements title \"Function Declarations and Definitions\" of the Google
-C++ Style Guide for the case where the previous line ends with an open
-parenthese.
-
-\"Current C expression\", as per the Google Style Guide and as clarified by
-subsequent discussions,
-means the whole expression regardless of the number of nested parentheses, but
-excluding non-expression material such as \"if(\" and \"for(\" control
-structures.
-
-Suitable for inclusion in `c-offsets-alist'."
-  (save-excursion
-    (back-to-indentation)
-    ;; Go to beginning of *previous* line:
-    (c-backward-syntactic-ws)
-    (back-to-indentation)
-    ;; We are making a reasonable assumption that if there is a control
-    ;; structure to indent past, it has to be at the beginning of the line.
-    (if (looking-at "\\(\\(if\\|for\\|while\\)\\s *(\\)")
-        (goto-char (match-end 1)))
-    (vector (+ 4 (current-column)))))
-
-(defconst google-c-style
-  `((c-recognize-knr-p . nil)
-    (c-enable-xemacs-performance-kludge-p . t) ; speed up indentation in XEmacs
-    (c-basic-offset . 2)
-    (indent-tabs-mode . nil)
-    (c-comment-only-line-offset . 0)
-    (c-hanging-braces-alist . ((defun-open after)
-                               (defun-close before after)
-                               (class-open after)
-                               (class-close before after)
-                               (namespace-open after)
-                               (inline-open after)
-                               (inline-close before after)
-                               (block-open after)
-                               (block-close . c-snug-do-while)
-                               (extern-lang-open after)
-                               (extern-lang-close after)
-                               (statement-case-open after)
-                               (substatement-open after)))
-    (c-hanging-colons-alist . ((case-label)
-                               (label after)
-                               (access-label after)
-                               (member-init-intro before)
-                               (inher-intro)))
-    (c-hanging-semi&comma-criteria
-     . (c-semi&comma-no-newlines-for-oneline-inliners
-        c-semi&comma-inside-parenlist
-        c-semi&comma-no-newlines-before-nonblanks))
-    (c-indent-comments-syntactically-p . nil)
-    (comment-column . 40)
-    (c-cleanup-list . (brace-else-brace
-                       brace-elseif-brace
-                       brace-catch-brace
-                       empty-defun-braces
-                       defun-close-semi
-                       list-close-comma
-                       scope-operator))
-    (c-offsets-alist . ((arglist-intro google-c-lineup-expression-plus-4)
-                        (func-decl-cont . ++)
-                        (member-init-intro . ++)
-                        (inher-intro . ++)
-                        (comment-intro . 0)
-                        (arglist-close . c-lineup-arglist)
-                        (topmost-intro . 0)
-                        (block-open . 0)
-                        (inline-open . 0)
-                        (substatement-open . 0)
-                        (statement-cont
-                         .
-                         (,(when (fboundp 'c-no-indent-after-java-annotations)
-                             'c-no-indent-after-java-annotations)
-                          ,(when (fboundp 'c-lineup-assignments)
-                             'c-lineup-assignments)
-                          ++))
-                        (label . /)
-                        (case-label . +)
-                        (statement-case-open . +)
-                        (statement-case-intro . +) ; case w/o {
-                        (access-label . /)
-                        (innamespace . 0))))
-  "Google C/C++ Programming Style")
-
-(defun google-set-c-style ()
-  "Set the current buffer's c-style to Google C/C++ Programming
-  Style. Meant to be added to `c-mode-common-hook'."
-  (interactive)
-  (make-local-variable 'c-tab-always-indent)
-  (setq c-tab-always-indent t)
-  (c-add-style "Google" google-c-style t))
+(require 'cc-engine)
 
 (require 'gud)
 (defun my-gud-run-to-cursor ()
@@ -295,3 +198,18 @@ Suitable for inclusion in `c-offsets-alist'."
 (install-hooks c-modes-hook 'google-set-c-style)
 (install-hooks c-modes-hook 'gr-c-mode-hook)
 (provide 'setup-c-mode)
+
+(defun gray-assert ()
+  (interactive)
+  ;; gray out the "assert(...)" wrapper
+  (font-lock-add-keywords nil
+                          '(("\\<\\(assert\(.*\);\\)" 1 '(:foreground "#444444") t)))
+
+  ;; gray out the stuff inside parenthesis with a slightly lighter color
+  (font-lock-add-keywords nil
+                          '(("\\<assert\\(\(.*\);\\)" 1 '(:foreground "#666666") t)))
+  )
+
+(add-hook 'c-mode-common-hook 'gray-assert)
+
+(require 'google-c-style)

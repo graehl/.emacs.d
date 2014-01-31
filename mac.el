@@ -22,9 +22,12 @@
   (mac-font "Andale Mono" 14)
   (mac-font "DejaVu Sans Mono" 14 'light)
   (mac-font "Pragmata" 14 'light)
+  (mac-font "Crisp" 14 'light)
+  (mac-font "ProggyCleanTT" 16 'light)
   (mac-font "PragmataPro" 14 'light)
   )
-
+(when (not (eq system-uses-terminfo t))
+(mac-font))
 
                                         ;(custom-set-faces '(default ((t (:height 100 :family "Consolas" :embolden nil)))))
 

@@ -1,5 +1,27 @@
 (setq default-tab-width 2)
 
+(setq bidi-display-reordering nil)
+(setq bidi-paragraph-direction 'left-to-right)
+
+(defface extra-whitespace-face
+   '((t (:background "pale green")))
+   "Used for tabs and such.")
+
+(defvar gr-extra-keywords
+   '(("\t" . 'extra-whitespace-face)))
+
+(defun gr-highlight-extra-whitespace ()
+  (interactive)
+  (font-lock-mode 1)
+  (font-lock-add-keywords nil gr-extra-keywords))
+
+;;(add-hook 'text-mode-hook 'gr-highlight-extra-whitespace)
+
+(defun gr-tab-higlight-add-font-lock ()
+  (font-lock-add-keywords nil '(("\t" 0 'trailing-whitespace prepend))))
+
+;;(add-hook 'font-lock-mode-hook 'gr-tab-highlight-add-font-lock)
+
 (setq visible-bell t
       font-lock-maximum-decoration t
       color-theme-is-global t
@@ -15,11 +37,10 @@
 
 (require 'color-theme)
 
-(if gr-on-24
-    (progn
-      (ignore-errors (load-theme 'solarized-dark t))
-      (ignore-errors (load-theme 'solarized-dark t))
-      ))
+(when gr-on-24
+  (if gr-on-term
+      (ignore-errors (load-theme 'solarized-light t))
+    (ignore-errors (load-theme 'solarized-dark t))))
 
 (when nil
   (require 'color-theme-solarized)

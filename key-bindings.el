@@ -29,7 +29,6 @@
 ;; Use shell-like backspace C-h, rebind help to F1
 (global-set-key (kbd "C-h") 'backward-delete-char-untabify)
 (define-key isearch-mode-map (kbd "C-h") 'isearch-delete-char)
-(global-set-key (kbd "<f1>") 'help-command)
 
 ;; Killing text
 (global-set-key (kbd "C-w") 'kill-region-or-backward-word)
@@ -85,8 +84,6 @@
 ;; Fetch the contents at a URL, display it raw.
 (global-set-key (kbd "C-x h") 'view-url)
 
-;; Help should search more than just commands
-(global-set-key (kbd "<f1> a") 'apropos)
 
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c e") 'eval-and-replace)
@@ -177,7 +174,6 @@
 (global-set-key (kbd "<f5>") 'kill-this-buffer)
 (global-set-key (kbd "<f6>") 'iswitchb-buffer) ; 'ido-switch-buffer
 (global-set-key (kbd "<f7>") 'save-buffer)
-(global-set-key (kbd "<f9>") 'ack)
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)
@@ -186,8 +182,8 @@
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-cursor-and-buffer-other-window)
 
-                                        ;(global-set-key (kbd "M-s") 'fixup-whitespace)
-                                        ;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
+;;(global-set-key (kbd "M-s") 'fixup-whitespace)
+;;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands
 ;; M-: (alt-shift-;) - evaluate lisp expression
 ;; C-x C-e - evaluate the preceding lisp expression on this line
@@ -240,7 +236,6 @@
 
 (global-set-key (kbd "<home>") 'beginning-of-visual-line)
 (global-set-key (kbd "<end>") 'end-of-visual-line)
-(global-set-key (kbd "M-[") 'default-split)
 (when nil (global-set-key [(meta \])] 'same-buffer-other-window))
 (global-set-key (kbd "M-]") 'same-buffer-other-window)
 (global-set-key (kbd "C-M-r") 'query-replace)
@@ -265,8 +260,8 @@
 (require 'top-mode)
 (global-set-key (kbd "C-M-S-t") 'top)
 (global-set-key (kbd "M-<f10>") 'menu-bar-open)
-                                        ;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
-                                        ;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
+;;(define-key isearch-mode-map [next] 'isearch-repeat-forward)
+;;(define-key isearch-mode-map [prior] 'isearch-repeat-backward)
 (require 'setup-ido)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files-compl)
 (global-set-key (kbd "C-x C-r") 'recentf-ido-find-file)
@@ -292,7 +287,7 @@
 
 (require 'setup-magit)
 (global-set-key (kbd "M-c") 'magit-status)
-;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
+;;(global-set-key (kbd ",") (lambda () (interactive) (insert ", ")))
 (global-set-key (kbd ",") 'self-insert-command)
 (global-set-key (kbd "C-=") 'gr-include)
 (global-set-key (kbd "M-'") 'gr-space-operators)
@@ -310,8 +305,48 @@
 (global-set-key (kbd "C-x y") 'helm-show-kill-ring)
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
 
+(require 'setup-ag)
 (require 'setup-ack)
 
 (global-set-key (kbd "<f9>") (if gr-have-ag 'gr-ag-cd 'ack-and-a-half))
-(global-set-key (kbd "S-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
+(global-set-key (kbd "C-<f9>") (if gr-have-ag 'ag-project 'ack-and-a-half))
 ;;(require 'multiple-cursors)(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+
+(when gr-on-mac
+  (global-set-key (kbd "<kp-3>") 'ignore)
+  (global-set-key (kbd "<kp-2>") 'ignore)
+  (global-set-key (kbd "<kp-1>") 'ignore)
+  (global-set-key (kbd "M-<kp-3>") 'ignore)
+  (global-set-key (kbd "M-<kp-2>") 'ignore)
+  (global-set-key (kbd "M-<kp-1>") 'ignore)
+  (global-set-key (kbd "C-<kp-3>") 'ignore)
+  (global-set-key (kbd "C-<kp-2>") 'ignore)
+  (global-set-key (kbd "C-<kp-1>") 'ignore)
+  )
+(global-set-key (kbd "C-d") 'backward-delete-char-untabify)
+(global-set-key (kbd "<f3>") 'next-error)
+(global-set-key (kbd "<f4>") 'compile)
+;;(when gr-on-term (global-set-key (kbd "<f1>") 'shell)
+;; Help should search more than just commands
+;;(global-set-key (kbd "<f1> a") 'apropos)
+(global-set-key (kbd "<f1>") 'help-command)
+
+(setq gr-on-term (eq window-system nil))
+
+(if (and nil gr-on-term)
+    (progn
+      (global-unset-key (kbd "M-["))
+      (global-set-key (kbd "<f1>") 'default-split))
+  (progn
+    (global-set-key (kbd "M-[") 'default-split)
+    (global-set-key (kbd "<f1>") 'help-command)))
+
+(global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)
+
+(define-key isearch-mode-map (kbd "C-y") 'isearch-yank-kill)
+
+(global-set-key (kbd "M-:") 'gr-goto-changelog-end)
+
+(global-set-key (kbd "C-c w")   'copy-word)
+(global-set-key (kbd "C-c l")   'copy-line)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)

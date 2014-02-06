@@ -27,7 +27,7 @@
         ack-and-a-half ace-jump-mode
         paredit
         scala-mode
-        gitconfig-mode gitignore-mode
+        ;;gitconfig-mode gitignore-mode
         helm
         helm-projectile ido-ubiquitous
         rainbow-delimiters

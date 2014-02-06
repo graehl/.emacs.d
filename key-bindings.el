@@ -324,7 +324,7 @@
   (global-set-key (kbd "C-<kp-1>") 'ignore)
   )
 (global-set-key (kbd "C-d") 'backward-delete-char-untabify)
-(global-set-key (kbd "<f3>") 'next-error)
+(global-set-key (kbd "<f3>") 'gr-next-error-error)
 (global-set-key (kbd "<f4>") 'compile)
 ;;(when gr-on-term (global-set-key (kbd "<f1>") 'shell)
 ;; Help should search more than just commands

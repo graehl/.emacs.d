@@ -15,9 +15,6 @@
 (setq compilation-skip-threshold 1)
 (setq compile-command (with-sh "kjen"))
 (setq compile-command (with-sh "cjen Debug"))
-(setq explicit-shell-file-name
-      )
-(setq shell-file-name explicit-shell-file-name)
 ;;(add-to-list 'exec-path "C:/chocolatey/bin")
 
 (defun set-shell-cmd (cmd)
@@ -27,6 +24,7 @@
 
 (setq gr-cmd-exe "C:/bin/ntemacs24/bin/cmdproxy.exe")
 (setq gr-bash-exe "C:/msys/bin/bash.exe")
+
 (defun set-cmd-exe ()
   (interactive)
   (setq shell-file-name gr-cmd-exe)
@@ -41,4 +39,4 @@
         (explicit-shell-file-name shell-file-name))
     x))
 
-(set-cmd-exe)
+;(set-cmd-exe)

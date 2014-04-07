@@ -214,7 +214,7 @@ is not supplied, the boost copyright is used by default"
         )
       (insert nsfini)
       (insert nsfini)
-      (insert "#endif // " guard)
+      (insert "#endif")
       (goto-char final))
     )
   )

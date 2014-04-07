@@ -239,7 +239,7 @@ Missing packages are installed automatically."
                                         ;(icomplete-mode 1)
 (require 'buffer-init)
 
-(autoload 'live-mode "live-mode" "live mode" t)
+;;(autoload 'live-mode "live-mode" "live mode" t)
 (defalias 'yes-or-no-p 'y-or-n-p) ; y or n is enough
 (fset 'yes-or-no-p 'y-or-n-p)
 (defalias 'list-buffers 'ibuffer) ; always use ibuffer

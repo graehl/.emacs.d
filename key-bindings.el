@@ -281,7 +281,7 @@
 (global-set-key (kbd "M-g") '(lambda () (interactive) (exchange-point-and-mark 1)))
 (global-set-key (kbd "<home>") 'gud-step)
 (global-set-key (kbd "<end>") 'gud-next)
-(global-set-key (kbd "<insert>") 'gud-finish)
+(global-set-key (kbd "<help>") 'gud-finish)
 (global-set-key (kbd "S-<right>") 'forward-sentence)
 (global-set-key (kbd "S-<left>") 'backward-sentence)
 

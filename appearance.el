@@ -1,3 +1,15 @@
+(set-frame-parameter nil 'fullscreen 'fullboth)
+
+(setq ns-use-srgb-colorspace t)
+
+(defun gr-toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
+(set-fringe-mode 0)
 (setq default-tab-width 2)
 
 (setq bidi-display-reordering nil)

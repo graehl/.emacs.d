@@ -10,6 +10,7 @@
  '(compilation-error-regexp-alist (quote (("^ + [0-9]+>\\([^(>]+\\)(\\([0-9]+\\)): [^ ]" 1 2) ("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2) absoft ada aix ant bash borland python-tracebacks-and-caml comma cucumber edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint)))
  '(compilation-skip-threshold 2)
  '(fill-column 80)
+ '(global-auto-revert-ignore-modes (quote ((quote c++-mode))))
  '(gud-gdb-command-name "~/bin/egdbHgCompose --fsm-compose 0")
  '(ido-use-filename-at-point nil)
  '(inferior-octave-prompt "\\(^octave\\(\\|.bin\\|.exe\\)?\\(-[.0-9]+\\)?\\(:[0-9]+\\)?\\|^debug\\|^\\)>+ ")

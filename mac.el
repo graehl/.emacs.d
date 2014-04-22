@@ -78,5 +78,5 @@
       'top-mode-mac-generate-top-command)
 (setq top-mode-strace-command "/usr/sbin/dtrace")
 
-(menu-bar-mode t)
+;;(menu-bar-mode t)
 (provide 'mac)

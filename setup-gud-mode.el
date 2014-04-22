@@ -20,6 +20,7 @@
                         (comint-next-input 1)
                       (forward-line 1))))
   (local-set-key [f2] 'gud-cont)
+  (local-set-key [f1] 'gud-up)
   (local-set-key [f12] 'gud-step)
   (local-set-key [f10] 'gud-next)
   (local-set-key [f11] 'gud-finish)

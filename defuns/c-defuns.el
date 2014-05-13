@@ -609,6 +609,8 @@ backward-paragraph and forward-paragraph so is brittle"
                      (gr-replace-string-all "\"" "\\\"")
                      (gr-replace-string-all "\n" "\\n\"\n")
                      (goto-char (point-min))
-                     (replace-regexp "^." "\"\\1")
+                     (replace-regexp "^" "\"") ; ^. \\1
+                     (goto-char (point-min))
+                     (replace-regexp "^\"$" "") ; ^. \\1
                      (buffer-substring-no-properties (point-min) (point-max))
                      )))

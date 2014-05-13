@@ -466,3 +466,12 @@ region-end is used. Adds the duplicated text to the kill ring."
   (copy-thing 'beginning-of-line 'end-of-line arg)
   (paste-to-mark arg)
   )
+
+(defun m_-to-trailing (&optional start end)
+  (interactive "r?")
+  "replace m_ prefix for C identifiers with _ suffix"
+  (let ((case-replace nil))
+    (save-excursion
+      (goto-char 0)
+      (while (re-search-forward "m_\\([a-zA-Z0-9]+\\)" nil t) ; ~bound noerror
+        (replace-match "\\1_" t nil))))) ; fixedcase ~literal

@@ -1,23 +1,25 @@
 ;; compile- + - one of these is killing my ctrl-o binding in global map.
-(require 'compile-)
+;;(require 'compile-)
 (require 'compile)
-(require 'compile+)
+;;(require 'compile+)
 (require 'compile-defuns)
 (require 'cmake-mode)
 
 (defun my-compilation-mode-hook ()
+  (define-key compilation-mode-map (kbd "C-o") 'other-window)
+  (when (eq major-mode 'compilation-mode) ; exclude grep/ag
   ;;  (setq truncate-lines nil)
   ;;  (add-to-list 'compilation-finish-functions 'compilation-recenter-end-at-finish)
   ;; (global-set-key (kbd "C-o") 'other-window)
-  (define-key compilation-mode-map (kbd "C-o") 'other-window)
-  (setq bidi-paragraph-direction 'left-to-right)
-  )
+  ;;(setq bidi-paragraph-direction 'left-to-right)
+  ))
                                         ; Don't truncate lines in the compilation window
 (add-hook 'compilation-mode-hook 'my-compilation-mode-hook)
 
-(add-to-list 'compilation-error-regexp-alist '("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2))
-(add-to-list 'compilation-error-regexp-alist '("^ + [0-9]+>\\([^(]+\\)(\\([0-9]+\\)): [^ ]" 1 2))
+;;(add-to-list 'compilation-error-regexp-alist '("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2))
+;;(add-to-list 'compilation-error-regexp-alist '("^ + [0-9]+>\\([^(]+\\)(\\([0-9]+\\)): [^ ]" 1 2))
 
+;; '(compilation-error-regexp-alist (quote (("^ + [0-9]+>\\([^(>]+\\)(\\([0-9]+\\)): [^ ]" 1 2) ("^\\([^ :]+\\):\\([0-9]+\\): [^ ]" 1 2) absoft ada aix ant bash borland python-tracebacks-and-caml comma cucumber edg-1 edg-2 epc ftnchek iar ibm irix java jikes-file maven jikes-line gcc-include ruby-Test::Unit gnu lcc makepp mips-1 mips-2 msft omake oracle perl php rxp sparc-pascal-file sparc-pascal-line sparc-pascal-example sun sun-ada watcom 4bsd gcov-file gcov-header gcov-nomark gcov-called-line gcov-never-called perl--Pod::Checker perl--Test perl--Test2 perl--Test::Harness weblint)))
 
 (require 'compile-defuns)
 
@@ -25,8 +27,9 @@
 (add-hook 'c++-mode-hook 'my-c++-mode-compile-dwim)
 (add-hook 'latex-mode-hook 'my-latex-mode-compile-dwim)
 
-(add-hook 'compilation-finish-functions #'qtmstr-compile-finish)
-(add-hook 'compilation-mode-hook #'qtmstr-setup-compile-mode)
+;;(add-hook 'compilation-finish-functions #'qtmstr-compile-finish)
+;;(add-hook 'compilation-mode-hook #'qtmstr-setup-compile-mode)
+
  ;; i don't like this - it forces a dedicated frame
 (remove-hook 'compilation-finish-functions 'fit-1-window-frames-on)
 

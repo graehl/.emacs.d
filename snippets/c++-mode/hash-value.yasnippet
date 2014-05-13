@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: hash-value
+# key: hv
+# --
+friend inline std::size_t hash_value(${1:`(gr-c-class-name "self_type")`} const& self) {
+  return self.hash();
+}
+std::size_t hash() const {
+  $0
+}

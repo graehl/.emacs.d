@@ -1,3 +1,5 @@
+(setq server-raise-frame nil)
+
 (set-frame-parameter nil 'fullscreen 'fullboth)
 
 (setq ns-use-srgb-colorspace t)

@@ -1,4 +1,4 @@
-;;(push "/usr/local/bin" exec-path) ;brew
+(exp .405465);;(push "/usr/local/bin" exec-path) ;brew
 
 (require 'font)
 ;; change command to meta, and ignore option to use weird norwegian keyboard
@@ -10,6 +10,8 @@
 (setq mac-font-default "Monaco")
 (setq mac-font-default "Andale Mono")
 (setq mac-font-default "PragmataPro")
+(setq mac-size-default 12)
+(setq mac-font-default "Source Code Pro")
 ;;(setq mac-font-default "Consolas")
 ;;(mac-font mac-font-default mac-size-default mac-weight-default)
 ;;(mac-font "PragmataPro")
@@ -18,13 +20,19 @@
 (set-face-attribute 'default nil :font mac-font-default)
 (set-face-attribute 'default nil :height (* 10 mac-size-default))
 (when nil
-  (mac-font "Consolas" 14)
+  (mac-font "Fira Mono OT" 12 'light)
+  (mac-font "Cousine" 12 'light)
+  (mac-font "Consolas" 13 'light)
+  (mac-font "PragmataPro" 14 'light)
+  (mac-font "Source Code Pro" 13 'light)
+  (mac-font "Source Code Pro" 12 'medium)
+  (mac-font "Source Code Pro" 12 'light)
+;;  (mac-font "Inconsolata" 12 'medium)
   (mac-font "Andale Mono" 14)
   (mac-font "DejaVu Sans Mono" 14 'light)
   (mac-font "Pragmata" 14 'light)
-  (mac-font "Crisp" 14 'light)
+  (mac-font "Crisp" 16 'light)
   (mac-font "ProggyCleanTT" 16 'light)
-  (mac-font "PragmataPro" 14 'light)
   )
 (when (not (eq system-uses-terminfo t))
 (mac-font))

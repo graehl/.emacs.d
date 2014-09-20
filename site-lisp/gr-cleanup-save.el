@@ -18,7 +18,7 @@
 (setq gr-cleanup-never-untabify nil)
 (defcustom gr-cleanup-buffer-excessive-newlines 3 "if not nil or 0, replace excessive newlines with this many" :type 'integer :group 'gr-cleanup-save)
 (defcustom gr-cleanup-compress-whitespace-fast t "use simple regex rather than syntax tables - may affect comments/strings" :type 'boolean :group 'gr-cleanup-save)
-(defvar make-modes '(conf-mode conf-unix-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
+(defvar make-modes '(conf-mode conf-unix-mode makefile-bsdmake-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
 (defvar shell-modes '(shell-script shell-mode sh-mode)) ;; don't add space around var=val
 (defun gr-save-with-cleanup () "gr-cleanup-always and save-buffer" (interactive) (gr-cleanup-always) (save-buffer))
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
@@ -276,7 +276,7 @@
     (save-excursion
       (gr-force-fontify)
       (goto-char (point-min))
-      (replace-regexp "\\([^ \n]\\){" "\\1 {")
+      ;;(replace-regexp "\\([^ \n]\\){" "\\1 {") ;; need to make this avoid string-constant font-face
       (goto-char (point-min))
       (gr-replace-regexp (concat "\\([ ]*" gr-cond-spec "\\)(") "\\1 (" nil)
       (goto-char (point-min))

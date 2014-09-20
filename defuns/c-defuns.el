@@ -614,3 +614,36 @@ backward-paragraph and forward-paragraph so is brittle"
                      (replace-regexp "^\"$" "") ; ^. \\1
                      (buffer-substring-no-properties (point-min) (point-max))
                      )))
+
+(setq gr-0ptr-var nil)
+
+(defun gr-0ptr-var-repl ()
+  (let (str)
+    (setq str (match-string 1))
+    (if (gr-ends-with str "->")
+        (replace-regexp-in-string "->$" "." str)
+      (replace-regexp-in-string "^*" "" str)
+      )))
+
+(defun gr-0ptr (str)
+  (interactive "M*var -> var: ")
+  (let (i (point))
+    (query-replace (concat str "->") (concat str "."))
+    (goto-char i)
+    (query-replace (concat "*" str) str)
+    (goto-char i)
+    ))
+
+(defun gr-0ptr (str &optional to)
+  (interactive "M*var -> var: \nMreplace-var: ")
+  (save-excursion
+    (let (i j)
+      (or str (setq to str))
+      (setq i (point))
+      (query-replace (concat str "->") (concat to "."))
+      (setq j (point))
+      (narrow-to-region i j)
+      (goto-char i)
+      (replace-string (concat "*" str) to)
+      (query-replace (concat "*" str) to)
+      )))

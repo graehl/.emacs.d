@@ -307,3 +307,5 @@ Missing packages are installed automatically."
 (when nil (not (boundp 'gr-init-once-t))
   (setq gr-init-once-t t)
   (load-file (expand-file-name "init.el" dotfiles-dir)))
+
+(fmakunbound 'ed)

@@ -52,7 +52,7 @@
   :type 'string)
 
 (defcustom git-show/sha-command
-  "log --pretty=format:'%H %an %d %ar %s'"
+  "log --pretty=format:'%h %an %ar %s'"
   "Git show SHA command."
   :group 'git-show
   :type 'string)
@@ -113,7 +113,7 @@
      ;; results seem to be getting cached or something... I don't know
      ;; how to refresh it. ATM if this is executed in a different
      ;; repo, it will render the git-log(1) of the first one!.
-     (candidates-process . git-show/sha-init)
+     (candidates . git-show/sha-init)
      (candidate-number-limit . 9999)
      (candidates-in-buffer)
      (action . (lambda (candidate) candidate)))
@@ -175,7 +175,7 @@
                                  tmp-file-path))
                  (git-show/make-tmp-dir)
                  (call-process-shell-command show-cmd)
-                 (find-file-read-only tmp-file-path)
+                 (find-file tmp-file-path)
                  (setq mode-line-format
                        '(" " mode-line-buffer-identification " "
                          (:eval (propertize

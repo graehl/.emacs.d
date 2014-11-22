@@ -1,5 +1,11 @@
+
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(setq inhibit-startup-message t)
+
 ;; Set path to .emacs.d
-(setq dotfiles-dir "~/.emacs.d")
+(setq dotfiles-dir (expand-file-name "~/.emacs.d"))
 
 (defun load-dotfile (file)
   (load-file (expand-file-name file dotfiles-dir)))
@@ -7,6 +13,7 @@
 (setq site-lisp-dir (concat (expand-file-name "site-lisp" dotfiles-dir) "/"))
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
+(add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))
 (add-to-list 'load-path dotfiles-dir)
 
 (require 'cl)
@@ -21,12 +28,15 @@
   (mapc (lambda (x) (add-to-list list x)) all))
 
 (setq gr-packages
-      '(ag
+      '(auto-complete
+        diminish
+        ag
         autopair
         ack
         ack-and-a-half ace-jump-mode
         paredit
         scala-mode
+        git-gutter-fringe
         ;;gitconfig-mode gitignore-mode
         helm
         helm-projectile ido-ubiquitous
@@ -170,9 +180,17 @@ Missing packages are installed automatically."
 
 
 ;; Save point position between sessions
-(setq save-place-file (expand-file-name ".places" dotfiles-dir))
 (require 'saveplace)
 (setq-default save-place t)
+(setq save-place-file (expand-file-name ".places" dotfiles-dir))
+
+;; Write backup files to own directory
+(setq backup-directory-alist
+      `(("." . ,(expand-file-name
+                 (concat user-emacs-directory "backups")))))
+
+;; Make backups of files, even when they're in version control
+(setq vc-make-backup-files t)
 
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
@@ -235,8 +253,8 @@ Missing packages are installed automatically."
 
 (require 'grep-buffers)
 (require 'scratch-back)
-                                        ;(iswitchb-mode 1)
-                                        ;(icomplete-mode 1)
+;;(iswitchb-mode 1)
+;;(icomplete-mode 1)
 (require 'buffer-init)
 
 ;;(autoload 'live-mode "live-mode" "live mode" t)
@@ -279,6 +297,7 @@ Missing packages are installed automatically."
 
 (require 'optional-bindings)
 (require 'setup-helm)
+(require 'setup-clang-complete)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 (defun gr-load-appearance ()
@@ -309,3 +328,25 @@ Missing packages are installed automatically."
   (load-file (expand-file-name "init.el" dotfiles-dir)))
 
 (fmakunbound 'ed)
+(setq compilation-ask-about-save nil)
+
+;; first argument is the package name, the second is the mode in question, and the third is the new lighter for the mode.
+
+(defmacro rename-modeline (package-name mode new-name)
+  `(eval-after-load ,package-name
+     '(defadvice ,mode (after rename-modeline activate)
+        (setq mode-name ,new-name))))
+
+(rename-modeline "js2-mode" js2-mode "JS2")
+
+;; Keep region when undoing in region
+(defadvice undo-tree-undo (around keep-region activate)
+  (if (use-region-p)
+      (let ((m (set-marker (make-marker) (mark)))
+            (p (set-marker (make-marker) (point))))
+        ad-do-it
+        (goto-char p)
+        (set-mark m)
+        (set-marker p nil)
+        (set-marker m nil))
+    ad-do-it))

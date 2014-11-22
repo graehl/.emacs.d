@@ -112,4 +112,15 @@ An alternate approach would be after-advice on isearch-other-meta-char."
 ;; compiled) elisp to make the above advise stick.
 ;; (when (< (emacs-version-major) 24) (load "comint.el.gz"))
 
+(defun comint-delchar-or-eof-or-kill-buffer (arg)
+  (interactive "p")
+  (if (null (get-buffer-process (current-buffer)))
+      (kill-buffer)
+    (comint-delchar-or-maybe-eof arg)))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (define-key shell-mode-map
+              (kbd "C-d") 'comint-delchar-or-eof-or-kill-buffer)))
+
 (provide 'setup-shell-mode)

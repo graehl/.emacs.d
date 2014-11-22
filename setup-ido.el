@@ -43,4 +43,32 @@
       (find-file (cdr (assoc filename
                              file-assoc-list))))))
 
+;;; ~ goes to homedir - don't like.
+(when nil
+(add-hook 'ido-setup-hook
+ (lambda ()
+   ;; Go straight home
+   (define-key ido-file-completion-map
+     (kbd "~")
+     (lambda ()
+       (interactive)
+       (if (looking-back "/")
+           (insert "~/")
+         (call-interactively 'self-insert-command)))))))
+
+;; Use ido everywhere - causes problems for my f6 iswitchb
+(require 'ido-ubiquitous)
+;;(ido-ubiquitous-mode 0)
+
+;; Fix ido-ubiquitous for newer packages
+(defmacro ido-ubiquitous-use-new-completing-read (cmd package)
+  `(eval-after-load ,package
+     '(defadvice ,cmd (around ido-ubiquitous-new activate)
+        (let ((ido-ubiquitous-enable-compatibility nil))
+          ad-do-it))))
+
+;;(ido-ubiquitous-use-new-completing-read webjump 'webjump)
+;;(ido-ubiquitous-use-new-completing-read yas/expand 'yasnippet)
+;;(ido-ubiquitous-use-new-completing-read yas/visit-snippet-file 'yasnippet)
+
 (provide 'setup-ido)

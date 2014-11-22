@@ -158,4 +158,9 @@
 
 (add-hook 'find-file-hook 'my-find-file-check-make-large-file-read-only-hook)
 
+;; Diminish modeline clutter
+(require 'diminish)
+(diminish 'wrap-region-mode)
+;; (diminish 'yas/minor-mode)
+
 (provide 'appearance)

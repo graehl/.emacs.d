@@ -1,4 +1,4 @@
-(exp .405465);;(push "/usr/local/bin" exec-path) ;brew
+;;(push "/usr/local/bin" exec-path) ;brew
 
 (require 'font)
 ;; change command to meta, and ignore option to use weird norwegian keyboard

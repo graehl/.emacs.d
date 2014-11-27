@@ -59,8 +59,9 @@
 ;; note: can still use ctrl-n ctrl-p for regular movement
 
 
-(require 'multi-term)
-(setq multi-term-program "/bin/bash")
+;; (require 'multi-term)
+;; (setq multi-term-program "/bin/bash")
+
 (defun open-localhost ()
   (interactive)
   (ansi-term "bash" "localhost"))

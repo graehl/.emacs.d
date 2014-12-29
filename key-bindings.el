@@ -172,7 +172,11 @@
 (global-set-key (kbd "C-k") 'kill-line)
 (global-set-key (kbd "C-M-k") 'kill-sentence)
 (global-set-key (kbd "<f5>") 'kill-this-buffer)
-(global-set-key (kbd "<f6>") 'iswitchb-buffer) ; 'ido-switch-buffer
+;;(global-set-key (kbd "<f6>") 'iswitchb-buffer) ; 'ido-switch-buffer
+(global-set-key (kbd "<f6>") 'ido-switch-buffer)
+;;(global-set-key (kbd "<f6>") 'ibuffer)
+(global-set-key (kbd "C-x b") 'ido-switch-buffer)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f7>") 'save-buffer)
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
@@ -359,3 +363,7 @@
 (require 'clang-format)
 (global-set-key [C-M-tab] 'clang-format-region)
 (global-set-key (kbd "M-<f7>") 'gr-close-with-cleanup)
+(global-set-key (kbd "C-s") 'isearch-forward)
+;;(define-key isearch-mode-map (kbd "C-s") 'isearch-forward)
+(define-key isearch-mode-map (kbd "C-g") 'keyboard-really-quit)
+(define-key isearch-mode-map (kbd "C-SPC") 'set-mark-command)

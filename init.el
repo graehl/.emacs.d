@@ -1,3 +1,15 @@
+(defun string-starts-with (string prefix)
+  "Returns non-nil if string STRING starts with PREFIX, otherwise nil."
+  (and (>= (length string) (length prefix))
+       (string-equal (substring string 0 (length prefix)) prefix)))
+
+
+(defadvice display-warning
+    (around no-warn-.emacs.d-in-load-path (type message &rest unused) activate)
+  "Ignore the warning about the `.emacs.d' directory being in `load-path'."
+  (unless (and (eq type 'initialization)
+               (string-starts-with message "Your `load-path' seems to contain\nyour `.emacs.d' directory"))
+    ad-do-it))
 
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -37,6 +49,7 @@
         paredit
         scala-mode
         git-gutter-fringe
+        ibuffer
         ;;gitconfig-mode gitignore-mode
         helm
         helm-projectile ido-ubiquitous
@@ -176,7 +189,11 @@ Missing packages are installed automatically."
 
 ;; Write backup files to own directory
 (setq backup-directory-alist `(("." . ,(expand-file-name
-                                        (concat dotfiles-dir "backups")))))
+                                        (concat dotfiles-dir "/backups")))))
+
+(setq delete-auto-save-files nil)
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 
 ;; Save point position between sessions

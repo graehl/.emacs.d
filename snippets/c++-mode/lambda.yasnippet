@@ -9,6 +9,6 @@ ${2:S const&} ${4:${2:$(c++-var-from-type text)}};
 $1($2 $4) : $4($4) {}
 template <class X>
 result_type operator()(X const& x) const {
-${5:return result_type();}$0
+return ${5:result_type();}$0
 }
 };

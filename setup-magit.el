@@ -70,7 +70,8 @@ in register specified by the magit-status-register variable."
 
 (provide 'setup-magit)
 
-(setq git-show/sha-command "log -g --pretty=format:'%H %an %d %ar %s'")
+;;(setq git-show/sha-command "log -g --pretty=format:'%H %an %d %ar %s'")
+(setq git-show/sha-command "log --pretty=format:'%H %an %d %ar %s'")
 
 (require 'fringe-helper)
 (require 'git-gutter-fringe)

@@ -18,7 +18,7 @@
 (defcustom gr-clang-format-modes '(c-mode cc-mode c++-mode) "list of modes which clang-format on save")
 (defcustom gr-cleanup-save-except-modes '(calc-mode dired-mode)
   "A list of modes in which `gr-cleanup-save-mode' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
-(defcustom make-modes nil
+(defcustom gr-make-modes '(conf-mode conf-unix-mode makefile-bsdmake-mode makefile-gmake-mode makefile-mode fundamental-mode)
   "A list of modes in which `gr-cleanup-untabify' and `gr-cleanup-indent' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
 (defcustom gr-cleanup-skip-compress-whitespace-modes '(fundamental-mode change-log-mode sh-mode shell-mode cmake-mode)
   "A list of modes in which `gr-cleanup-compress-whitespace' should not be activated." :type '(symbol) :group 'gr-cleanup-save)
@@ -29,16 +29,16 @@
 (setq gr-cleanup-never-untabify nil)
 (defcustom gr-cleanup-buffer-excessive-newlines 3 "if not nil or 0, replace excessive newlines with this many" :type 'integer :group 'gr-cleanup-save)
 (defcustom gr-cleanup-compress-whitespace-fast t "use simple regex rather than syntax tables - may affect comments/strings" :type 'boolean :group 'gr-cleanup-save)
-(defvar make-modes '(conf-mode conf-unix-mode makefile-bsdmake-mode makefile-gmake-mode makefile-mode fundamental-mode) "skip indent on cleanup for these modes")
-(defvar shell-modes '(shell-script shell-mode sh-mode)) ;; don't add space around var=val
+(defvar gr-make-modes )
+(defvar gr-shell-modes '(shell-script shell-mode sh-mode)) ;; don't add space around var=val
 (defun gr-close-with-cleanup () "gr-cleanup-always and save-buffer and kill-buffer" (interactive) (gr-cleanup-always) (gr-save-close-buffer))
 (defun gr-save-with-cleanup () "gr-cleanup-always and save-buffer" (interactive) (gr-cleanup-always) (save-buffer))
 (defun gr-cleanup-skip-save-p () (member major-mode gr-cleanup-save-except-modes))
-(defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode make-modes)))
-(defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (member major-mode make-modes)))
+(defun gr-cleanup-skip-indent-p () (or gr-cleanup-never-indent (member major-mode gr-make-modes)))
+(defun gr-cleanup-skip-untabify-p () (or gr-cleanup-never-untabify (member major-mode gr-make-modes)))
 (defun gr-skip-manual-compress-whitespace-p () (member major-mode gr-cleanup-skip-compress-whitespace-modes))
 (defun gr-cleanup-skip-compress-whitespace-p () (or gr-cleanup-never-compress (gr-skip-manual-compress-whitespace-p)))
-(defun gr-cleanup-space-assign () (not (or (member major-mode shell-modes) (member major-mode make-modes))))
+(defun gr-cleanup-space-assign () (not (or (member major-mode gr-shell-modes) (member major-mode gr-make-modes))))
 (defvar gr-cleanup-save-hook nil
   "Called when `gr-cleanup-save-mode' is turned on.")
 

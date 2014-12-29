@@ -1,5 +1,6 @@
-(require 'isearch+)
+;; (require 'isearch+)
 (require 'misc-cmds)
+(when nil
 (defun isearchp-set-region ()
   "Set region around search target, if `isearchp-set-region-flag'.
 Used only for Transient Mark mode."
@@ -7,6 +8,7 @@ Used only for Transient Mark mode."
     (push-mark isearch-other-end t 'activate)))
 
 (add-hook 'isearch-mode-end-hook 'isearchp-set-region)
+)
 
 (provide 'setup-isearch)
 
@@ -104,4 +106,8 @@ Used only for Transient Mark mode."
 ;;    etc. to search for it.  This is controlled by user option
 ;;    `isearchp-mouse-2-flag'.
 
-(setq isearchp-set-region-flag nil) ; i like t, but need it to restore state after i move or it's unusable
+(setq isearchp-set-region-flag nil) ; t would be useful but couldn't solve annoyance
+
+;; Non-‘nil’ means automatically set the region around the last search target.
+
+;; Command ‘isearchp-toggle-set-region’, bound to ‘C-SPC’ during isearch – toggle ‘isearchp-set-region-flag’

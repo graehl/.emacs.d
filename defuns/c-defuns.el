@@ -184,6 +184,7 @@ is not supplied, the boost copyright is used by default"
      my-doxygen-file-header
      "\n#ifndef " guard "\n"
      "#define " guard "\n"
+     "#pragma once\n"
      )
 
     (let ((final nil) ;; final position
@@ -506,7 +507,7 @@ starts."
   (skip-chars-forward " \t")
   )
 
-(setq gr-include-prefix "xmt/")
+(setq gr-include-prefix "sdl/")
 (setq gr-include-suffix ".hpp")
 (setq gr-skip-prefix "boost/")
 

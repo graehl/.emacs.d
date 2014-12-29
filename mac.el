@@ -1,5 +1,4 @@
 ;;(push "/usr/local/bin" exec-path) ;brew
-
 (require 'font)
 ;; change command to meta, and ignore option to use weird norwegian keyboard
 (setq mac-option-modifier 'control)
@@ -43,6 +42,9 @@
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))
 (add-to-list 'exec-path "/usr/local/bin")
 
+(setq ns-auto-hide-menu-bar t)
+(set-frame-position (selected-frame) 0 -24)
+(tool-bar-mode -1)
 (setq ns-use-native-fullscreen nil)
 ;; keybinding to toggle full screen mode
 (global-set-key (quote [M-f10]) 'toggle-frame-fullscreen)

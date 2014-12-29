@@ -33,10 +33,8 @@ file LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)"))
   ':type 'alist )
 
 (defun my-filter-path-elts (pe)
-  (if (or (equal (car pe) "x") (equal (car pe) "r") (equal (car pe) "racerx"))
-      (my-filter-path-elts (cons "LW" (my-filter-path-elts (cdr pe))))
-    (if (equal (car pe) "LWUtil")
-        nil
-      pe)))
+  (if (or (equal (car pe) "x"))
+      (my-filter-path-elts (cdr pe))
+    pe))
 
 (provide 'buffer-init)

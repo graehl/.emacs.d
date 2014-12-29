@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: boosthash
+# key: bh
+# --
+namespace boost {
+template <>
+struct hash<$1> {
+  std::size_t operator()($1 const& x) const {
+    return $2;
+  }
+};
+}

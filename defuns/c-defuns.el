@@ -95,6 +95,7 @@
       (goto-char start)
       (insert "/* "))))
 
+(setq my-include-guard-name "GRAEHL")
 
 (defun my-include-guard ()
   "Compute the appropriate #include guard based on the current buffer's name"
@@ -105,7 +106,7 @@
          (extension (if ext (concat "_" ext) ""))
          )
     (upcase
-     (format "%s_%s_%04d_%02d_%02d%s" prefix my-initials (nth 5 time) (nth 4 time) (nth 3 time) extension))))
+     (format "%s_%s_%04d_%02d_%02d%s" prefix my-include-guard-name (nth 5 time) (nth 4 time) (nth 3 time) extension))))
 
 
 (defun my-copyright (&optional copyright)
@@ -296,7 +297,7 @@ is not supplied, the boost copyright is used by default"
   (interactive)
   (my-maybe-insert-incude "<" ">"))
 
-
+;; buggy when editting nonempty PP lines - disabled
 (defun my-electric-pound ()
   (interactive)
   (insert "#")
@@ -446,6 +447,11 @@ Works with: template-args-cont."
           (insert close)))
     (insert open)))
 
+(defun my-c-electric-pound (arg)
+  (interactive "*P")
+  (self-insert-command (prefix-numeric-value arg))
+  )
+
 (defun my-c-electric-gt (arg)
   "Insert a greater-than character.
 The line will be re-indented if the buffer is in C++ mode.
@@ -475,10 +481,10 @@ starts."
 
 (require 'editing-defuns)
 (defun gr-c-class-name (&optional else) (interactive)
-  (save-excursion
-    (if (re-search-backward "^[[:blank:]]*\\(struct\\|class\\) +\\([^\n[:blank:]]+\\)")
-        (gr-match-string 2)
-      else)))
+       (save-excursion
+         (if (re-search-backward "^[[:blank:]]*\\(struct\\|class\\) +\\([^\n[:blank:]]+\\)")
+             (gr-match-string 2)
+           else)))
 
 (defun gr-ends-with (s ending)
   "return non-nil if string S ends with ENDING."
@@ -503,25 +509,25 @@ starts."
   (buffer-substring-no-properties (point) (line-end-position)))
 
 (defun gr-beginning-of-line-after-ws () (interactive)
-  (beginning-of-line)
-  (skip-chars-forward " \t")
-  )
+       (beginning-of-line)
+       (skip-chars-forward " \t")
+       )
 
 (setq gr-include-prefix "sdl/")
 (setq gr-include-suffix ".hpp")
 (setq gr-skip-prefix "boost/")
 
 (defun gr-buffer-contains (string) "whether buffer contains string"
-  (save-excursion
-    (save-match-data
-      (goto-char (point-min))
-      (search-forward string nil t))))
+       (save-excursion
+         (save-match-data
+           (goto-char (point-min))
+           (search-forward string nil t))))
 
 (defun gr-buffer-matches (re) "whether buffer matches re"
-  (save-excursion
-    (save-match-data
-      (goto-char (point-min))
-      (re-search-forward re nil t))))
+       (save-excursion
+         (save-match-data
+           (goto-char (point-min))
+           (re-search-forward re nil t))))
 
 (defun gr-include ()
   "insert #include line after previous include, with contents of current line inside #include <>"
@@ -546,7 +552,8 @@ starts."
         (when (not (gr-buffer-contains rest))
           (if (re-search-backward "^\\# *include" nil t)
               (progn (next-line) (beginning-of-line))
-            (if (re-search-backward "^#ifndef " nil t) (progn (next-line) (next-line) (beginning-of-line))
+            (if (or (re-search-backward "^#pragma once" nil t) (re-search-backward "^#ifndef " nil t))
+                (progn (next-line) (next-line) (beginning-of-line))
               (beginning-of-buffer)))
           (insert rest "\n")
           )))))

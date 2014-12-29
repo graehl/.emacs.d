@@ -43,7 +43,8 @@
 (defun define-fringe-bitmap (a b c d e) t)
 (defun set-fringe-mode (a) t)
 (setq gr-packages
-      '(auto-complete
+      '(ansi-color
+        auto-complete
         diminish
         ag
         autopair
@@ -215,6 +216,12 @@ Missing packages are installed automatically."
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
 
+(setq backup-by-copying t)
+(setq delete-old-versions t
+  kept-new-versions 9
+  kept-old-versions 5
+  version-control t)
+
 ;; Lets start with a smattering of sanity
 (require 'sane-defaults)
 
@@ -320,6 +327,9 @@ Missing packages are installed automatically."
 
 (require 'optional-bindings)
 (require 'setup-helm)
+;; emacs-clang-complete-async doesn't seem to work at all (tried google) - maybe try https://truongtx.me/2013/03/10/ecb-emacs-code-browser/ ?
+
+;;(add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))
 ;;(require 'setup-clang-complete)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)

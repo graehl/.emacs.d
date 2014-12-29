@@ -19,7 +19,7 @@
      (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
 (set-fringe-mode 0)
-(setq default-tab-width 2)
+(setq default-tab-width 4)
 
 (setq bidi-display-reordering nil)
 (setq bidi-paragraph-direction 'left-to-right)
@@ -170,5 +170,7 @@
 (require 'diminish)
 (diminish 'wrap-region-mode)
 ;; (diminish 'yas/minor-mode)
-
+(require 'tty-format)
 (provide 'appearance)
+(setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
+;;(whitespace-mode)

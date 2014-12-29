@@ -98,11 +98,11 @@
   "Regular expression which matches newlines at the end of the buffer.")
 
 (defun delete-trailing-newlines () "delete extra end-of-buffer newlines"
-  (interactive)
-  (save-excursion
-    (goto-char (point-min))
-    (and (re-search-forward whitespace-eob-newline-regexp nil t)
-         (delete-region (1+ (match-beginning 0)) (match-end 0)))))
+       (interactive)
+       (save-excursion
+         (goto-char (point-min))
+         (and (re-search-forward whitespace-eob-newline-regexp nil t)
+              (delete-region (1+ (match-beginning 0)) (match-end 0)))))
 
 
 (defconst excessive-newlines-regexp "\n\n\n\n+" "regexp to replace")
@@ -118,15 +118,15 @@
     (dotimes (i nrepl) (insert excessive-newlines-replacement))))
 
 (defun gr-indent-buffer-maybe () "indent whole buffer!"
-  (interactive)
-  (when (not (gr-cleanup-skip-indent-p))
-    (gr-indent-buffer)))
+       (interactive)
+       (when (not (gr-cleanup-skip-indent-p))
+         (gr-indent-buffer)))
 
 (defun gr-indent-buffer () "indent whole buffer!"
-  (interactive)
-  (message "indent...")
-  (widen)
-  (indent-region (point-min) (point-max) nil))
+       (interactive)
+       (message "indent...")
+       (widen)
+       (indent-region (point-min) (point-max) nil))
 
 (defun gr-buffer-contains-substring (string)
   (save-excursion
@@ -466,7 +466,7 @@
   (gr-close-namespaces-fix-clang)
   (ignore-errors (gr-diag-fix-clang))
   (gr-diag-fix-clang)
-)
+  )
 
 (defun gr-will-clang-format-buffer ()
   (ignore-errors (require 'clang-format t))
@@ -522,12 +522,12 @@
     ;; always return nil, in case this is on write-file-hooks.
     nil))
 
-(defun gr-cleanup-buffer-impl ()
+(defun gr-cleanup-buffer-impl (untabify)
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
   (gr-safe-wrap
    (gr-indent-buffer-maybe)
-   (gr-untabify-buffer)
+   (when untabify (gr-untabify-buffer))
    (unless (or (= 0 gr-cleanup-buffer-excessive-newlines) (eq nil gr-cleanup-buffer-excessive-newlines))
      (excessive-newlines-compress gr-cleanup-buffer-excessive-newlines))
    (gr-delete-trailing-whitespace-except-tab)
@@ -541,11 +541,12 @@
   "gr-cleanup-buffer catching errors"
   (message "cleaning up buffer on save (catching errors) ...")
   (save-excursion
-    (gr-cleanup-buffer-impl)))
+    (gr-cleanup-buffer-impl nil)))
+
 (defun gr-cleanup-buffer ()
   "Perform a bunch of operations on the whitespace content of a buffer."
   (interactive)
-  (with-whole-buffer (gr-cleanup-buffer-impl)))
+  (with-whole-buffer (gr-cleanup-buffer-impl t)))
 
 
 (provide 'gr-cleanup-save)

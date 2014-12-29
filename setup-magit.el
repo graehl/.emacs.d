@@ -79,3 +79,4 @@ in register specified by the magit-status-register variable."
 (require 'git-gutter-fringe)
 (set-fringe-mode 2)
 (global-git-gutter-mode +1)
+(require 'git-timemachine)

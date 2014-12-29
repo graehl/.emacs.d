@@ -1,5 +1,5 @@
 ;; (require 'isearch+)
-;(require 'misc-cmds)
+(require 'misc-cmds)
 (when nil
 (defun isearchp-set-region ()
   "Set region around search target, if `isearchp-set-region-flag'.

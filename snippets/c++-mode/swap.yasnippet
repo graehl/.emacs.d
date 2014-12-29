@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: swap
+# key: swap
+# --
+friend inline void swap(${1:`(gr-c-class-name "self_type")`} & x1, $1 & x2) {
+  x1.swap(x2);
+}
+void swap($1 &o) {
+  $0
+}

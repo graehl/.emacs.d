@@ -355,10 +355,7 @@
 (require 'clang-format)
 (global-set-key [C-M-tab] 'clang-format-region)
 (global-set-key (kbd "M-<f7>") 'gr-close-with-cleanup)
-(global-set-key (kbd "C-s") 'isearch-forward)
 ;;(define-key isearch-mode-map (kbd "C-s") 'isearch-forward)
-(define-key isearch-mode-map (kbd "C-g") 'keyboard-really-quit)
-(define-key isearch-mode-map (kbd "C-SPC") 'set-mark-command)
 
 (if (and nil gr-on-term)
 ;; ESC, M-O (which is really ESC O) and M-[ (which is really ESC [).
@@ -370,3 +367,8 @@
   (progn
     (global-set-key (kbd "M-[") 'default-split)
     (global-set-key (kbd "<f1>") 'help-command)))
+
+(global-set-key (kbd "C-s") 'isearch-forward)
+;;(define-key isearch-mode-map (kbd "C-s") 'isearch-forward)
+(define-key isearch-mode-map (kbd "C-g") 'keyboard-really-quit)
+(define-key isearch-mode-map (kbd "C-SPC") 'set-mark-command)

@@ -357,6 +357,10 @@ region-end is used. Adds the duplicated text to the kill ring."
 (defun downcase-whole-word ()
   (interactive) (backward-word 1) (downcase-word 1))
 
+(defun downcase-char ()
+  (interactive)
+  (downcase-region (point) (+ (point) 1)))
+
 (defun at-eol ()
   (= (point) (point-at-eol)))
 

@@ -6,7 +6,7 @@
 ;; Develop in ~/emacs.d/snippets, but also
 ;; include snippets that come with yasnippet
 (setq yas-root-directory `(,(expand-file-name "snippets" dotfiles-dir)
-                           ,(expand-file-name "yasnippet/snippets" site-lisp-dir)))
+                           ))
 
 (mapc 'yas-load-directory yas-root-directory)
 

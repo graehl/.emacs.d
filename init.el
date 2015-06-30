@@ -45,7 +45,7 @@
         ag
         autopair
         ack
-        ack-and-a-half ace-jump-mode
+        ace-jump-mode
         paredit
         scala-mode
         git-gutter-fringe

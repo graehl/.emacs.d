@@ -26,6 +26,8 @@
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))
+(add-to-list 'load-path (concat dotfiles-dir "plugins"))
+(add-to-list 'load-path (concat dotfiles-dir "plugins/yasnippet"))
 (add-to-list 'load-path dotfiles-dir)
 
 (require 'cl)

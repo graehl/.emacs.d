@@ -28,11 +28,6 @@
 	ignore = untracked
 	path = site-lisp/coffee-mode
 	url = https://github.com/defunkt/coffee-mode.git
-[submodule "site-lisp/yasnippet"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/yasnippet
-	url = https://github.com/capitaomorte/yasnippet.git
 [submodule "site-lisp/expand-region"]
 	ignore = untracked
 	ignore = untracked

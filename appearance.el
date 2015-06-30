@@ -1,3 +1,10 @@
+(set-terminal-parameter nil 'background-mode 'dark)
+(setq frame-background-mode 'dark)
+(require 'color-theme-solarized)
+;;(color-theme-solarized)
+
+
+(setq solarized-termcolors 16)
 (setq server-raise-frame nil)
 
 (set-frame-parameter nil 'fullscreen 'fullboth)
@@ -49,12 +56,13 @@
 
 (transient-mark-mode 1)
 
+(when nil
 (require 'color-theme)
 
 (when gr-on-24
   (if gr-on-term
       (ignore-errors (load-theme 'solarized-light t))
-    (ignore-errors (load-theme 'solarized-dark t))))
+    (ignore-errors (load-theme 'solarized-dark t)))))
 
 (when nil
   (require 'color-theme-solarized)

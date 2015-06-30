@@ -26,8 +26,8 @@
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))
+(add-to-list 'load-path (concat site-lisp-dir "emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat dotfiles-dir "plugins"))
-(add-to-list 'load-path (concat dotfiles-dir "plugins/yasnippet"))
 (add-to-list 'load-path dotfiles-dir)
 
 (require 'cl)
@@ -40,7 +40,8 @@
 
 (defun all-to-list (list all)
   (mapc (lambda (x) (add-to-list list x)) all))
-
+(defun define-fringe-bitmap (a b c d e) t)
+(defun set-fringe-mode (a) t)
 (setq gr-packages
       '(auto-complete
         diminish
@@ -52,9 +53,12 @@
         scala-mode
         git-gutter-fringe
         ibuffer
+        magit
         ;;gitconfig-mode gitignore-mode
         helm
+        wrap-region
         helm-projectile ido-ubiquitous
+        pandoc-mode
         rainbow-delimiters
         solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24
@@ -226,7 +230,7 @@ Missing packages are installed automatically."
 (require 'setup-ido)
 (require 'setup-yasnippet)
 (require 'setup-dired)
-;;(require 'setup-magit)
+(require 'setup-magit)
 (require 'setup-hippie)
 ;;(require 'setup-autopair)
 (require 'setup-c-mode)
@@ -311,12 +315,12 @@ Missing packages are installed automatically."
 (delete-selection-mode nil)
 (require 'setup-change-log)
 (require 're-builder+)
-(require 'pandoc-mode)
+;;(require 'pandoc-mode)
 (require 'setup-compilation-mode)
 
 (require 'optional-bindings)
 (require 'setup-helm)
-(require 'setup-clang-complete)
+;;(require 'setup-clang-complete)
 ;;(add-to-list 'load-path (concat site-lisp-dir "/" multiple-cursors.el "/"))
 ;;(require 'ffap) ; find files/urls at point ; (ffap-bindings)
 (defun gr-load-appearance ()

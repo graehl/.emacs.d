@@ -3,11 +3,6 @@
 	ignore = untracked
 	path = site-lisp/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
-[submodule "site-lisp/recall-position"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/recall-position
-	url = http://github.com/cjohansen/recall-position.el.git
 [submodule "site-lisp/undo-tree"]
 	ignore = untracked
 	ignore = untracked
@@ -38,11 +33,6 @@
 	ignore = untracked
 	path = site-lisp/magit
 	url = https://github.com/magit/magit.git
-[submodule "site-lisp/grep-buffers"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/grep-buffers
-	url = https://github.com/emacsmirror/grep-buffers.git
 [submodule "site-lisp/multi-term"]
 	ignore = untracked
 	ignore = untracked
@@ -53,11 +43,6 @@
 	ignore = untracked
 	path = site-lisp/fit-frame
 	url = https://github.com/emacsmirror/fit-frame.git
-[submodule "site-lisp/misc-fns"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/misc-fns
-	url = https://github.com/emacsmirror/misc-fns.git
 [submodule "site-lisp/smex"]
 	ignore = untracked
 	ignore = untracked
@@ -88,11 +73,6 @@
 	ignore = untracked
 	path = site-lisp/isearch-plus
 	url = https://github.com/emacsmirror/isearch-plus.git
-[submodule "site-lisp/misc-cmds"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/misc-cmds
-	url = https://github.com/emacsmirror/misc-cmds.git
 [submodule "site-lisp/smooth-scroll-el"]
 	ignore = untracked
 	ignore = untracked
@@ -119,9 +99,6 @@
 [submodule "site-lisp/python-mode"]
 	path = site-lisp/python-mode
 	url = git@github.com:graehl/python-mode.git
-[submodule "site-lisp/multiple-cursors.el"]
-	path = site-lisp/multiple-cursors.el
-	url = git://github.com/magnars/multiple-cursors.el.git
 [submodule "site-lisp/gitsum"]
 	path = site-lisp/gitsum
 	url = git://github.com/tomykaira/gitsum.git
@@ -134,3 +111,12 @@
 [submodule "site-lisp/emacs-clang-complete-async"]
 	path = site-lisp/emacs-clang-complete-async
 	url = git://github.com/Golevka/emacs-clang-complete-async.git
+[submodule "site-lisp/helm"]
+	path = site-lisp/helm
+	url = https://github.com/emacs-helm/helm.git
+[submodule "site-lisp/multiple-cursors.el"]
+	path = site-lisp/multiple-cursors.el
+	url = https://github.com/magnars/multiple-cursors.el.git
+[submodule "site-lisp/expand-region.el"]
+	path = site-lisp/expand-region.el
+	url = https://github.com/magnars/expand-region.el.git

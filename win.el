@@ -101,4 +101,5 @@
   (let ((explicit-sh.exe-args '("--login" "-i")))
     (shell-explicit "c:/msys/bin/bash.exe" "Msys" ?/ nil)))
 
+(load-file (expand-file-name "win-termkeys.el" dotfiles-dir))
 (require 'setup-cygwin)

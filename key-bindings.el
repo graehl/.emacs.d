@@ -340,14 +340,6 @@
 
 (setq gr-on-term (eq window-system nil))
 
-(if (and nil gr-on-term)
-    (progn
-      (global-unset-key (kbd "M-["))
-      (global-set-key (kbd "<f1>") 'default-split))
-  (progn
-    (global-set-key (kbd "M-[") 'default-split)
-    (global-set-key (kbd "<f1>") 'help-command)))
-
 (global-set-key (kbd "M-C-]") 'gr-fn-to-cpp)
 
 (define-key isearch-mode-map (kbd "C-y") 'isearch-yank-kill)
@@ -367,3 +359,14 @@
 ;;(define-key isearch-mode-map (kbd "C-s") 'isearch-forward)
 (define-key isearch-mode-map (kbd "C-g") 'keyboard-really-quit)
 (define-key isearch-mode-map (kbd "C-SPC") 'set-mark-command)
+
+(if (and nil gr-on-term)
+;; ESC, M-O (which is really ESC O) and M-[ (which is really ESC [).
+    (progn
+      (global-unset-key (kbd "M-O"))
+      (global-unset-key (kbd "ESC"))
+      (global-unset-key (kbd "M-["))
+      (global-set-key (kbd "<f1>") 'default-split))
+  (progn
+    (global-set-key (kbd "M-[") 'default-split)
+    (global-set-key (kbd "<f1>") 'help-command)))

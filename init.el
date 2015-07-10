@@ -1,3 +1,30 @@
+(setq gr-packages
+      '(ansi-color
+        auto-complete
+        diminish
+        ag
+        autopair
+        ack
+        ace-jump-mode
+        paredit
+        scala-mode
+        git-gutter-fringe
+        ibuffer
+        ;;magit
+        ;;gitconfig-mode gitignore-mode
+        helm
+        wrap-region
+        helm-projectile
+        ido-ubiquitous
+        pandoc-mode
+        rainbow-delimiters
+        smart-operator
+        python-mode
+        ;;python-mode-expansions
+        solarized-theme
+        zenburn-theme
+        rainbow-mode))
+
 (defun string-starts-with (string prefix)
   "Returns non-nil if string STRING starts with PREFIX, otherwise nil."
   (and (>= (length string) (length prefix))
@@ -42,26 +69,6 @@
   (mapc (lambda (x) (add-to-list list x)) all))
 (defun define-fringe-bitmap (a b c d e) t)
 (defun set-fringe-mode (a) t)
-(setq gr-packages
-      '(ansi-color
-        auto-complete
-        diminish
-        ag
-        autopair
-        ack
-        ace-jump-mode
-        paredit
-        scala-mode
-        git-gutter-fringe
-        ibuffer
-        magit
-        ;;gitconfig-mode gitignore-mode
-        helm
-        wrap-region
-        helm-projectile ido-ubiquitous
-        pandoc-mode
-        rainbow-delimiters
-        solarized-theme zenburn-theme rainbow-mode))
 (if gr-on-24
     (all-to-list 'gr-packages '(smex gist flyspell pcache logito js2-mode gh flycheck artist))
   (add-to-list 'gr-packages 'cl-lib))

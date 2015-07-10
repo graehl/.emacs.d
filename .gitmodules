@@ -28,11 +28,6 @@
 	ignore = untracked
 	path = site-lisp/expand-region
 	url = https://github.com/magnars/expand-region.el.git
-[submodule "site-lisp/magit"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/magit
-	url = https://github.com/magit/magit.git
 [submodule "site-lisp/multi-term"]
 	ignore = untracked
 	ignore = untracked
@@ -96,9 +91,6 @@
 [submodule "site-lisp/git-commit-mode"]
 	path = site-lisp/git-commit-mode
 	url = git://github.com/rafl/git-commit-mode.git
-[submodule "site-lisp/python-mode"]
-	path = site-lisp/python-mode
-	url = git@github.com:graehl/python-mode.git
 [submodule "site-lisp/gitsum"]
 	path = site-lisp/gitsum
 	url = git://github.com/tomykaira/gitsum.git
@@ -120,3 +112,6 @@
 [submodule "site-lisp/expand-region.el"]
 	path = site-lisp/expand-region.el
 	url = https://github.com/magnars/expand-region.el.git
+[submodule "site-lisp/python-mode"]
+	path = site-lisp/python-mode
+	url = git@github.com:emacsmirror/python-mode.git

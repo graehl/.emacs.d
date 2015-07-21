@@ -5,10 +5,9 @@
 
 ;; Develop in ~/emacs.d/snippets, but also
 ;; include snippets that come with yasnippet
-(setq yas-root-directory `(,(expand-file-name "snippets" dotfiles-dir)
-                           ))
+;;(setq yas-root-directory `(,(expand-file-name "snippets" dotfiles-dir)))
 
-(mapc 'yas-load-directory yas-root-directory)
+;;(mapc 'yas-load-directory yas-root-directory)
 
 ;; Include snippets for Buster.js
                                         ;(require 'buster-snippets)

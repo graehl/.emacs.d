@@ -1,4 +1,6 @@
-(require 'setup-magit)(global-set-key (kbd "M-c") 'magit-status)
+(require 'setup-magit)
+
+(global-set-key (kbd "M-c") 'magit-status)
 (define-key magit-status-mode-map (kbd "q")
   '(lambda ()
      (interactive)
@@ -6,5 +8,6 @@
 (require 'smex)(global-set-key (kbd "M-x") 'smex)
 (require 'scratch-back)(global-set-key (kbd "M-<f2>") 'scratch-back)
 ;;(require 'hobo)(global-set-key (kbd "C-x F") 'hobo-find-file)
+(global-set-key (kbd "M-c") 'magit-status)
 
 (provide 'optional-bindings)

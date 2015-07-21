@@ -7,10 +7,10 @@
         ack
         ace-jump-mode
         paredit
-        scala-mode
-        git-gutter-fringe
+;;        scala-mode
+        git-gutter+
         ibuffer
-        ;;magit
+        magit
         ;;gitconfig-mode gitignore-mode
         helm
         wrap-region
@@ -21,8 +21,11 @@
         smart-operator
         python-mode
         ;;python-mode-expansions
-        solarized-theme
+        ;;solarized-theme
+        color-theme-solarized
         zenburn-theme
+        yasnippet
+        expand-region
         rainbow-mode))
 
 (defun string-starts-with (string prefix)
@@ -60,6 +63,7 @@
 (require 'cl)
 
 (require 'gr-config)
+(setq package-user-dir "~/.elpa")
 ;;(load-file (expand-file-name "gr-config.el" dotfiles-dir))
 (if (< (emacs-version-major) 24)
     (load-file (expand-file-name "package-23.el" dotfiles-dir))
@@ -87,7 +91,7 @@
 
   Use this as follows:
   (gr-elpa-ensure-package 'org)"
-  (if (not (package-installed-p name))
+  (when (not (package-installed-p name))
       (package-install name)))
 
 (defun gr-elpa-require (name)
@@ -244,7 +248,7 @@ Missing packages are installed automatically."
 (require 'setup-ido)
 (require 'setup-yasnippet)
 (require 'setup-dired)
-(require 'setup-magit)
+;;(require 'setup-magit)
 (require 'setup-hippie)
 ;;(require 'setup-autopair)
 (require 'setup-c-mode)
@@ -260,12 +264,12 @@ Missing packages are installed automatically."
 ;;(require 'setup-paredit)
 (require 'setup-ispell)
 (require 'setup-spell)
-
+(require 'setup-git-gutter)
 ;; Map files to modes
 (require 'mode-mappings)
 
 (require 'recall-position)
-(require 'expand-region)
+;;(require 'expand-region)
 ;;(require 'inline-string-rectangle)
 (require 'iy-go-to-char)
 
@@ -276,6 +280,7 @@ Missing packages are installed automatically."
 
 
 ;; Misc
+
 
 (require 'misc)
 
@@ -328,11 +333,11 @@ Missing packages are installed automatically."
 (defun gr-byte-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
 (delete-selection-mode nil)
 (require 'setup-change-log)
-(require 're-builder+)
+;;(require 're-builder+)
 ;;(require 'pandoc-mode)
 (require 'setup-compilation-mode)
 
-(require 'optional-bindings)
+;;(require 'optional-bindings)
 (require 'setup-helm)
 ;; emacs-clang-complete-async doesn't seem to work at all (tried google) - maybe try https://truongtx.me/2013/03/10/ecb-emacs-code-browser/ ?
 

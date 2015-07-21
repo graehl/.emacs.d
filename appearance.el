@@ -1,11 +1,11 @@
 (set-terminal-parameter nil 'background-mode 'dark)
 (setq frame-background-mode 'dark)
-(require 'color-theme-solarized)
-;;(color-theme-solarized)
 
 
-(setq solarized-termcolors 16)
-(setq server-raise-frame nil)
+
+;;(setq solarized-termcolors 16)
+(setq solarized-termcolors 256)
+(setq serqqver-raise-frame nil)
 
 (set-frame-parameter nil 'fullscreen 'fullboth)
 
@@ -18,7 +18,6 @@
      nil 'fullscreen
      (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
 
-(set-fringe-mode 0)
 (setq default-tab-width 4)
 
 (setq bidi-display-reordering nil)
@@ -129,7 +128,7 @@
   )
 
 (require 'avoid)
-(require 'misc-fns)
+;;(require 'misc-fns)
 
 (setq-default
  sgml-quick-keys t
@@ -171,6 +170,9 @@
 (diminish 'wrap-region-mode)
 ;; (diminish 'yas/minor-mode)
 (require 'tty-format)
-(provide 'appearance)
+(setq color-themes nil)
+(require 'color-theme-solarized)
+(ignore-errors (color-theme-solarized))
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 ;;(whitespace-mode)
+(provide 'appearance)

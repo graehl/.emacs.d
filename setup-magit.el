@@ -1,6 +1,7 @@
+(require 'dash)
 (require 'magit)
 
-(setq magit-last-seen-setup-instructions "1.4.0")
+;;(setq magit-last-seen-setup-instructions "1.4.0")
 
 (defun magit-toggle-whitespace ()
   (interactive)
@@ -74,9 +75,6 @@ in register specified by the magit-status-register variable."
 
 ;;(setq git-show/sha-command "log -g --pretty=format:'%H %an %d %ar %s'")
 (setq git-show/sha-command "log --pretty=format:'%H %an %d %ar %s'")
+;;(setq visual-line-fringe-indicators nil)
 
-(require 'fringe-helper)
-(require 'git-gutter-fringe)
-(set-fringe-mode 2)
-(global-git-gutter-mode +1)
 (require 'git-timemachine)

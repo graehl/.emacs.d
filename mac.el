@@ -4,39 +4,43 @@
 (setq mac-option-modifier 'control)
 (setq mac-command-modifier 'meta)
 
-(setq mac-size-default 14)
 (setq mac-weight-default 'light)
 (setq mac-font-default "Monaco")
 (setq mac-font-default "Andale Mono")
 (setq mac-font-default "PragmataPro")
 (setq mac-size-default 12)
+(setq mac-font-default "Consolas")
 (setq mac-font-default "Source Code Pro")
-;;(setq mac-font-default "Consolas")
 ;;(mac-font mac-font-default mac-size-default mac-weight-default)
 ;;(mac-font "PragmataPro")
 ;; mac friendly font
-;;(mac-font "Monaco-12")
+;;(mac-font)
 (set-face-attribute 'default nil :font mac-font-default)
 (set-face-attribute 'default nil :height (* 10 mac-size-default))
 (when nil
   (mac-font "Fira Mono OT" 12 'light)
   (mac-font "Cousine" 12 'light)
-  (mac-font "Consolas" 13 'light)
+  (mac-font "Consolas" 13 'extra-light)
   (mac-font "PragmataPro" 14 'light)
   (mac-font "Source Code Pro" 13 'light)
   (mac-font "Source Code Pro" 12 'medium)
   (mac-font "Source Code Pro" 12 'light)
 ;;  (mac-font "Inconsolata" 12 'medium)
   (mac-font "Andale Mono" 14)
-  (mac-font "DejaVu Sans Mono" 14 'light)
+  (mac-font "DejaVu Sans Mono" 12 'light)
   (mac-font "Pragmata" 14 'light)
   (mac-font "Crisp" 16 'light)
   (mac-font "ProggyCleanTT" 16 'light)
   )
-(when (not (eq system-uses-terminfo t))
-(mac-font))
 
-                                        ;(custom-set-faces '(default ((t (:height 100 :family "Consolas" :embolden nil)))))
+
+(when (gr-starts-with (emacs-version)
+"GNU Emacs 24.5.1 (x86_64-apple")
+  (mac-font "Source Code Pro" 12 'normal))
+
+
+                                        ;(custom-set-faces '(default ((t (:height 110 :family "Consolas" :embolden nil)))))
+;;
 
 ;; make sure path is correct when launched as application
 (setenv "PATH" (concat "/usr/local/bin:" (getenv "PATH")))

@@ -18,7 +18,7 @@
         ido-ubiquitous
         pandoc-mode
         rainbow-delimiters
-        smart-operator
+;;        smart-operator
         python-mode
         ;;python-mode-expansions
         ;;solarized-theme

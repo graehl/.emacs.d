@@ -36,7 +36,9 @@
 
 (when (gr-starts-with (emacs-version)
 "GNU Emacs 24.5.1 (x86_64-apple")
-  (mac-font "Source Code Pro" 12 'normal))
+  (mac-font "Source Code Pro" 12 'light))
+;;  (mac-font "Source Code Pro" 12 'medium)
+;;  (mac-font "Source Code Pro" 12 'normal)
 
 
                                         ;(custom-set-faces '(default ((t (:height 110 :family "Consolas" :embolden nil)))))

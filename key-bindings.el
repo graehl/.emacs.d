@@ -132,8 +132,8 @@
 (global-set-key (kbd "C-c C-e") 'eval-current-line)
 (global-set-key (kbd "C-c M-e") 'eval-output-marked-lines)
 
-;; Magit
-(global-set-key (kbd "C-x m") 'magit-status-fullscreen)
+;; Magit l=f limit to files. enter file. l view log
+(global-set-key (kbd "C-x m") 'magit-status)
 
 ;; Clever newlines
 (global-set-key (kbd "<C-return>") 'new-line-below)
@@ -178,6 +178,8 @@
 (global-set-key (kbd "C-x b") 'ido-switch-buffer)
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "<f7>") 'save-buffer)
+(global-set-key (kbd "<f8>") '(lambda () (interactive) (save-buffer) (server-edit)))
+
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "<f11>") 'shell)

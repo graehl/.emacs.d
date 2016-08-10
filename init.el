@@ -7,7 +7,7 @@
         ack
         ace-jump-mode
         paredit
-;;        scala-mode
+        scala-mode
         git-gutter+
         ibuffer
         magit
@@ -164,7 +164,7 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
     ("\\.php\\'" php-mode php-mode)
     ("PKGBUILD\\'" pkgbuild-mode pkgbuild-mode)
     ("\\.sass\\'" sass-mode sass-mode)
-    ("\\.scala\\'" scala-mode2 scala-mode)
+    ("\\.scala\\'" scala-mode scala-mode)
     ("\\.scss\\'" scss-mode scss-mode)
     ("\\.slim\\'" slim-mode slim-mode)
     ("\\.textile\\'" textile-mode textile-mode)
@@ -246,6 +246,7 @@ Missing packages are installed automatically."
 
 ;; Setup extensions
 (require 'setup-ido)
+(require 'setup-perl)
 (require 'setup-yasnippet)
 (require 'setup-dired)
 ;;(require 'setup-magit)
@@ -269,7 +270,7 @@ Missing packages are installed automatically."
 (require 'mode-mappings)
 
 (require 'recall-position)
-;;(require 'expand-region)
+(require 'expand-region)
 ;;(require 'inline-string-rectangle)
 (require 'iy-go-to-char)
 
@@ -277,7 +278,6 @@ Missing packages are installed automatically."
 (require 'setup-python)
 (require 'setup-term)
 ;; below use defuns.
-
 
 ;; Misc
 
@@ -364,6 +364,7 @@ Missing packages are installed automatically."
     (require 'setup-ack))
   (load-file (expand-file-name "key-bindings.el" dotfiles-dir))
   (load-file (expand-file-name "setup-compilation-mode.el" dotfiles-dir))
+  (load-file (expand-file-name "setup-ac-yasnippet.el" dotfiles-dir))
 )
 
 (add-hook 'after-init-hook 'gr-ag-after-init)

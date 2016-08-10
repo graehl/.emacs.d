@@ -21,7 +21,7 @@ If REGEXP is non-nil, treat STRING as a regular expression."
       (error "No such directory %s" default-directory))
     (compilation-start
      (ag/s-join " "
-                (append '("ag") arguments (list (ag/shell-quote string))))
+                (append '("ag") arguments (list "--agignore" "~/.agignore" (ag/shell-quote string))))
      'ag-mode)))
 
 (defun gr-ag-cd-case (pattern &optional directory)

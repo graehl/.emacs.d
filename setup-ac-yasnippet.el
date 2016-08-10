@@ -1,5 +1,6 @@
 (require 'auto-complete)
 (require 'yasnippet)
+(require 'flymake)
 
 (defun ac-yasnippet-candidate ()
   (let ((table (yas/get-snippet-tables major-mode)))
@@ -27,5 +28,19 @@
     (candidate-face . ac-yasnippet-candidate-face)
     (selection-face . ac-yasnippet-selection-face))
   "Source for Yasnippet.")
+
+(require 'auto-complete-clang-async)
+(setq gr-ac-clang-cflags '("-I.." "-I../.." "-I../include"))
+(defun kimim/c-mode-ac-complete()
+  (global-auto-complete-mode t)
+  (setq ac-clang-complete-executable "clang-complete")
+  (add-to-list 'ac-sources 'ac-source-clang-async)
+  (if ac-clang-cflags
+      (setq ac-clang-cflags (cons ac-clang-cflags gr-ac-clang-cflags))
+    (setq ac-clang-cflags gr-ac-clang-cflags))
+  (ac-clang-launch-completion-process)
+  (ac-clang-update-cmdlineargs))
+
+;;(add-hook 'c-mode-common-hook (lambda () (kimim/c-mode-ac-complete)))
 
 (provide 'setup-ac-yasnippet)

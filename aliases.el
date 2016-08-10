@@ -7,6 +7,22 @@
 (defalias 'dml 'delete-matching-lines)
 (defalias 'dnml 'delete-non-matching-lines)
 (defalias 'sl 'sort-lines)
+  (defun uniquify-all-lines-region (start end)
+    "Find duplicate lines in region START to END keeping first occurrence."
+    (interactive "*r")
+    (save-excursion
+      (let ((end (copy-marker end)))
+        (while
+            (progn
+              (goto-char start)
+              (re-search-forward "^\\(.*\\)\n\\(\\(.*\n\\)*\\)\\1\n" end t))
+          (replace-match "\\1\n\\2")))))
+
+  (defun uniquify-all-lines-buffer ()
+    "Delete duplicate lines in buffer and keep first occurrence."
+    (interactive "*")
+    (uniquify-all-lines-region (point-min) (point-max)))
+(defalias 'uniq 'uniquify-all-lines-buffer)
 (defalias 'dtw 'delete-trailing-whitespace)
 (defalias 'lcd 'list-colors-display)
 (defalias 'rb 'revert-buffer)

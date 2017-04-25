@@ -35,7 +35,7 @@
 
 
 (when (gr-starts-with (emacs-version)
-"GNU Emacs 24.5.2 (x86_64-apple")
+"GNU Emacs 25.2.1 (x86_64-apple")
   (mac-font "Source Code Pro" 10 'light))
 ;;  (mac-font "Source Code Pro" 10 'medium)
 ;;  (mac-font "Source Code Pro" 10 'normal)

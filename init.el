@@ -78,7 +78,7 @@
   (add-to-list 'gr-packages 'cl-lib))
 
 ;; packages
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
 
 (defun gr-elpa-ensure-package (name)
   "Make sure that a particular package is installed; if not then

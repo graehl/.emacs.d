@@ -43,11 +43,6 @@
 	ignore = untracked
 	path = site-lisp/cygwin-mount
 	url = https://github.com/emacsmirror/cygwin-mount.git
-[submodule "site-lisp/hobo"]
-	ignore = untracked
-	ignore = untracked
-	path = site-lisp/hobo
-	url = https://github.com/emacsmirror/hobo.git
 [submodule "site-lisp/wrap-region"]
 	ignore = untracked
 	ignore = untracked

@@ -75,12 +75,12 @@
   (add-hook 'after-make-frame-functions '(lambda (f) (with-selected-frame f (set-cursor-color color)))))
                                         ;(cursor-color "red") ; doesn't work with hl-line or what?
 
-(require 'hl-line+)
+;;(require 'hl-line+)
 ;;(global-hl-line-mode t)
-(toggle-hl-line-when-idle)
-(set-face-background 'hl-line "#111144")
-(set-face-background 'cursor "#111144") ; magic value same as hl-line makes grey? cool
-(set-face-background 'cursor "#777777")
+;;(toggle-hl-line-when-idle)
+;;(set-face-background 'hl-line "#111144")
+;;(set-face-background 'cursor "#111144") ; magic value same as hl-line makes grey? cool
+;;(set-face-background 'cursor "#777777")
 
 ;;(set-face-background 'region "#222222")
 

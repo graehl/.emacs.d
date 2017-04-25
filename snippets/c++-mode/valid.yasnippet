@@ -2,9 +2,7 @@
 # name: valid
 # key: val
 # --
-friend inline void validate(${1:`(gr-c-class-name "self_type")`} & x) {
-  x.validate();
-}
+typedef ${1:`(gr-c-class-name "self_type")`} configure_validate;
 void validate() {
   $0
 }

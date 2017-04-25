@@ -37,6 +37,8 @@
  '(js2-strict-missing-semi-warning nil)
  '(kill-whole-line t)
  '(line-move-visual t)
+ '(magit-diff-expansion-threshold 3.0)
+ '(magit-diff-refine-hunk (quote all))
  '(make-modes
    (quote
     (make-mode makefile-mode makefile-gmake-mode jam-mode fundamental-mode conf-mode conf-unix-mode change-log-mode)) t)
@@ -54,6 +56,10 @@
            (rainbow-mode 1))
      (indent-tabs-mode . 1)
      (encoding . utf-8))))
+ '(sourcepair-header-extensions (quote (".h" ".hpp" ".hh" ".in" ".derivs")))
+ '(sourcepair-source-extensions
+   (quote
+    (".ipp" ".cpp" ".cxx" ".cc" ".C" ".c" ".out" ".log")))
  '(text-mode-hook
    (quote
     (er/add-text-mode-expansions
@@ -70,5 +76,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ediff-fine-diff-B ((t (:background "dark olive green"))))
  '(error ((t (:foreground "#dc322f"))))
  '(slime-error-face ((t (:foreground "#dc322f")))))

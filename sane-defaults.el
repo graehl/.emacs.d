@@ -49,10 +49,6 @@
 ;; Lines should be 80 characters wide, not 72
 (setq fill-column 80)
 
-(require 'recentf)
-;; Save a list of recent files visited.
-(recentf-mode 1)
-
 ;; Never insert tabs
 (set-default 'indent-tabs-mode nil)
 

@@ -10,6 +10,16 @@ Used only for Transient Mark mode."
 (add-hook 'isearch-mode-end-hook 'isearchp-set-region)
 )
 
+(defun isearch-yank-kill-as-regexp ()
+   "Like `isearch-yank-kill', except during regular expression search:
+Search for the text that matches the string (as a regexp) instead of
+searching for the literal string itself."
+   (interactive)
+   (let ((isearch-regexp nil))
+     (isearch-yank-kill)))
+
+(define-key isearch-mode-map "\M-z" 'isearch-yank-kill-as-regexp)
+
 (provide 'setup-isearch)
 
 

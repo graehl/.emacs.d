@@ -1,6 +1,6 @@
-#!/usr/bin/env perl
 package Foo;
 1;
+#!/usr/bin/env perl
 package main;
 use strict;
 use warnings;

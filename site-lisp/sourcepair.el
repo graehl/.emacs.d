@@ -103,7 +103,7 @@
 
 ;;; Code:
 
-(defcustom sourcepair-source-extensions '( ".ipp" ".cpp" ".cxx" ".cc" ".C" ".c" ".out" )
+(defcustom sourcepair-source-extensions '( ".ipp" ".cpp" ".cxx" ".cc" ".C" ".c" ".out" ".log")
   "*List of recognized extensions for source files.
 
 This variable is used by `sourcepair-load'.  The value should be a list
@@ -114,7 +114,7 @@ value is ( \".cpp\" \".cxx\" \".cc\" \".C\" \".c\" ), and you are looking at
 `sourcepair-source-path'."
 :type '(repeat string))
 
-(defcustom sourcepair-header-extensions '( ".h" ".hpp" ".hh" ".in" )
+(defcustom sourcepair-header-extensions '( ".h" ".hpp" ".hh" ".in" ".derivs")
   "*List of recognized extensions for header files.
 
 This variable is used by `sourcepair-load'.  The value should be a list

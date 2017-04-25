@@ -396,3 +396,7 @@ Missing packages are installed automatically."
         (set-marker p nil)
         (set-marker m nil))
     ad-do-it))
+
+(require 'recentf)
+;; Save a list of recent files visited.
+(recentf-mode 1)

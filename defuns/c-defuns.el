@@ -486,6 +486,14 @@ starts."
              (gr-match-string 2)
            else)))
 
+(defun gr-replace-c-class-name () (interactive)
+       (save-excursion
+         (beginning-of-line)
+         (when (re-search-forward " void" nil t)
+           (backward-kill-word 1)
+         (insert (gr-c-class-name))
+         )))
+
 (defun gr-ends-with (s ending)
   "return non-nil if string S ends with ENDING."
   (let ((elength (length ending)))

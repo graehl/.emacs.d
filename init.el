@@ -33,7 +33,6 @@
   (and (>= (length string) (length prefix))
        (string-equal (substring string 0 (length prefix)) prefix)))
 
-
 (defadvice display-warning
     (around no-warn-.emacs.d-in-load-path (type message &rest unused) activate)
   "Ignore the warning about the `.emacs.d' directory being in `load-path'."

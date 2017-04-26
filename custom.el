@@ -48,7 +48,11 @@
  '(ns-use-native-fullscreen nil)
  '(package-selected-packages
    (quote
+<<<<<<< HEAD
     (lua-mode zenburn-theme yasnippet yaml-mode wrap-region smex scala-mode rainbow-mode rainbow-delimiters python-mode paredit pandoc-mode markdown-mode magit js2-mode ido-ubiquitous helm-projectile git-gutter+ gist flycheck expand-region diminish color-theme-solarized autopair auto-complete-clang-async auto-complete ag ack ace-jump-mode)))
+=======
+    (markdown-mode yaml-mode zenburn-theme yasnippet wrap-region smex scala-mode rainbow-mode rainbow-delimiters python-mode paredit pandoc-mode magit js2-mode ido-ubiquitous helm-projectile git-gutter+ gist flycheck expand-region diminish color-theme-solarized autopair auto-complete ag ack ace-jump-mode)))
+>>>>>>> m
  '(recentf-max-menu-items 30)
  '(recentf-max-saved-items 300)
  '(safe-local-variable-values

@@ -182,7 +182,8 @@
 
 (global-set-key (kbd "<f10>") 'my-recompile)
 (global-set-key (kbd "C-<f10>") 'compile)
-(global-set-key (kbd "<f11>") 'shell)
+(global-set-key (kbd "S-<f10>") 'local-compile)
+(global-set-key (kbd "<f11>") 'local-shell)
 (global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)

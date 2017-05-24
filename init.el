@@ -184,7 +184,6 @@ PACKAGE is installed only if not already present.  The file is opened in MODE."
 
 (add-hook 'after-init-hook 'gr-auto-install-install)
 
-
 (defun gr-ensure-module-deps (packages)
   "Ensure PACKAGES are installed.
 Missing packages are installed automatically."
@@ -328,6 +327,7 @@ Missing packages are installed automatically."
 (require 'setup-isearch)
 (require 'setup-ediff)
 (require 'make-byte-compile)
+(require 'setup-lua)
 (defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
 (defun gr-byte-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
@@ -400,3 +400,5 @@ Missing packages are installed automatically."
 (require 'recentf)
 ;; Save a list of recent files visited.
 (recentf-mode 1)
+
+(eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))

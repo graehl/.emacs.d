@@ -102,3 +102,6 @@
 [submodule "site-lisp/python-mode"]
 	path = site-lisp/python-mode
 	url = git@github.com:emacsmirror/python-mode.git
+[submodule "site-lisp/lua-mode"]
+	path = site-lisp/lua-mode
+	url = https://github.com/kostafey/lua-mode.git

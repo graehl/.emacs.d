@@ -327,4 +327,5 @@ so we can watch errors as they come up"
         (recenter next-error-recenter))
       (run-hooks 'next-error-hook))))
 
+
 (provide 'compile-defuns)

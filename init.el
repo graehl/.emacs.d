@@ -401,3 +401,4 @@ Missing packages are installed automatically."
 (recentf-mode 1)
 
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
+(require 'setup-projectile)

@@ -32,4 +32,13 @@ If REGEXP is non-nil, treat STRING as a regular expression."
 
 (setq ag-highlight-search t)
 
+(require 'ido)
+(defun bind-ido-keys ()
+  "Keybindings for ido mode."
+  (define-key ido-completion-map (kbd "<down>") 'ido-next-match)
+  (define-key ido-completion-map (kbd "<up>")   'ido-prev-match)
+  (define-key ido-completion-map (kbd "<f9>")   'gr-ag-cd)
+  )
+
+(add-hook 'ido-setup-hook #'bind-ido-keys)
 (provide 'setup-ag)

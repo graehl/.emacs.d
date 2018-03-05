@@ -429,7 +429,7 @@
 (defun gr-diag-fix-clang ()
   (interactive)
   (goto-char (point-min))
-  (while (re-search-forward "REGISTER_FEATURE\\|GCC_DIAG_OFF\\|GCC_DIAG_ON\\|GCC_DIAG_IGNORE\\|CLANG_DIAG_OFF\\|CLANG_DIAG_ON\\|CLANG_DIAG_IGNORE"
+  (while (re-search-forward "REGISTER_FEATURE\\|GCC_DIAG_OFF\\|GCC6_DIAG_OFF\\|GCC_DIAG_ON\\|GCC6_DIAG_ON\\|GCC_DIAG_IGNORE\\|CLANG_DIAG_OFF\\|CLANG_DIAG_ON\\|CLANG_DIAG_IGNORE"
                             nil t)
     (save-excursion
       (save-restriction

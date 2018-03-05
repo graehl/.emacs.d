@@ -184,11 +184,11 @@
 (global-set-key (kbd "C-<f10>") 'compile)
 (global-set-key (kbd "S-<f10>") 'local-compile)
 (global-set-key (kbd "<f11>") 'local-shell)
+;;(global-set-key (kbd "<f11>") 'shell)
 (global-set-key (kbd "S-<f12>") 'previous-error)
 (global-set-key (kbd "C-<f12>") 'first-error)
 (global-set-key (kbd "C-o") 'other-window)
 (global-set-key (kbd "M-]") 'same-cursor-and-buffer-other-window)
-
 ;;(global-set-key (kbd "M-s") 'fixup-whitespace)
 ;;(global-set-key [(meta control escape)] 'iconify-or-deiconify-frame) ; minimize
 ;; Other useful strokes and commands
@@ -395,6 +395,8 @@
      (define-key git-gutter+-mode-map (kbd "C-x C-y") 'git-gutter+-stage-and-commit-whole-buffer)
      (define-key git-gutter+-mode-map (kbd "C-x U") 'git-gutter+-unstage-whole-buffer)))
 
-(eval-after-load 'expand-region
-  '(progn
-     (global-set-key (kbd "C-]") 'er/expand-region)))
+;; (eval-after-load 'expand-region '(progn (global-set-key (kbd "C-]") 'er/expand-region)))
+
+(eval-after-load 'csv-mode '(define-key csv-mode-map (kbd "C-'") 'csv-align-fields))
+(require 'csv-mode)
+(global-set-key (kbd "C-]") 'csv-align-fields)

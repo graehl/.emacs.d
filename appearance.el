@@ -175,4 +175,5 @@
 (ignore-errors (color-theme-solarized))
 (setq whitespace-style '(trailing tabs newline tab-mark newline-mark))
 ;;(whitespace-mode)
+(setq-default bidi-display-reordering nil)
 (provide 'appearance)

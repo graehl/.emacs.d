@@ -1,3 +1,4 @@
+
 (setq gr-packages
       '(ansi-color
         auto-complete
@@ -8,11 +9,12 @@
         ace-jump-mode
         paredit
         scala-mode
+        gradle-mode
         git-gutter+
         ibuffer
         magit
         ;;gitconfig-mode gitignore-mode
-        helm
+        ;;helm
         wrap-region
         helm-projectile
         ido-ubiquitous
@@ -22,10 +24,11 @@
         python-mode
         ;;python-mode-expansions
         ;;solarized-theme
-        color-theme-solarized
+        ;;color-theme-solarized
         zenburn-theme
         yasnippet
         expand-region
+        gradle-mode
         rainbow-mode))
 
 (defun string-starts-with (string prefix)
@@ -55,9 +58,9 @@
 ;; Set up load path
 (add-to-list 'load-path site-lisp-dir)
 (add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))
-(add-to-list 'load-path (concat site-lisp-dir "emacs-color-theme-solarized"))
 (add-to-list 'load-path (concat dotfiles-dir "plugins"))
 (add-to-list 'load-path dotfiles-dir)
+(require 'color-theme)
 
 (require 'cl)
 
@@ -70,8 +73,15 @@
 
 (defun all-to-list (list all)
   (mapc (lambda (x) (add-to-list list x)) all))
-(defun define-fringe-bitmap (a b c d e) t)
-(defun set-fringe-mode (a) t)
+(if gr-on-26
+    (progn
+      (defun define-fringe-bitmap (a b) t)
+      (defun set-fringe-mode (a) t)
+      )
+  (progn
+    (defun define-fringe-bitmap (a b c d e) t)
+    (defun set-fringe-mode (a) t)
+    ))
 (if gr-on-24
     (all-to-list 'gr-packages '(smex gist flyspell pcache logito js2-mode gh flycheck artist))
   (add-to-list 'gr-packages 'cl-lib))
@@ -107,6 +117,11 @@
   "Check if all packages in `gr-packages' are installed."
   (every #'package-installed-p gr-packages))
 
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                     ("marmalade" . "http://marmalade-repo.org/packages/")
+                     ("melpa" . "http://melpa.org/packages/")))
+(setq package-check-signature nil)
+(setq linum-format "%d ")
 (defun gr-install-packages ()
   "Install all packages listed in `gr-packages'."
   (interactive)
@@ -337,7 +352,7 @@ Missing packages are installed automatically."
 (require 'setup-compilation-mode)
 
 ;;(require 'optional-bindings)
-(require 'setup-helm)
+;;(require 'setup-helm)
 ;; emacs-clang-complete-async doesn't seem to work at all (tried google) - maybe try https://truongtx.me/2013/03/10/ecb-emacs-code-browser/ ?
 
 ;;(add-to-list 'load-path (concat site-lisp-dir "emacs-clang-complete-async"))

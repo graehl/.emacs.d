@@ -32,5 +32,6 @@
 
 (setq gr-on-24 (>= (emacs-version-major) 24))
 (setq gr-on-25 (>= (emacs-version-major) 25))
+(setq gr-on-26 (>= (emacs-version-major) 26))
 (setq gr-on-24-3 (or gr-on-25 (and (= (emacs-version-major) 24) (>= (emacs-version-get-component 'minor) 3))))
 (provide 'gr-config)

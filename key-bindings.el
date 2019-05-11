@@ -224,7 +224,7 @@
 (global-set-key (kbd "M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-s") 'occur)
 (global-set-key (kbd "M-m") 'iy-go-to-char)
-(global-set-key "\C-\\" 'set-mark-and-goto-line-with-feedback)
+(global-set-key "\C-\\" 'set-mark-and-goto-line) ;; -with-feedback
 (global-set-key (kbd "C-f") 'forward-word)
 (require 'scratch-back)(global-set-key (kbd "M-<f2>") 'scratch-back)
 (global-set-key (kbd "M-<f3>") 'back-from-scratch)
@@ -400,3 +400,4 @@
 (eval-after-load 'csv-mode '(define-key csv-mode-map (kbd "C-'") 'csv-align-fields))
 (require 'csv-mode)
 (global-set-key (kbd "C-]") 'csv-align-fields)
+(global-set-key "\M-p" 'decrease-left-margin)

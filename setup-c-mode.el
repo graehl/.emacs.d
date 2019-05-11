@@ -1,3 +1,5 @@
+(require 'gradle-mode)
+(add-hook 'java-mode-hook '(lambda() (gradle-mode 1) (gr-java-hook)))
 (defun mapcar-first-rest (fn-head fn-rest list)
   "applies a different function to the first element."
   (if list
@@ -198,6 +200,12 @@
 (install-hooks c-modes-hook 'google-set-c-style)
 (install-hooks c-modes-hook 'gr-c-mode-hook)
 (provide 'setup-c-mode)
+(defun gr-tab4 () (interactive)
+       (setq c-basic-offset 4)
+       )
+(defun gr-java-hook () (interactive)
+       (setq c-basic-offset 4)
+       )
 
 (defun gray-assert ()
   (interactive)

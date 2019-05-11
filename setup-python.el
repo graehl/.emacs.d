@@ -8,6 +8,7 @@
                (cons (kbd "S-<f10>") 'py-pychecker-run)
                (cons (kbd "<M-left>") 'py-shift-left)
                (cons (kbd "<M-right>") 'py-shift-right)
+               (cons (kbd "\M-p") 'py-dedent)
                ))
 
 (defun define-py-keys ()
@@ -18,20 +19,19 @@
 
   (interactive)
   ;;  (switch-to-buffer-other-window (apply 'make-comint py-which-bufname py-which-shell nil py-which-args))
-  (make-local-variable 'comint-prompt-regexp)
-  (make-local-variable 'font-lock-defaults)
-  (setq comint-prompt-regexp "^python% \\|^> \\|^(pdb) "
-        font-lock-defaults '(python-shell-font-lock-keywords t))
+;  (make-local-variable 'comint-prompt-regexp)
+ ; (make-local-variable 'font-lock-defaults)
+;  (setq comint-prompt-regexp "^python% \\|^> \\|^(pdb) " font-lock-defaults '(python-shell-font-lock-keywords t))
   (add-hook 'comint-output-filter-functions 'py-comint-output-filter-function)
-  (set-syntax-table py-mode-syntax-table)
+  ;(set-syntax-table py-mode-syntax-table)
   (use-local-map py-shell-map)
   (local-set-key "\C-a" 'comint-bol)
   (local-set-key "\C-c\C-a" 'beginning-of-line)
-  (python-mode)
+  ;(python-mode)
   (mapcar (lambda (c) (local-set-key (car c) (cdr c))) py-keys)
   ;;(local-set-key (kbd "S-<f10>") 'py-pychecker-run))
   ;;  (define-py-keys)
-  (font-lock-mode)
+  ;(font-lock-mode)
   (setq indent-tabs-mode nil)
   (setq python-indent 2)
   (setq python-indent-offset 2)
@@ -57,12 +57,18 @@
                    (t (line-end-position)))))
     (python-send-region beg end)))
 
+(defun gr-python-mode ()
+  (interactive)
+    (mapcar (lambda (c) (local-set-key (car c) (cdr c))) py-keys)
+)
 (require 'autopair)
 
 (add-hook 'python-mode-hook
           #'(lambda ()
+              (gr-python-mode)
               (setq autopair-handle-action-fns
                     (list #'autopair-default-handle-action
                           #'autopair-python-triple-quote-action))))
+
 )
 (provide 'setup-python)

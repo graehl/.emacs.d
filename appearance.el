@@ -63,9 +63,9 @@
       (ignore-errors (load-theme 'solarized-light t))
     (ignore-errors (load-theme 'solarized-dark t)))))
 
-(when nil
+(when gr-on-26
   (require 'color-theme-solarized)
-  (color-theme-solarized-dark)
+  ;;(color-theme-solarized-dark)
   ;;(color-theme-solarized-light)
   )
 

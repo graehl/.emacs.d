@@ -15,6 +15,7 @@
 (setq compilation-skip-threshold 1)
 (setq compile-command (with-sh "kjen"))
 (setq compile-command (with-sh "cjen Debug"))
+(setq compile-command "cd; cd ~/cz; mvn test")
 ;;(add-to-list 'exec-path "C:/chocolatey/bin")
 
 (defun set-shell-cmd (cmd)

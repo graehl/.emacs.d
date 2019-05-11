@@ -45,7 +45,7 @@
  '(next-error-highlight t)
  '(next-error-highlight-no-select (quote fringe-arrow))
  '(next-error-recenter (quote (4)))
- '(ns-use-native-fullscreen nil)
+ '(ns-use-native-fullscreen nil t)
  '(package-selected-packages
    (quote
     (go-mode gradle-mode csv-mode lua-mode zenburn-theme yasnippet yaml-mode wrap-region smex scala-mode rainbow-mode rainbow-delimiters python-mode paredit pandoc-mode markdown-mode magit js2-mode ido-ubiquitous helm-projectile git-gutter+ gist flycheck expand-region diminish color-theme-solarized autopair auto-complete-clang-async auto-complete ag ack ace-jump-mode)))

@@ -1,5 +1,6 @@
 (require 'gradle-mode)
-(add-hook 'java-mode-hook '(lambda() (gradle-mode 1) (gr-java-hook)))
+(add-hook 'java-mode-hook '(lambda() (gr-java-hook)))
+;;(gradle-mode 1)
 (defun mapcar-first-rest (fn-head fn-rest list)
   "applies a different function to the first element."
   (if list

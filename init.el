@@ -7,6 +7,7 @@
         autopair
         ack
         ace-jump-mode
+        csv-mode
         paredit
         scala-mode
         gradle-mode
@@ -341,7 +342,7 @@ Missing packages are installed automatically."
 (require 'setup-isearch)
 (require 'setup-ediff)
 (require 'make-byte-compile)
-(require 'setup-lua)
+;;(require 'setup-lua)
 (defun emacs-d-recompile () (interactive) (make-byte-compile-directory dotfiles-dir))
 (defun site-lisp-recompile () (interactive) (make-byte-compile-directory site-lisp-dir))
 (defun gr-byte-recompile () (interactive) (emacs-d-recompile) (site-lisp-recompile))
@@ -417,3 +418,8 @@ Missing packages are installed automatically."
 
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 (require 'setup-projectile)
+
+(custom-set-variables
+           '(tramp-default-method "ssh")
+           '(tramp-default-user "graehl")
+           '(tramp-default-host "c-graehl"))

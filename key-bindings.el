@@ -393,9 +393,9 @@
      (define-key git-gutter+-mode-map (kbd "C-x C-y") 'git-gutter+-stage-and-commit-whole-buffer)
      (define-key git-gutter+-mode-map (kbd "C-x U") 'git-gutter+-unstage-whole-buffer)))
 
-;; (eval-after-load 'expand-region '(progn (global-set-key (kbd "C-]") 'er/expand-region)))
+(eval-after-load 'expand-region '(progn (global-set-key (kbd "C-]") 'er/expand-region)))
 
 (eval-after-load 'csv-mode '(define-key csv-mode-map (kbd "C-'") 'csv-align-fields))
-(require 'csv-mode)
-(global-set-key (kbd "C-]") 'csv-align-fields)
+;;(require 'csv-mode)
+;;(global-set-key (kbd "C-]") 'csv-align-fields)
 (global-set-key "\M-p" 'decrease-left-margin)

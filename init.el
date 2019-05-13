@@ -419,7 +419,4 @@ Missing packages are installed automatically."
 (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 (require 'setup-projectile)
 
-(custom-set-variables
-           '(tramp-default-method "ssh")
-           '(tramp-default-user "graehl")
-           '(tramp-default-host "c-graehl"))
+(require 'setup-tramp)
